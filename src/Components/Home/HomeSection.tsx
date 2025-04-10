@@ -14,7 +14,7 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
     >
       <ConstrainedBox classNames="px-4 py-8 pt-16 z-20 items-center justify-center">
         <Column classNames="w-full items-center justify-center">
-          {/* <div className="inline-flex items-center">
+          <div className="inline-flex items-center">
             <p className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
               Hi there, I am
             </p>
@@ -25,7 +25,7 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
           </div>
           <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)]">
             Full Stack Developer 💻 SDE 🛠️ Open Source 🌍
-          </p> */}
+          </p>
 
           <div className="gap-4 mt-12 lg:mt-16 flex flex-col md:flex-row">
             {/* <TalkButton /> */}
