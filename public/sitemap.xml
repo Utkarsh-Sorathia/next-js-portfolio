@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Main page -->
+    <url>
+        <loc>https://utkarsh-sorathia.vercel.app</loc>
+        <lastmod>2025-04-11T18:00:00.000Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+</urlset>
