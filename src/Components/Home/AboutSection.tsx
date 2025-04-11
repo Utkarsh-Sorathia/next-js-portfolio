@@ -11,18 +11,13 @@ const AboutSection = ({ id }: { id: string }) => {
       classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] min-h-screen items-center justify-center"
       id={id}
     >
-      <ConstrainedBox classNames="">
+      <ConstrainedBox classNames="py-12">
         <SectionTitle>About me</SectionTitle>
 
         <div className="w-full flex flex-col md:flex-row justify-between space-x-4">
           <div className="flex-1 p-6">
             <p className="mt-20 text-xl">
-              Hi, My name is Utkarsh Sorathia, and I specialize in React.js,
-              Firebase, and Bootstrap. I thrive on the opportunity to create
-              dynamic and user-friendly web applications that leave a lasting
-              impact. By staying updated with the latest trends and continuously
-              refining my skills, I ensure that every project I undertake is
-              delivered with precision and innovation.
+              Hi, my name is Utkarsh Sorathia. I'm a passionate Full Stack Developer specializing in the MERN stack (MongoDB, Express.js, React.js, and Node.js). With strong expertise in both frontend and backend development, I thrive on building robust, scalable, and intuitive web applications from start to finish. I stay up-to-date with the latest technologies and best practices to ensure that every project I work on is crafted with precision, performance, and a user-focused approach.
             </p>
           </div>
 

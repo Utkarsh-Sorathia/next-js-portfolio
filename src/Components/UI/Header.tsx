@@ -51,7 +51,7 @@ const FloatingNavbar = ({
                       title={navItem.name}
                     />
                   </span>
-                  <span className="absolute inset-0 text-[var(--primaryColor)] transition-transform transform translate-y-full group-hover:translate-y-0 duration-300 ease-in-out z-10">
+                  <span className="absolute inset-0 text-[var(--primaryColor)] transition-transform transform translate-y-full group-hover:translate-y-0 duration-300 ease-in-out z-10 text-xl">
                     <i
                       className={`bi ${navItem.icon}`}
                       id={`nav-item-icon${idx}-hover`}
@@ -61,7 +61,7 @@ const FloatingNavbar = ({
                 </span>
 
                 {/* Icon with text for larger screens */}
-                <span className="hidden sm:block text-sm/6 lg:text-base relative overflow-hidden">
+                <span className="hidden sm:block text-sm/6 lg:text-xl relative overflow-hidden font-semibold">
                   <span className="relative z-10">{navItem.name}</span>
                   <span className="absolute inset-0 text-[#4361ee] transition-transform transform translate-y-full group-hover:translate-y-0 duration-300 ease-in-out z-10">
                     {navItem.name}

@@ -3,10 +3,10 @@
 import { createRef } from 'react'
 import { IProjectItem } from '@/interfaces'
 import Row from '../core/Row'
-import ProjectItem from './ProjectCard'
+import ProjectCard from './ProjectCard'
 import Column from '../../Components/core/Column'
 
-const ProjectCard = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
+const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   const carouselRef = createRef<HTMLDivElement>()
 
   const _handleOnClickPrev = () => {
@@ -34,7 +34,7 @@ const ProjectCard = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
         elementRef={carouselRef}
       >
         {projects.map((item, index) => {
-          return <ProjectItem key={`project-item-${index}`} project={item} />
+          return <ProjectCard key={`project-item-${index}`} project={item} />
         })}
       </Row>
 
@@ -63,4 +63,4 @@ const ProjectCard = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   )
 }
 
-export default ProjectCard
+export default ProjectList

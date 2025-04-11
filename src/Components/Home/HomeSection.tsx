@@ -12,9 +12,9 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
       classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] min-h-screen items-center justify-center relative overflow-hidden rounded-md"
       id={id}
     >
-      <ConstrainedBox classNames="px-4 py-8 pt-16 z-20 items-center justify-center">
+      <ConstrainedBox classNames="px-4 py-8 pt-16 z-20 items-center justify-center my-auto">
         <Column classNames="w-full items-center justify-center">
-          <div className="inline-flex items-center">
+          <div className="inline-flex items-center mx-auto pb-4">
             <p className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
               Hi there, I am
             </p>
@@ -23,17 +23,13 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
               className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)] dark:text-[var(--primaryColor)]"
             />
           </div>
-          <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)]">
+          <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)] mx-auto">
             Full Stack Developer 💻 SDE 🛠️ Open Source 🌍
           </p>
-
-          <div className="gap-4 mt-12 lg:mt-16 flex flex-col md:flex-row">
-            {/* <TalkButton /> */}
-          </div>
         </Column>
 
         <div className="mt-12 lg:mt-16 w-full flex flex-col items-center">
-          <p className="text-base font-medium">Follow me here</p>
+          <p className="text-base font-medium pb-3">Follow me here</p>
 
           <Row classNames="mt-2 gap-4 md:gap-6">
             {socialLinks.map((link, index) => {
@@ -53,7 +49,7 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
         </div>
 
         {/* Centered Down Button */}
-        <div className="mx-auto lg:mt-120 mt-65">
+        {/* <div className="mx-auto lg:mt-120 mt-65">
           <Link href="#about" className="btn btn-lg" id="about">
             <img
               src="/images/down.gif"
@@ -62,7 +58,7 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
               width={40}
             />
           </Link>
-        </div>
+        </div> */}
       </ConstrainedBox>
     </ResponsiveBox>
   )

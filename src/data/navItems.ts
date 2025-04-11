@@ -3,7 +3,7 @@ import { INavItem } from "@/interfaces";
 export const navMenus: INavItem[] = [
   {
     name: "Home",
-    link: "/#home",
+    link: "/",
     icon: "bi bi-house-fill",
   },
   {
@@ -11,16 +11,11 @@ export const navMenus: INavItem[] = [
     link: "/#about",
     icon: "bi bi-person-fill",
   },
-  // {
-  //   name: "Services",
-  //   link: "/#services",
-  //   icon: faBriefcase,
-  // },
-  // {
-  //   name: "Experiences",
-  //   link: "/#experiences",
-  //   icon: faTimeline,
-  // },
+  {
+    name: "Services",
+    link: "/#services",
+    icon: "bi bi-briefcase-fill",
+  },
   {
     name: "Skills",
     link: "/#skills",
@@ -36,9 +31,4 @@ export const navMenus: INavItem[] = [
     link: "/#contact",
     icon: "bi bi-person-lines-fill",
   },
-  // {
-  //   name: "Payment",
-  //   link: "/payment",
-  //   icon: faCreditCard,
-  // },
 ];
