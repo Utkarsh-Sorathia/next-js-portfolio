@@ -1,7 +1,5 @@
 "use client";
 
-import { animate, motion } from "framer-motion";
-import { useEffect } from "react";
 import { cn } from "@/utils/cn";
 import { IServiceItem } from "@/interfaces";
 import Image from "next/image";
@@ -21,58 +19,6 @@ export function ServiceCard({
 }
 
 const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
-  const scale = [1, 1.1, 1];
-  const transform = ["translateY(0px)", "translateY(-4px)", "translateY(0px)"];
-  const sequence = [
-    [
-      ".circle-1",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-2",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-3",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-4",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-    [
-      ".circle-5",
-      {
-        scale,
-        transform,
-      },
-      { duration: 0.8 },
-    ],
-  ];
-
-  // useEffect(() => {
-  //   animate(sequence, {
-  //     repeat: Infinity,
-  //     repeatDelay: 1,
-  //   });
-  // }, []);
-
   return (
     <div className="overflow-hidden h-full relative flex items-center justify-center">
       <div className="flex flex-row flex-shrink-0 justify-center items-center gap-2">
@@ -142,51 +88,9 @@ const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
           />
         </IconContainer>
       </div>
-
-      <div className="h-40 w-px absolute top-20 m-auto z-40 bg-gradient-to-b from-transparent via-[var(--primaryColor)] to-transparent animate-move">
-        <div className="w-10 h-32 top-1/2 -translate-y-1/2 absolute -left-10">
-          {/* <Sparkles /> */}
-        </div>
-      </div>
     </div>
   );
 };
-
-// const Sparkles = () => {
-//   const randomMove = () => Math.random() * 2 - 1;
-//   const randomOpacity = () => Math.random();
-//   const random = () => Math.random();
-//   return (
-//     <div className="absolute inset-0">
-//       {[...Array(12)].map((_, i) => (
-//         <motion.span
-//           key={`star-${i}`}
-//           animate={{
-//             top: `calc(${random() * 100}% + ${randomMove()}px)`,
-//             left: `calc(${random() * 100}% + ${randomMove()}px)`,
-//             opacity: randomOpacity(),
-//             scale: [1, 1.2, 0],
-//           }}
-//           transition={{
-//             duration: random() * 2 + 4,
-//             repeat: Infinity,
-//             ease: "linear",
-//           }}
-//           style={{
-//             position: "absolute",
-//             top: `${random() * 100}%`,
-//             left: `${random() * 100}%`,
-//             width: `2px`,
-//             height: `2px`,
-//             borderRadius: "50%",
-//             zIndex: 1,
-//           }}
-//           className="inline-block bg-white"
-//         ></motion.span>
-//       ))}
-//     </div>
-//   );
-// };
 
 export const Card = ({
   className,
@@ -198,7 +102,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group",
+        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group hover:transform hover:scale-105 transition duration-300",
         className
       )}
     >

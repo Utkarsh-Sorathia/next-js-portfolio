@@ -24,7 +24,7 @@ const HomeSection6 = ({ id }: { id: string }) => {
                   text={link.text}
                   icon={link.icon}
                   url={link.url}
-                  className="flex items-center gap-x-2 p-4 border rounded text-xl"
+                  className="flex items-center gap-x-2 p-4 border rounded text-xl hover:bg-white hover:text-[var(--primaryColor)] transition duration-300"
                 />
               );
             })}

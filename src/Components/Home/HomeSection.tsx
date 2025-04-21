@@ -47,18 +47,6 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
             })}
           </Row>
         </div>
-
-        {/* Centered Down Button */}
-        {/* <div className="mx-auto lg:mt-120 mt-65">
-          <Link href="#about" className="btn btn-lg" id="about">
-            <img
-              src="/images/down.gif"
-              alt="down"
-              height={40}
-              width={40}
-            />
-          </Link>
-        </div> */}
       </ConstrainedBox>
     </ResponsiveBox>
   )
