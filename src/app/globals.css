@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: url(/images/dark-mode.gif); /* dark mode background */
-  --foreground: #ededed;
+  --background: url(/images/dark-mode.gif);  /* Permanent dark mode background */
+  --foreground: #ededed;  /* Light text for dark background */
   --primaryColor: #4361ee;
 }
 
@@ -13,8 +13,18 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* No media query here, ensuring dark mode is permanent */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Add to global.css if needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
