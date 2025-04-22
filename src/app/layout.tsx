@@ -41,7 +41,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="lg:px-40">{children}</div>
+        <div>{children}</div>
         <Header className="app_nav" navItems={navMenus} />
         <Footer />
         <ScrollToTop />
