@@ -5,7 +5,7 @@ const Column = (props: Readonly<CoreComponentsProps>) => {
 
   return (
     <div
-      className={`relative flex flex-col justify-start items-start transition duration-300 ease-in-out ${classNames}`}
+      className={`relative flex flex-col transition duration-300 ease-in-out ${classNames}`}
       id={id}
       ref={elementRef}
       onClick={onClick}

@@ -13,7 +13,7 @@ import CardBox from "../../Components/core/CardBox";
 
 const ProjectCard = ({ project }: { project: IProjectItem }) => {
   return (
-    <CardBox classNames="min-w-[calc(100%-2rem)] sm:min-w-[25rem] md:min-w-[28rem] aspect-[3/5] max-h-[30rem] p-4 gap-8 items-center justify-between rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group slide_in">
+    <CardBox classNames="min-w-[calc(100%-2rem)] sm:min-w-[25rem] md:min-w-[28rem] aspect-[3/5] max-h-[30rem] p-4 gap-4 items-center justify-between rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group slide_in">
       <Column classNames="w-full items-center justify-start">
         <Row classNames="w-[2.5rem] md:w-[3rem] aspect-square items-center justify-center">
           <Image
@@ -32,7 +32,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
         <p className="text-lg/6 font-semibold mt-4 text-[var(--primaryColor)]">{project.title}</p>
 
         <div
-          className={`flex flex-row items-center justify-center rounded-full py-[0.05] px-[0.5rem] mt-4 capitalize text-center border ${
+          className={`flex flex-row items-center justify-center rounded-full py-[0.05] px-[0.5rem] mt-2 capitalize text-center border ${
             project.repoType === RepoType.Private
               ? "text-[var(--errorColor)] border-[var(--errorColor50)]"
               : "text-[var(--successColor)] border-[var(--successColor50)]"
@@ -43,7 +43,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
           </p>
         </div>
 
-        <Row classNames="w-full items-center justify-center mt-4 gap-2">
+        <Row classNames="w-full items-center justify-center mt-2 gap-2">
           {project.githubUrl ? (
             <Link
               href={project.githubUrl}
@@ -75,8 +75,10 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
       </Column>
 
       <Column classNames="w-full items-center">
-        <p className="text-base">
-          <Balancer>{project.description}</Balancer>
+      <p className="text-base mx-auto text-justify px-2">
+          {/* <Balancer> */}
+            {project.description}
+            {/* </Balancer> */}
         </p>
 
         {project.tags && project.tags.length > 0 ? (

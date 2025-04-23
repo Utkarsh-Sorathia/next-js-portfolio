@@ -137,7 +137,7 @@ const skills: ISkillListItem[] = [
       {
         title: "GitHub",
         level: SkillLevel.Expert,
-        icon: "/skills/github.svg",
+        icon: "/skills/github-white.png",
       },
     ],
   },

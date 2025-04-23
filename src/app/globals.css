@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: url(/images/dark-mode.gif);  /* Permanent dark mode background */
+  --background: url(/images/dark-mode.gif), #121212;  /* Permanent dark mode background */
   --foreground: #ededed;  /* Light text for dark background */
   --primaryColor: #4361ee;
 }

@@ -10,7 +10,7 @@ const ProjectSection = ({ id }: { id: string }) => {
       classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] min-h-screen items-center justify-center lg:px-40"
       id={id}
     >
-      <ConstrainedBox classNames="p-4 py-16">
+      <ConstrainedBox classNames="px-2 py-16">
         <SectionTitle>Projects/Recent Works</SectionTitle>
 
         <ProjectCard projects={projects} />

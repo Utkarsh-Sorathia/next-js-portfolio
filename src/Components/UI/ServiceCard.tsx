@@ -102,7 +102,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group hover:transform hover:scale-105 transition duration-300",
+        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-zinc-500 dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group hover:transform hover:scale-105 transition duration-300",
         className
       )}
     >

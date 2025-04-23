@@ -18,9 +18,10 @@ const educations: TimelineEntry[] = [
     educations: [
       {
         institute: "Jeevanbharti Pravrutti Vidhalaya",
-        startDate: "2017-18",
+        startDate: "2019",
+        endDate: "Mar 2020",
         location: "Surat, Gujarat, India",
-        cgpa: "84.33 %",
+        cgpa: "77 %",
       },
     ],
   },
@@ -29,9 +30,10 @@ const educations: TimelineEntry[] = [
     educations: [
       {
         institute: "Jeevanbharti Pravrutti Vidhalaya",
-        startDate: "2019-20",
+        startDate: "2017",
+        endDate: "Mar 2018",
         location: "Surat, Gujarat, India",
-        cgpa: " 77 %",
+        cgpa: "84.33 %",
       },
     ],
   },

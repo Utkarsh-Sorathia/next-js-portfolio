@@ -25,7 +25,7 @@ const CardBox = (props: Readonly<CoreComponentsProps>) => {
       onMouseMove={onMouseMove}
       onClick={onClick}
       ref={elementRef}
-      className={`relative w-full flex flex-col justify-start items-start duration-500 border rounded-[var(--borderRadius)] hover:bg-zinc-800/10 hover:border-zinc-400/50 border-zinc-600 overflow-hidden group ${classNames}`}
+      className={`relative w-full flex flex-col duration-500 border rounded-[var(--borderRadius)] hover:bg-zinc-800/10 hover:border-zinc-500 border-zinc-500 overflow-hidden group ${classNames}`}
     >
       <div className="pointer-events-none absolute">
         <div className="absolute inset-0 z-0 transition duration-1000 [mask-image:linear-gradient(black,transparent)]" />

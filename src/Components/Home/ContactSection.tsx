@@ -12,7 +12,7 @@ const HomeSection6 = ({ id }: { id: string }) => {
       classNames="dark:bg-[var(--dialogColor)] bg-[var(--dialogColor)] min-h-screen items-center justify-center dark:bg-dot-white/[0.15] bg-dot-white/[0.15] items-center justify-center lg:px-40"
       id={id}
     >
-      <ConstrainedBox classNames="p-4 py-16">
+      <ConstrainedBox classNames="px-4 py-16">
         <SectionTitle>Get in Touch</SectionTitle>
 
         <Column classNames="mt-16 w-full">
@@ -24,7 +24,7 @@ const HomeSection6 = ({ id }: { id: string }) => {
                   text={link.text}
                   icon={link.icon}
                   url={link.url}
-                  className="flex items-center gap-x-2 p-4 border rounded text-xl hover:bg-white hover:text-[var(--primaryColor)] transition duration-300"
+                  className="flex items-center gap-x-2 p-4 border border-zinc-500 rounded text-xl hover:bg-white hover:text-[var(--primaryColor)] transition duration-300"
                 />
               );
             })}
