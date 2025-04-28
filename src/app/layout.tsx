@@ -36,13 +36,13 @@ export const metadata: Metadata = {
       url: '/favicon-16x16.png',
       rel: 'icon',
       sizes: '16x16',
-      type: 'image/x-icon',
+      type: 'image/png',
     },
     {
       url: '/favicon-32x32.png',
       rel: 'icon',
       sizes: '32x32',
-      type: 'image/x-icon',
+      type: 'image/png',
     },
     {
       url: '/favicon.ico',
@@ -66,6 +66,22 @@ export const metadata: Metadata = {
     'utkarsh portfolio',
     'utkarsh github',
   ],
+  openGraph: {
+    title: 'Portfolio | Utkarsh Sorathia',
+    description:
+      'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
+    url: 'https://utkarsh-sorathia.vercel.app/',
+    images: 'https://utkarsh-sorathia.vercel.app/og-image.png',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portfolio | Utkarsh Sorathia',
+    description:
+      'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
+    images: 'https://utkarsh-sorathia.vercel.app/og-image.png',
+  },
 };
 
 export default function RootLayout({
