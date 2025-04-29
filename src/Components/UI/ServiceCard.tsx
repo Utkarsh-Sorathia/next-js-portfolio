@@ -12,8 +12,8 @@ export function ServiceCard({
       <CardSkeletonContainer>
         <IconSkeleton item={item} />
       </CardSkeletonContainer>
-      <CardTitle>{item.title}</CardTitle>
-      <CardDescription>{item.description}</CardDescription>
+      <CardTitle className="text-center">{item.title}</CardTitle>
+      <CardDescription className="text-justify">{item.description}</CardDescription>
     </Card>
   );
 }
@@ -163,7 +163,7 @@ export const CardSkeletonContainer = ({
   return (
     <div
       className={cn(
-        "rounded-[var(--borderRadius)] z-40 mb-4",
+        "rounded-[var(--borderRadius)] z-40 mb-2",
         className,
         showGradient &&
           "bg-bg-[rgba(40,40,40,0.70)] dark:bg-[rgba(40,40,40,0.70)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]"
