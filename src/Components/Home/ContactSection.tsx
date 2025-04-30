@@ -6,10 +6,10 @@ import SectionTitle from "../../Components/common/SectionTitle";
 import ContactButton from "../UI/ContactButton";
 import socialLinks from "../../data/importantLinks";
 
-const HomeSection6 = ({ id }: { id: string }) => {
+const ContactSection = ({ id }: { id: string }) => {
   return (
     <ResponsiveBox
-      classNames="dark:bg-[var(--dialogColor)] bg-[var(--dialogColor)] min-h-screen items-center justify-center dark:bg-dot-white/[0.15] bg-dot-white/[0.15] items-center justify-center lg:px-40"
+      classNames="dark:bg-[var(--dialogColor)] bg-[var(--dialogColor)] items-center justify-center dark:bg-dot-white/[0.15] bg-dot-white/[0.15] lg:px-40 lg:min-h-screen"
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-16">
@@ -43,4 +43,4 @@ const HomeSection6 = ({ id }: { id: string }) => {
   );
 };
 
-export default HomeSection6;
+export default ContactSection;
