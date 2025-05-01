@@ -20,14 +20,12 @@ const ContactSection = ({ id }: { id: string }) => {
             {socialLinks.map((link, index) => {
               return (
                 <ContactButton
-  key={`social-link-${index}`}
-  text={link.text}
-  icon={link.icon}
-  url={link.url}
-  className="p-4 border border-zinc-500 rounded text-xl hover:bg-white hover:text-[var(--primaryColor)] transition duration-300"
-
-/>
-
+                  key={`social-link-${index}`}
+                  text={link.text}
+                  icon={link.icon}
+                  url={link.url}
+                  className="p-4 border border-zinc-500 text-xl hover:bg-white hover:text-[var(--primaryColor)] transition duration-300"
+                />
               );
             })}
           </GridBox>
