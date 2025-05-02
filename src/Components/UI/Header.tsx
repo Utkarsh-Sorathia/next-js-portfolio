@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { INavItem } from '@/interfaces'
 import Row from '../../Components/core/Row'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 // Get the URL from environment variables
 const locationsApiUrl = process.env.NEXT_PUBLIC_LOCATIONS_API_URL;
@@ -23,13 +24,8 @@ const FloatingNavbar = ({
     if (locationsApiUrl) {
       const fetchLocations = async () => {
         try {
-          const response = await fetch(locationsApiUrl);
-          if (response.ok) {
-            const data = await response.json();
-            setLocations(data); // Store the fetched data
-          } else {
-            console.error('Failed to fetch locations');
-          }
+          const response = await axios.get(locationsApiUrl);
+          setLocations(response.data); // Store the fetched data
         } catch (error) {
           console.error('Error fetching locations:', error);
         }
