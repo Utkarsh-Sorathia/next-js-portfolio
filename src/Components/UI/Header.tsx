@@ -5,6 +5,10 @@ import { cn } from '@/utils/cn'
 import Link from 'next/link'
 import { INavItem } from '@/interfaces'
 import Row from '../../Components/core/Row'
+import { useEffect, useState } from 'react'
+
+// Get the URL from environment variables
+const locationsApiUrl = process.env.NEXT_PUBLIC_LOCATIONS_API_URL;
 
 const FloatingNavbar = ({
   navItems,
@@ -13,6 +17,28 @@ const FloatingNavbar = ({
   navItems: INavItem[]
   className?: string
 }) => {
+  const [locations, setLocations] = useState<any>(null); // You can adjust the type based on the expected response structure
+
+  useEffect(() => {
+    if (locationsApiUrl) {
+      const fetchLocations = async () => {
+        try {
+          const response = await fetch(locationsApiUrl);
+          if (response.ok) {
+            const data = await response.json();
+            setLocations(data); // Store the fetched data
+          } else {
+            console.error('Failed to fetch locations');
+          }
+        } catch (error) {
+          console.error('Error fetching locations:', error);
+        }
+      };
+
+      fetchLocations();
+    }
+  }, [locationsApiUrl]);
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
