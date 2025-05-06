@@ -4,7 +4,7 @@ Welcome to my personal portfolio! 🚀
 
 I'm **Utkarsh Sorathia**, a passionate **Full Stack Developer**, always excited to create beautiful and functional experiences. Explore my work and get to know me better. 😎
 
-[![Portfolio Banner](https://res.cloudinary.com/dvdq0rw3m/image/upload/v1745644368/im3t8uppdeuwdaw0urtb.png)](https://utkarsh-sorathia.vercel.app/)
+[![Portfolio Banner](https://raw.githubusercontent.com/Utkarsh-Sorathia/next-js-portfolio/refs/heads/main/public/og-image.png)](https://utkarsh-sorathia.vercel.app/)
 
 ---
 
