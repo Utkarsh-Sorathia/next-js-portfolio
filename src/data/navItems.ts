@@ -17,6 +17,11 @@ export const navMenus: INavItem[] = [
     icon: "bi bi-briefcase-fill",
   },
   {
+    name: "Experience",
+    link: "/#experience",
+    icon: "bi bi-clock-history",
+  },
+  {
     name: "Skills",
     link: "/#skills",
     icon: "bi bi-award-fill",

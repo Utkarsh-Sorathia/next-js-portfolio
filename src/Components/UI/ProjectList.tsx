@@ -48,17 +48,19 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   }, [])
 
   return (
-    <div className="w-full mt-16 flex flex-col items-center gap-4 px-4">
+    <div className="w-full mt-16 flex flex-col gap-4 px-18 mx-auto">
       {/* Main Carousel Row */}
       <div className="w-full flex items-center gap-4">
-        {/* Prev Button - Desktop only */}
-        <button
-          onClick={() => scrollByOffset(-400)}
-          aria-label="Scroll to previous project"
-          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
-        >
-          <i className="bi bi-chevron-left text-xl" />
-        </button>
+        {/* Conditionally Render Prev Button - Desktop only */}
+        {projects.length > 3 && (
+          <button
+            onClick={() => scrollByOffset(-400)}
+            aria-label="Scroll to previous project"
+            className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
+          >
+            <i className="bi bi-chevron-left text-xl" />
+          </button>
+        )}
 
         {/* Carousel */}
         <div
@@ -75,14 +77,16 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
           ))}
         </div>
 
-        {/* Next Button - Desktop only */}
-        <button
-          onClick={() => scrollByOffset(400)}
-          aria-label="Scroll to next project"
-          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
-        >
-          <i className="bi bi-chevron-right text-xl" />
-        </button>
+        {/* Conditionally Render Next Button - Desktop only */}
+        {projects.length > 3 && (
+          <button
+            onClick={() => scrollByOffset(400)}
+            aria-label="Scroll to next project"
+            className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
+          >
+            <i className="bi bi-chevron-right text-xl" />
+          </button>
+        )}
       </div>
 
       {/* Dot Indicators - Only on mobile */}

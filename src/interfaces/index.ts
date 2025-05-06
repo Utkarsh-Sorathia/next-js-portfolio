@@ -154,3 +154,13 @@ export interface BulletedTextProps {
   iconSize?: string | number;
   bulletColor?: string;
 }
+
+export interface IExperienceItem {
+  company: string;
+  position: string;
+  startDate: string; 
+  endDate: string;
+  description: string;
+  location?: string;
+  companyLogo?: string;
+}

@@ -32,7 +32,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Utkarsh Sorathia. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} <span className="text-[var(--primaryColor)]">Utkarsh Sorathia.</span> All rights reserved.</p>
         </div>
       </div>
     </footer>
