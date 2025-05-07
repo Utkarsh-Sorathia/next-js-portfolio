@@ -3,6 +3,7 @@
 import { IExperienceItem } from "../../interfaces";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface ExperienceCardProps {
   data: IExperienceItem[];
@@ -25,7 +26,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
               viewport={{ amount: 0.3 }}
               className={`
                     relative
-                    md:w-1/2
+                    md:w-[65%]
                     mx-4 md:mx-0
                     md:ml-0
                     mb-10 last:mb-0
@@ -43,7 +44,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
               <div
                 className="md:hidden absolute w-5 h-5 z-10 top-15"
                 style={{
-                  left: isLeft ? "16px" : "32px",
+                  left: isLeft ? "5%" : "10%",
                   transform: "translateX(-50%)",
                 }}
               > <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
@@ -53,8 +54,8 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
               <div
                 className="hidden md:block absolute top-10 w-6 h-6 z-10"
                 style={{
-                  left: isLeft ? "30.3rem" : "-0.3rem",
-                  right: isLeft ? "auto" : "100%",
+                  left: isLeft ? "76.5%" : "auto",
+                  right: isLeft ? "auto" : "73.7%",
                   transform: "translateX(-50%)",
                 }}
               > <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
@@ -62,21 +63,23 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 </div>
               </div>
               <div
-                className={`bg-[var(--primaryColor5)] border border-[rgba(255,255,255,0.10)]
-                    shadow-[0_4px_24px_rgba(0,0,0,0.1)] rounded-xl p-3 md:p-8
-                    transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.15)]
-                    ${isLeft ? "md:mr-8 md:pr-8" : "md:ml-8 md:pl-8"}`}
+                className={`border border-[rgba(255,255,255,0.50)]
+                p-3 md:p-8
+                transition-all duration-300
+                ${isLeft ? "md:mr-8 md:pr-8 transform translate-x-[-14px] md:translate-x-[-150px]" : "md:ml-8 md:pl-8 transform md:translate-x-40"}`}
               >
                 <div className="flex flex-col sm:flex-row items-start gap-3">
-                  {item.companyLogo && (
-                    <Image
-                      src={item.companyLogo}
-                      alt={`${item.company} logo`}
-                      width={72}
-                      height={72}
-                      className="w-18 h-18 object-contain rounded-lg flex-shrink-0"
-                    />
-                  )}
+                  {item.companyLink ?
+                    <Link href={item.companyLink} target="_blank">
+                      {item.companyLogo && (
+                        <Image
+                          src={item.companyLogo}
+                          alt={`${item.company} logo`}
+                          width={72}
+                          height={72}
+                          className="w-18 h-18 object-contain rounded-lg flex-shrink-0"
+                        />
+                      )}</Link> : null}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-3">
                       <div>
@@ -87,10 +90,10 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                           {item.company}
                         </p>
                       </div>
-                      <span className="text-sm text-[var(--textColor)] opacity-80 whitespace-nowrap mt-1 sm:mt-0">
-                        {item.startDate} - {item.endDate}
-                      </span>
                     </div>
+                    <span className="text-sm text-[var(--textColor)] opacity-80 whitespace-nowrap mt-1 sm:mt-0 mx-1">
+                      {item.startDate} - {item.endDate}
+                    </span>
                     {item.location && (
                       <p className="text-sm text-[var(--textColor)] opacity-80 mt-3 truncate">
                         📍 {item.location}

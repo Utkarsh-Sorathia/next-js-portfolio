@@ -163,4 +163,5 @@ export interface IExperienceItem {
   description: string;
   location?: string;
   companyLogo?: string;
+  companyLink?: string;
 }
