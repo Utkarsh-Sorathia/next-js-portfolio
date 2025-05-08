@@ -101,9 +101,9 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         />
       </head>
-      <body className="antialiased">
+      <body className="flex flex-col min-h-screen antialiased">
         <Header className="app_nav" navItems={navMenus} />
-        <main>{children}</main>
+        <main className="flex-grow">{children}</main>
         <Footer />
         <ScrollToTop />
       </body>
