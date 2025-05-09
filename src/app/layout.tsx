@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Utkarsh Sorathia',
+  title: 'Utkarsh Sorathia | Full Stack Developer',
   description:
     'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
   robots: {
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     'utkarsh github',
   ],
   openGraph: {
-    title: 'Portfolio | Utkarsh Sorathia',
+    title: 'Utkarsh Sorathia | Full Stack Developer',
     description:
       'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
     url: 'https://utkarsh-sorathia.vercel.app/',
@@ -77,10 +77,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio | Utkarsh Sorathia',
+    title: 'Utkarsh Sorathia | Full Stack Developer',
     description:
       'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
     images: 'https://utkarsh-sorathia.vercel.app/og-image.png',
+  },
+  alternates: {
+    canonical: 'https://utkarsh-sorathia.vercel.app/',
   },
 };
 
@@ -99,6 +102,26 @@ export default function RootLayout({
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Utkarsh Sorathia",
+              url: "https://utkarsh-sorathia.vercel.app",
+              jobTitle: "Full Stack Developer",
+              sameAs: [
+                "https://github.com/Utkarsh-Sorathia",
+                "https://www.facebook.com/share/1FbsyHZuzG/",
+                "https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a",
+                "https://www.instagram.com/utkarsh__sorathia",
+                "https://x.com/utkarshsor03?t=fWrMF32Y7DivN7FJJMITYw&s=08",
+              ],
+              description: "Utkarsh Sorathia is a passionate Full Stack Developer focused on scalable, performance-driven web applications.",
+            }),
+          }}
         />
       </head>
       <body className="flex flex-col min-h-screen antialiased">
