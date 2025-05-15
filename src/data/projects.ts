@@ -37,5 +37,17 @@ const projects: IProjectItem[] = [
     url: "https://utkarsh-sorathia.netlify.app/",
     tags: ["React.js", "Bootstrap", "Formspree"],
   },
+   {
+    id: "Typing Test Website",
+    title: "Typingo - Typing Test Website",
+    description:
+      "Typingo, a comprehensive web-based typing test and keyboard mastery platform. This tool is designed to improve your typing speed, accuracy, and finger placement using interactive tests and real-time feedback.",
+    icon: "/skills/react.svg",
+    repoType: RepoType.Public,
+    projectType: ProjectType.Personal,
+    githubUrl: "https://github.com/Utkarsh-Sorathia/Typingo",
+    url: "https://typingo.vercel.app/",
+    tags: ["React.js", "Tailwind css", "Typescript"],
+  },
 ];
 export default projects;
