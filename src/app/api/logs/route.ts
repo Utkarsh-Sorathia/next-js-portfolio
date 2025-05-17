@@ -34,6 +34,7 @@ export async function GET(request: Request) {
         const client = await clientPromise;
         const db = client.db();
 
+        const totalRecords = await db.collection('ipapiresponses').countDocuments();
         const total = await db.collection('ipapiresponses').countDocuments(filter);
         // const cityFilter = await db.collection('ipapiresponses').distinct("fullResponse.city")
         // const regionFilter = await db.collection('ipapiresponses').distinct("fullResponse.region_name")
@@ -50,6 +51,7 @@ export async function GET(request: Request) {
             logs,
             totalPages: Math.ceil(total / limit),
             currentPage: page,
+            totalRecords: totalRecords,
         });
     } catch (error) {
         return NextResponse.json(
