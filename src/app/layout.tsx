@@ -1,66 +1,66 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import Header from '@/Components/UI/Header';
-import ScrollToTop from '@/Components/common/ScrollToTop';
-import { navMenus } from '../data/navItems';
-import Footer from '@/Components/UI/Footer';
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import Header from "@/Components/UI/Header";
+import ScrollToTop from "@/Components/common/ScrollToTop";
+import { navMenus } from "../data/navItems";
+import Footer from "@/Components/UI/Footer";
 
 const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'Utkarsh Sorathia | Full Stack Developer',
+  title: "Utkarsh Sorathia | Full Stack Developer",
   description:
-    'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
+    "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   icons: [
     {
-      url: '/favicon-16x16.png',
-      rel: 'icon',
-      sizes: '16x16',
-      type: 'image/png',
+      url: "/favicon-16x16.png",
+      rel: "icon",
+      sizes: "16x16",
+      type: "image/png",
     },
     {
-      url: '/favicon-32x32.png',
-      rel: 'icon',
-      sizes: '32x32',
-      type: 'image/png',
+      url: "/favicon-32x32.png",
+      rel: "icon",
+      sizes: "32x32",
+      type: "image/png",
     },
     {
-      url: '/favicon.ico',
-      rel: 'icon',
-      sizes: '48x48',
-      type: 'image/x-icon',
+      url: "/favicon.ico",
+      rel: "icon",
+      sizes: "48x48",
+      type: "image/x-icon",
     },
     {
-      url: '/android-chrome-192x192.png',
-      rel: 'icon',
-      sizes: '192x192',
-      type: 'image/png',
+      url: "/android-chrome-192x192.png",
+      rel: "icon",
+      sizes: "192x192",
+      type: "image/png",
     },
   ],
   keywords: [
-    'utkarsh sorathia',
+    "utkarsh sorathia",
     "Utkarsh Sorathia",
-    'utkarsh',
+    "utkarsh",
     "Utkarsh",
     "Utkarsh CV",
     "UtkarshSorathia",
@@ -68,11 +68,11 @@ export const metadata: Metadata = {
     "Sorathia Utkarsh",
     "sorathia utkarsh",
     "utkarsh resume",
-    'full stack developer',
-    'web developer india',
-    'react developer',
-    'utkarsh portfolio',
-    'utkarsh github',
+    "full stack developer",
+    "web developer india",
+    "react developer",
+    "utkarsh portfolio",
+    "utkarsh github",
     "Full Stack Developer",
     "MERN Stack Developer",
     "React Developer",
@@ -90,23 +90,32 @@ export const metadata: Metadata = {
     "Full Stack Portfolio",
   ],
   openGraph: {
-    title: 'Utkarsh Sorathia | Full Stack Developer',
+    title: "Utkarsh Sorathia | Full Stack Developer",
     description:
-      'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
-    url: 'https://utkarsh-sorathia.vercel.app/',
-    images: 'https://utkarsh-sorathia.vercel.app/og-image.png',
-    type: 'website',
-    locale: 'en_US',
+      "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
+    url: "https://utkarsh-sorathia.vercel.app/",
+    images: [
+      {
+        url: "https://utkarsh-sorathia.vercel.app/og-image.png",
+        alt: "Utkarsh Sorathia Portfolio",
+      },
+      {
+        url: "https://utkarsh-sorathia.vercel.app/Utkarsh-Sorathia-CV-og-image.jpg",
+        alt: "Utkarsh Sorathia Resume",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Utkarsh Sorathia | Full Stack Developer',
+    card: "summary_large_image",
+    title: "Utkarsh Sorathia | Full Stack Developer",
     description:
-      'Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.',
-    images: 'https://utkarsh-sorathia.vercel.app/og-image.png',
+      "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
+    images: "https://utkarsh-sorathia.vercel.app/og-image.png",
   },
   alternates: {
-    canonical: 'https://utkarsh-sorathia.vercel.app/',
+    canonical: "https://utkarsh-sorathia.vercel.app/",
   },
 };
 
@@ -142,7 +151,8 @@ export default function RootLayout({
                 "https://www.instagram.com/utkarsh__sorathia",
                 "https://x.com/utkarshsor03?t=fWrMF32Y7DivN7FJJMITYw&s=08",
               ],
-              description: "Utkarsh Sorathia is a passionate Full Stack Developer focused on scalable, performance-driven web applications.",
+              description:
+                "Utkarsh Sorathia is a passionate Full Stack Developer focused on scalable, performance-driven web applications.",
             }),
           }}
         />
