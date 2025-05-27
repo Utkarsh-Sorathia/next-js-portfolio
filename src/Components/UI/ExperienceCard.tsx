@@ -41,7 +41,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 right: !isLeft ? 0 : undefined,
               }}
             >
-              <div
+              {/* <div
                 className="md:hidden absolute w-5 h-5 z-10 top-15"
                 style={{
                   left: isLeft ? "5%" : "10%",
@@ -50,7 +50,31 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
               > <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
                   <div className="h-3 w-3 lg:h-4 lg:w-4 p-1 lg:p-2 rounded-full bg-blue-600 dark:bg-blue-600 dark:border-blue-600" />
                 </div>
-              </div>
+              </div> */}
+              {item.companyLink ? (
+                <Link href={item.companyLink} target="_blank">
+                  {item.companyLogo && (
+                    <div
+                      className="md:hidden absolute z-10 top-13 rounded-full overflow-hidden border-2 border-[var(--primaryColor)]"
+                      style={{
+                        left: isLeft ? "5%" : "10%",
+                        width: 45,
+                        height: 45,
+                        transform: "translateX(-50%)",
+                      }}
+                    >
+                      <Image
+                        src={item.companyLogo}
+                        alt={`${item.company} logo`}
+                        width={45}
+                        height={45}
+                        className="object-contain"
+                        priority={true}
+                      />
+                    </div>
+                  )}
+                </Link>
+              ) : null}
               <div
                 className="hidden md:block absolute top-10 w-6 h-6 z-10"
                 style={{
@@ -58,7 +82,8 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                   right: isLeft ? "auto" : "73.7%",
                   transform: "translateX(-50%)",
                 }}
-              > <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
+              >
+                <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
                   <div className="h-3 w-3 lg:h-4 lg:w-4 p-1 lg:p-2 rounded-full bg-blue-600 dark:bg-blue-600 dark:border-blue-600" />
                 </div>
               </div>
@@ -66,10 +91,14 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 className={`border border-[rgba(255,255,255,0.50)]
                 p-3 md:p-8
                 transition-all duration-300
-                ${isLeft ? "md:mr-8 md:pr-8 transform translate-x-[-14px] md:translate-x-[-150px]" : "md:ml-8 md:pl-8 transform md:translate-x-40"}`}
+                ${
+                  isLeft
+                    ? "md:mr-8 md:pr-8 transform translate-x-[-14px] md:translate-x-[-150px]"
+                    : "md:ml-8 md:pl-8 transform md:translate-x-40"
+                }`}
               >
                 <div className="flex flex-col sm:flex-row items-start gap-3">
-                  {item.companyLink ?
+                  {item.companyLink ? (
                     <Link href={item.companyLink} target="_blank">
                       {item.companyLogo && (
                         <Image
@@ -77,13 +106,15 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                           alt={`${item.company} logo`}
                           width={72}
                           height={72}
-                          className="w-18 h-18 object-contain rounded-lg flex-shrink-0"
+                          className="hidden md:block w-18 h-18 object-contain rounded-lg flex-shrink-0"
                         />
-                      )}</Link> : null}
+                      )}
+                    </Link>
+                  ) : null}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-3">
                       <div>
-                        <h3 className="text-2xl font-semibold text-[var(--primaryColor)]">
+                        <h3 className="text-xl font-semibold text-[var(--primaryColor)]">
                           {item.position}
                         </h3>
                         <p className="text-lg font-medium text-[var(--textColor)] mt-1 truncate">
@@ -99,7 +130,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                         📍 {item.location}
                       </p>
                     )}
-                    <p className="text-base text-[var(--textColor)] leading-relaxed mt-5 text-justify">
+                    <p className="text-base text-[var(--textColor)] leading-relaxed mt-5">
                       {item.description}
                     </p>
                   </div>
