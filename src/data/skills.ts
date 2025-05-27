@@ -162,7 +162,7 @@ const skills: ISkillListItem[] = [
       {
         title: "Problem Solving",
         level: SkillLevel.Expert,
-        icon: "/images/logical-thinking.png",
+        icon: "/images/problem-solving.png",
       },
       {
         title: "Collaboration",

@@ -50,7 +50,7 @@ const services: IServiceItem[] = [
     icons: [
       "/skills/git.svg",
       "/images/collaboration.png",
-      "/images/logical-thinking.png",
+      "/images/problem-solving.png",
       "/images/analytical-skills.png",
       "/skills/ubuntu.png",
     ],
