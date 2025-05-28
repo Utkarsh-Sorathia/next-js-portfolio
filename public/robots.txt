@@ -1,4 +1,9 @@
 User-Agent: *
 Allow: /
+Disallow: /experience/pixml-logo.png
+Disallow: /experience/sparkle-logo.png
+Disallow: /images/problem-solving.png
+Disallow: /skills/github-white.png
+Disallow: /skills/react.svg
 
 Sitemap: https://utkarsh-sorathia.vercel.app/sitemap.xml
