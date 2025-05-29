@@ -1,7 +1,9 @@
 User-Agent: *
-Allow: /
-Disallow: /experience
-Disallow: /images
-Disallow: /skills
+
+Disallow: /experience/*.png$
+Disallow: /images/*.png$
+Disallow: /images/*.gif$
+Disallow: /skills/*.svg$
+Disallow: /skills/*.png$
 
 Sitemap: https://utkarsh-sorathia.vercel.app/sitemap.xml
