@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     url: "https://utkarsh-sorathia.vercel.app/",
     images: [
       {
-        url: "https://media.licdn.com/dms/image/v2/D5603AQEQYDFKjMNUug/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1713264086266?e=1753920000&v=beta&t=BUomUz_O-C5FikpjeeN-feXInUIMd3l38RSFCguldxI",
+        url: "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.png",
         alt: "Utkarsh Sorathia Portfolio",
       },
     ],
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
     images:
-      "https://media.licdn.com/dms/image/v2/D5603AQEQYDFKjMNUug/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1713264086266?e=1753920000&v=beta&t=BUomUz_O-C5FikpjeeN-feXInUIMd3l38RSFCguldxI",
+      "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.png",
   },
   alternates: {
     canonical: "https://utkarsh-sorathia.vercel.app/",
