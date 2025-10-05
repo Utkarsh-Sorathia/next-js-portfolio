@@ -27,7 +27,7 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
               Hi there, I am
             </p>
             <NameAnimation
-              words={['Utkarsh Sorathia.', '@usorathia.']}
+              words={['Utkarsh Sorathia.', '@utkarsh__sorathia.']}
               className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)] dark:text-[var(--primaryColor)]"
             />
           </div>
