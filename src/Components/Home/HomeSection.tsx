@@ -22,21 +22,15 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
 
       <ConstrainedBox classNames="px-4 py-8 pt-16 z-10 items-center justify-center my-auto">
         <Column classNames="w-full items-center justify-center">
-          <div className="relative inline-flex items-center mx-auto pb-4">
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
-                Hi there, I am{' '}
-                <span className="text-[var(--primaryColor)] dark:text-[var(--primaryColor)]">
-                  Utkarsh Sorathia.
-                </span>
-              </h1>
-            
-              <div aria-hidden="true" className="absolute inset-0 flex justify-center items-center">
-                <NameAnimation
-                  words={['Utkarsh Sorathia.', '@utkarsh__sorathia.']}
-                  className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)] dark:text-[var(--primaryColor)]"
-                />
-              </div>
-            </div>
+           <h1 className="inline-flex items-center mx-auto pb-4">
+            <p className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
+              Hi there, I am
+            </p>
+            <NameAnimation
+              words={['Utkarsh Sorathia.', '@utkarsh__sorathia.']}
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)] dark:text-[var(--primaryColor)]"
+            />
+          </h1>
           <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)] mx-auto">
             Full Stack Developer 💻 SDE 🛠️ Open Source 🌍
           </p>
