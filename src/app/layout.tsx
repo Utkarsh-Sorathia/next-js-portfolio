@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://utkarsh-sorathia.vercel.app'),
   title: "Utkarsh Sorathia | Full Stack Developer",
   description:
     "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",

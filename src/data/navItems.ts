@@ -32,6 +32,11 @@ export const navMenus: INavItem[] = [
     icon: "bi bi-code-square",
   },
   {
+    name: "Blog",
+    link: "/blogs",
+    icon: "bi bi-journal-text",
+  },
+  {
     name: "Contact",
     link: "/#contact",
     icon: "bi bi-person-lines-fill",
