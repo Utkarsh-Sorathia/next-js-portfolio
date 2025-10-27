@@ -6,6 +6,7 @@ import ScrollToTop from "@/Components/common/ScrollToTop";
 import { navMenus } from "../data/navItems";
 import Footer from "@/Components/UI/Footer";
 import GoogleAnalytics from "@/Components/core/GoogleAnalytics";
+import BlogButton from "@/Components/UI/BlogButton";
 import { Suspense } from "react";
 
 const geistSans = Geist({
@@ -161,6 +162,7 @@ export default function RootLayout({
         <main className="flex-grow">{children}</main>
         <Footer />
         <ScrollToTop />
+        <BlogButton />
       </body>
     </html>
   );

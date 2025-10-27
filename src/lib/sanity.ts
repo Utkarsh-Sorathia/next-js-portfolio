@@ -53,7 +53,24 @@ export const getBlogPostBySlugQuery = `
     _updatedAt,
     title,
     publishedAt,
-    body,
+    body[] {
+      ...,
+      "listItem": listItem,
+      "style": style,
+      "level": level,
+      children[] {
+        ...,
+        marks,
+        text
+      },
+      markDefs[]{
+        ...,
+        _type == "link" => {
+          ...,
+          "href": href
+        }
+      }
+    },
     slug {
       current
     },

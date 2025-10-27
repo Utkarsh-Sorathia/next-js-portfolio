@@ -17,20 +17,17 @@ const Footer = () => {
         </div>
         {/* Social Links */}
         <div className="flex justify-center md:justify-end space-x-6">
-          {socialLinks.map(
-            (link, index) =>
-              index !== socialLinks.length - 1 && (
-                <Link
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  aria-label={link.name}
-                  className="text-white text-2xl transition duration-300 transform hover:scale-125"
-                >
-                  <i className={link.icon} />
-                </Link>
-              )
-          )}
+          {socialLinks.map((link, index) => (
+            <Link
+              key={index}
+              href={link.url}
+              target="_blank"
+              aria-label={link.name}
+              className="text-white text-2xl transition duration-300 transform hover:scale-125"
+            >
+              <i className={link.icon} />
+            </Link>
+          ))}
         </div>
       </div>
     </footer>

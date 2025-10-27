@@ -11,10 +11,10 @@ const SkillSection = ({ id }: { id: string }) => {
       classNames="dark:bg-[var(--dialogColor)] bg-[var(--dialogColor)] items-center justify-center dark:bg-dot-white/[0.15] bg-dot-white/[0.15] lg:px-40"
       id={id}
     >
-      <ConstrainedBox classNames="px-4 py-16">
+      <ConstrainedBox classNames="px-4 py-12">
         <SectionTitle>Skills</SectionTitle>
 
-        <GridBox classNames="justify-items-center grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-16">
+        <GridBox classNames="justify-items-center grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-12">
           {skills.map((skill, index) => {
             return <SkillCard key={`skill-${index}`} data={skill} />;
           })}

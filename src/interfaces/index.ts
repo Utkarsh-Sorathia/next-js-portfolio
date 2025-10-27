@@ -187,7 +187,7 @@ export interface IBlogPost {
   title: string;
   publishedAt: string;
   slug: ISanitySlug;
-  body: any; // Raw content from Sanity
+  body: string | any; // Can be plain markdown string or legacy Portable Text
   image?: ISanityImage;
 }
 

@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { IBlogPost } from '@/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import PageBox from '@/Components/core/PageBox';
 import ResponsiveBox from '@/Components/core/ResponsiveBox';
 import ConstrainedBox from '@/Components/core/constrained-box';
+import MarkdownRenderer from '@/Components/UI/MarkdownRenderer';
 import { getTimeSincePublished, getBlogPostBySlug, getAllBlogPostSlugs } from '@/lib/sanity';
 
 
@@ -28,7 +28,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
-  
+
   if (!post) {
     return {
       title: 'Post Not Found | Utkarsh Sorathia',
@@ -36,11 +36,28 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
-      const excerpt = post.body?.[0]?.children?.[0]?.text?.substring(0, 160) || `Read about ${post.title}`;
+  let excerpt = '';
+  if (typeof post.body === 'string') {
+    // Clean markdown for excerpt
+    excerpt = post.body
+      .replace(/^#{1,6}\s+/gm, '') // Remove headers
+      .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+      .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+      .replace(/`([^`]+)`/g, '$1') // Remove inline code
+      .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links
+      .replace(/\[|\]|\(|\)|`|#|\*/g, '') // Remove any remaining markdown special chars
+      .replace(/\s+/g, ' ')
+      .trim()
+      .substring(0, 160);
+  } else {
+    excerpt = post.body?.[0]?.children?.[0]?.text?.substring(0, 160) || '';
+  }
+  
+  const metaDescription = excerpt || `Read about ${post.title}`;
 
   return {
     title: `${post.title} | Utkarsh Sorathia`,
-    description: excerpt,
+    description: metaDescription,
     keywords: [
       'blog',
       'web development',
@@ -107,6 +124,68 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const timeSincePublished = getTimeSincePublished(post.publishedAt);
 
+  // Convert Portable Text to Markdown string
+  const convertPortableTextToMarkdown = (body: any): string => {
+    if (!body) return '';
+    if (typeof body === 'string') return body;
+    if (!Array.isArray(body)) return '';
+
+    let markdown = '';
+
+    body.forEach((block: any) => {
+      if (block._type === 'block') {
+        const style = block.style || 'normal';
+        const listItem = block.listItem;
+        
+        let text = '';
+        
+        if (block.children && Array.isArray(block.children)) {
+          block.children.forEach((child: any) => {
+            let childText = String(child?.text || '');
+            
+            // Apply marks from the child
+            if (child?.marks && Array.isArray(child.marks)) {
+              // Check for strong
+              if (child.marks.includes('strong')) {
+                childText = `**${childText}**`;
+              }
+              // Check for em
+              if (child.marks.includes('em')) {
+                childText = `*${childText}*`;
+              }
+              // Check for code
+              if (child.marks.includes('code')) {
+                childText = `\`${childText}\``;
+              }
+            }
+            
+            text += childText;
+          });
+        }
+
+        // Handle lists
+        if (listItem) {
+          const prefix = listItem === 'bullet' ? '- ' : '1. ';
+          markdown += `${prefix}${text}\n`;
+        }
+        // Apply block styles
+        else if (style === 'h1') markdown += `# ${text}\n\n`;
+        else if (style === 'h2') markdown += `## ${text}\n\n`;
+        else if (style === 'h3') markdown += `### ${text}\n\n`;
+        else if (style === 'h4') markdown += `#### ${text}\n\n`;
+        else if (style === 'blockquote') markdown += `> ${text}\n\n`;
+        else markdown += `${text}\n\n`;
+      }
+    });
+
+    return markdown;
+  };
+
+  // Convert body to markdown string if needed
+  const bodyMarkdown = typeof post.body === 'string' 
+    ? post.body 
+    : convertPortableTextToMarkdown(post.body);
+
   return (
     <PageBox>
       <ResponsiveBox
@@ -116,12 +195,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <ConstrainedBox classNames="px-4 py-16">
           {/* Back Button */}
           <div className="mb-6 sm:mb-8">
-            <Link 
-              href="/blogs" 
+            <Link
+              href="/blogs"
               className="inline-flex items-center text-[var(--primaryColor)] hover:text-[var(--primaryColor)]/80 transition-colors text-sm sm:text-base"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Blog
+              Back to Blogs
             </Link>
           </div>
 
@@ -131,7 +210,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--textColor)] mb-4 sm:mb-6 leading-tight">
                 {post.title}
               </h1>
-              
+
               {/* Meta Information */}
               <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm sm:text-base text-[var(--textColorLight)] mb-6 sm:mb-8">
                 <div className="flex items-center">
@@ -169,28 +248,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </header>
 
             {/* Article Content */}
-        <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none">
-          {post.body?.map((block: any, index: number) => (
-            <p key={index} className="text-[var(--textColor)] leading-relaxed mb-4 sm:mb-6">
-              {block.children?.map((child: any, childIndex: number) => (
-                <span key={childIndex}>{child.text}</span>
-              ))}
-            </p>
-          ))}
-        </div>
+            {bodyMarkdown && (
+              <MarkdownRenderer content={bodyMarkdown} />
+            )}
 
             {/* Article Footer */}
             <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-[var(--textColor50)]">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6">
                 <div className="flex-1">
-                  <h3 className="text-lg sm:text-xl font-semibold text-[var(--textColor)] mb-2">About the Author</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-[var(--textColor)] mb-2">About Me</h3>
                   <p className="text-sm sm:text-base text-[var(--textColorLight)]">
-                    Utkarsh Sorathia is a passionate Full Stack Developer focused on creating 
-                    scalable and performance-driven web applications using modern technologies.
+                    I'm Utkarsh Sorathia, a Full Stack Developer passionate about React, Next.js, and modern JavaScript.
+                    I love building scalable web applications and sharing programming insights on my blog.
                   </p>
                 </div>
-                <Link 
-                  href="/blogs" 
+                <Link
+                  href="/blogs"
                   className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[var(--primaryColor)] to-indigo-600 hover:from-indigo-600 hover:to-[var(--primaryColor)] text-white rounded-[var(--borderRadius)] transition-all duration-300 text-sm sm:text-base whitespace-nowrap"
                 >
                   Read More Posts

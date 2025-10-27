@@ -80,7 +80,23 @@ export default function BlogCard({ post }: BlogCardProps) {
 
             {/* Excerpt */}
                 <p className="text-[var(--textColorLight)] text-sm leading-relaxed mb-4 line-clamp-3">
-                  {post.body?.[0]?.children?.[0]?.text || 'No excerpt available...'}
+                  {(() => {
+                    let excerpt = '';
+                    if (typeof post.body === 'string') {
+                      // Clean markdown: remove headers (#), bold (**), italic (*), code (`), links, etc.
+                      excerpt = post.body
+                        .replace(/^#{1,6}\s+/gm, '') // Remove headers
+                        .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+                        .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+                        .replace(/`([^`]+)`/g, '$1') // Remove inline code
+                        .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links
+                        .replace(/\[|\]|\(|\)|`|#|\*/g, ''); // Remove any remaining markdown special chars
+                      // Clean up extra spaces
+                      excerpt = excerpt.replace(/\s+/g, ' ').trim();
+                      return excerpt.substring(0, 150) + (excerpt.length > 150 ? '...' : '');
+                    }
+                    return post.body?.[0]?.children?.[0]?.text || 'No excerpt available...';
+                  })()}
                 </p>
           </div>
 

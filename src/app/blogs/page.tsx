@@ -4,6 +4,7 @@ import BlogCard from '@/Components/UI/BlogCard';
 import PageBox from '@/Components/core/PageBox';
 import ResponsiveBox from '@/Components/core/ResponsiveBox';
 import ConstrainedBox from '@/Components/core/constrained-box';
+import SectionTitle from '@/Components/common/SectionTitle';
 import { getAllBlogPosts } from '@/lib/sanity';
 
 export const metadata: Metadata = {
@@ -71,11 +72,9 @@ export default async function BlogsPage() {
       >
         <ConstrainedBox classNames="px-4 py-16">
           {/* Header Section */}
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <div className="text-center mx-auto text-2xl/6 sm:text-3xl/6 md:text-4xl/6 font-bold mb-4 sm:mb-6">
-              My <span className="text-[var(--primaryColor)]">Blogs</span>
-            </div>
-            <p className="text-base sm:text-lg text-[var(--textColorLight)] max-w-2xl mx-auto">
+          <div className="mb-8 sm:mb-12 lg:mb-16">
+            <SectionTitle>My <span className="text-[var(--primaryColor)]">Blogs</span></SectionTitle>
+            <p className="text-center text-base sm:text-lg text-[var(--textColorLight)] max-w-2xl mx-auto mt-4 sm:mt-6">
               Thoughts, tutorials, and insights about web development, technology, and programming.
             </p>
           </div>
