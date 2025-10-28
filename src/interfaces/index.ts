@@ -165,3 +165,45 @@ export interface IExperienceItem {
   companyLogo?: string;
   companyLink?: string;
 }
+
+// Sanity CMS Blog Post Interface based on GROQ query
+export interface ISanitySlug {
+  current: string;
+}
+
+export interface ISanityAsset {
+  altText?: string;
+  url: string;
+}
+
+export interface ISanityImage {
+  asset: ISanityAsset;
+}
+
+export interface IBlogPost {
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+  title: string;
+  publishedAt: string;
+  slug: ISanitySlug;
+  body: string | any; // Can be plain markdown string or legacy Portable Text
+  image?: ISanityImage;
+}
+
+// Additional interfaces for enhanced blog functionality
+export interface IBlogPostWithMetadata extends IBlogPost {
+  excerpt?: string;
+  readTime?: number; // in minutes
+  tags?: string[];
+  category?: string;
+  featured?: boolean;
+}
+
+export interface IBlogCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  color?: string;
+}

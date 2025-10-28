@@ -10,7 +10,7 @@ const ExperienceSection = ({ id }: { id: string }) => {
       classNames="dark:bg-[var(--dialogColor)] bg-[var(--dialogColor)] items-center justify-center dark:bg-dot-white/[0.15] bg-dot-white/[0.15] lg:px-40"
       id={id}
     >
-      <ConstrainedBox classNames="px-4 py-16">
+      <ConstrainedBox classNames="px-4 py-12">
         <SectionTitle>Experience</SectionTitle>
         <ExperienceCard data={experiences} />
       </ConstrainedBox>
