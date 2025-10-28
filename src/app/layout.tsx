@@ -7,6 +7,7 @@ import { navMenus } from "../data/navItems";
 import Footer from "@/Components/UI/Footer";
 import GoogleAnalytics from "@/Components/core/GoogleAnalytics";
 import BlogButton from "@/Components/UI/BlogButton";
+import WhatsAppButton from "@/Components/UI/WhatsAppButton";
 import { Suspense } from "react";
 
 const geistSans = Geist({
@@ -163,6 +164,7 @@ export default function RootLayout({
         <Footer />
         <ScrollToTop />
         <BlogButton />
+        <WhatsAppButton />
       </body>
     </html>
   );
