@@ -1,0 +1,58 @@
+/* WhatsApp Sticky Icon */
+.whatsappSticky {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  background: #25D366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  z-index: 4998;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.whatsappSticky:hover {
+  background: #128C7E;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+  text-decoration: none;
+  color: white;
+}
+
+.whatsappSticky i {
+  transition: transform 0.3s ease;
+}
+
+.whatsappSticky:hover i {
+  transform: scale(1.1);
+}
+
+/* Pulse animation for WhatsApp icon */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  }
+}
+
+/* Mobile responsive adjustments for WhatsApp icon */
+@media (max-width: 480px) {
+  .whatsappSticky {
+    width: 48px;
+    height: 48px;
+  }
+}
