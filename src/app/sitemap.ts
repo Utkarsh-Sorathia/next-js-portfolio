@@ -16,8 +16,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/blogs`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      changeFrequency: 'daily' as const, 
+      priority: 0.9, 
     },
   ]
   
@@ -25,10 +25,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}/blogs/${post.slug.current}`,
     lastModified: new Date(post._updatedAt || post._createdAt),
     changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    priority: 0.8, 
   }))
   
   return [...staticRoutes, ...blogRoutes]
 }
 
-export const revalidate = 3600
+export const revalidate = 60
