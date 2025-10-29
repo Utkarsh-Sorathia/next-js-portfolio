@@ -7,6 +7,10 @@ export const sanityConfig = {
   dataset: 'production',
   apiVersion: '2022-06-01',
   useCdn: process.env.NODE_ENV === 'production',
+  perspective: 'published' as const,
+  stega: {
+    enabled: false,
+  },
 };
 
 // Create Sanity client
