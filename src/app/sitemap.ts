@@ -31,4 +31,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [...staticRoutes, ...blogRoutes]
 }
 
-export const revalidate = 60
+export const revalidate = 21600
