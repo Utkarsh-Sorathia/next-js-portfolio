@@ -24,6 +24,8 @@ export async function generateStaticParams() {
   }));
 }
 
+export const revalidate = 60;
+
 // Generate metadata for each blog post
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
