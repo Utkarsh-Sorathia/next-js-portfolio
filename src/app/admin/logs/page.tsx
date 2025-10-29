@@ -328,46 +328,126 @@ export default function AdminLogs() {
               </div>
 
               {/* Pagination */}
-              <div className="flex justify-center items-center mt-6 space-x-3 select-none">
+              <div className="flex justify-center items-center mt-6 space-x-1 md:space-x-3 select-none">
                 <button
                   onClick={() => goToPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`px-3 py-1 rounded border ${
+                  className={`px-2 md:px-3 py-1 rounded border text-sm md:text-base ${
                     currentPage === 1
                       ? "cursor-not-allowed text-white border-[var(--primaryColor)]"
-                      : "text-[var(--primaryColor)]"
+                      : "text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                   }`}
                   aria-label="Previous page"
                 >
-                  &laquo; Prev
+                  <span className="hidden md:inline">&laquo; Prev</span>
+                  <span className="md:hidden">&laquo;</span>
                 </button>
 
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (page) => (
-                    <button
-                      key={page}
-                      onClick={() => goToPage(page)}
-                      className={`px-3 py-1 rounded border border-[var(--primaryColor)] text-white ${
-                        page === currentPage ? "bg-[var(--primaryColor)]" : null
-                      }`}
-                      aria-current={page === currentPage ? "page" : undefined}
-                    >
-                      {page}
-                    </button>
-                  )
-                )}
+                {/* Smart pagination with ellipsis */}
+                {(() => {
+                  const pages = [];
+                  const maxVisiblePages = 5; // Show max 5 page numbers
+                  
+                  if (totalPages <= maxVisiblePages) {
+                    // Show all pages if total is small
+                    for (let i = 1; i <= totalPages; i++) {
+                      pages.push(
+                        <button
+                          key={i}
+                          onClick={() => goToPage(i)}
+                          className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
+                            i === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                          }`}
+                          aria-current={i === currentPage ? "page" : undefined}
+                        >
+                          {i}
+                        </button>
+                      );
+                    }
+                  } else {
+                    // Always show first page
+                    pages.push(
+                      <button
+                        key={1}
+                        onClick={() => goToPage(1)}
+                        className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
+                          1 === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                        }`}
+                        aria-current={1 === currentPage ? "page" : undefined}
+                      >
+                        1
+                      </button>
+                    );
+
+                    if (currentPage > 3) {
+                      pages.push(
+                        <span key="ellipsis1" className="px-2 text-white text-sm md:text-base">
+                          ...
+                        </span>
+                      );
+                    }
+
+                    // Show pages around current page
+                    const start = Math.max(2, currentPage - 1);
+                    const end = Math.min(totalPages - 1, currentPage + 1);
+
+                    for (let i = start; i <= end; i++) {
+                      if (i !== 1 && i !== totalPages) {
+                        pages.push(
+                          <button
+                            key={i}
+                            onClick={() => goToPage(i)}
+                            className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
+                              i === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                            }`}
+                            aria-current={i === currentPage ? "page" : undefined}
+                          >
+                            {i}
+                          </button>
+                        );
+                      }
+                    }
+
+                    if (currentPage < totalPages - 2) {
+                      pages.push(
+                        <span key="ellipsis2" className="px-2 text-white text-sm md:text-base">
+                          ...
+                        </span>
+                      );
+                    }
+
+                    // Always show last page (if not already shown)
+                    if (totalPages > 1) {
+                      pages.push(
+                        <button
+                          key={totalPages}
+                          onClick={() => goToPage(totalPages)}
+                          className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
+                            totalPages === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                          }`}
+                          aria-current={totalPages === currentPage ? "page" : undefined}
+                        >
+                          {totalPages}
+                        </button>
+                      );
+                    }
+                  }
+
+                  return pages;
+                })()}
 
                 <button
                   onClick={() => goToPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={`px-3 py-1 rounded border ${
+                  className={`px-2 md:px-3 py-1 rounded border text-sm md:text-base ${
                     currentPage === totalPages
                       ? "cursor-not-allowed text-white border-[var(--primaryColor)]"
-                      : "text-[var(--primaryColor)]"
+                      : "text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                   }`}
                   aria-label="Next page"
                 >
-                  Next &raquo;
+                  <span className="hidden md:inline">Next &raquo;</span>
+                  <span className="md:hidden">&raquo;</span>
                 </button>
               </div>
             </>
