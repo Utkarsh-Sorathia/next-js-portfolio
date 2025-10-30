@@ -28,3 +28,35 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Animation for floating blog button */
+@keyframes upDown {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(8px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Custom beige/off-white utilities */
+.text-off-white {
+  color: var(--off-white);
+}
+
+.bg-off-white {
+  background-color: var(--off-white);
+}
+
+.border-off-white {
+  border-color: var(--border-off-white);
+}

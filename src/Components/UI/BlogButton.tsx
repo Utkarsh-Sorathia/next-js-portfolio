@@ -24,6 +24,8 @@ const BlogButton = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const showScrollTop = scrollY > 400;
+
   // Don't show button on blogs pages
   if (pathname?.startsWith('/blogs')) {
     return null;
@@ -39,7 +41,7 @@ const BlogButton = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             className="fixed sm:hidden right-4 z-[4999] transition-all duration-300"
-            style={{ bottom: scrollY > 400 ? '80px' : '16px' }}
+            style={{ bottom: scrollY > 400 ? '140px' : '80px' }}
           >
             <Link href="/blogs">
               <motion.div
