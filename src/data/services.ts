@@ -22,7 +22,7 @@ const services: IServiceItem[] = [
     icons: [
       "/skills/redux.svg",
       "/skills/react.svg",
-      "/skills/nextjs.png",
+      "/skills/nextjs.webp",
       "/skills/html.svg",
       "/skills/css.svg",
     ],
@@ -34,8 +34,8 @@ const services: IServiceItem[] = [
     id: 3,
     title: "Backend Development",
     icons: [
-      "/skills/socket-io.png",
-      "/skills/docker.png",
+      "/skills/socket-io.webp",
+      "/skills/docker.svg",
       "/skills/nodejs.svg",
       "/skills/express.svg",
       "/skills/aws.svg",
@@ -49,10 +49,10 @@ const services: IServiceItem[] = [
     title: "Product Strategy",
     icons: [
       "/skills/git.svg",
-      "/images/collaboration.png",
-      "/images/problem-solving.png",
-      "/images/analytical-skills.png",
-      "/skills/ubuntu.png",
+      "/images/collaboration.webp",
+      "/images/problem-solving.webp",
+      "/images/analytical-skills.webp",
+      "/skills/ubuntu.webp",
     ],
     shortDescription:
       "I define goals, target audiences, and roadmap for success.",

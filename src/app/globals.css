@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: url(/images/dark-mode.gif), #121212;  /* Permanent dark mode background */
+  --background: url(/images/dark-mode.webp), #121212;  /* Permanent dark mode background */
   --foreground: #ededed;  /* Light text for dark background */
   --primaryColor: #4361ee;
 }
@@ -14,13 +14,56 @@
 }
 
 /* No media query here, ensuring dark mode is permanent */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Add to global.css if needed */
+/* Smooth scroll offset for fixed header */
+:target {
+  scroll-margin-top: 100px;
+}
+
+/* Custom Scrollbar Styling */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(18, 18, 18, 0.8);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primaryColor), #5f7cff);
+  border-radius: 10px;
+  border: 2px solid rgba(18, 18, 18, 0.8);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5f7cff, var(--primaryColor));
+  border-color: rgba(67, 97, 238, 0.3);
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(18, 18, 18, 0.8);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primaryColor) rgba(18, 18, 18, 0.8);
+}
+
+/* Utility class to hide scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -29,34 +72,74 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
-/* Animation for floating blog button */
-@keyframes upDown {
+/* Image Loading Shimmer Animation */
+@keyframes shimmer {
   0% {
-    transform: translateY(0px);
-  }
-  25% {
-    transform: translateY(8px);
-  }
-  50% {
-    transform: translateY(0px);
-  }
-  75% {
-    transform: translateY(-8px);
+    background-position: -1000px 0;
   }
   100% {
-    transform: translateY(0px);
+    background-position: 1000px 0;
   }
 }
 
-/* Custom beige/off-white utilities */
-.text-off-white {
-  color: var(--off-white);
+.image-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
 }
 
-.bg-off-white {
-  background-color: var(--off-white);
+/* Enhanced Spinner Animation */
+@keyframes spinner-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.border-off-white {
-  border-color: var(--border-off-white);
+/* Enhanced smooth spinner with easing */
+.spinner-animated {
+  animation: spinner-rotate 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+/* Loading Dots Animation */
+.loading-dots {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.loading-dots .dot {
+  opacity: 0.3;
+  animation: dot-blink 1.4s infinite;
+}
+
+.loading-dots .dot-1 {
+  animation-delay: 0s;
+}
+
+.loading-dots .dot-2 {
+  animation-delay: 0.2s;
+}
+
+.loading-dots .dot-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-blink {
+  0%, 20% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }

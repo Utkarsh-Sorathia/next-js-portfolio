@@ -14,11 +14,6 @@ const skills: ISkillListItem[] = [
         level: SkillLevel.Intermediate,
         icon: "/skills/typescript.svg",
       },
-      // {
-      //   title: "Dart",
-      //   level: SkillLevel.Expert,
-      //   icon: "/skills/dart.svg",
-      // },
     ],
   },
   {
@@ -27,7 +22,7 @@ const skills: ISkillListItem[] = [
       {
         title: "Next.js",
         level: SkillLevel.Expert,
-        icon: "/skills/nextjs.png",
+        icon: "/skills/nextjs.webp",
       },
       {
         title: "React.js",
@@ -72,30 +67,25 @@ const skills: ISkillListItem[] = [
       {
         title: "Socket.io",
         level: SkillLevel.Intermediate,
-        icon: "/skills/socket-io.png",
+        icon: "/skills/socket-io.webp",
       },
-      // {
-      //   title: "Nest.js",
-      //   level: SkillLevel.Beginner,
-      //   icon: "/skills/nestjs.svg",
-      // },
+      {
+        title: "Nest.js",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/nestjs.svg",
+      },
     ],
   },
-  // {
-  //   title: "Mobile App Development",
-  //   items: [
-  //     {
-  //       title: "Flutter",
-  //       level: SkillLevel.Expert,
-  //       icon: "/skills/flutter.svg",
-  //     },
-  //     {
-  //       title: "GetX",
-  //       level: SkillLevel.Expert,
-  //       icon: "/skills/getx.png",
-  //     },
-  //   ],
-  // },
+  {
+    title: "Mobile App Development",
+    items: [
+      {
+        title: "React Native(Andriod & iOS)",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/react-native.svg",
+      },
+    ],
+  },
   {
     title: "Database Management",
     items: [
@@ -119,11 +109,11 @@ const skills: ISkillListItem[] = [
   {
     title: "DevOps/VCS",
     items: [
-      // {
-      //   title: "Docker",
-      //   level: SkillLevel.Beginner,
-      //   icon: "/skills/docker.png",
-      // },
+      {
+        title: "Docker",
+        level: SkillLevel.Beginner,
+        icon: "/skills/docker.svg",
+      },
       // {
       //   title: "AWS",
       //   level: SkillLevel.Intermediate,
@@ -137,7 +127,7 @@ const skills: ISkillListItem[] = [
       {
         title: "GitHub",
         level: SkillLevel.Expert,
-        icon: "/skills/github-white.png",
+        icon: "/skills/github-white.webp",
       },
     ],
   },
@@ -152,7 +142,7 @@ const skills: ISkillListItem[] = [
       {
         title: "Ubuntu",
         level: SkillLevel.Intermediate,
-        icon: "/skills/ubuntu.png",
+        icon: "/skills/ubuntu.webp",
       },
     ],
   },
@@ -162,17 +152,17 @@ const skills: ISkillListItem[] = [
       {
         title: "Problem Solving",
         level: SkillLevel.Expert,
-        icon: "/images/problem-solving.png",
+        icon: "/images/problem-solving.webp",
       },
       {
         title: "Collaboration",
         level: SkillLevel.Expert,
-        icon: "/images/collaboration.png",
+        icon: "/images/collaboration.webp",
       },
       {
         title: "Analytical Skills",
         level: SkillLevel.Expert,
-        icon: "/images/analytical-skills.png",
+        icon: "/images/analytical-skills.webp",
       },
     ],
   },

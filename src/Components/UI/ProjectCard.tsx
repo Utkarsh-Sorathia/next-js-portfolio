@@ -1,7 +1,6 @@
 "use client";
 
 import { RepoType, type IProjectItem } from "@/interfaces";
-import { Balancer } from "react-wrap-balancer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";

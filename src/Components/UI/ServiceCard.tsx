@@ -3,6 +3,7 @@
 import { cn } from "@/utils/cn";
 import { IServiceItem } from "@/interfaces";
 import Image from "next/image";
+import { validateAltText, getSkillAltText } from "@/utils/imageValidation";
 
 export function ServiceCard({
   item,
@@ -25,65 +26,65 @@ const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
         <IconContainer className="h-8 w-8 circle-1">
           <Image
             src={item.icons[0]}
-            alt={`icon-1`}
+            alt={validateAltText(item.icons[0], getSkillAltText(`${item.title} service icon 1`), 'Service icon')}
             width={144}
             height={144}
             sizes="100%"
             loading="lazy"
             placeholder="blur"
-            blurDataURL="/images/placeholder.png"
+            blurDataURL="/images/placeholder.webp"
             className="h-4 w-4 aspect-square"
           />
         </IconContainer>
         <IconContainer className="h-12 w-12 circle-2">
           <Image
             src={item.icons[1]}
-            alt={`icon-2`}
+            alt={validateAltText(item.icons[1], getSkillAltText(`${item.title} service icon 2`), 'Service icon')}
             width={144}
             height={144}
             sizes="100%"
             loading="lazy"
             placeholder="blur"
-            blurDataURL="/images/placeholder.png"
+            blurDataURL="/images/placeholder.webp"
             className="h-6 w-6 aspect-square"
           />
         </IconContainer>
         <IconContainer className="circle-3">
           <Image
             src={item.icons[2]}
-            alt={`icon-3`}
+            alt={validateAltText(item.icons[2], getSkillAltText(`${item.title} service icon 3`), 'Service icon')}
             width={144}
             height={144}
             sizes="100%"
             loading="lazy"
             placeholder="blur"
-            blurDataURL="/images/placeholder.png"
+            blurDataURL="/images/placeholder.webp"
             className="h-8 w-8 aspect-square"
           />
         </IconContainer>
         <IconContainer className="h-12 w-12 circle-4">
           <Image
             src={item.icons[3]}
-            alt={`icon-4`}
+            alt={validateAltText(item.icons[3], getSkillAltText(`${item.title} service icon 4`), 'Service icon')}
             width={144}
             height={144}
             sizes="100%"
             loading="lazy"
             placeholder="blur"
-            blurDataURL="/images/placeholder.png"
+            blurDataURL="/images/placeholder.webp"
             className="h-6 w-6 aspect-square"
           />
         </IconContainer>
         <IconContainer className="h-8 w-8 circle-5">
           <Image
             src={item.icons[4]}
-            alt={`icon-5`}
+            alt={validateAltText(item.icons[4], getSkillAltText(`${item.title} service icon 5`), 'Service icon')}
             width={144}
             height={144}
             sizes="100%"
             loading="lazy"
             placeholder="blur"
-            blurDataURL="/images/placeholder.png"
+            blurDataURL="/images/placeholder.webp"
             className="h-4 w-4 aspect-square"
           />
         </IconContainer>
@@ -102,7 +103,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-zinc-500 dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group hover:transform hover:scale-105 transition duration-300",
+        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-zinc-500 dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group hover:transform hover:scale-105 hover:bg-white/10 transition duration-300",
         className
       )}
     >

@@ -24,7 +24,7 @@ const ContactSection = ({ id }: { id: string }) => {
                   text={link.text}
                   icon={link.icon}
                   url={link.url}
-                  className="p-4 border border-zinc-500 text-xl hover:bg-white hover:text-[var(--primaryColor)] transition duration-300"
+                  className="p-4 border border-zinc-500 text-xl hover:bg-white/10 transition duration-300"
                 />
               );
             })}

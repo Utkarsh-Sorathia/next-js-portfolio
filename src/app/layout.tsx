@@ -7,8 +7,9 @@ import { navMenus } from "../data/navItems";
 import Footer from "@/Components/UI/Footer";
 import GoogleAnalytics from "@/Components/core/GoogleAnalytics";
 import BlogButton from "@/Components/UI/BlogButton";
-import WhatsAppButton from "@/Components/UI/WhatsAppButton";
+import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
+import WhatsAppButton from "@/Components/UI/WhatsAppButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -101,7 +102,7 @@ export const metadata: Metadata = {
     url: "https://utkarsh-sorathia.vercel.app/",
     images: [
       {
-        url: "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.png",
+        url: "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp",
         alt: "Utkarsh Sorathia Portfolio",
       },
     ],
@@ -114,7 +115,7 @@ export const metadata: Metadata = {
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
     images:
-      "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.png",
+      "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp",
   },
   alternates: {
     canonical: "https://utkarsh-sorathia.vercel.app/",
@@ -159,15 +160,17 @@ export default function RootLayout({
         />
       </head>
       <body className="flex flex-col min-h-screen antialiased">
-        <Header className="app_nav" navItems={navMenus} />
-        <Suspense fallback={null}>
-          <GoogleAnalytics />
-        </Suspense>
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <ScrollToTop />
-        <BlogButton />
-        <WhatsAppButton />
+        <ErrorBoundary>
+          <Header className="app_nav" navItems={navMenus} />
+          <Suspense fallback={null}>
+            <GoogleAnalytics />
+          </Suspense>
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <ScrollToTop />
+          <BlogButton />
+          <WhatsAppButton />
+        </ErrorBoundary>
       </body>
     </html>
   );
