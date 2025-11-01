@@ -9,10 +9,10 @@ import socialLinks from "../../data/importantLinks";
 const ContactSection = ({ id }: { id: string }) => {
   return (
     <ResponsiveBox
-      classNames="dark:bg-[var(--dialogColor)] bg-[var(--dialogColor)] items-center justify-center dark:bg-dot-white/[0.15] bg-dot-white/[0.15] lg:px-40 lg:min-h-screen"
+      classNames="dark:bg-[var(--dialogColor)] bg-[var(--dialogColor)] items-center justify-center dark:bg-dot-white/[0.15] bg-dot-white/[0.15] lg:px-40"
       id={id}
     >
-      <ConstrainedBox classNames="px-4 py-8">
+      <ConstrainedBox classNames="px-4 py-12 lg:py-16">
         <SectionTitle>Get in Touch</SectionTitle>
 
         <Column classNames="mt-16 w-full">

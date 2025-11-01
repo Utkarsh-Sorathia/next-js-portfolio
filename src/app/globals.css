@@ -29,38 +29,56 @@ body {
   scroll-margin-top: 100px;
 }
 
-/* Custom Scrollbar Styling */
+/* Custom Scrollbar Styling - Completely Hidden */
 /* Webkit browsers (Chrome, Safari, Edge) */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(18, 18, 18, 0.8);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primaryColor), #5f7cff);
-  border-radius: 10px;
-  border: 2px solid rgba(18, 18, 18, 0.8);
-  transition: all 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #5f7cff, var(--primaryColor));
-  border-color: rgba(67, 97, 238, 0.3);
-}
-
-::-webkit-scrollbar-corner {
-  background: rgba(18, 18, 18, 0.8);
-}
-
-/* Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: var(--primaryColor) rgba(18, 18, 18, 0.8);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-corner {
+  display: none;
+  background: transparent;
+}
+
+/* Ensure html and body hide scrollbar */
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Utility class to hide scrollbar */

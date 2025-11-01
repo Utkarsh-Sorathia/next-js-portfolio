@@ -14,7 +14,7 @@ const SkillSection = ({ id }: { id: string }) => {
       <ConstrainedBox classNames="px-4 py-12">
         <SectionTitle>Skills</SectionTitle>
 
-        <GridBox classNames="justify-items-center grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-12">
+        <GridBox classNames="justify-items-center grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-8">
           {skills.map((skill, index) => {
             return <SkillCard key={`skill-${index}`} data={skill} />;
           })}
