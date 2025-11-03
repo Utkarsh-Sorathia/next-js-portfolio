@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import PageBox from '@/Components/core/PageBox';
@@ -8,6 +7,8 @@ import ResponsiveBox from '@/Components/core/ResponsiveBox';
 import ConstrainedBox from '@/Components/core/constrained-box';
 import MarkdownRenderer from '@/Components/UI/MarkdownRenderer';
 import { getTimeSincePublished, getBlogPostBySlug, getAllBlogPostSlugs } from '@/lib/sanity';
+import { getBlogAltText } from '@/utils/imageValidation';
+import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
 
 
 interface BlogPostPageProps {
@@ -89,7 +90,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.title,
       description: excerpt,
       url: `https://utkarsh-sorathia.vercel.app/blogs/${post.slug.current}`,
-      images: post.image ? [post.image.asset.url] : [],
+      images: post.image?.asset?.url 
+        ? [post.image.asset.url] 
+        : [{
+            url: 'https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp',
+            alt: post.title,
+            width: 1200,
+            height: 630,
+          }],
       type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post._updatedAt,
@@ -101,7 +109,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       card: 'summary_large_image',
       title: post.title,
       description: excerpt,
-      images: post.image ? [post.image.asset.url] : [],
+      images: post.image?.asset?.url 
+        ? [post.image.asset.url] 
+        : ['https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp'],
       creator: '@utkarshsor03',
     },
     alternates: {
@@ -231,17 +241,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Featured Image */}
               {post.image?.asset?.url ? (
-                <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96 mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden">
-                  <Image
-                    src={post.image.asset.url}
-                    alt={post.image.asset.altText || post.title}
-                    fill
-                    className="object-cover"
-                    quality={95}
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                  />
-                </div>
+                <BlogImageWithLoader
+                  src={post.image.asset.url}
+                  alt={post.image.asset.altText || getBlogAltText(post.title)}
+                  className="w-full h-48 sm:h-64 md:h-80 lg:h-96 mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden"
+                  priority
+                />
               ) : (
                 <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96 mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden bg-gray-800 flex items-center justify-center">
                   <div className="text-gray-400 text-6xl">📝</div>
