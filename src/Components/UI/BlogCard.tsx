@@ -5,16 +5,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import CardBox from '../core/CardBox';
 import Column from '../core/Column';
 import Row from '../core/Row';
 import { getTimeSincePublished } from '@/lib/sanity';
+import { getBlogAltText, validateAltText } from '@/utils/imageValidation';
 
 interface BlogCardProps {
   post: IBlogPost;
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
   const publishedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -25,9 +30,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={false}
       whileHover={{ y: -5 }}
       className="h-full"
     >
@@ -36,14 +39,35 @@ export default function BlogCard({ post }: BlogCardProps) {
         {post.image?.asset?.url ? (
           <Link href={`/blogs/${post.slug.current}`} className="block">
             <div className="relative w-full h-48 sm:h-56 overflow-hidden cursor-pointer">
+              {/* Loading Shimmer */}
+              {imageLoading && !imageError && (
+                <div className="absolute inset-0 image-shimmer bg-gray-700" />
+              )}
+              
+              {/* Image */}
               <Image
                 src={post.image.asset.url}
-                alt={post.image.asset.altText || post.title}
+                alt={validateAltText(post.image.asset.altText, getBlogAltText(post.title), 'Blog post image')}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                className={`object-cover group-hover:scale-105 transition-all duration-300 ${
+                  imageLoading ? 'opacity-0' : 'opacity-100'
+                }`}
                 quality={90}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onLoad={() => setImageLoading(false)}
+                onError={() => {
+                  setImageLoading(false);
+                  setImageError(true);
+                }}
               />
+              
+              {/* Error Fallback */}
+              {imageError && (
+                <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                  <div className="text-gray-400 text-4xl">📝</div>
+                </div>
+              )}
+              
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           </Link>

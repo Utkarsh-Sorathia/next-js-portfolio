@@ -2,7 +2,14 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  z-index: 20;
+  z-index: 5000;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .topToBottom {
+    bottom: 1rem;
+  }
 }
 
 .btnStyle {

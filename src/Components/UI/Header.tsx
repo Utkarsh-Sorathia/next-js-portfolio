@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/utils/cn'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { INavItem } from '@/interfaces'
 import Row from '../../Components/core/Row'
 import { useEffect, useState } from 'react'
@@ -18,14 +19,16 @@ const FloatingNavbar = ({
   navItems: INavItem[]
   className?: string
 }) => {
-  const [locations, setLocations] = useState<any>(null); // You can adjust the type based on the expected response structure
+  const pathname = usePathname();
+  const router = useRouter();
+  const [locations, setLocations] = useState<any>(null);
 
   useEffect(() => {
     if (locationsApiUrl) {
       const fetchLocations = async () => {
         try {
           const response = await axios.get(locationsApiUrl);
-          setLocations(response.data); // Store the fetched data
+          setLocations(response.data);
         } catch (error) {
           console.error('Error fetching locations:', error);
         }
@@ -34,6 +37,24 @@ const FloatingNavbar = ({
       fetchLocations();
     }
   }, [locationsApiUrl]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
+    // Handle home link with smooth scroll
+    if (link === '/') {
+      e.preventDefault();
+      if (pathname === '/') {
+        // Already on home page, just scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Navigate to home then scroll
+        router.push('/');
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      }
+    }
+    // Other hash links will work with default Next.js behavior + CSS smooth scroll
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -60,6 +81,7 @@ const FloatingNavbar = ({
               <span key={`link=${idx}`}>
                 <Link
                   href={navItem.link}
+                  onClick={(e) => handleNavClick(e, navItem.link)}
                   className={cn(
                     'relative flex items-center space-x-1 text-neutral-50 group',
                   )}

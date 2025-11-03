@@ -44,7 +44,7 @@ const AboutSection = ({ id }: { id: string }) => {
                   onClick={toggleModal}
                 >
                   <Image
-                    src="/UtkarshSorathia.png"
+                    src="/UtkarshSorathia.webp"
                     alt="Utkarsh Sorathia"
                     fill
                     className="object-cover"
@@ -90,7 +90,7 @@ const AboutSection = ({ id }: { id: string }) => {
                     ✖
                   </button>
                   <Image
-                    src="/UtkarshSorathia.png"
+                    src="/UtkarshSorathia.webp"
                     alt="Full-size profile image of Utkarsh Sorathia"
                     width={500}
                     height={500}

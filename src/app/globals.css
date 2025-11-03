@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: url(/images/dark-mode.gif), #121212;  /* Permanent dark mode background */
+  --background: url(/images/dark-mode.webp), #121212;  /* Permanent dark mode background */
   --foreground: #ededed;  /* Light text for dark background */
   --primaryColor: #4361ee;
 }
@@ -14,17 +14,150 @@
 }
 
 /* No media query here, ensuring dark mode is permanent */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Add to global.css if needed */
+/* Smooth scroll offset for fixed header */
+:target {
+  scroll-margin-top: 100px;
+}
+
+/* Custom Scrollbar Styling - Completely Hidden */
+/* Webkit browsers (Chrome, Safari, Edge) */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-corner {
+  display: none;
+  background: transparent;
+}
+
+/* Ensure html and body hide scrollbar */
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Utility class to hide scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* Image Loading Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.image-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Enhanced Spinner Animation */
+@keyframes spinner-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced smooth spinner with easing */
+.spinner-animated {
+  animation: spinner-rotate 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+/* Loading Dots Animation */
+.loading-dots {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.loading-dots .dot {
+  opacity: 0.3;
+  animation: dot-blink 1.4s infinite;
+}
+
+.loading-dots .dot-1 {
+  animation-delay: 0s;
+}
+
+.loading-dots .dot-2 {
+  animation-delay: 0.2s;
+}
+
+.loading-dots .dot-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-blink {
+  0%, 20% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }
