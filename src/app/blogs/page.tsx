@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog | Utkarsh Sorathia - Full Stack Developer',
     description: 'Read my latest thoughts on web development, technology, and programming. Explore tutorials, insights, and best practices for modern web development.',
-    url: 'https://utkarsh-sorathia.vercel.app/blogs',
+    url: 'https://utkarshsorathia.in/blogs',
     type: 'website',
     locale: 'en_US',
     siteName: 'Utkarsh Sorathia Portfolio',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     creator: '@utkarshsor03',
   },
   alternates: {
-    canonical: 'https://utkarsh-sorathia.vercel.app/blogs',
+    canonical: 'https://utkarshsorathia.in/blogs',
   },
 };
 

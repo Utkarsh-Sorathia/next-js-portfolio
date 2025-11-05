@@ -89,11 +89,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     openGraph: {
       title: post.title,
       description: excerpt,
-      url: `https://utkarsh-sorathia.vercel.app/blogs/${post.slug.current}`,
+      url: `https://utkarshsorathia.in/blogs/${post.slug.current}`,
       images: post.image?.asset?.url 
         ? [post.image.asset.url] 
         : [{
-            url: 'https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp',
+            url: 'https://utkarshsorathia.in/UtkarshSorathia.webp',
             alt: post.title,
             width: 1200,
             height: 630,
@@ -111,11 +111,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description: excerpt,
       images: post.image?.asset?.url 
         ? [post.image.asset.url] 
-        : ['https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp'],
+        : ['https://utkarshsorathia.in/UtkarshSorathia.webp'],
       creator: '@utkarshsor03',
     },
     alternates: {
-      canonical: `https://utkarsh-sorathia.vercel.app/blogs/${post.slug.current}`,
+      canonical: `https://utkarshsorathia.in/blogs/${post.slug.current}`,
     },
   };
 }

@@ -1,21 +1,19 @@
 import { IServiceItem } from "@/interfaces";
 
 const services: IServiceItem[] = [
-//   {
-//     id: 1,
-//     title: "Mobile App Development",
-//     icons: [
-//       "/skills/socket-io.png",
-//       "/skills/dart.svg",
-//       "/skills/flutter.svg",
-//       "/skills/getx.png",
-//       "/skills/firebase.svg",
-//     ],
-//     shortDescription:
-//       "I create engaging mobile applications for your audience.",
-//     description:
-//       "I create captivating mobile apps from concept to deployment for iOS and Android. Using cutting-edge technologies, I ensure seamless performance, intuitive interfaces, and robust functionality that align with your business goals. Enjoy a flawless user experience and outstanding results.",
-//   },
+  {
+    id: 1,
+    title: "Mobile App Development",
+    icons: [
+      "/skills/socket-io.png",
+      "/skills/react-native.svg",
+      "/skills/firebase.svg",
+    ],
+    shortDescription:
+      "I create engaging mobile applications for your audience.",
+    description:
+      "I design and develop engaging mobile applications for iOS and Android, delivering seamless performance, intuitive interfaces, and robust functionality. Using cutting-edge technologies, I create apps that align with your business goals and provide an exceptional user experience.",
+  },
   {
     id: 2,
     title: "Web Development",
@@ -28,7 +26,7 @@ const services: IServiceItem[] = [
     ],
     shortDescription: "I build visually stunning and user-friendly websites.",
     description:
-      "I deliver stunning, user-friendly websites to establish your online presence. From simple sites to complex e-commerce platforms, I provide tailored solutions using the latest frameworks and technologies for a seamless, responsive, and SEO-friendly browsing experience. Enhance your online identity with quality.",
+      "I create stunning, user-friendly websites that strengthen your online presence. From simple pages to full e-commerce platforms, I deliver custom web solutions using the latest technologies for a responsive, SEO-friendly, and seamless browsing experience.",
   },
   {
     id: 3,
@@ -42,7 +40,7 @@ const services: IServiceItem[] = [
     ],
     shortDescription: "I create robust and scalable backend infrastructures.",
     description:
-      "I enhance digital applications with robust, scalable backend infrastructures. I develop efficient database structures, APIs, and configure servers for optimal performance, security, and scalability, ensuring your applications handle high traffic and complex data management seamlessly. Rely on strong backend solutions.",
+      "I build robust and scalable backend solutions to power your digital applications. From efficient database architectures and API development to secure server configuration, I ensure optimal performance, security, and scalability for seamless data management and high-traffic handling.",
   },
   {
     id: 4,
@@ -57,7 +55,7 @@ const services: IServiceItem[] = [
     shortDescription:
       "I define goals, target audiences, and roadmap for success.",
     description:
-      "I collaborate to define clear goals, target audiences, and a success roadmap. My expertise in product ideation and market analysis ensures your product meets user needs and aligns with your business strategy for long-term growth and full potential realization. Drive your product's success with strategic planning.",
+      "I help define clear product goals, identify target audiences, and create a strategic roadmap. With expertise in product ideation and market analysis, I ensure your product meets user needs, aligns with your business strategy, and achieves long-term growth.",
   },
 //   {
 //     id: 5,
@@ -85,7 +83,7 @@ const services: IServiceItem[] = [
     ],
     shortDescription: "I manage and optimize your database systems.",
     description:
-      "I manage and optimize your database systems for performance, reliability, and scalability. With expertise in SQL and NoSQL databases, I design schemas, write complex queries, and implement best practices for data integrity and security. Ensure your data is managed effectively and efficiently.",
+      "I manage and optimize database systems for performance, reliability, and scalability. With expertise in SQL and NoSQL databases, I design schemas, write complex queries, and implement best practices to ensure data integrity and security.",
   },
 ];
 

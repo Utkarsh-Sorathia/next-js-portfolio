@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllBlogPosts } from '@/lib/sanity'
 
-const baseUrl = 'https://utkarsh-sorathia.vercel.app'
+const baseUrl = 'https://utkarshsorathia.in'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllBlogPosts()

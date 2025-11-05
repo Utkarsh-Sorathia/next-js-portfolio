@@ -9,4 +9,4 @@ Disallow: /images/*.gif$
 Disallow: /skills/*.svg$
 Disallow: /skills/*.png$
 
-Sitemap: https://utkarsh-sorathia.vercel.app/sitemap.xml
+Sitemap: https://utkarshsorathia.in/sitemap.xml

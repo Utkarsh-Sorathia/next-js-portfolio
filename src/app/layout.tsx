@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://utkarsh-sorathia.vercel.app'),
+  metadataBase: new URL('https://utkarshsorathia.in'),
   title: "Utkarsh Sorathia - Computer Engineer / Full Stack Developer",
   description:
     "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
@@ -99,10 +99,10 @@ export const metadata: Metadata = {
     title: "Utkarsh Sorathia | Full Stack Developer",
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
-    url: "https://utkarsh-sorathia.vercel.app/",
+    url: "https://utkarshsorathia.in/",
     images: [
       {
-        url: "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp",
+        url: "https://utkarshsorathia.in/UtkarshSorathia.webp",
         alt: "Utkarsh Sorathia Portfolio",
       },
     ],
@@ -115,10 +115,10 @@ export const metadata: Metadata = {
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
     images:
-      "https://utkarsh-sorathia.vercel.app/UtkarshSorathia.webp",
+      "https://utkarshsorathia.in/UtkarshSorathia.webp",
   },
   alternates: {
-    canonical: "https://utkarsh-sorathia.vercel.app/",
+    canonical: "https://utkarshsorathia.in/",
   },
 };
 
@@ -144,7 +144,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Utkarsh Sorathia",
-              url: "https://utkarsh-sorathia.vercel.app",
+              url: "https://utkarshsorathia.in",
               jobTitle: "Full Stack Developer",
               sameAs: [
                 "https://github.com/Utkarsh-Sorathia",

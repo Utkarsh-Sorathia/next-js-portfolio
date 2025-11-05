@@ -5,7 +5,7 @@ const projects: IProjectItem[] = [
     id: "E-commerce Website",
     title: "E-commerce Website",
     description:
-      "Our E-commerce site provides a smooth shopping experience, featuring easy user authentication, detailed plant descriptions, and a robust search function. With secure payment integration and informative pages, we aim to offer convenience and satisfaction to our customers.",
+      "Our E-commerce website delivers a seamless shopping experience with smooth user authentication, detailed product descriptions, and a powerful search feature. With secure payment integration and informative pages, we ensure convenience, trust, and satisfaction for every customer.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -17,7 +17,7 @@ const projects: IProjectItem[] = [
     id: "Project Management Website",
     title: "Project Management Website",
     description:
-      "Our project management platform streamlines collaboration with user authentication, detailed project pages, and progress tracking dashboards. The comments section fosters effective teamwork, ensuring successful project delivery.",
+      "Our project management platform enhances collaboration with secure user authentication, detailed project dashboards, and real-time progress tracking. A built-in comments section promotes effective teamwork, ensuring efficient and successful project delivery.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -29,7 +29,7 @@ const projects: IProjectItem[] = [
     id: "My Portfolio Website",
     title: "My Portfolio Website",
     description:
-      "My portfolio website showcases my expertise in React.js, Bootstrap, and Firebase, providing a comprehensive and visually appealing platform for showcasing my skills and projects.",
+      "My portfolio website highlights my expertise in React.js, Bootstrap, and Firebase, offering a modern, responsive, and visually engaging platform to showcase my skills and projects.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -41,7 +41,7 @@ const projects: IProjectItem[] = [
     id: "Typing Test Website",
     title: "Typingo - Typing Test Website",
     description:
-      "Typingo, a comprehensive web-based typing test and keyboard mastery platform. This tool is designed to improve your typing speed, accuracy, and finger placement using interactive tests and real-time feedback.",
+      "Typingo is a comprehensive web-based typing test platform designed to enhance typing speed, accuracy, and finger placement through interactive tests and real-time feedback.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
