@@ -26,13 +26,16 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
               Hi there, I am
               <NameAnimation
-                words={['Utkarsh Sorathia.', '@utkarsh__sorathia.']}
+                words={['Utkarsh Sorathia.', 'Full Stack Developer.']}
                 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)] dark:text-[var(--primaryColor)]"
               />
             </h1>
           </div>
-          <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)] mx-auto">
-            Full Stack Developer 💻 SDE 🛠️ Open Source 🌍
+          <h2 className="sr-only">
+            Full Stack Developer specializing in MERN, Next.js, and React.js — creating modern web and mobile applications.
+          </h2>
+          <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)] mx-auto text-wrap max-w-2xl text-center">
+            MERN & Next.js Developer 🚀 SDE 🛠️ Building Modern Web Experiences 💻
           </p>
         </Column>
 

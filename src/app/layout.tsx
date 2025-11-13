@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://utkarshsorathia.in'),
   title: "Utkarsh Sorathia - Computer Engineer / Full Stack Developer",
   description:
-    "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
+    "I'm Utkarsh Sorathia, a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
   robots: {
     index: true,
     follow: true,
