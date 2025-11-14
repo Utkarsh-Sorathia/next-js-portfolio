@@ -1,12 +1,3 @@
 User-Agent: *
 
-Disallow: /skills/github-white.png
-Disallow: /images/problem-solving.png
-Disallow: /skills/react.svg
-Disallow: /experience/*.png$
-Disallow: /images/*.png$
-Disallow: /images/*.gif$
-Disallow: /skills/*.svg$
-Disallow: /skills/*.png$
-
 Sitemap: https://utkarshsorathia.in/sitemap.xml
