@@ -145,6 +145,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Utkarsh Sorathia",
               url: "https://utkarshsorathia.in",
+              image: "https://utkarshsorathia.in/UtkarshSorathia.webp",
               jobTitle: "Full Stack Developer",
               sameAs: [
                 "https://github.com/Utkarsh-Sorathia",
