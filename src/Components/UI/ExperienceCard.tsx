@@ -52,7 +52,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 </div>
               </div> */}
               {item.companyLink ? (
-                <Link href={item.companyLink} target="_blank">
+                <Link href={item.companyLink} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${item.company} website`}>
                   {item.companyLogo && (
                     <div
                       className="md:hidden absolute z-10 top-13 rounded-full overflow-hidden border-2 border-[var(--primaryColor)]"
@@ -100,7 +100,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
               >
                 <div className="flex flex-col sm:flex-row items-start gap-3">
                   {item.companyLink ? (
-                    <Link href={item.companyLink} target="_blank">
+                    <Link href={item.companyLink} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${item.company} website`}>
                       {item.companyLogo && (
                         <Image
                           src={item.companyLogo}

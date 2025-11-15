@@ -6,6 +6,7 @@ import ResponsiveBox from '@/Components/core/ResponsiveBox';
 import ConstrainedBox from '@/Components/core/constrained-box';
 import SectionTitle from '@/Components/common/SectionTitle';
 import { getAllBlogPosts } from '@/lib/sanity';
+import { getBlogListingSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 
 export const metadata: Metadata = {
   title: 'Blog | Utkarsh Sorathia - Full Stack Developer',
@@ -66,8 +67,27 @@ export const revalidate = 3600;
 
 export default async function BlogsPage() {
   const posts = await getAllBlogPosts();
+  
+  const blogListingSchema = getBlogListingSchema();
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://utkarshsorathia.in' },
+    { name: 'Blog', url: 'https://utkarshsorathia.in/blogs' },
+  ]);
+
   return (
     <PageBox>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogListingSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
       <ResponsiveBox
         classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40"
         id="blogs"

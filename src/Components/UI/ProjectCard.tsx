@@ -46,6 +46,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
               href={project.githubUrl}
               aria-label={`${project.title} GitHub URL`}
               target="_blank"
+              rel="noopener noreferrer"
               className="app__outlined_btn !rounded-full !p-2 lg:!p-3 !aspect-square !border-[var(--textColor)]"
             >
               <FontAwesomeIcon
@@ -59,6 +60,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
               href={project.url}
               aria-label={`${project.title} Project URL`}
               target="_blank"
+              rel="noopener noreferrer"
               className="app__outlined_btn !rounded-full !p-2 lg:!p-3 !aspect-square !border-[var(--textColor)]"
             >
               <FontAwesomeIcon

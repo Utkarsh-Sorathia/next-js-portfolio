@@ -9,6 +9,7 @@ import MarkdownRenderer from '@/Components/UI/MarkdownRenderer';
 import { getTimeSincePublished, getBlogPostBySlug, getAllBlogPostSlugs } from '@/lib/sanity';
 import { getBlogAltText } from '@/utils/imageValidation';
 import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
+import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 
 
 interface BlogPostPageProps {
@@ -198,9 +199,52 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ? post.body 
     : convertPortableTextToMarkdown(post.body);
 
+  // Get image URL for structured data
+  const imageUrl = post.image?.asset?.url || 'https://utkarshsorathia.in/UtkarshSorathia.webp';
+  const excerpt = typeof post.body === 'string'
+    ? post.body
+        .replace(/^#{1,6}\s+/gm, '')
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/\*([^*]+)\*/g, '$1')
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')
+        .replace(/\[|\]|\(|\)|`|#|\*/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .substring(0, 160)
+    : post.body?.[0]?.children?.[0]?.text?.substring(0, 160) || '';
+
+  // Generate structured data
+  const articleSchema = getArticleSchema(
+    post.title,
+    excerpt || `Read about ${post.title}`,
+    imageUrl,
+    post.publishedAt,
+    post._updatedAt,
+    post.slug.current
+  );
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://utkarshsorathia.in' },
+    { name: 'Blog', url: 'https://utkarshsorathia.in/blogs' },
+    { name: post.title, url: `https://utkarshsorathia.in/blogs/${post.slug.current}` },
+  ]);
+
   return (
     <PageBox>
-      <ResponsiveBox
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+        <ResponsiveBox
         classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40"
         id="blog-post"
       >

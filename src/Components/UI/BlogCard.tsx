@@ -52,7 +52,7 @@ export default function BlogCard({ post }: BlogCardProps) {
                 className={`object-cover group-hover:scale-105 transition-all duration-300 ${
                   imageLoading ? 'opacity-0' : 'opacity-100'
                 }`}
-                quality={90}
+                quality={85}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 onLoad={() => setImageLoading(false)}
                 onError={() => {

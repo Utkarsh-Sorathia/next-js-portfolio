@@ -10,15 +10,20 @@ import BlogButton from "@/Components/UI/BlogButton";
 import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
+import { getPersonSchema, getWebSiteSchema } from "@/utils/structuredData";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -26,6 +31,11 @@ export const metadata: Metadata = {
   title: "Utkarsh Sorathia - Computer Engineer / Full Stack Developer",
   description:
     "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
+  authors: [{ name: "Utkarsh Sorathia", url: "https://utkarshsorathia.in" }],
+  creator: "Utkarsh Sorathia",
+  publisher: "Utkarsh Sorathia",
+  applicationName: "Utkarsh Sorathia Portfolio",
+  referrer: "origin-when-cross-origin",
   robots: {
     index: true,
     follow: true,
@@ -58,11 +68,19 @@ export const metadata: Metadata = {
     },
     {
       url: "/android-chrome-192x192.png",
-      rel: "icon",
+      rel: "apple-touch-icon",
       sizes: "192x192",
       type: "image/png",
     },
   ],
+  manifest: "/manifest.json",
+  themeColor: "#4361ee",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   keywords: [
     "utkarsh sorathia",
     "Utkarsh Sorathia",
@@ -100,10 +118,14 @@ export const metadata: Metadata = {
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
     url: "https://utkarshsorathia.in/",
+    siteName: "Utkarsh Sorathia Portfolio",
     images: [
       {
         url: "https://utkarshsorathia.in/UtkarshSorathia.webp",
         alt: "Utkarsh Sorathia Portfolio",
+        width: 1200,
+        height: 630,
+        type: "image/webp",
       },
     ],
     type: "website",
@@ -114,8 +136,9 @@ export const metadata: Metadata = {
     title: "Utkarsh Sorathia | Full Stack Developer",
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
-    images:
-      "https://utkarshsorathia.in/UtkarshSorathia.webp",
+    images: ["https://utkarshsorathia.in/UtkarshSorathia.webp"],
+    creator: "@utkarshsor03",
+    site: "@utkarshsor03",
   },
   alternates: {
     canonical: "https://utkarshsorathia.in/",
@@ -132,30 +155,40 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link
+          rel="preload"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          as="style"
+        />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href="/UtkarshSorathia.webp"
+          as="image"
+          type="image/webp"
+        />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#4361ee" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Utkarsh Sorathia" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Utkarsh Sorathia",
-              url: "https://utkarshsorathia.in",
-              jobTitle: "Full Stack Developer",
-              sameAs: [
-                "https://github.com/Utkarsh-Sorathia",
-                "https://www.facebook.com/share/1FbsyHZuzG/",
-                "https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a",
-                "https://www.instagram.com/utkarsh__sorathia",
-                "https://x.com/utkarshsor03?t=fWrMF32Y7DivN7FJJMITYw&s=08",
-              ],
-              description:
-                "Utkarsh Sorathia is a passionate Full Stack Developer focused on scalable, performance-driven web applications.",
-            }),
+            __html: JSON.stringify(getPersonSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getWebSiteSchema()),
           }}
         />
       </head>
