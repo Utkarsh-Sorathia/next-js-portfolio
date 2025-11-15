@@ -17,7 +17,7 @@ export default function BlogImageWithLoader({
   alt,
   className = '',
   priority = false,
-  quality = 95,
+  quality = 85,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw',
 }: BlogImageWithLoaderProps) {
   const [imageLoading, setImageLoading] = useState(true);

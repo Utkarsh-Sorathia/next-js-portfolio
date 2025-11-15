@@ -48,6 +48,7 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
                 key={`social-link-${index}`}
                 href={link.url}
                 target="_blank"
+                rel="noopener noreferrer"
                 aria-label={`${link.name}`}
                 className="flex items-center text-2xl hover:transform hover:scale-120 transition duration-200"
               >

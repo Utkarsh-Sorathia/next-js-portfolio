@@ -6,6 +6,8 @@ const ContactButton = ({ text, icon, url, className }: any) => {
       className={className}
       href={url}
       target="_blank"
+      rel="noopener noreferrer"
+      aria-label={text}
     >
       <span className="flex justify-content-center gap-2" style={{ justifyContent: "center" }}><i className={icon} />
         <p className="text-lg/6 font-semibold text-[var(--textColor)]">{text}</p></span>

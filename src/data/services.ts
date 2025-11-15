@@ -8,6 +8,8 @@ const services: IServiceItem[] = [
       "/skills/socket-io.png",
       "/skills/react-native.svg",
       "/skills/firebase.svg",
+      "/skills/typescript.svg",
+      "/skills/android-studio.webp",
     ],
     shortDescription:
       "I create engaging mobile applications for your audience.",
@@ -57,20 +59,20 @@ const services: IServiceItem[] = [
     description:
       "I help define clear product goals, identify target audiences, and create a strategic roadmap. With expertise in product ideation and market analysis, I ensure your product meets user needs, aligns with your business strategy, and achieves long-term growth.",
   },
-//   {
-//     id: 5,
-//     title: "DevOps",
-//     icons: [
-//       "/skills/docker.svg",
-//       "/skills/kubernetes.svg",
-//       "/skills/aws.svg",
-//       "/skills/jenkins.svg",
-//       "/skills/terraform.svg",
-//     ],
-//     shortDescription: "I streamline development and operations processes.",
-//     description:
-//       "I streamline development and operations processes through effective DevOps practices. I implement continuous integration and deployment pipelines, manage cloud infrastructure, and use containerization to ensure efficient, reliable, and scalable software delivery. Improve your workflow with DevOps solutions.",
-//   },
+  {
+    id: 5,
+    title: "DevOps",
+    icons: [
+      "/skills/docker.svg",
+      "/skills/kubernetes.svg",
+      "/skills/aws.svg",
+      "/skills/github-white.webp",
+      "/skills/git.svg",
+    ],
+    shortDescription: "I streamline development and operations processes.",
+    description:
+      "I drive efficient DevOps workflows by implementing CI/CD pipelines, managing cloud infrastructure, and utilizing containerization for scalable software delivery. Leverage DevOps solutions to optimize performance, speed, and reliability across your development lifecycle.",
+  },
   {
     id: 6,
     title: "Database Management",

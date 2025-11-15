@@ -47,6 +47,7 @@ const AboutSection = ({ id }: { id: string }) => {
                     src="/UtkarshSorathia.webp"
                     alt="Utkarsh Sorathia"
                     fill
+                    priority
                     className="object-cover"
                   />
                 </button>
@@ -69,7 +70,7 @@ const AboutSection = ({ id }: { id: string }) => {
               transition={{ duration: 0.6 }}
             >
               <p className="mb-4 text-xl leading-relaxed">
-                I’m a passionate <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> with a love for building seamless web experiences. I specialize in the <span className="font-semibold text-[var(--primaryColor)]">MERN stack</span> and thrive on transforming ideas into scalable products.
+                I’m a passionate <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> with a love for building seamless web experiences. I specialize in the <span className="font-semibold text-[var(--primaryColor)]">MERN stack, Next.js</span> and <span className="font-semibold text-[var(--primaryColor)]">TypeScript</span> and thrive on transforming ideas into scalable products.
               </p>
               <p className="text-lg text-blue-100">
                 Always learning, always building. My focus is on clean code, great UX, and modern design.

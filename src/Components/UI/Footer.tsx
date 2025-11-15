@@ -22,6 +22,7 @@ const Footer = () => {
               key={index}
               href={link.url}
               target="_blank"
+              rel="noopener noreferrer"
               aria-label={link.name}
               className="text-white text-xl md:text-2xl transition duration-300 transform hover:scale-125"
             >
