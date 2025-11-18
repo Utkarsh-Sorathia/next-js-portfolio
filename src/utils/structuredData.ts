@@ -27,51 +27,37 @@ function ensureArray<T>(val: T | T[] | undefined): T[] {
  */
 export function getPersonSchema() {
   const currentJob = experience.find(exp => exp.endDate === "Present");
-  const pastJobs = experience.filter(exp => exp.endDate !== "Present");
 
   const worksFor = currentJob
     ? {
-        "@type": "Organization",
-        "@id": `${currentJob.companyLink}#org` || `${baseUrl}#worksFor`,
-        name: currentJob.company,
-        url: currentJob.companyLink || undefined,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: currentJob.location,
-          addressCountry: "IN",
-        },
-      }
+      "@type": "Organization",
+      "@id": `${currentJob.companyLink}#org`,
+      name: currentJob.company,
+      url: currentJob.companyLink,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: currentJob.location?.split(",")[0]?.trim() || "Surat",
+        addressRegion: "Gujarat",
+        addressCountry: "IN",
+        streetAddress: "",
+        postalCode: "395002"
+      },
+    }
     : undefined;
 
-  const alumniOf = educations.map(edu => ({
+  const alumniOf = educations.map((edu, idx) => ({
     "@type": "EducationalOrganization",
+    "@id": `${baseUrl}#edu-${idx}`,
     name: edu.educations?.[0]?.institute || "",
     address: {
       "@type": "PostalAddress",
-      addressLocality: edu.educations?.[0]?.location || "",
+      addressLocality: "Surat",
+      addressRegion: "Gujarat",
       addressCountry: "IN",
+      streetAddress: "",
+      postalCode: "395002"
     },
   }));
-
-  const hasOccupation = {
-    "@type": "Occupation",
-    "@id": `${baseUrl}#occupation`,
-    name: "Full Stack Developer",
-    occupationLocation: {
-      "@type": "City",
-      name: "Surat",
-    },
-    skills: [
-      "React.js",
-      "Next.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "TypeScript",
-      "JavaScript",
-      "MERN Stack",
-    ],
-  };
 
   return {
     "@context": "https://schema.org",
@@ -80,7 +66,12 @@ export function getPersonSchema() {
     name: "Utkarsh Sorathia",
     alternateName: ["Utkarsh", "U.S."],
     url: baseUrl,
-    image: makeImageObject(`${baseUrl}/UtkarshSorathia.webp`, 800, 800, "Utkarsh Sorathia"),
+    image: makeImageObject(
+      `${baseUrl}/UtkarshSorathia.webp`,
+      800,
+      800,
+      "Utkarsh Sorathia"
+    ),
     jobTitle: "Full Stack Developer",
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies like React.js, Next.js, Node.js, and MongoDB.",
@@ -89,10 +80,30 @@ export function getPersonSchema() {
       addressLocality: "Surat",
       addressRegion: "Gujarat",
       addressCountry: "IN",
+      streetAddress: "",
+      postalCode: "395002"
     },
     ...(worksFor && { worksFor }),
     alumniOf,
-    hasOccupation,
+    hasOccupation: {
+      "@type": "Occupation",
+      "@id": `${baseUrl}#occupation`,
+      name: "Full Stack Developer",
+      occupationLocation: {
+        "@type": "City",
+        name: "Surat",
+      },
+      skills: [
+        "React.js",
+        "Next.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "TypeScript",
+        "JavaScript",
+        "MERN Stack",
+      ],
+    },
     knowsAbout: [
       "Web Development",
       "Full Stack Development",
@@ -107,13 +118,11 @@ export function getPersonSchema() {
       "Frontend Development",
       "Backend Development",
     ],
-    // include only public and crawlable profiles
     sameAs: [
       Strings.githubLink,
       Strings.linkedInLink,
       Strings.instagramLink,
       Strings.twitterLink,
-      // Strings.facebookLink // include only if public and crawlable
     ].filter(Boolean),
     contactPoint: {
       "@type": "ContactPoint",
@@ -134,9 +143,6 @@ export function getPersonSchema() {
   };
 }
 
-/**
- * WEBSITE SCHEMA
- */
 export function getWebSiteSchema() {
   return {
     "@context": "https://schema.org",
@@ -146,28 +152,35 @@ export function getWebSiteSchema() {
     url: baseUrl,
     description:
       "Portfolio website of Utkarsh Sorathia, a Full Stack Developer specializing in React.js, Next.js, Node.js, and modern web technologies.",
-    about: { "@id": `${baseUrl}#person` },
+    mainEntity: {
+      "@type": "Person",
+      "@id": `${baseUrl}#person`,
+    },
+    about: {
+      "@type": "Person",
+      "@id": `${baseUrl}#person`,
+    },
+    creator: {
+      "@type": "Person",
+      "@id": `${baseUrl}#person`,
+    },
     publisher: {
       "@type": "Organization",
+      "@id": `${baseUrl}#publisher`,
       name: "Utkarsh Sorathia Portfolio",
       url: baseUrl,
-      logo: makeImageObject(`${baseUrl}/UtkarshSorathia.webp`, 1200, 630, "Utkarsh Sorathia Logo"),
-      "@id": `${baseUrl}#publisher`,
+      logo: makeImageObject(
+        `${baseUrl}/UtkarshSorathia.webp`,
+        1200,
+        630,
+        "Utkarsh Sorathia Logo"
+      ),
     },
     author: {
       "@type": "Person",
-      name: "Utkarsh Sorathia",
       "@id": `${baseUrl}#person`,
     },
     inLanguage: "en-US",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/blogs?search={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
     sameAs: [
       Strings.githubLink,
       Strings.linkedInLink,
@@ -175,6 +188,8 @@ export function getWebSiteSchema() {
     ].filter(Boolean),
   };
 }
+
+
 
 /**
  * ORGANIZATION SCHEMA
@@ -190,6 +205,8 @@ export function getOrganizationSchema(companyName: string, companyUrl: string, l
       "@type": "PostalAddress",
       addressLocality: location,
       addressCountry: "IN",
+      streetAddress: "",
+      postalCode: "395002"
     },
     logo: {
       "@type": "ImageObject",
