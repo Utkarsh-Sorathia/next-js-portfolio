@@ -7,6 +7,7 @@ import ConstrainedBox from '@/Components/core/constrained-box';
 import SectionTitle from '@/Components/common/SectionTitle';
 import { getAllBlogPosts } from '@/lib/sanity';
 import { getBlogListingSchema, getBreadcrumbSchema } from '@/utils/structuredData';
+import { baseURL } from '@/utils/api';
 
 export const metadata: Metadata = {
   title: 'Blog | Utkarsh Sorathia - Full Stack Developer',
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog | Utkarsh Sorathia - Full Stack Developer',
     description: 'Read my latest thoughts on web development, technology, and programming. Explore tutorials, insights, and best practices for modern web development.',
-    url: 'https://utkarshsorathia.in/blogs',
+    url: `${baseURL}/blogs`,
     type: 'website',
     locale: 'en_US',
     siteName: 'Utkarsh Sorathia Portfolio',
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     creator: '@utkarshsor03',
   },
   alternates: {
-    canonical: 'https://utkarshsorathia.in/blogs',
+    canonical: `${baseURL}/blogs`,
   },
 };
 
@@ -70,8 +71,8 @@ export default async function BlogsPage() {
   
   const blogListingSchema = getBlogListingSchema();
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://utkarshsorathia.in' },
-    { name: 'Blog', url: 'https://utkarshsorathia.in/blogs' },
+    { name: 'Home', url: baseURL },
+    { name: 'Blog', url: `${baseURL}/blogs` },
   ]);
 
   return (

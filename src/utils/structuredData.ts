@@ -1,8 +1,9 @@
 import experience from "@/data/experience";
 import educations from "@/data/education";
 import Strings from "@/constants/strings";
+import { baseURL } from "@/utils/api";
 
-const baseUrl = "https://utkarshsorathia.in";
+const baseUrl = baseURL;
 
 /**
  * Helpers

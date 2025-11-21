@@ -10,6 +10,7 @@ import { getTimeSincePublished, getBlogPostBySlug, getAllBlogPostSlugs } from '@
 import { getBlogAltText } from '@/utils/imageValidation';
 import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
 import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
+import { baseURL } from '@/utils/api';
 
 
 interface BlogPostPageProps {
@@ -90,11 +91,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     openGraph: {
       title: post.title,
       description: excerpt,
-      url: `https://utkarshsorathia.in/blogs/${post.slug.current}`,
+      url: `${baseURL}/blogs/${post.slug.current}`,
       images: post.image?.asset?.url 
         ? [post.image.asset.url] 
         : [{
-            url: 'https://utkarshsorathia.in/UtkarshSorathia.webp',
+            url: `${baseURL}/UtkarshSorathia.webp`,
             alt: post.title,
             width: 1200,
             height: 630,
@@ -112,11 +113,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description: excerpt,
       images: post.image?.asset?.url 
         ? [post.image.asset.url] 
-        : ['https://utkarshsorathia.in/UtkarshSorathia.webp'],
+        : [`${baseURL}/UtkarshSorathia.webp`],
       creator: '@utkarshsor03',
     },
     alternates: {
-      canonical: `https://utkarshsorathia.in/blogs/${post.slug.current}`,
+      canonical: `${baseURL}/blogs/${post.slug.current}`,
     },
   };
 }
@@ -200,7 +201,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     : convertPortableTextToMarkdown(post.body);
 
   // Get image URL for structured data
-  const imageUrl = post.image?.asset?.url || 'https://utkarshsorathia.in/UtkarshSorathia.webp';
+  const imageUrl = post.image?.asset?.url || `${baseURL}/UtkarshSorathia.webp`;
   const excerpt = typeof post.body === 'string'
     ? post.body
         .replace(/^#{1,6}\s+/gm, '')
@@ -225,9 +226,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   );
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://utkarshsorathia.in' },
-    { name: 'Blog', url: 'https://utkarshsorathia.in/blogs' },
-    { name: post.title, url: `https://utkarshsorathia.in/blogs/${post.slug.current}` },
+    { name: 'Home', url: baseURL },
+    { name: 'Blog', url: `${baseURL}/blogs` },
+    { name: post.title, url: `${baseURL}/blogs/${post.slug.current}` },
   ]);
 
   return (
