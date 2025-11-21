@@ -71,9 +71,9 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="w-full">
+          <div className="w-full px-0 md:px-10 lg:px-20">
             <h4 className="text-md font-semibold text-white mb-3">Quick Links</h4>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+            <div className="grid grid-cols-2 gap-3 text-sm">
               <Link href="/" className="hover:text-[var(--primaryColor)]">Home</Link>
               <Link href="#about" className="hover:text-[var(--primaryColor)]">About Me</Link>
               <Link href="#services" className="hover:text-[var(--primaryColor)]">Services</Link>

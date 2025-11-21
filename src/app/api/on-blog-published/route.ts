@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import clientPromise from "@/lib/mongodb";
 import { getNewBlogEmailHtml } from "@/emails/NewBlogEmail";
+import { baseURL } from "@/utils/api";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -25,7 +26,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "No subscribers" });
     }
 
-    const blogUrl = `https://utkarshsorathia.in/blogs/${slug?.current || slug}`;
+    const blogUrl = `${baseURL}/blogs/${slug?.current || slug}`;
 
     // Send emails
     await Promise.all(

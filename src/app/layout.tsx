@@ -11,6 +11,9 @@ import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
 import { getPersonSchema, getWebSiteSchema } from "@/utils/structuredData";
+import { baseURL } from "@/utils/api";
+
+const baseUrl = baseURL;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,11 +30,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://utkarshsorathia.in'),
+  metadataBase: new URL(baseUrl),
   title: "Utkarsh Sorathia - Computer Engineer / Full Stack Developer",
   description:
     "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
-  authors: [{ name: "Utkarsh Sorathia", url: "https://utkarshsorathia.in" }],
+  authors: [{ name: "Utkarsh Sorathia", url: baseUrl }],
   creator: "Utkarsh Sorathia",
   publisher: "Utkarsh Sorathia",
   applicationName: "Utkarsh Sorathia Portfolio",
@@ -117,11 +120,11 @@ export const metadata: Metadata = {
     title: "Utkarsh Sorathia | Full Stack Developer",
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
-    url: "https://utkarshsorathia.in/",
+    url: baseUrl,
     siteName: "Utkarsh Sorathia Portfolio",
     images: [
       {
-        url: "https://utkarshsorathia.in/UtkarshSorathia.webp",
+        url: `${baseUrl}/UtkarshSorathia.webp`,
         alt: "Utkarsh Sorathia Portfolio",
         width: 1200,
         height: 630,
@@ -136,12 +139,12 @@ export const metadata: Metadata = {
     title: "Utkarsh Sorathia | Full Stack Developer",
     description:
       "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
-    images: ["https://utkarshsorathia.in/UtkarshSorathia.webp"],
+    images: [`${baseUrl}/UtkarshSorathia.webp`],
     creator: "@utkarshsor03",
     site: "@utkarshsor03",
   },
   alternates: {
-    canonical: "https://utkarshsorathia.in/",
+    canonical: baseUrl,
   },
 };
 
