@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default async function UnsubscribePage({ params }: { params: Promise<{ token: string }> }) {
-  const { token } = await params;
+export default function UnsubscribePage({ params }: { params: { token: string } }) {
+  const { token } = params;
   const [status, setStatus] = useState<
     "loading" | "valid" | "invalid" | "done" | "error"
   >("loading");
