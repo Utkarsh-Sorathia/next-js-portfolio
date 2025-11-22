@@ -27,8 +27,6 @@ export async function generateStaticParams() {
   }));
 }
 
-export const revalidate = 3600;
-
 export const viewport = {
   themeColor: '#000000',
   width: 'device-width',
