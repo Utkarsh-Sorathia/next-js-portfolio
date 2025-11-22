@@ -9,6 +9,12 @@ import { getAllBlogPosts } from '@/lib/sanity';
 import { getBlogListingSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 import { baseURL } from '@/utils/api';
 
+export const viewport = {
+  themeColor: '#000000',
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: 'Blog | Utkarsh Sorathia - Full Stack Developer',
   description: 'Read my latest thoughts on web development, technology, and programming. Explore tutorials, insights, and best practices for modern web development.',
