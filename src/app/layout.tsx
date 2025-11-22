@@ -29,6 +29,12 @@ const geistMono = Geist_Mono({
   preload: true,
 });
 
+export const viewport = {
+  themeColor: '#000000',
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: "Utkarsh Sorathia - Computer Engineer / Full Stack Developer",
@@ -77,13 +83,6 @@ export const metadata: Metadata = {
     },
   ],
   manifest: "/manifest.json",
-  themeColor: "#4361ee",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   keywords: [
     "utkarsh sorathia",
     "Utkarsh Sorathia",
@@ -165,6 +164,7 @@ export default function RootLayout({
           rel="preload"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
           as="style"
+          crossOrigin="anonymous"
         />
         <link
           rel="stylesheet"
@@ -179,7 +179,7 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#4361ee" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Utkarsh Sorathia" />
         <script
