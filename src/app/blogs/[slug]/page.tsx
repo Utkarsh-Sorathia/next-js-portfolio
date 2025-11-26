@@ -12,6 +12,7 @@ import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
 import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 import { baseURL } from '@/utils/api';
 
+export const revalidate = 0;
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -322,7 +323,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   href="/blogs"
                   className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[var(--primaryColor)] to-indigo-600 hover:from-indigo-600 hover:to-[var(--primaryColor)] text-white rounded-[var(--borderRadius)] transition-all duration-300 text-sm sm:text-base whitespace-nowrap"
                 >
-                  Read More Posts
+                  Read More Blogs
                 </Link>
               </div>
             </footer>

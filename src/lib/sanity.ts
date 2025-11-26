@@ -169,7 +169,7 @@ export function extractExcerpt(body: any[], maxLength: number = 150): string {
 // API Functions
 export async function getAllBlogPosts() {
   try {
-    const posts = await client.fetch(getAllBlogPostsQuery);
+    const posts = await client.fetch(getAllBlogPostsQuery, {}, { cache: 'no-store' });
     return posts || [];
   } catch (error) {
     console.error('Error fetching blog posts:', error);
@@ -179,7 +179,7 @@ export async function getAllBlogPosts() {
 
 export async function getBlogPostBySlug(slug: string) {
   try {
-    const post = await client.fetch(getBlogPostBySlugQuery, { slug });
+    const post = await client.fetch(getBlogPostBySlugQuery, { slug }, { cache: 'no-store' });
     return post || null;
   } catch (error) {
     console.error('Error fetching blog post:', error);
@@ -189,7 +189,7 @@ export async function getBlogPostBySlug(slug: string) {
 
 export async function getAllBlogPostSlugs() {
   try {
-    const slugs = await client.fetch(getAllBlogPostSlugsQuery);
+    const slugs = await client.fetch(getAllBlogPostSlugsQuery,{}, { cache: 'no-store' });
     return slugs?.map((item: any) => item.slug.current) || [];
   } catch (error) {
     console.error('Error fetching blog post slugs:', error);
