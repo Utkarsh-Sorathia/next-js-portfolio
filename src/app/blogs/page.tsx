@@ -10,6 +10,8 @@ import { getBlogListingSchema, getBreadcrumbSchema } from "@/utils/structuredDat
 import { baseURL } from "@/utils/api";
 import BlogsPageClient from "@/app/blogs/BlogsPageClient";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Blog | Utkarsh Sorathia - Full Stack Developer",
   description:
