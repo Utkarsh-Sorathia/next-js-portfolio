@@ -2,6 +2,9 @@ import { MetadataRoute } from 'next'
 import { getAllBlogPosts } from '@/lib/sanity'
 import { baseURL } from '@/utils/api';
 
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 const baseUrl = baseURL;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -31,5 +34,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   return [...staticRoutes, ...blogRoutes]
 }
-
-export const revalidate = 3600
