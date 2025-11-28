@@ -4,27 +4,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/",
-        destination: "https://utkarshsorathia.in/",
-        permanent: true,
-      },
-      {
-        source: "/blogs",
-        destination: "https://utkarshsorathia.in/blogs",
-        permanent: true,
-      },
-      {
-        source: "/blogs/:slug*",
-        destination: "https://utkarshsorathia.in/blogs/:slug*",
-        permanent: true,
-      },
-      {
-        source: "/cv",
-        destination: "https://utkarshsorathia.in/cv",
-        permanent: true,
-      },
-      {
         source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "utkarsh-sorathia.vercel.app",
+          },
+        ],
         destination: "https://utkarshsorathia.in/:path*",
         permanent: true,
       },
@@ -43,7 +29,8 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: false,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy:
+      "default-src 'self'; script-src 'none'; sandbox;",
   },
 };
 
