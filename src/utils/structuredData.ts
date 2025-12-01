@@ -124,6 +124,8 @@ export function getPersonSchema() {
       Strings.linkedInLink,
       Strings.instagramLink,
       Strings.twitterLink,
+      "https://www.wikidata.org/wiki/Q137171536",
+      "https://utkarshsorathia.in"
     ].filter(Boolean),
     contactPoint: {
       "@type": "ContactPoint",
