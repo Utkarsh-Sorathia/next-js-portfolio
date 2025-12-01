@@ -5,7 +5,7 @@ const projects: IProjectItem[] = [
     id: "E-commerce Website",
     title: "E-commerce Website",
     description:
-      "Our E-commerce website delivers a seamless shopping experience with smooth user authentication, detailed product descriptions, and a powerful search feature. With secure payment integration and informative pages, we ensure convenience, trust, and satisfaction for every customer.",
+      "A seamless shopping platform with user authentication, detailed product descriptions, and powerful search. Features secure payment integration and informative pages for a complete shopping experience.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -14,10 +14,22 @@ const projects: IProjectItem[] = [
     tags: ["React", "Firebase", "Redux-Toolkit", "Bootstrap", "Razorpay"],
   },
   {
+    id: "Next.js Portfolio Website",
+    title: "Next.js Portfolio Website",
+    description:
+      "A modern portfolio built with Next.js 15, featuring a blog system with Sanity CMS, email subscriptions, and responsive design with dark mode. Showcases projects, skills, and experience with smooth animations.",
+    icon: "/skills/nextjs.webp",
+    repoType: RepoType.Public,
+    projectType: ProjectType.Personal,
+    githubUrl: "https://github.com/Utkarsh-Sorathia/next-js-portfolio",
+    url: "https://utkarshsorathia.in/",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity CMS", "MongoDB", "Resend"],
+  },
+  {
     id: "Project Management Website",
     title: "Project Management Website",
     description:
-      "Our project management platform enhances collaboration with secure user authentication, detailed project dashboards, and real-time progress tracking. A built-in comments section promotes effective teamwork, ensuring efficient and successful project delivery.",
+      "A collaborative platform with secure authentication, detailed project dashboards, and real-time progress tracking. Features built-in comments section for effective teamwork and project delivery.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -26,28 +38,28 @@ const projects: IProjectItem[] = [
     tags: ["React.js", "Redux", "Bootstrap", "Firebase"],
   },
   {
-    id: "My Portfolio Website",
-    title: "My Portfolio Website",
-    description:
-      "My portfolio website highlights my expertise in React.js, Bootstrap, and Firebase, offering a modern, responsive, and visually engaging platform to showcase my skills and projects.",
-    icon: "/skills/react.svg",
-    repoType: RepoType.Public,
-    projectType: ProjectType.Personal,
-    githubUrl: "https://github.com/Utkarsh-Sorathia/Portfolio-Utkarsh",
-    url: "https://utkarsh-sorathia.netlify.app/",
-    tags: ["React.js", "Bootstrap", "Formspree"],
-  },
-   {
     id: "Typing Test Website",
     title: "Typingo - Typing Test Website",
     description:
-      "Typingo is a comprehensive web-based typing test platform designed to enhance typing speed, accuracy, and finger placement through interactive tests and real-time feedback.",
+      "A comprehensive web-based typing test platform designed to enhance typing speed, accuracy, and finger placement. Features interactive tests with real-time feedback and performance analytics.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
     githubUrl: "https://github.com/Utkarsh-Sorathia/Typingo",
     url: "https://typingo.vercel.app/",
     tags: ["React.js", "Tailwind css", "Typescript"],
+  },
+  {
+    id: "My Portfolio Website",
+    title: "My Portfolio Website",
+    description:
+      "A modern and responsive portfolio website showcasing expertise in React.js, Bootstrap, and Firebase. Features an engaging design to highlight skills, projects, and professional experience effectively.",
+    icon: "/skills/react.svg",
+    repoType: RepoType.Public,
+    projectType: ProjectType.Personal,
+    githubUrl: "https://github.com/Utkarsh-Sorathia/Portfolio-Utkarsh",
+    url: "https://utkarsh-sorathia.netlify.app/",
+    tags: ["React.js", "Bootstrap", "Formspree"],
   },
 ];
 export default projects;

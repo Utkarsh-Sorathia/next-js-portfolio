@@ -84,6 +84,11 @@ const skills: ISkillListItem[] = [
         level: SkillLevel.Intermediate,
         icon: "/skills/react-native.svg",
       },
+      {
+        title: "Expo",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/expo.svg",
+      },
     ],
   },
   {
