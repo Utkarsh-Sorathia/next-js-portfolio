@@ -4,29 +4,35 @@ import { useEffect, useRef, useState } from 'react'
 import { IProjectItem } from '@/interfaces'
 import ProjectCard from './ProjectCard'
 
-const cardDesktopWidth = 380; // px
+const PROJECTS_PER_PAGE = 3
 
 const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
-  const desktopCarouselRef = useRef<HTMLDivElement>(null)
+  // Desktop: Load More functionality
+  const [visibleCount, setVisibleCount] = useState(PROJECTS_PER_PAGE)
+  const visibleProjects = projects.slice(0, visibleCount)
+  const hasMore = visibleCount < projects.length
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + PROJECTS_PER_PAGE, projects.length))
+  }
+
+  // Mobile: Carousel functionality
   const carouselRef = useRef<HTMLDivElement>(null)
-  // Only for mobile/sidebar
   const [activeIndex, setActiveIndex] = useState(0)
 
-  // Scroll for both carousels
   const scrollByOffset = (offset: number, ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
       ref.current.scrollBy({ left: offset, behavior: 'smooth' })
     }
   }
 
-  // This is only used on mobile/tablet
   const scrollToIndex = (index: number) => {
     if (carouselRef.current) {
       const cardWidth = carouselRef.current.offsetWidth
       carouselRef.current.scrollTo({ left: index * cardWidth, behavior: 'smooth' })
     }
   }
-  // This is for mobile/tablet carousel to set dot indicator
+
   useEffect(() => {
     const handleScroll = () => {
       if (!carouselRef.current) return
@@ -42,46 +48,31 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
 
   return (
     <div className="w-full mt-16 flex flex-col items-center px-4 lg:px-0">
-      {/* Desktop Carousel Layout - 3 at a time */}
-      <div className="hidden lg:flex w-full items-center justify-center gap-3">
-        {/* Prev Button */}
-        {projects.length > 3 && (
-          <button
-            onClick={() => scrollByOffset(-cardDesktopWidth * 3, desktopCarouselRef)}
-            aria-label="Scroll to previous projects"
-            className="app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white flex items-center justify-center text-xl hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
-          >
-            <i className="bi bi-chevron-left" />
-          </button>
-        )}
-        {/* Carousel */}
-        <div
-          ref={desktopCarouselRef}
-          className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory flex-1"
-          style={{ scrollSnapType: 'x mandatory' }}
-        >
-          {projects.map((item, index) => (
-            <div
-              key={`project-${index}`}
-              style={{ minWidth: cardDesktopWidth, maxWidth: cardDesktopWidth, flex: '0 0 auto' }}
-              className="snap-start"
-            >
+      {/* Desktop: Static Grid with Load More */}
+      <div className="hidden lg:block w-full">
+        <div className="w-full grid grid-cols-3 gap-6">
+          {visibleProjects.map((item, index) => (
+            <div key={`project-${item.id || index}`} className="w-full">
               <ProjectCard project={item} />
             </div>
           ))}
         </div>
-        {/* Next Button */}
-        {projects.length > 3 && (
-          <button
-            onClick={() => scrollByOffset(cardDesktopWidth * 3, desktopCarouselRef)}
-            aria-label="Scroll to next projects"
-            className="app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white flex items-center justify-center text-xl hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
-          >
-            <i className="bi bi-chevron-right" />
-          </button>
+
+        {/* Load More Button - Desktop only */}
+        {hasMore && (
+          <div className="w-full flex justify-center mt-8">
+            <button
+              onClick={handleLoadMore}
+              aria-label="Load more projects"
+              className="app__filled_btn px-8 py-3 rounded-full bg-[#4361ee] text-white font-semibold hover:bg-[#3a54d4] active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
+            >
+              Load More Projects
+            </button>
+          </div>
         )}
       </div>
-      {/* Mobile/Tablet Carousel Row (unchanged) */}
+
+      {/* Mobile/Tablet: Carousel (unchanged) */}
       <div className="w-full flex items-center gap-4 lg:hidden">
         {/* Prev Button - Tablet only */}
         {projects.length > 3 ? <button

@@ -14,7 +14,7 @@ const services: IServiceItem[] = [
     shortDescription:
       "I create engaging mobile applications for your audience.",
     description:
-      "I design and develop engaging mobile applications for iOS and Android, delivering seamless performance, intuitive interfaces, and robust functionality. Using cutting-edge technologies, I create apps that align with your business goals and provide an exceptional user experience.",
+      "I specialize in developing high-performance native and cross-platform mobile applications for iOS and Android using React Native, TypeScript, and modern mobile development frameworks. I build scalable mobile apps with real-time features, push notifications, offline capabilities, and seamless API integrations. My mobile development services include UI/UX design implementation, app store optimization, performance tuning, and comprehensive testing to ensure your mobile app delivers exceptional user engagement and business value.",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const services: IServiceItem[] = [
     ],
     shortDescription: "I build visually stunning and user-friendly websites.",
     description:
-      "I create stunning, user-friendly websites that strengthen your online presence. From simple pages to full e-commerce platforms, I deliver custom web solutions using the latest technologies for a responsive, SEO-friendly, and seamless browsing experience.",
+      "I develop modern, responsive web applications and websites using React, Next.js, TypeScript, and cutting-edge frontend technologies. I create custom web solutions ranging from single-page applications to complex e-commerce platforms, progressive web apps, and enterprise-level web applications. My web development expertise includes server-side rendering, API integration, state management, performance optimization, and implementing SEO best practices to ensure your website ranks well and provides an exceptional user experience across all devices.",
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const services: IServiceItem[] = [
     ],
     shortDescription: "I create robust and scalable backend infrastructures.",
     description:
-      "I build robust and scalable backend solutions to power your digital applications. From efficient database architectures and API development to secure server configuration, I ensure optimal performance, security, and scalability for seamless data management and high-traffic handling.",
+      "I architect and develop secure, scalable backend systems using Node.js, Express, NestJS, and cloud technologies like AWS. I design RESTful and GraphQL APIs, implement real-time communication with WebSockets, and build microservices architectures that handle high traffic loads efficiently. My backend development services include database design, authentication and authorization systems, API security, caching strategies, and cloud infrastructure setup to ensure your application backend is performant, secure, and ready to scale.",
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ const services: IServiceItem[] = [
     shortDescription:
       "I define goals, target audiences, and roadmap for success.",
     description:
-      "I help define clear product goals, identify target audiences, and create a strategic roadmap. With expertise in product ideation and market analysis, I ensure your product meets user needs, aligns with your business strategy, and achieves long-term growth.",
+      "I provide comprehensive product strategy consulting to help you define clear product vision, identify target user personas, and create actionable roadmaps for product development and growth. I conduct market research, competitive analysis, and user research to ensure your product strategy aligns with market needs and business objectives. My product strategy services include feature prioritization, user journey mapping, MVP planning, and go-to-market strategies to help you build products that users love and drive sustainable business growth.",
   },
   {
     id: 5,
@@ -71,7 +71,7 @@ const services: IServiceItem[] = [
     ],
     shortDescription: "I streamline development and operations processes.",
     description:
-      "I drive efficient DevOps workflows by implementing CI/CD pipelines, managing cloud infrastructure, and utilizing containerization for scalable software delivery. Leverage DevOps solutions to optimize performance, speed, and reliability across your development lifecycle.",
+      "I implement comprehensive DevOps solutions to automate and streamline your software development lifecycle using Docker, Kubernetes, AWS, and modern CI/CD tools. I set up continuous integration and continuous deployment pipelines, configure container orchestration, manage cloud infrastructure, and implement monitoring and logging solutions. My DevOps services include infrastructure as code, automated testing and deployment, containerization strategies, cloud migration, and performance monitoring to ensure your applications are deployed efficiently, run reliably, and scale seamlessly.",
   },
   {
     id: 6,
@@ -85,7 +85,7 @@ const services: IServiceItem[] = [
     ],
     shortDescription: "I manage and optimize your database systems.",
     description:
-      "I manage and optimize database systems for performance, reliability, and scalability. With expertise in SQL and NoSQL databases, I design schemas, write complex queries, and implement best practices to ensure data integrity and security.",
+      "I design, implement, and optimize database solutions using both SQL (MySQL, PostgreSQL) and NoSQL (MongoDB, Redis) technologies to ensure optimal performance, data integrity, and scalability. I create efficient database schemas, write optimized queries, implement indexing strategies, and set up database replication and backup systems. My database management services include database migration, performance tuning, query optimization, data modeling, and implementing security best practices to ensure your data is stored securely, accessed efficiently, and scales with your application's growth.",
   },
 ];
 
