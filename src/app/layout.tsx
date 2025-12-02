@@ -12,6 +12,7 @@ import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
 import { getPersonSchema, getWebSiteSchema } from "@/utils/structuredData";
 import { baseURL } from "@/utils/api";
+import { Analytics } from '@vercel/analytics/next';
 
 const baseUrl = baseURL;
 
@@ -202,7 +203,9 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <GoogleAnalytics />
           </Suspense>
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow">{children}
+            <Analytics />
+          </main>
           <Footer />
           <ScrollToTop />
           <BlogButton />
