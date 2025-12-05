@@ -18,6 +18,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prefers Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -110,6 +122,7 @@ body::-webkit-scrollbar {
   );
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
+  will-change: background-position;
 }
 
 /* Enhanced Spinner Animation */
@@ -125,6 +138,7 @@ body::-webkit-scrollbar {
 /* Enhanced smooth spinner with easing */
 .spinner-animated {
   animation: spinner-rotate 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  will-change: transform;
 }
 
 /* Loading Dots Animation */

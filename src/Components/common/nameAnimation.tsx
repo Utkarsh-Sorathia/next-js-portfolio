@@ -15,20 +15,45 @@ export const NameAnimation = ({
 }) => {
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const startAnimation = useCallback(() => {
+    if (isMobile) return; // Don't animate on mobile
     const word = words[words.indexOf(currentWord) + 1] || words[0];
     setCurrentWord(word);
     setIsAnimating(true);
-  }, [currentWord, words]);
+  }, [currentWord, words, isMobile]);
 
   useEffect(() => {
-    if (!isAnimating)
+    if (!isAnimating && !isMobile)
       setTimeout(() => {
         startAnimation();
       }, duration);
-  }, [isAnimating, duration, startAnimation]);
+  }, [isAnimating, duration, startAnimation, isMobile]);
 
+  // On mobile, always show the first word (Utkarsh Sorathia)
+  if (isMobile) {
+    return (
+      <span className={cn(
+        "z-10 inline-block relative text-left text-[var(--textColor)] dark:text-[var(--textColor)] ml-2",
+        className
+      )}>
+        {words[0]}
+      </span>
+    );
+  }
+
+  // On desktop, show animated version
   return (
     <AnimatePresence
       onExitComplete={() => {

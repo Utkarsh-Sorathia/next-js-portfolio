@@ -1,43 +1,21 @@
 "use client";
 
-import type { MouseEvent } from "react";
 import type { CoreComponentsProps } from "@/interfaces";
-import { motion, useMotionTemplate, useSpring } from "framer-motion";
 
 const CardBox = (props: Readonly<CoreComponentsProps>) => {
   const { children, classNames, onClick, id, elementRef } = props;
 
-  const mouseX = useSpring(0, { stiffness: 500, damping: 100 });
-  const mouseY = useSpring(0, { stiffness: 500, damping: 100 });
-
-  function onMouseMove(e: MouseEvent<HTMLDivElement>) {
-    if (!e.currentTarget) return;
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - left);
-    mouseY.set(e.clientY - top);
-  }
-  let maskImage = useMotionTemplate`radial-gradient(240px at ${mouseX}px ${mouseY}px, white, transparent)`;
-  let style = { maskImage, WebkitMaskImage: maskImage };
-
   return (
     <div
       id={id}
-      onMouseMove={onMouseMove}
       onClick={onClick}
       ref={elementRef}
       className={`relative w-full flex flex-col duration-500 border rounded-[var(--borderRadius)] hover:bg-zinc-800/10 hover:border-zinc-500 border-zinc-500 overflow-hidden group ${classNames}`}
+      style={{ willChange: 'transform' }}
     >
-      <div className="pointer-events-none absolute">
-        <div className="absolute inset-0 z-0 transition duration-1000 [mask-image:linear-gradient(black,transparent)]" />
-        <motion.div
-          className="absolute inset-0 z-10 bg-gradient-to-br opacity-100 via-zinc-100/10 transition duration-1000 group-hover:opacity-50"
-          style={style}
-        />
-        <motion.div
-          className="absolute inset-0 z-10 opacity-0 mix-blend-overlay transition duration-1000 group-hover:opacity-100"
-          style={style}
-        />
-      </div>
+      {/* White background overlay on hover */}
+      <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-[var(--borderRadius)] z-0" />
+      <div className="pointer-events-none absolute inset-0 z-0 transition duration-1000 [mask-image:linear-gradient(black,transparent)] opacity-0 group-hover:opacity-100" />
       {children}
     </div>
   );
