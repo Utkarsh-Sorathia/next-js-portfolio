@@ -1,4 +1,4 @@
-.topToBottom {
+  .topToBottom {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
@@ -22,6 +22,7 @@
   cursor: pointer;
   animation: upDown 3s ease-in-out infinite;
   transition: all 0.25s ease-in-out;
+  will-change: transform;
 
   display: flex;
   align-items: center;

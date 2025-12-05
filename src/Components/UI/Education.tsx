@@ -44,6 +44,7 @@ const Education = ({ data }: { data: TimelineEntry }) => {
             style={{
               height: heightTransform,
               opacity: opacityTransform,
+              willChange: 'transform, opacity',
             }}
           />
         </div>
@@ -54,7 +55,9 @@ const Education = ({ data }: { data: TimelineEntry }) => {
             key={index}
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: index * 0.2 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
+            style={{ willChange: 'transform, opacity' }}
           >
             <div className="relative flex items-start py-10">
               {/* Bullet Point */}

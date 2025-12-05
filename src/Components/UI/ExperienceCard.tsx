@@ -22,8 +22,12 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ amount: 0.3 }}
+              transition={{ duration: 0.3, delay: index * 0.05, ease: "easeOut" }}
+              viewport={{ amount: 0.3, once: true }}
+              style={{
+                willChange: 'transform, opacity', marginLeft: !isLeft ? "auto" : undefined,
+                right: !isLeft ? 0 : undefined
+              }}
               className={`
                     relative
                     md:w-[65%]
@@ -36,10 +40,6 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                     max-w-full
                     box-border
                     `}
-              style={{
-                marginLeft: !isLeft ? "auto" : undefined,
-                right: !isLeft ? 0 : undefined,
-              }}
             >
               {/* <div
                 className="md:hidden absolute w-5 h-5 z-10 top-15"
@@ -92,11 +92,10 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 p-3 md:p-8
                 transition-all duration-300
                 hover:bg-white/10
-                ${
-                  isLeft
+                ${isLeft
                     ? "md:mr-8 md:pr-8 transform translate-x-[-14px] md:translate-x-[-150px]"
                     : "md:ml-8 md:pl-8 transform md:translate-x-40"
-                }`}
+                  }`}
               >
                 <div className="flex flex-col sm:flex-row items-start gap-3">
                   {item.companyLink ? (

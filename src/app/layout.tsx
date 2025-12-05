@@ -96,11 +96,31 @@ export const metadata: Metadata = {
     "Sorathia Utkarsh",
     "sorathia utkarsh",
     "utkarsh resume",
+    "utkarsh portfolio",
+    "utkarsh github",
+    "Utkarsh developer",
+    "Utkarsh programmer",
+    "Utkarsh software engineer",
+    "Utkarsh web developer",
+    "Utkarsh full stack",
+    "Utkarsh React developer",
+    "Utkarsh Next.js developer",
+    "Utkarsh Node.js developer",
+    "Utkarsh MERN developer",
+    "Utkarsh portfolio website",
+    "Utkarsh Sorathia developer",
+    "Utkarsh Sorathia portfolio",
+    "Utkarsh Sorathia resume",
+    "Utkarsh Sorathia CV",
+    "Utkarsh Sorathia github",
+    "developer Utkarsh",
+    "programmer Utkarsh",
+    "Utkarsh India",
+    "Utkarsh Surat",
+    "Utkarsh Gujarat",
     "full stack developer",
     "web developer india",
     "react developer",
-    "utkarsh portfolio",
-    "utkarsh github",
     "Full Stack Developer",
     "MERN Stack Developer",
     "React Developer",
@@ -126,7 +146,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${baseUrl}/UtkarshSorathia.webp`,
-        alt: "Utkarsh Sorathia Portfolio",
+        alt: "Utkarsh Sorathia - Full Stack Developer Portfolio",
         width: 1200,
         height: 630,
         type: "image/webp",
@@ -184,6 +204,60 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Utkarsh Sorathia" />
+        {/* Enhanced SEO for Utkarsh */}
+        <meta name="author" content="Utkarsh Sorathia" />
+        <meta name="copyright" content="Utkarsh Sorathia" />
+        <meta name="subject" content="Utkarsh Sorathia - Full Stack Developer Portfolio" />
+        <meta name="classification" content="Utkarsh Sorathia Portfolio, Full Stack Developer, Web Developer" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="distribution" content="Global" />
+        <meta name="rating" content="General" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="target" content="all" />
+        <meta name="audience" content="all" />
+        <meta name="owner" content="Utkarsh Sorathia" />
+        <meta name="url" content={baseUrl} />
+        <meta name="identifier-URL" content={baseUrl} />
+        <meta name="directory" content="submission" />
+        <meta name="category" content="Utkarsh Sorathia, Full Stack Developer, Portfolio, Web Development" />
+        <meta name="geo.region" content="IN-GJ" />
+        <meta name="geo.placename" content="Surat, Gujarat, India" />
+        <meta name="ICBM" content="21.1702, 72.8311" />
+        <meta name="DC.title" content="Utkarsh Sorathia - Full Stack Developer" />
+        <meta name="DC.creator" content="Utkarsh Sorathia" />
+        <meta name="DC.subject" content="Utkarsh Sorathia, Full Stack Developer, Web Developer, Portfolio" />
+        <meta name="DC.description" content="Portfolio of Utkarsh Sorathia, a passionate Full Stack Developer from Surat, India" />
+        <meta name="DC.publisher" content="Utkarsh Sorathia" />
+        <meta name="DC.contributor" content="Utkarsh Sorathia" />
+        <meta name="DC.type" content="Portfolio Website" />
+        <meta name="DC.format" content="text/html" />
+        <meta name="DC.identifier" content={baseUrl} />
+        <meta name="DC.language" content="en" />
+        <meta name="DC.coverage" content="Worldwide" />
+        <meta name="DC.rights" content="Copyright Utkarsh Sorathia" />
+        {/* Additional Utkarsh-specific meta tags */}
+        <meta property="profile:first_name" content="Utkarsh" />
+        <meta property="profile:last_name" content="Sorathia" />
+        <meta property="profile:username" content="utkarshsor03" />
+        <meta property="og:profile:first_name" content="Utkarsh" />
+        <meta property="og:profile:last_name" content="Sorathia" />
+        <meta property="article:author" content="Utkarsh Sorathia" />
+        <meta property="article:publisher" content="Utkarsh Sorathia" />
+        <meta name="given-name" content="Utkarsh" />
+        <meta name="family-name" content="Sorathia" />
+        <meta name="name" content="Utkarsh Sorathia" />
+        {/* OpenGraph Image Meta Tags */}
+        <meta property="og:image" content={`${baseUrl}/UtkarshSorathia.webp`} />
+        <meta property="og:image:url" content={`${baseUrl}/UtkarshSorathia.webp`} />
+        <meta property="og:image:secure_url" content={`${baseUrl}/UtkarshSorathia.webp`} />
+        <meta property="og:image:type" content="image/webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Utkarsh Sorathia - Full Stack Developer Portfolio" />
+        {/* Twitter Card Image */}
+        <meta name="twitter:image" content={`${baseUrl}/UtkarshSorathia.webp`} />
+        <meta name="twitter:image:src" content={`${baseUrl}/UtkarshSorathia.webp`} />
+        <meta name="twitter:image:alt" content="Utkarsh Sorathia - Full Stack Developer Portfolio" />
         <link rel="me" href="https://www.wikidata.org/wiki/Q137171536" />
         <script
           type="application/ld+json"

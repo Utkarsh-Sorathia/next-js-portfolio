@@ -33,8 +33,9 @@ const AboutSection = ({ id }: { id: string }) => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ amount: 0.3 }}
-              transition={{ duration: 0.6 }}
+              viewport={{ amount: 0.3, once: true }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              style={{ willChange: 'transform, opacity' }}
               className="flex items-center gap-6"
             >
               <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-blue-600/50">
@@ -66,8 +67,9 @@ const AboutSection = ({ id }: { id: string }) => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ amount: 0.3 }}
-              transition={{ duration: 0.6 }}
+              viewport={{ amount: 0.3, once: true }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              style={{ willChange: 'transform, opacity' }}
             >
               <p className="mb-4 text-xl leading-relaxed">
                 I’m a passionate <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> with a love for building seamless web experiences. I specialize in the <span className="font-semibold text-[var(--primaryColor)]">MERN stack, Next.js</span> and <span className="font-semibold text-[var(--primaryColor)]">TypeScript</span> and thrive on transforming ideas into scalable products.

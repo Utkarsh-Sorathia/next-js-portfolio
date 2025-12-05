@@ -69,7 +69,9 @@ const FloatingNavbar = ({
         }}
         transition={{
           duration: 0.2,
+          ease: "easeOut",
         }}
+        style={{ willChange: 'transform, opacity' }}
         className={cn(
           'flex w-fit fixed top-4 inset-x-0 mx-auto border border-white/[0.25] rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-4 py-3 items-center space-x-4',
           className,

@@ -40,8 +40,12 @@ const BlogButton = () => {
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed sm:hidden right-4 z-[4999] transition-all duration-300"
-            style={{ bottom: scrollY > 400 ? '140px' : '80px' }}
+            style={{ 
+              bottom: scrollY > 400 ? '140px' : '80px',
+              willChange: 'transform, opacity'
+            }}
           >
             <Link href="/blogs">
               <motion.div
@@ -75,6 +79,8 @@ const BlogButton = () => {
             initial={{ opacity: 0, scale: 0.8, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: -20 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            style={{ willChange: 'transform, opacity' }}
             className="hidden sm:fixed sm:block top-4 right-4 z-[4999]"
           >
             <Link href="/blogs">

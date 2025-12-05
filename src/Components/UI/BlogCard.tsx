@@ -4,7 +4,6 @@ import { IBlogPost } from '@/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import CardBox from '../core/CardBox';
 import Column from '../core/Column';
@@ -29,11 +28,7 @@ export default function BlogCard({ post }: BlogCardProps) {
   const timeSincePublished = getTimeSincePublished(post.publishedAt);
 
   return (
-    <motion.article
-      initial={false}
-      whileHover={{ y: -5 }}
-      className="h-full"
-    >
+    <article className="h-full">
       <CardBox classNames="group h-full flex flex-col overflow-hidden hover:bg-zinc-800/10 hover:border-zinc-500 border-zinc-500">
         {/* Image */}
         {post.image?.asset?.url ? (
@@ -49,9 +44,10 @@ export default function BlogCard({ post }: BlogCardProps) {
                 src={post.image.asset.url}
                 alt={validateAltText(post.image.asset.altText, getBlogAltText(post.title), 'Blog post image')}
                 fill
-                className={`object-cover group-hover:scale-105 transition-all duration-300 ${
+                className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
                   imageLoading ? 'opacity-0' : 'opacity-100'
                 }`}
+                style={{ willChange: imageLoading ? 'opacity' : 'transform' }}
                 quality={85}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 onLoad={() => setImageLoading(false)}
@@ -134,6 +130,6 @@ export default function BlogCard({ post }: BlogCardProps) {
           </Link>
         </Column>
       </CardBox>
-    </motion.article>
+    </article>
   );
 }
