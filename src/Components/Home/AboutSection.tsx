@@ -72,10 +72,13 @@ const AboutSection = ({ id }: { id: string }) => {
               style={{ willChange: 'transform, opacity' }}
             >
               <p className="mb-4 text-xl leading-relaxed">
-                I’m a passionate <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> with a love for building seamless web experiences. I specialize in the <span className="font-semibold text-[var(--primaryColor)]">MERN stack, Next.js</span> and <span className="font-semibold text-[var(--primaryColor)]">TypeScript</span> and thrive on transforming ideas into scalable products.
+                I’m a <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> focused on building scalable web applications with
+                <span className="font-semibold text-[var(--primaryColor)]"> Next.js, TypeScript</span>, and the
+                <span className="font-semibold text-[var(--primaryColor)]"> MERN stack</span>.
+                I enjoy working across the stack to turn product ideas into reliable, production-ready solutions.
               </p>
               <p className="text-lg text-blue-100">
-                Always learning, always building. My focus is on clean code, great UX, and modern design.
+                My approach emphasizes clean architecture, performance, and user-focused design, with a strong preference for maintainable and readable code.
               </p>
             </motion.div>
             {isModalOpen && (

@@ -12,9 +12,9 @@ export const navMenus: INavItem[] = [
     icon: "bi bi-person-fill",
   },
   {
-    name: "Services",
-    link: "/#services",
-    icon: "bi bi-briefcase-fill",
+    name: "Skills",
+    link: "/#skills",
+    icon: "bi bi-award-fill",
   },
   {
     name: "Projects",
@@ -27,9 +27,9 @@ export const navMenus: INavItem[] = [
     icon: "bi bi-clock-history",
   },
   {
-    name: "Skills",
-    link: "/#skills",
-    icon: "bi bi-award-fill",
+    name: "Services",
+    link: "/#services",
+    icon: "bi bi-briefcase-fill",
   },
   {
     name: "Contact",

@@ -13,7 +13,7 @@ import BlogsPageClient from "@/app/blogs/BlogsPageClient";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Blog | Utkarsh Sorathia - Full Stack Developer",
+  title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
   description:
     "Read my latest thoughts on web development, technology, and programming.",
   alternates: { canonical: `${baseURL}/blogs` },
@@ -26,7 +26,7 @@ export default async function BlogsPage() {
   const blogListingSchema = getBlogListingSchema();
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: "Home", url: baseURL },
-    { name: "Blog", url: `${baseURL}/blogs` },
+    { name: "Blogs", url: `${baseURL}/blogs` },
   ]);
 
   return (

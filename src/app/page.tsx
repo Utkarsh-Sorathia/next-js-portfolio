@@ -15,10 +15,10 @@ const Home = () => {
       <PageBox>
         <HomeSection id="/" />
         <AboutSection id="about" />
-        <ServiceSection id="services" />
+        <SkillSection id="skills" />
         <ProjectSection id="projects" />
         <ExperienceSection id="experience" />
-        <SkillSection id="skills" />
+        <ServiceSection id="services" />
         <ContactSection id="contact" />
       </PageBox>
     </>
