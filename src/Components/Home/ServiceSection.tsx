@@ -1,0 +1,21 @@
+import ConstrainedBox from "../../Components/core/constrained-box";
+import ResponsiveBox from "../../Components/core/ResponsiveBox";
+import SectionTitle from "../../Components/common/SectionTitle";
+import { HoverGrid } from "../../Components/common/HoverGrid";
+import services from "@/data/services";
+
+const HomeSection2 = ({ id }: { id: string }) => {
+  return (
+    <ResponsiveBox
+      classNames="bg-background items-center justify-center dark:bg-dot-white/[0.15] light:bg-dot-black/[0.1] lg:px-40"
+      id={id}
+    >
+      <ConstrainedBox classNames="px-4 py-12 z-20">
+        <SectionTitle>Services</SectionTitle>
+        <HoverGrid cards={services} />
+      </ConstrainedBox>
+    </ResponsiveBox>
+  );
+};
+
+export default HomeSection2;

@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+:root {
+  --background: url(/images/dark-mode.webp), #09090b;
+  --foreground: #d4d4d8;
+  --text-secondary: #71717a;
+  --primaryColor: #6366f1;
+  --primaryColor5: rgba(99, 102, 241, 0.05);
+  --textColor: var(--foreground);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --dialogColor: rgba(255, 255, 255, 0.05);
+  --dialogColor50: rgba(255, 255, 255, 0.05);
+  --successColor: #22c55e;
+  --successColor50: rgba(34, 197, 94, 0.5);
+  --errorColor: #ef4444;
+  --errorColor50: rgba(239, 68, 68, 0.5);
+}
+
+[data-theme='light'] {
+  --background: #fdf7f4;
+  --foreground: #4a2c2a;
+  --text-secondary: #8c7371;
+  --primaryColor: #a67c52;
+  --primaryColor5: rgba(166, 124, 82, 0.05);
+  --textColor: var(--foreground);
+  --card-bg: #ffffff;
+  --border-color: #e5e7eb;
+  --dialogColor: #ffffff;
+  --dialogColor50: rgba(255, 255, 255, 0.8);
+  --successColor: #16a34a;
+  --successColor50: rgba(22, 163, 74, 0.5);
+  --errorColor: #dc2626;
+  --errorColor50: rgba(220, 38, 38, 0.5);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-text-secondary: var(--text-secondary);
+  --color-primary: var(--primaryColor);
+  --color-primary-5: var(--primaryColor5);
+  --color-card-bg: var(--card-bg);
+  --color-border-custom: var(--border-color);
+  --color-success: var(--successColor);
+  --color-success-50: var(--successColor50);
+  --color-error: var(--errorColor);
+  --color-error-50: var(--errorColor50);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* No media query here, ensuring dark mode is permanent */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prefers Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Smooth scroll offset for fixed header */
+:target {
+  scroll-margin-top: 100px;
+}
+
+/* Custom Scrollbar Styling - Completely Hidden */
+/* Webkit browsers (Chrome, Safari, Edge) */
+* {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  display: none;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-corner {
+  display: none;
+  background: transparent;
+}
+
+/* Ensure html and body hide scrollbar */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Utility class to hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Image Loading Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes shimmer-slide {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.image-shimmer {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.1) 20%,
+      rgba(255, 255, 255, 0.05) 40%,
+      rgba(255, 255, 255, 0.05) 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+  will-change: background-position;
+}
+
+/* Enhanced Spinner Animation */
+@keyframes spinner-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced smooth spinner with easing */
+.spinner-animated {
+  animation: spinner-rotate 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  will-change: transform;
+}
+
+/* Loading Dots Animation */
+.loading-dots {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.loading-dots .dot {
+  opacity: 0.3;
+  animation: dot-blink 1.4s infinite;
+}
+
+.loading-dots .dot-1 {
+  animation-delay: 0s;
+}
+
+.loading-dots .dot-2 {
+  animation-delay: 0.2s;
+}
+
+.loading-dots .dot-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-blink {
+
+  0%,
+  20% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
