@@ -138,7 +138,6 @@ const AboutSection = ({ id }: { id: string }) => {
                   <motion.div
                     key={name}
                     className="w-24 h-24 bg-primary/5 border border-border-custom p-3 rounded-2xl flex flex-col items-center justify-center shadow-sm hover:bg-primary/10 transition-all"
-                    whileHover={{ scale: 1.1, rotate: -5 }}
                   >
                     <Image src={iconSrc} alt={name} width={32} height={32} className="object-contain" />
                     <span className="text-xs mt-2 text-foreground font-medium text-center">{name}</span>

@@ -118,7 +118,7 @@ const FloatingNavbar = ({
               </span>
             ))}
           </Row>
-          <div className="pl-4 border-l border-border-custom">
+          <div className="pl-4">
             <ThemeToggle />
           </div>
         </Row>
