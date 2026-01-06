@@ -126,6 +126,31 @@ const Footer = () => {
         <div className="text-center text-xs text-gray-500 mt-8 pt-6 border-t border-gray-800">
           © {new Date().getFullYear()} Utkarsh Sorathia. All Rights Reserved.
         </div>
+
+        {/* Hidden SEO Keywords & Tags */}
+        <div className="sr-only" aria-hidden="true">
+          <h2>SEO Keywords for Utkarsh Sorathia</h2>
+          <p>
+            Utkarsh, Utkarsh Sorathia, Utkarsh Portfolio, Utkarsh CV, Full Stack Developer, 
+            Software Engineer India, MERN Stack Developer, React.js Expert, Next.js Developer, 
+            Utkarsh Developer, Web Developer Surat, Gujarat Software Engineer, Utkarsh Programming, 
+            Javascript Developer, Node.js Backend Developer, MongoDB Expert, Frontend Engineer, 
+            Utkarsh Sorathia Projects, Utkarsh Sorathia Blogs, Portfolio Website, Web Application Developer,
+            TypeScript, Express.js Expert, Computer Engineer, Coding, Programming Insights,
+            Tech Blog by Utkarsh, Software Solutions, Modern Web Development, Clean Code.
+          </p>
+          <h3>Technologies and Skills</h3>
+          <ul>
+            <li>React.js</li>
+            <li>Next.js 15</li>
+            <li>Node.js</li>
+            <li>MongoDB</li>
+            <li>Tailwind CSS</li>
+            <li>Prisma</li>
+            <li>Sanity CMS</li>
+            <li>API Development</li>
+          </ul>
+        </div>
       </div>
     </footer>
   );

@@ -6,7 +6,7 @@ import ResponsiveBox from "@/Components/core/ResponsiveBox";
 import ConstrainedBox from "@/Components/core/constrained-box";
 import SectionTitle from "@/Components/common/SectionTitle";
 
-import { getBlogListingSchema, getBreadcrumbSchema } from "@/utils/structuredData";
+import { getBlogListingSchema, getBreadcrumbSchema, getCompleteBlogSchema } from "@/utils/structuredData";
 import { baseURL } from "@/utils/api";
 import BlogsPageClient from "@/app/blogs/BlogsPageClient";
 
@@ -24,6 +24,7 @@ export default async function BlogsPage() {
   const posts = await getAllBlogPosts();
 
   const blogListingSchema = getBlogListingSchema();
+  const completeBlogSchema = getCompleteBlogSchema(posts);
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: "Home", url: baseURL },
     { name: "Blogs", url: `${baseURL}/blogs` },
@@ -39,6 +40,10 @@ export default async function BlogsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(completeBlogSchema) }}
       />
 
       <ResponsiveBox

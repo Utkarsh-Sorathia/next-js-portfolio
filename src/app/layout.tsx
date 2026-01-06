@@ -10,7 +10,7 @@ import BlogButton from "@/Components/UI/BlogButton";
 import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
-import { getPersonSchema, getWebSiteSchema } from "@/utils/structuredData";
+import { getPersonSchema, getWebSiteSchema, getProfilePageSchema, getFAQSchema, getSiteNavigationSchema, getProfessionalServiceSchema, getServiceSchema, getProjectSchema } from "@/utils/structuredData";
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -258,7 +258,12 @@ export default function RootLayout({
         <meta name="twitter:image" content={`${baseUrl}/UtkarshSorathia.webp`} />
         <meta name="twitter:image:src" content={`${baseUrl}/UtkarshSorathia.webp`} />
         <meta name="twitter:image:alt" content="Utkarsh Sorathia - Full Stack Developer Portfolio" />
+        <meta name="thumbnail" content={`${baseUrl}/UtkarshSorathia.webp`} />
         <link rel="me" href="https://www.wikidata.org/wiki/Q137171536" />
+        <link rel="me" href="https://www.github.com/Utkarsh-Sorathia" />
+        <link rel="me" href="https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a" />
+        <link rel="me" href="https://x.com/utkarshsor03" />
+        <link rel="me" href="https://www.instagram.com/utkarsh__sorathia" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -269,6 +274,42 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(getWebSiteSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getProfilePageSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getFAQSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getSiteNavigationSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getProfessionalServiceSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getServiceSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getProjectSchema()),
           }}
         />
       </head>
