@@ -168,6 +168,14 @@ export function getWebSiteSchema() {
         630,
         "Utkarsh Sorathia Logo"
       ),
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+        addressLocality: "Surat",
+        addressRegion: "Gujarat",
+        postalCode: "395002",
+        addressCountry: "IN"
+      },
     },
     inLanguage: "en-US",
   };
@@ -237,7 +245,7 @@ export function getOrganizationSchema(companyName: string, companyUrl: string, l
       "@type": "PostalAddress",
       addressLocality: location,
       addressCountry: "IN",
-      streetAddress: "",
+      streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
       postalCode: "395002"
     },
     logo: {
@@ -291,6 +299,7 @@ export function getArticleSchema(
       "@type": "Person",
       name: "Utkarsh Sorathia",
       url: baseUrl,
+      image: `${baseUrl}/UtkarshSorathia.webp`,
       sameAs: [
         Strings.githubLink,
         Strings.linkedInLink,
@@ -308,6 +317,14 @@ export function getArticleSchema(
         url: `${baseUrl}/UtkarshSorathia.webp`,
         width: 1200,
         height: 630,
+      },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+        addressLocality: "Surat",
+        addressRegion: "Gujarat",
+        postalCode: "395002",
+        addressCountry: "IN"
       },
       "@id": `${baseUrl}#publisher`,
     },
@@ -377,6 +394,14 @@ export function getBlogListingSchema(posts?: { title: string; url: string; dateP
         url: `${baseUrl}/UtkarshSorathia.webp`,
         width: 1200,
         height: 630,
+      },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+        addressLocality: "Surat",
+        addressRegion: "Gujarat",
+        postalCode: "395002",
+        addressCountry: "IN"
       },
       "@id": `${baseUrl}#publisher`,
     },
@@ -461,9 +486,11 @@ export function getCompleteBlogSchema(posts: any[]) {
       "headline": p.title,
       "url": `${baseUrl}/blogs/${p.slug.current}`,
       "datePublished": p.publishedAt,
+      "image": p.image?.asset?.url || `${baseUrl}/UtkarshSorathia.webp`,
       "author": {
          "@type": "Person",
-         "name": "Utkarsh"
+         "name": "Utkarsh",
+         "url": baseUrl
       }
     }))
   };
@@ -480,6 +507,7 @@ export function getProfessionalServiceSchema() {
     "name": "Utkarsh Sorathia - Full Stack Web Development",
     "image": `${baseUrl}/UtkarshSorathia.webp`,
     "url": baseUrl,
+    "priceRange": "$$",
     "telephone": "+918758453292",
     "address": {
       "@type": "PostalAddress",
