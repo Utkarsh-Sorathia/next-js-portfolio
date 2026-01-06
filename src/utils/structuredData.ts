@@ -151,26 +151,15 @@ export function getWebSiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${baseUrl}#website`,
-    name: "Utkarsh Sorathia - Portfolio",
+    name: "Utkarsh Sorathia",
+    alternateName: ["Utkarsh", "Utkarsh Sorathia Portfolio", "Utkarsh Portfolio"],
     url: baseUrl,
     description:
       "Portfolio website of Utkarsh Sorathia, a Full Stack Developer specializing in React.js, Next.js, Node.js, and modern web technologies.",
-    mainEntity: {
-      "@type": "Person",
-      "@id": `${baseUrl}#person`,
-    },
-    about: {
-      "@type": "Person",
-      "@id": `${baseUrl}#person`,
-    },
-    creator: {
-      "@type": "Person",
-      "@id": `${baseUrl}#person`,
-    },
     publisher: {
       "@type": "Organization",
       "@id": `${baseUrl}#publisher`,
-      name: "Utkarsh Sorathia Portfolio",
+      name: "Utkarsh Sorathia",
       url: baseUrl,
       logo: makeImageObject(
         `${baseUrl}/UtkarshSorathia.webp`,
@@ -179,16 +168,55 @@ export function getWebSiteSchema() {
         "Utkarsh Sorathia Logo"
       ),
     },
-    author: {
-      "@type": "Person",
-      "@id": `${baseUrl}#person`,
-    },
     inLanguage: "en-US",
-    sameAs: [
-      Strings.githubLink,
-      Strings.linkedInLink,
-      Strings.twitterLink,
-    ].filter(Boolean),
+  };
+}
+
+/**
+ * SITE NAVIGATION SCHEMA (For Sitelinks like in your image)
+ */
+export function getSiteNavigationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "SiteNavigationElement",
+        "position": 1,
+        "name": "About Me",
+        "url": `${baseUrl}/#about`
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 2,
+        "name": "Projects",
+        "url": `${baseUrl}/#projects`
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 3,
+        "name": "Blogs",
+        "url": `${baseUrl}/blogs`
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 4,
+        "name": "Experience",
+        "url": `${baseUrl}/#experience`
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 5,
+        "name": "Skills",
+        "url": `${baseUrl}/#skills`
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 6,
+        "name": "Contact",
+        "url": `${baseUrl}/#contact`
+      }
+    ]
   };
 }
 
@@ -369,4 +397,126 @@ export function getBlogListingSchema(posts?: { title: string; url: string; dateP
   }
 
   return schema;
+}
+
+/**
+ * ADDITIVE SCHEMAS FOR ENHANCED PERFORMANCE
+ */
+
+export function getProfilePageSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Utkarsh",
+      "alternateName": "Utkarsh Sorathia",
+      "identifier": "Utkarsh",
+      "description": "Utkarsh is a Full Stack Developer and Software Engineer.",
+      "image": `${baseUrl}/UtkarshSorathia.webp`,
+      "sameAs": [
+        Strings.githubLink,
+        Strings.linkedInLink,
+        Strings.twitterLink,
+        Strings.instagramLink
+      ].filter(Boolean)
+    }
+  };
+}
+
+export function getFAQSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who is Utkarsh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Utkarsh (full name Utkarsh Sorathia) is a professional Full Stack Developer specializing in React, Next.js, and Node.js. He is based in India and creates modern web applications."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Utkarsh do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Utkarsh builds scalable, performance-driven web and mobile applications using the MERN stack and Next.js."
+        }
+      }
+    ]
+  };
+}
+
+export function getCompleteBlogSchema(posts: any[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${baseUrl}/blogs#fullblog`,
+    "name": "Utkarsh's Complete Blog Collection",
+    "blogPost": posts.map(p => ({
+      "@type": "BlogPosting",
+      "headline": p.title,
+      "url": `${baseUrl}/blogs/${p.slug.current}`,
+      "datePublished": p.publishedAt,
+      "author": {
+         "@type": "Person",
+         "name": "Utkarsh"
+      }
+    }))
+  };
+}
+
+/**
+ * PROFESSIONAL SERVICE SCHEMA (For the "Business" look in search results)
+ */
+export function getProfessionalServiceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${baseUrl}#service`,
+    "name": "Utkarsh Sorathia - Full Stack Web Development",
+    "image": `${baseUrl}/UtkarshSorathia.webp`,
+    "url": baseUrl,
+    "telephone": "+918866300463",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "306, Rajhans Complex - 2, Civil Char Rasta, Ring Rd",
+      "addressLocality": "Surat",
+      "addressRegion": "Gujarat",
+      "postalCode": "395002",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 21.1702,
+      "longitude": 72.8311
+    },
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `${baseUrl}/UtkarshSorathia.webp`,
+      "width": 1200,
+      "height": 630
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "21:00"
+    },
+    "sameAs": [
+        Strings.githubLink,
+        Strings.linkedInLink,
+        Strings.twitterLink,
+        Strings.instagramLink
+    ].filter(Boolean)
+  };
 }
