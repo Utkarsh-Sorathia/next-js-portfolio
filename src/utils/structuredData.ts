@@ -81,9 +81,10 @@ export function getPersonSchema() {
       addressLocality: "Surat",
       addressRegion: "Gujarat",
       addressCountry: "IN",
-      streetAddress: "",
+      streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
       postalCode: "395002"
     },
+    telephone: "+918758453292",
     ...(worksFor && { worksFor }),
     alumniOf,
     hasOccupation: {
@@ -479,10 +480,10 @@ export function getProfessionalServiceSchema() {
     "name": "Utkarsh Sorathia - Full Stack Web Development",
     "image": `${baseUrl}/UtkarshSorathia.webp`,
     "url": baseUrl,
-    "telephone": "+918866300463",
+    "telephone": "+918758453292",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "306, Rajhans Complex - 2, Civil Char Rasta, Ring Rd",
+      "streetAddress": "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate, Surat, Gujarat",
       "addressLocality": "Surat",
       "addressRegion": "Gujarat",
       "postalCode": "395002",
@@ -518,5 +519,71 @@ export function getProfessionalServiceSchema() {
         Strings.twitterLink,
         Strings.instagramLink
     ].filter(Boolean)
+  };
+}
+
+/**
+ * SERVICE SCHEMA (To highlight specific professional services)
+ */
+export function getServiceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Professional Services by Utkarsh Sorathia",
+    "itemListElement": [
+      {
+        "@type": "Service",
+        "position": 1,
+        "name": "Mobile App Development",
+        "serviceType": "Mobile App Development (iOS & Android)",
+        "provider": { "@id": `${baseUrl}#person` },
+        "description": "I build scalable mobile applications for iOS and Android using React Native and TypeScript."
+      },
+      {
+        "@type": "Service",
+        "position": 2,
+        "name": "Web Development",
+        "serviceType": "Full Stack Web Development",
+        "provider": { "@id": `${baseUrl}#person` },
+        "description": "Modern, responsive web applications using React, Next.js, and TypeScript."
+      },
+      {
+        "@type": "Service",
+        "position": 3,
+        "name": "Backend Development",
+        "serviceType": "Backend Infrastructure & API Development",
+        "provider": { "@id": `${baseUrl}#person` },
+        "description": "Secure, scalable backend systems using Node.js, Express, and NestJS."
+      }
+    ]
+  };
+}
+
+/**
+ * PROJECT / CREATIVE WORK SCHEMA (To highlight portfolio projects)
+ */
+export function getProjectSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Portfolio Projects by Utkarsh Sorathia",
+    "itemListElement": [
+      {
+        "@type": "CreativeWork",
+        "position": 1,
+        "name": "E-commerce Website (Kachnaar)",
+        "url": "https://kachnaar.netlify.app/",
+        "author": { "@id": `${baseUrl}#person` },
+        "description": "A seamless shopping platform with user authentication and secure payment integration."
+      },
+      {
+        "@type": "CreativeWork",
+        "position": 2,
+        "name": "Typingo - Typing Test Website",
+        "url": "https://typingo.vercel.app/",
+        "author": { "@id": `${baseUrl}#person` },
+        "description": "An interactive web-based typing test platform designed to enhance typing speed."
+      }
+    ]
   };
 }

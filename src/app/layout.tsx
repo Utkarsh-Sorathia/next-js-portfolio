@@ -10,7 +10,7 @@ import BlogButton from "@/Components/UI/BlogButton";
 import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
-import { getPersonSchema, getWebSiteSchema, getProfilePageSchema, getFAQSchema, getSiteNavigationSchema, getProfessionalServiceSchema } from "@/utils/structuredData";
+import { getPersonSchema, getWebSiteSchema, getProfilePageSchema, getFAQSchema, getSiteNavigationSchema, getProfessionalServiceSchema, getServiceSchema, getProjectSchema } from "@/utils/structuredData";
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -298,6 +298,18 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(getProfessionalServiceSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getServiceSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getProjectSchema()),
           }}
         />
       </head>
