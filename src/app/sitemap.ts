@@ -3,23 +3,25 @@ import { getAllBlogPosts } from '@/lib/sanity'
 import { baseURL } from '@/utils/api';
 
 export const revalidate = 0;
-export const dynamic = "force-dynamic";
 
 const baseUrl = baseURL;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllBlogPosts()
   
+  // Use a stable date for static routes to avoid "faking" updates
+  const lastUpdated = new Date('2024-03-20T00:00:00.000Z');
+
   const staticRoutes = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: lastUpdated,
       changeFrequency: 'monthly' as const,
       priority: 1,
     },
     {
       url: `${baseUrl}/blogs`,
-      lastModified: new Date(),
+      lastModified: lastUpdated,
       changeFrequency: 'daily' as const, 
       priority: 0.9, 
     },

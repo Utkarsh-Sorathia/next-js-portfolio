@@ -10,7 +10,7 @@ import BlogButton from "@/Components/UI/BlogButton";
 import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
-import { getPersonSchema, getWebSiteSchema, getProfilePageSchema, getFAQSchema, getSiteNavigationSchema, getProfessionalServiceSchema, getServiceSchema, getProjectSchema } from "@/utils/structuredData";
+
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     {
       url: "/favicon.ico",
       rel: "icon",
-      sizes: "48x48",
+      sizes: "any",
       type: "image/x-icon",
     },
     {
@@ -108,34 +108,12 @@ export const metadata: Metadata = {
     "Utkarsh Node.js developer",
     "Utkarsh MERN developer",
     "Utkarsh portfolio website",
-    "Utkarsh Sorathia developer",
-    "Utkarsh Sorathia portfolio",
-    "Utkarsh Sorathia resume",
-    "Utkarsh Sorathia CV",
-    "Utkarsh Sorathia github",
-    "developer Utkarsh",
-    "programmer Utkarsh",
     "Utkarsh India",
     "Utkarsh Surat",
     "Utkarsh Gujarat",
     "full stack developer",
     "web developer india",
     "react developer",
-    "Full Stack Developer",
-    "MERN Stack Developer",
-    "React Developer",
-    "Node.js Developer",
-    "Portfolio",
-    "Web Developer",
-    "Frontend Developer",
-    "Backend Developer",
-    "JavaScript Developer",
-    "MongoDB Developer",
-    "Express.js Developer",
-    "React.js Developer",
-    "Frontend Development",
-    "Backend Development",
-    "Full Stack Portfolio",
   ],
   openGraph: {
     title: "Utkarsh Sorathia | Full Stack Developer",
@@ -147,8 +125,8 @@ export const metadata: Metadata = {
       {
         url: `${baseUrl}/UtkarshSorathia.webp`,
         alt: "Utkarsh Sorathia - Full Stack Developer Portfolio",
-        width: 1200,
-        height: 630,
+        width: 512,
+        height: 487,
         type: "image/webp",
       },
     ],
@@ -167,6 +145,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: baseUrl,
   },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": "Utkarsh Sorathia",
+    "geo.region": "IN-GJ",
+    "geo.placename": "Surat, Gujarat, India",
+    "geo.position": "21.1702; 72.8311",
+    "ICBM": "21.1702, 72.8311",
+  },
 };
 
 export default function RootLayout({
@@ -183,135 +170,15 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link
-          rel="preload"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-          as="style"
-          crossOrigin="anonymous"
-        />
-        <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-          crossOrigin="anonymous"
         />
-        <link
-          rel="preload"
-          href="/UtkarshSorathia.webp"
-          as="image"
-          type="image/webp"
-        />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#4361ee" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Utkarsh Sorathia" />
-        {/* Enhanced SEO for Utkarsh */}
-        <meta name="author" content="Utkarsh Sorathia" />
-        <meta name="copyright" content="Utkarsh Sorathia" />
-        <meta name="subject" content="Utkarsh Sorathia - Full Stack Developer Portfolio" />
-        <meta name="classification" content="Utkarsh Sorathia Portfolio, Full Stack Developer, Web Developer" />
-        <meta name="coverage" content="Worldwide" />
-        <meta name="distribution" content="Global" />
-        <meta name="rating" content="General" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="target" content="all" />
-        <meta name="audience" content="all" />
-        <meta name="owner" content="Utkarsh Sorathia" />
-        <meta name="url" content={baseUrl} />
-        <meta name="identifier-URL" content={baseUrl} />
-        <meta name="directory" content="submission" />
-        <meta name="category" content="Utkarsh Sorathia, Full Stack Developer, Portfolio, Web Development" />
-        <meta name="geo.region" content="IN-GJ" />
-        <meta name="geo.placename" content="Surat, Gujarat, India" />
-        <meta name="ICBM" content="21.1702, 72.8311" />
-        <meta name="DC.title" content="Utkarsh Sorathia - Full Stack Developer" />
-        <meta name="DC.creator" content="Utkarsh Sorathia" />
-        <meta name="DC.subject" content="Utkarsh Sorathia, Full Stack Developer, Web Developer, Portfolio" />
-        <meta name="DC.description" content="Portfolio of Utkarsh Sorathia, a passionate Full Stack Developer from Surat, India" />
-        <meta name="DC.publisher" content="Utkarsh Sorathia" />
-        <meta name="DC.contributor" content="Utkarsh Sorathia" />
-        <meta name="DC.type" content="Portfolio Website" />
-        <meta name="DC.format" content="text/html" />
-        <meta name="DC.identifier" content={baseUrl} />
-        <meta name="DC.language" content="en" />
-        <meta name="DC.coverage" content="Worldwide" />
-        <meta name="DC.rights" content="Copyright Utkarsh Sorathia" />
-        {/* Additional Utkarsh-specific meta tags */}
-        <meta property="profile:first_name" content="Utkarsh" />
-        <meta property="profile:last_name" content="Sorathia" />
-        <meta property="profile:username" content="utkarshsor03" />
-        <meta property="og:profile:first_name" content="Utkarsh" />
-        <meta property="og:profile:last_name" content="Sorathia" />
-        <meta property="article:author" content="Utkarsh Sorathia" />
-        <meta property="article:publisher" content="Utkarsh Sorathia" />
-        <meta name="given-name" content="Utkarsh" />
-        <meta name="family-name" content="Sorathia" />
-        <meta name="name" content="Utkarsh Sorathia" />
-        {/* OpenGraph Image Meta Tags */}
-        <meta property="og:image" content={`${baseUrl}/UtkarshSorathia.webp`} />
-        <meta property="og:image:url" content={`${baseUrl}/UtkarshSorathia.webp`} />
-        <meta property="og:image:secure_url" content={`${baseUrl}/UtkarshSorathia.webp`} />
-        <meta property="og:image:type" content="image/webp" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Utkarsh Sorathia - Full Stack Developer Portfolio" />
-        {/* Twitter Card Image */}
-        <meta name="twitter:image" content={`${baseUrl}/UtkarshSorathia.webp`} />
-        <meta name="twitter:image:src" content={`${baseUrl}/UtkarshSorathia.webp`} />
-        <meta name="twitter:image:alt" content="Utkarsh Sorathia - Full Stack Developer Portfolio" />
-        <meta name="thumbnail" content={`${baseUrl}/UtkarshSorathia.webp`} />
         <link rel="me" href="https://www.wikidata.org/wiki/Q137171536" />
         <link rel="me" href="https://www.github.com/Utkarsh-Sorathia" />
         <link rel="me" href="https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a" />
         <link rel="me" href="https://x.com/utkarshsor03" />
         <link rel="me" href="https://www.instagram.com/utkarsh__sorathia" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getPersonSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getWebSiteSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getProfilePageSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getFAQSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getSiteNavigationSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getProfessionalServiceSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getServiceSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getProjectSchema()),
-          }}
-        />
+
       </head>
       <body className="flex flex-col min-h-screen antialiased">
         <ErrorBoundary>
