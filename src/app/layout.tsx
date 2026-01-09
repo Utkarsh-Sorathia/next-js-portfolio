@@ -10,6 +10,7 @@ import BlogButton from "@/Components/UI/BlogButton";
 import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
+import ChatWidget from "@/Components/UI/ChatWidget";
 
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
@@ -194,6 +195,7 @@ export default function RootLayout({
           <ScrollToTop />
           <BlogButton />
           <WhatsAppButton />
+          <ChatWidget />
         </ErrorBoundary>
       </body>
     </html>

@@ -28,7 +28,7 @@ const WhatsAppButton = () => {
       rel="noopener noreferrer" 
       className={styles.whatsappSticky} 
       style={{ 
-        bottom: showScrollTop ? '80px' : undefined
+        bottom: showScrollTop ? '76px' : undefined
       }}
     >
       <FontAwesomeIcon icon={faWhatsapp} style={{ width: '1.5rem', height: '1.5rem' }} />
