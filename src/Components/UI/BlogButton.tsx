@@ -43,7 +43,7 @@ const BlogButton = () => {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed sm:hidden right-4 z-[4999] transition-all duration-300"
             style={{ 
-              bottom: scrollY > 400 ? '140px' : '80px',
+              bottom: scrollY > 400 ? '204px' : '144px',
               willChange: 'transform, opacity'
             }}
           >
