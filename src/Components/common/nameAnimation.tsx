@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/utils/cn";
 
 export const NameAnimation = ({
@@ -13,98 +13,83 @@ export const NameAnimation = ({
   duration?: number;
   className?: string;
 }) => {
-  const [currentWord, setCurrentWord] = useState(words[0]);
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [index, setIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
-    };
-    
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const startAnimation = useCallback(() => {
-    if (isMobile) return; // Don't animate on mobile
-    const word = words[words.indexOf(currentWord) + 1] || words[0];
-    setCurrentWord(word);
-    setIsAnimating(true);
-  }, [currentWord, words, isMobile]);
-
   useEffect(() => {
-    if (!isAnimating && !isMobile)
-      setTimeout(() => {
-        startAnimation();
-      }, duration);
-  }, [isAnimating, duration, startAnimation, isMobile]);
+    if (isMobile) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, duration);
+    return () => clearInterval(timer);
+  }, [words, duration, isMobile]);
 
-  // On mobile, always show the first word (Utkarsh Sorathia)
+  const isName = (text: string) => text.toLowerCase().includes("utkarsh");
+
+  const Suffix = () => (
+    <span className="inline-flex items-center gap-1.5 ml-2 md:ml-3 text-[0.6em] md:text-[0.7em] align-middle pointer-events-none">
+      <span>🧑‍💻</span>
+      <span className="hidden md:inline">🚀</span>
+    </span>
+  );
+
+  const renderContent = (word: string) => {
+    const hasPeriod = word.endsWith(".");
+    const base = hasPeriod ? word.slice(0, -1) : word;
+    const shouldShowSuffix = isName(word);
+
+    return (
+      <span className="inline-flex items-center whitespace-nowrap">
+        {base}
+        {shouldShowSuffix && <Suffix />}
+        {hasPeriod && <span>.</span>}
+      </span>
+    );
+  };
+
   if (isMobile) {
     return (
-      <span className={cn(
-        "z-10 inline-block relative text-left text-[var(--textColor)] dark:text-[var(--textColor)] ml-2",
-        className
-      )}>
-        {words[0]}
+      <span className={cn("inline-flex items-center font-bold text-[var(--primaryColor)] ml-2", className)}>
+        {renderContent(words[0])}
       </span>
     );
   }
 
-  // On desktop, show animated version
   return (
-    <AnimatePresence
-      onExitComplete={() => {
-        setIsAnimating(false);
-      }}
-    >
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 10,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.5,
-          ease: "easeInOut",
-          type: "spring",
-          stiffness: 100,
-          damping: 10,
-        }}
-        exit={{
-          opacity: 0,
-          y: -40,
-          x: 40,
-          filter: "blur(8px)",
-          scale: 2,
-          position: "absolute",
-        }}
-        className={cn(
-          "z-10 inline-block relative text-left text-[var(--textColor)] dark:text-[var(--textColor)] ml-2",
-          className
-        )}
-        key={currentWord}
-      >
-        {currentWord.split(/(?<=\s)/).map((letter, index) => (
+    <div className={cn("relative inline-grid grid-cols-1 grid-rows-1 ml-2 md:ml-4 align-baseline", className)}>
+      {/* Ghost elements – essential for 0.00 CLS */}
+      {words.map((word, i) => (
+        <span 
+          key={`ghost-${i}`} 
+          className="invisible pointer-events-none col-start-1 row-start-1 font-bold whitespace-nowrap inline-flex items-center"
+          aria-hidden="true"
+        >
+          {renderContent(word)}
+        </span>
+      ))}
+
+      {/* Actual Animated text */}
+      <div className="col-start-1 row-start-1 flex items-center justify-start">
+        <AnimatePresence mode="wait">
           <motion.span
-            key={currentWord + index}
-            initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{
-              delay: index * 0.08,
-              duration: 1,
-            }}
-            className="inline-block mr-2"
+            key={index}
+            initial={{ opacity: 0, filter: "blur(8px)", y: 5 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            exit={{ opacity: 0, filter: "blur(8px)", y: -5 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="font-bold text-[var(--primaryColor)] whitespace-nowrap inline-flex items-center"
           >
-            {letter}
+            {renderContent(words[index])}
           </motion.span>
-        ))}
-      </motion.div>
-    </AnimatePresence>
+        </AnimatePresence>
+      </div>
+    </div>
   );
 };

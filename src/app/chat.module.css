@@ -2,10 +2,8 @@
 .chatToggle {
   box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
   transition: all 0.3s ease;
-}
-
-.chatTogglePulse {
   animation: chatPulse 2s infinite;
+  will-change: transform, box-shadow;
 }
 
 @keyframes chatPulse {
@@ -14,7 +12,7 @@
   }
 
   50% {
-    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4), 0 0 0 10px rgba(67, 97, 238, 0.1);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4), 0 0 0 10px rgba(67, 97, 238, 0.2);
   }
 
   100% {
@@ -24,4 +22,11 @@
 
 .chatToggle:hover {
   box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
+  transform: scale(1.1);
+}
+
+.chatToggle:hover svg,
+.chatToggle:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }

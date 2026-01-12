@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, MessageSquare } from 'lucide-react';
+import { X, Send } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from '@/app/chat.module.css';
@@ -252,17 +252,17 @@ export default function ChatWidget() {
             </motion.div>
           )}
         </AnimatePresence>
-
+ 
         {/* Toggle Button */}
         <motion.button
           onMouseEnter={() => !isOpen && setIsNudgeVisible(true)}
           onMouseLeave={() => !isOpen && setIsNudgeVisible(false)}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
-        className={`${styles.chatToggle} ${!isOpen ? styles.chatTogglePulse : ''} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50 hover:bg-opacity-90 transition-all`}
+        className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50`}
         aria-label="Open AI Assistant"
       >
-        {isOpen ? <X className="w-5 h-5" /> : <MessageSquare className="w-5 h-5" />}
+        {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.png" alt="AI Assistant" width={50} height={50} />}
       </motion.button>
       </div>
     </div>

@@ -21,22 +21,16 @@
       text: Strings.instagramUsername,
     },
     {
-      name: Strings.twitter,
-      url: Strings.twitterLink,
-      icon: Strings.twitterIcon,
-      text: Strings.twitterUsername,
-    },
-    {
       name: Strings.facebook,
       url: Strings.facebookLink,
       icon: Strings.facebookIcon,
       text: Strings.facebookUsername,
     },
     {
-      name: Strings.whatsapp,
-      url: Strings.primarywhatsappLink,
-      icon: Strings.whatsappIcon,
-      text: Strings.primarywhatsapp,
+      name: Strings.twitter,
+      url: Strings.twitterLink,
+      icon: Strings.twitterIcon,
+      text: Strings.twitterUsername,
     },
   ];
   
