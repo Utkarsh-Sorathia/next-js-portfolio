@@ -2,34 +2,35 @@ import { IProjectItem, ProjectType, RepoType } from "@/interfaces";
 
 const projects: IProjectItem[] = [
   {
-    id: "E-commerce Website",
-    title: "E-commerce Website",
-    description:
-      "A seamless shopping platform with user authentication, detailed product descriptions, and powerful search. Features secure payment integration and informative pages for a complete shopping experience.",
-    icon: "/skills/react.svg",
-    repoType: RepoType.Public,
-    projectType: ProjectType.Personal,
-    githubUrl: "https://github.com/Utkarsh-Sorathia/Kachnaar",
-    url: "https://kachnaar.netlify.app/",
-    tags: ["React", "Firebase", "Redux-Toolkit", "Bootstrap", "Razorpay"],
-  },
-  {
     id: "Next.js Portfolio Website",
     title: "Next.js Portfolio Website",
     description:
-      "A modern portfolio built with Next.js 15, featuring a blog system with Sanity CMS, email subscriptions, and responsive design with dark mode. Showcases projects, skills, and experience with smooth animations.",
+    "A modern portfolio built with Next.js 15, featuring a blog system with Sanity CMS, email subscriptions, and responsive design with dark mode. Showcases projects, skills, and experience with smooth animations.",
     icon: "/skills/nextjs.webp",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
     githubUrl: "https://github.com/Utkarsh-Sorathia/next-js-portfolio",
     url: "https://utkarshsorathia.in/",
+    isCurrent: true,
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity CMS", "MongoDB", "Resend"],
+  },
+  {
+    id: "ChatApp Premium",
+    title: "ChatApp Premium (PWA)",
+    description:
+    "A high-performance real-time messaging PWA featuring intelligent push notifications, sub-millisecond delivery, and glassmorphic UI. Built for cross-platform excellence with offline support and advanced session handling.",
+    icon: "/skills/nextjs.webp",
+    repoType: RepoType.Private,
+    projectType: ProjectType.Personal,
+    githubUrl: "https://github.com/Utkarsh-Sorathia/Chat-Application",
+    url: "https://chat.utkarshsorathia.in/",
+    tags: ["Next.js", "Supabase", "PWA", "Edge-Functions", "PostgreSQL", "Tailwind"],
   },
   {
     id: "Project Management Website",
     title: "Project Management Website",
     description:
-      "A collaborative platform with secure authentication, detailed project dashboards, and real-time progress tracking. Features built-in comments section for effective teamwork and project delivery.",
+    "A collaborative platform with secure authentication, detailed project dashboards, and real-time progress tracking. Features built-in comments section for effective teamwork and project delivery.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -48,6 +49,18 @@ const projects: IProjectItem[] = [
     githubUrl: "https://github.com/Utkarsh-Sorathia/Typingo",
     url: "https://typingo.vercel.app/",
     tags: ["React.js", "Tailwind css", "Typescript"],
+  },
+  {
+    id: "E-commerce Website",
+    title: "E-commerce Website",
+    description:
+      "A seamless shopping platform with user authentication, detailed product descriptions, and powerful search. Features secure payment integration and informative pages for a complete shopping experience.",
+    icon: "/skills/react.svg",
+    repoType: RepoType.Public,
+    projectType: ProjectType.Personal,
+    githubUrl: "https://github.com/Utkarsh-Sorathia/Kachnaar",
+    url: "https://kachnaar.netlify.app/",
+    tags: ["React", "Firebase", "Redux-Toolkit", "Bootstrap", "Razorpay"],
   },
   {
     id: "My Portfolio Website",

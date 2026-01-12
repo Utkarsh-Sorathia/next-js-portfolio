@@ -1,60 +1,58 @@
   .topToBottom {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: 5000;
-}
-
-/* Mobile adjustments */
-@media (max-width: 640px) {
-  .topToBottom {
+    position: fixed;
     bottom: 1rem;
+    right: 1rem;
+    z-index: 5000;
   }
-}
 
-.btnStyle {
-  background-color: var(--bgColor);
-  border: 2px solid white;
-  border-radius: 50%;
-  height: 3rem;
-  width: 3rem;
-  color: var(--whiteColor);
-  cursor: pointer;
-  animation: upDown 3s ease-in-out infinite;
-  transition: all 0.25s ease-in-out;
-  will-change: transform;
+  /* Mobile adjustments */
+  @media (max-width: 640px) {
+    .topToBottom {
+      bottom: 1rem;
+    }
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .btnStyle {
+    background-color: var(--bgColor);
+    border: 2px solid white;
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    color: white;
+    cursor: pointer;
+    animation: scrollPulse 2s infinite;
+    transition: all 0.3s ease;
+    will-change: transform, box-shadow;
 
-.btnStyle:hover {
-  animation: none;
-  border: 2px solid #4361ee;
-  background-color: #4361ee;
-  color: var(--bgColor);
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
 
-.iconStyle {
-  width: 1.5rem;
-  height: 1.5rem;
-}
+  .btnStyle:hover {
+    border-color: #4361ee;
+    background-color: #4361ee;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+  }
 
-@keyframes upDown {
-  0% {
-    transform: translateY(0px);
+  .iconStyle {
+    width: 1.2rem;
+    height: 1.2rem;
   }
-  25% {
-    transform: translateY(8px);
+
+  @keyframes scrollPulse {
+    0% {
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    }
+
+    50% {
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2), 0 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    100% {
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    }
   }
-  50% {
-    transform: translateY(0px);
-  }
-  75% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}

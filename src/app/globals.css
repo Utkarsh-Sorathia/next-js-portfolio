@@ -4,6 +4,7 @@
   --background: url(/images/dark-mode.webp), #121212;  /* Permanent dark mode background */
   --foreground: #ededed;  /* Light text for dark background */
   --primaryColor: #4361ee;
+  --borderRadius: 0.5rem;
 }
 
 @theme inline {

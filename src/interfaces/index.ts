@@ -58,6 +58,7 @@ export interface IProjectItem {
   tags?: string[];
   screenshots?: string[];
   about?: string;
+  isCurrent?: boolean;
 }
 
 export type IServiceItem = {

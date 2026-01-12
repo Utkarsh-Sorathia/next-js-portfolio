@@ -12,82 +12,95 @@ import CardBox from "../../Components/core/CardBox";
 
 const ProjectCard = ({ project }: { project: IProjectItem }) => {
   return (
-    <CardBox classNames="min-w-[calc(100%-2rem)] sm:min-w-[25rem] md:min-w-[28rem] lg:min-w-full lg:w-full aspect-[3/5] lg:aspect-auto lg:min-h-[480px] max-h-[30rem] lg:max-h-none p-4 gap-4 items-center justify-between rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group slide_in overflow-hidden hover:shadow-[4px_8px_24px_0px_rgba(100,100,100,0.12)_inset] transition-shadow duration-300">
-      <Column classNames="w-full items-center justify-start flex-1">
-        <Row classNames="w-[2.5rem] md:w-[3rem] aspect-square items-center justify-center">
-          <Image
-            src={project.icon}
-            alt={`project-${project.title}`}
-            width={100}
-            height={100}
-            sizes="100%"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL={project.icon}
-            className="w-full h-full object-cover aspect-square"
-          />
-        </Row>
+    <CardBox classNames="w-full lg:min-h-[450px] p-6 rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group slide_in overflow-hidden hover:shadow-[4px_8px_24px_0px_rgba(100,100,100,0.12)_inset] transition-shadow duration-300">
+      <div className="w-full h-full flex flex-col justify-between items-center gap-4">
+        {/* Top Section: Header & Info */}
+        <div className="w-full flex flex-col items-center">
+          <div className="w-[3rem] aspect-square flex items-center justify-center mb-4">
+            <Image
+              src={project.icon}
+              alt={`project-${project.title}`}
+              width={100}
+              height={100}
+              sizes="100%"
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL={project.icon}
+              className="w-full h-full object-cover aspect-square"
+            />
+          </div>
 
-        <p className="text-lg lg:text-xl font-semibold mt-2 lg:mt-4 text-[var(--primaryColor)]">{project.title}</p>
-        <div
-          className={`flex flex-row items-center justify-center rounded-full py-[0.05] px-[0.5rem] mt-2 capitalize text-center border ${
-            project.repoType === RepoType.Private
-              ? "text-[var(--errorColor)] border-[var(--errorColor50)]"
-              : "text-[var(--successColor)] border-[var(--successColor50)]"
-          }`}
-        >
-          <p className="text-xs/6 font-semibold">
-            {project.repoType === RepoType.Private ? "Private" : "Public"}
+          <p className="text-lg lg:text-xl font-semibold text-[var(--primaryColor)] text-center">{project.title}</p>
+          
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
+            {project.isCurrent && (
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400">Current</span>
+              </div>
+            )}
+
+            <div
+              className={`flex flex-row items-center justify-center rounded-full py-[0.05rem] px-[0.75rem] capitalize text-center border ${
+                project.repoType === RepoType.Private
+                  ? "text-[var(--errorColor)] border-[var(--errorColor50)]"
+                  : "text-[var(--successColor)] border-[var(--successColor50)]"
+              }`}
+            >
+            <p className="text-[10px] font-bold uppercase tracking-widest">
+              {project.repoType === RepoType.Private ? "Private" : "Public"}
+            </p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center mt-4 gap-3">
+            {project.githubUrl && (
+              <Link
+                href={project.githubUrl}
+                aria-label={`${project.title} GitHub URL`}
+                target="_blank"
+                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] transition-all"
+              >
+                <FontAwesomeIcon icon={faGithub} className="text-lg text-zinc-100" />
+              </Link>
+            )}
+            {project.url && (
+              <Link
+                href={project.url}
+                aria-label={`${project.title} Project URL`}
+                target="_blank"
+                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] transition-all"
+              >
+                <FontAwesomeIcon icon={faEye} className="text-lg text-zinc-100" />
+              </Link>
+            )}
+          </div>
+        </div>
+
+        {/* Middle Section: Description (Flex Grow) */}
+        <div className="flex-grow flex flex-col justify-center">
+          <p className="text-sm lg:text-base text-zinc-400 leading-relaxed line-clamp-4 text-justify">
+            {project.description}
           </p>
         </div>
-        <Row classNames="w-full items-center justify-center mt-2 gap-2">
-          {project.githubUrl ? (
-            <Link
-              href={project.githubUrl}
-              aria-label={`${project.title} GitHub URL`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="app__outlined_btn !rounded-full !p-2 lg:!p-3 !aspect-square !border-[var(--textColor)]"
-            >
-              <FontAwesomeIcon
-                icon={faGithub}
-                className="text-base/6 text-[var(--textColor)]"
-              />
-            </Link>
-          ) : null}
-          {project.url ? (
-            <Link
-              href={project.url}
-              aria-label={`${project.title} Project URL`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="app__outlined_btn !rounded-full !p-2 lg:!p-3 !aspect-square !border-[var(--textColor)]"
-            >
-              <FontAwesomeIcon
-                icon={faEye}
-                className="text-base/6 text-[var(--textColor)]"
-              />
-            </Link>
-          ) : null}
-        </Row>
-        <p className="text-sm lg:text-base mx-auto text-justify px-2 mt-2 lg:mt-4">
-          {project.description}
-        </p>
-        {project.tags && project.tags.length > 0 ? (
-          <Row classNames="w-full items-center justify-center flex-wrap mt-2 lg:mt-4 gap-2">
-            {project.tags.map((tag, i) => {
-              return (
-                <p
-                  key={`tag-${i}`}
-                  className="rounded-[var(--borderRadius)] border border-[var(--textColor50)] py-[.125rem] px-2 text-xs/6 font-normal bg-[var(--primaryColor)]/10 hover:bg-[var(--primaryColor)]/20 transition-colors"
-                >
-                  {tag}
-                </p>
-              );
-            })}
-          </Row>
-        ) : null}
-      </Column>
+
+        {/* Bottom Section: Tags */}
+        {project.tags && project.tags.length > 0 && (
+          <div className="w-full flex flex-wrap items-center justify-center gap-2 pt-4">
+            {project.tags.map((tag, i) => (
+              <span
+                key={`tag-${i}`}
+                className="rounded-md border border-white/5 bg-white/5 py-1 px-2.5 text-[10px] font-bold uppercase tracking-tighter text-zinc-400"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </CardBox>
   );
 };

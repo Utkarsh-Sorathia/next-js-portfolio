@@ -39,6 +39,23 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
           </p>
         </Column>
 
+        <div className="mt-10 flex flex-wrap gap-4 justify-center z-10">
+          <Link
+            href="#contact"
+            className="bg-[var(--primaryColor)] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+          >
+            Hire Me
+            <i className="bi bi-arrow-right" />
+          </Link>
+          <Link
+            href="#projects"
+            className="border border-[var(--primaryColor)] text-[var(--primaryColor)] px-8 py-3 rounded-full font-bold hover:bg-[var(--primaryColor)] hover:text-white transition-all duration-300"
+          >
+            View Projects
+          </Link>
+        </div>
+
+
         <div className="mt-12 lg:mt-16 w-full flex flex-col items-center">
           <p className="text-base font-medium pb-3">Follow me here</p>
 

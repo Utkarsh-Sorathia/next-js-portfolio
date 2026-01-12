@@ -105,24 +105,23 @@ const AboutSection = ({ id }: { id: string }) => {
                 </div>
               </div>
             )}
-            <motion.div
-              className="flex flex-wrap gap-4 mt-2 justify-start sm:justify-center"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div className="flex flex-wrap gap-4 mt-2 justify-start sm:justify-center">
               {techStack.map(({ name, icon }) => (
-                <motion.div
+                <div
                   key={name}
-                  className="w-25 h-20 bg-white/10 p-3 rounded-xl flex flex-col items-center justify-center shadow-lg hover:scale-110 transition"
-                  whileHover={{ scale: 1.15, rotate: -5 }}
+                  className="w-24 h-20 bg-white/5 border border-white/10 p-3 rounded-xl flex flex-col items-center justify-center shadow-sm hover:scale-105 hover:bg-white/10 transition-all duration-300 group"
                 >
-                  <Image src={icon} alt={name} width={32} height={32} />
-                  <span className="text-xs mt-2 text-white text-center">{name}</span>
-                </motion.div>
+                  <Image 
+                    src={icon} 
+                    alt={name} 
+                    width={32} 
+                    height={32} 
+                    className="group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <span className="text-[10px] uppercase font-bold tracking-widest mt-2 text-zinc-400 group-hover:text-white transition-colors">{name}</span>
+                </div>
               ))}
-            </motion.div>
+            </div>
 
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
