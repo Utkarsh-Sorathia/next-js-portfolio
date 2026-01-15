@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import 'github-markdown-css/github-markdown.css';
 import Header from "@/Components/UI/Header";
 import ScrollToTop from "@/Components/common/ScrollToTop";
 import { navMenus } from "../data/navItems";

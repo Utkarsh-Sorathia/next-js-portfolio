@@ -1,17 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: url(/images/dark-mode.webp), #121212;  /* Permanent dark mode background */
-  --foreground: #ededed;  /* Light text for dark background */
+  --background: url(/images/dark-mode.webp), #121212;
+  /* Permanent dark mode background */
+  --foreground: #ededed;
+  /* Light text for dark background */
   --primaryColor: #4361ee;
   --borderRadius: 0.5rem;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-geist-sans: 'Geist Sans', sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
 }
 
 /* No media query here, ensuring dark mode is permanent */
@@ -21,6 +18,7 @@ html {
 
 /* Prefers Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -45,8 +43,10 @@ body {
 /* Custom Scrollbar Styling - Completely Hidden */
 /* Webkit browsers (Chrome, Safari, Edge) */
 * {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
 
 *::-webkit-scrollbar {
@@ -82,7 +82,8 @@ body {
 }
 
 /* Ensure html and body hide scrollbar */
-html, body {
+html,
+body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -98,9 +99,12 @@ body::-webkit-scrollbar {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Image Loading Shimmer Animation */
@@ -108,19 +112,18 @@ body::-webkit-scrollbar {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
 }
 
 .image-shimmer {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.1) 20%,
-    rgba(255, 255, 255, 0.05) 40%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.1) 20%,
+      rgba(255, 255, 255, 0.05) 40%,
+      rgba(255, 255, 255, 0.05) 100%);
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
   will-change: background-position;
@@ -131,6 +134,7 @@ body::-webkit-scrollbar {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -165,14 +169,171 @@ body::-webkit-scrollbar {
   animation-delay: 0.4s;
 }
 
+
 @keyframes dot-blink {
-  0%, 20% {
+
+  0%,
+  20% {
     opacity: 0.3;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0.3;
   }
+}
+
+/* Custom Markdown Styles to override/enhance github-markdown-css */
+.markdown-body {
+  color: var(--foreground) !important;
+  font-family: inherit !important;
+  line-height: 1.6 !important;
+  font-size: 1rem !important;
+  /* Base text size */
+}
+
+/* Headings */
+.markdown-body h1 {
+  font-size: 2.25rem !important;
+  /* text-3xl/4xl */
+  font-weight: 700 !important;
+  color: var(--foreground) !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 1rem !important;
+  border-bottom: 1px solid rgba(237, 237, 237, 0.2) !important;
+}
+
+.markdown-body h2 {
+  font-size: 1.875rem !important;
+  /* text-2xl/3xl */
+  font-weight: 700 !important;
+  color: var(--primaryColor) !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  border-bottom: none !important;
+}
+
+.markdown-body h2::before {
+  content: '';
+  display: block;
+  width: 0.25rem;
+  height: 2rem;
+  background-color: var(--primaryColor);
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+}
+
+.markdown-body h3 {
+  font-size: 1.5rem !important;
+  /* text-xl/2xl */
+  font-weight: 600 !important;
+  color: var(--foreground) !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.markdown-body h4 {
+  font-size: 1.25rem !important;
+  /* text-lg/xl */
+  font-weight: 600 !important;
+  color: var(--foreground) !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Lists - Replicating the custom 'bullet with square' look */
+.markdown-body ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.markdown-body ul li {
+  position: relative !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.75rem !important;
+}
+
+.markdown-body ul li::before {
+  content: '' !important;
+  display: inline-block !important;
+  width: 0.5rem !important;
+  height: 0.5rem !important;
+  background-color: var(--primaryColor) !important;
+  border-radius: 9999px !important;
+  /* rounded-full */
+  margin-top: 0.6rem !important;
+  /* Align with text */
+  flex-shrink: 0 !important;
+}
+
+/* Ordered Lists */
+.markdown-body ol {
+  list-style: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.markdown-body ol li {
+  margin-bottom: 0.5rem !important;
+  display: list-item !important;
+  /* Reset display for ordered lists */
+}
+
+.markdown-body ol li::before {
+  display: none !important;
+  /* No custom dot for ordered lists */
+}
+
+/* Blockquotes */
+.markdown-body blockquote {
+  border-left: 4px solid var(--primaryColor) !important;
+  background-color: rgba(67, 97, 238, 0.1) !important;
+  /* primaryColor with low opacity */
+  color: var(--foreground) !important;
+  padding: 1rem 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  border-radius: 0 0.5rem 0.5rem 0 !important;
+  font-style: italic !important;
+}
+
+/* Links */
+.markdown-body a {
+  color: var(--primaryColor) !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(67, 97, 238, 0.5) !important;
+  text-underline-offset: 2px !important;
+}
+
+.markdown-body a:hover {
+  text-decoration-color: var(--primaryColor) !important;
+}
+
+/* Inline Code */
+.markdown-body code:not([class*="language-"]) {
+  color: var(--foreground) !important;
+  /* White text */
+  background-color: #1f2937 !important;
+  /* Gray-800 */
+  border: 1px solid rgba(67, 97, 238, 0.3) !important;
+  border-radius: 0.25rem !important;
+  padding: 0.2em 0.4em !important;
+}
+
+/* Code Blocks */
+.markdown-body pre {
+  background-color: #111827 !important;
+  /* Gray-900 */
+  border: 1px solid rgba(67, 97, 238, 0.3) !important;
+  border-radius: 0.5rem !important;
 }

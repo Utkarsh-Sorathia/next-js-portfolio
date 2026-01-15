@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: false,
     contentSecurityPolicy:
       "default-src 'self'; script-src 'none'; sandbox;",
+    qualities: [75, 85],
   },
 };
 
