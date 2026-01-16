@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import 'github-markdown-css/github-markdown.css';
 import Header from "@/Components/UI/Header";
 import ScrollToTop from "@/Components/common/ScrollToTop";
 import { navMenus } from "../data/navItems";
@@ -179,6 +180,7 @@ export default function RootLayout({
         <link rel="me" href="https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a" />
         <link rel="me" href="https://x.com/utkarshsor03" />
         <link rel="me" href="https://www.instagram.com/utkarsh__sorathia" />
+        <link rel="alternate" type="application/rss+xml" title="Utkarsh Sorathia Blog RSS Feed" href={`${baseUrl}/rss.xml`} />
 
       </head>
       <body className="flex flex-col min-h-screen antialiased">

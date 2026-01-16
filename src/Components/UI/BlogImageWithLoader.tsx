@@ -22,6 +22,22 @@ export default function BlogImageWithLoader({
 }: BlogImageWithLoaderProps) {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [objectPosition, setObjectPosition] = useState('center');
+
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    const aspectRatio = img.naturalWidth / img.naturalHeight;
+    
+    // If image is portrait or square (aspect ratio <= 1.5), position from top
+    // If image is wide landscape (aspect ratio > 1.5), keep centered
+    if (aspectRatio <= 1.5) {
+      setObjectPosition('top');
+    } else {
+      setObjectPosition('center');
+    }
+    
+    setImageLoading(false);
+  };
 
   return (
     <div className={`relative ${className}`}>
@@ -38,10 +54,11 @@ export default function BlogImageWithLoader({
         className={`object-cover rounded-[var(--borderRadius)] transition-opacity duration-300 ${
           imageLoading ? 'opacity-0' : 'opacity-100'
         }`}
+        style={{ objectPosition }}
         quality={quality}
         priority={priority}
         sizes={sizes}
-        onLoad={() => setImageLoading(false)}
+        onLoad={handleImageLoad}
         onError={() => {
           setImageLoading(false);
           setImageError(true);

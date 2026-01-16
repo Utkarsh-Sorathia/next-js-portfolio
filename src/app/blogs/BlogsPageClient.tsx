@@ -12,7 +12,7 @@ export default function BlogsPageClient({ posts }: BlogsPageClientProps) {
   const [visibleCount, setVisibleCount] = useState(6);
 
   const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 6);
+    setVisibleCount((prev) => prev + 9);
   };
 
   const visiblePosts = posts.slice(0, visibleCount);
