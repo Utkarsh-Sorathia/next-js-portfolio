@@ -6,7 +6,7 @@ export function getWelcomeEmailHtml(subscriberEmail: string, token: string) {
         <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:20px;overflow:hidden;">
           <tr>
             <td align="center" style="padding:32px 24px 0 24px;">
-              <h1 style="margin:24px 0 8px;font-size:26px;color:#0f172a;">Welcome, ${subscriberEmail}!</h1>
+              <h1 style="margin:24px 0 8px;font-size:26px;color:#0f172a;">Welcome to the Team! 🚀</h1>
               <p style="margin:0;font-size:16px;color:#475569;">Thanks for subscribing to my personal updates.</p>
             </td>
           </tr>

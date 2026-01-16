@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         from: `Portfolio Contact <${process.env.CONTACT_FROM_EMAIL || "contact@utkarshsorathia.in"}>`,
         to: process.env.PERSONAL_EMAIL || "utkarshsor03@gmail.com",
         replyTo: email,
-        subject: `New Message: ${subject}`,
+        subject: `[Portfolio] ${name}: ${subject}`,
         html: emailHtml,
       });
     } catch (emailError) {

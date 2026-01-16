@@ -9,7 +9,7 @@ interface BlogsPageClientProps {
 }
 
 export default function BlogsPageClient({ posts }: BlogsPageClientProps) {
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(9);
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 9);

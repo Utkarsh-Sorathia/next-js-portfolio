@@ -29,12 +29,19 @@ export default function NotFoundClient() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
+        className="flex flex-col sm:flex-row gap-4 justify-center items-center"
       >
         <Link
           href="/"
           className="inline-block bg-[#4361ee] text-white px-6 py-3 rounded-full font-medium shadow-md hover:bg-[#2e4ac7] transition-colors"
         >
           Back to Home
+        </Link>
+        <Link
+          href="/blogs"
+          className="inline-block border border-[#4361ee] text-[#4361ee] hover:text-white px-6 py-3 rounded-full font-medium hover:bg-[#4361ee] transition-all duration-300"
+        >
+          Read Blogs
         </Link>
       </motion.div>
     </div>
