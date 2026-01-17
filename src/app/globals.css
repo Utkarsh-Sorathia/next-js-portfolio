@@ -35,10 +35,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Smooth scroll offset for fixed header */
-:target {
-  scroll-margin-top: 100px;
-}
+/* Smooth scroll offset for fixed header handled by html scroll-padding-top */
 
 /* Custom Scrollbar Styling - Completely Hidden */
 /* Webkit browsers (Chrome, Safari, Edge) */
@@ -144,6 +141,22 @@ body::-webkit-scrollbar {
 .spinner-animated {
   animation: spinner-rotate 0.75s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
   will-change: transform;
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-in {
+  animation: scale-in 0.15s ease-out forwards;
 }
 
 /* Loading Dots Animation */
