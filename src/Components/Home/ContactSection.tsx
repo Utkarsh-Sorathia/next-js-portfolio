@@ -4,8 +4,8 @@ import ResponsiveBox from "../../Components/core/ResponsiveBox";
 import ConstrainedBox from "../../Components/core/constrained-box";
 import SectionTitle from "../../Components/common/SectionTitle";
 import ContactForm from "../UI/ContactForm";
-import { MapPin, ArrowRight } from "lucide-react";
-import { SiWhatsapp, SiGmail } from "react-icons/si";
+import { ArrowRight } from "lucide-react";
+import { SiWhatsapp, SiGmail, SiLinkedin } from "react-icons/si";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -29,8 +29,8 @@ const ContactSection = ({ id }: { id: string }) => {
             viewport={{ once: true }}
             className="flex flex-col gap-8 w-full"
           >
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-4">Let&apos;s Talk</h3>
+            <div className="pt-8 bg-transparent">
+              <h3 className="text-2xl font-bold text-zinc-100 mb-4">Let&apos;s Talk</h3>
               <p className="text-zinc-400 text-lg leading-relaxed">
                 I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision. 
               </p>
@@ -38,6 +38,25 @@ const ContactSection = ({ id }: { id: string }) => {
 
             <div className="space-y-4">
               {/* Contact Cards */}
+              <Link 
+                href="https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a"
+                target="_blank"
+                className="flex items-center justify-between p-4 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
+              >
+                <div className="flex items-center gap-4 md:gap-6 overflow-hidden">
+                  <div className="p-3 md:p-4 bg-blue-100 dark:bg-blue-900/20 rounded-xl text-[#0077b5] shrink-0">
+                    <SiLinkedin className="w-5 h-5 md:w-6 md:h-6" />
+                  </div>
+                  <div className="overflow-hidden">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#0077b5] mb-1 opacity-80">LinkedIn</p>
+                    <p className="text-white font-semibold truncate">utkarsh-sorathia</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[#0077b5] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                  Connect <ArrowRight className="w-4 h-4" />
+                </div>
+              </Link>
+
               <Link 
                 href="mailto:utkarshsor03@gmail.com"
                 className="flex items-center justify-between p-4 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#EA4335]/30 transition-all duration-300"
@@ -59,7 +78,7 @@ const ContactSection = ({ id }: { id: string }) => {
               <Link 
                 href="https://wa.me/918758453292" 
                 target="_blank"
-                className="flex items-center justify-between p-4 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group transition-all duration-300"
+                className="flex items-center justify-between p-4 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#25D366]/30 transition-all duration-300"
               >
                 <div className="flex items-center gap-4 md:gap-6">
                   <div className="p-3 md:p-4 bg-green-100 dark:bg-green-900/20 rounded-xl text-[#25D366] shrink-0">
@@ -67,23 +86,13 @@ const ContactSection = ({ id }: { id: string }) => {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-[#25D366] mb-1 opacity-80">WhatsApp</p>
-                    <p className="text-white font-semibold">+91 8758453292</p>
+                    <p className="text-white font-semibold">Utkarsh Sorathia</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[#25D366] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
                   Chat Now <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
-
-              <div className="flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl shadow-sm border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm">
-                <div className="p-3 md:p-4 bg-purple-100 dark:bg-purple-900/30 rounded-xl text-purple-600 dark:text-purple-400 shrink-0">
-                  <MapPin className="w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-1 opacity-80">Location</p>
-                  <p className="text-white font-semibold">Surat, Gujarat, India</p>
-                </div>
-              </div>
             </div>
           </motion.div>
 

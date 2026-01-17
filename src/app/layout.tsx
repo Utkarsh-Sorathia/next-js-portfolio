@@ -12,6 +12,8 @@ import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
 import WhatsAppButton from "@/Components/UI/WhatsAppButton";
 import ChatWidget from "@/Components/UI/ChatWidget";
+import KBarWrapper from "@/Components/core/KBarWrapper";
+import CommandBarTrigger from "@/Components/UI/CommandBarTrigger";
 
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
@@ -184,21 +186,24 @@ export default function RootLayout({
 
       </head>
       <body className="flex flex-col min-h-screen antialiased">
-        <ErrorBoundary>
-          <Header className="app_nav" navItems={navMenus} />
-          <Suspense fallback={null}>
-            <GoogleAnalytics />
-          </Suspense>
-          <main className="flex-grow">{children}
-            <Analytics />
-            <SpeedInsights />
-          </main>
-          <Footer />
-          <ScrollToTop />
-          <BlogButton />
-          <WhatsAppButton />
-          <ChatWidget />
-        </ErrorBoundary>
+        <KBarWrapper>
+          <ErrorBoundary>
+            <Header className="app_nav" navItems={navMenus} />
+            <Suspense fallback={null}>
+              <GoogleAnalytics />
+            </Suspense>
+            <main className="flex-grow">{children}
+              <Analytics />
+              <SpeedInsights />
+            </main>
+            <Footer />
+            <ScrollToTop />
+            <CommandBarTrigger />
+            <BlogButton />
+            <WhatsAppButton />
+            <ChatWidget />
+          </ErrorBoundary>
+        </KBarWrapper>
       </body>
     </html>
   );
