@@ -4,10 +4,14 @@ import { useKBar } from 'kbar';
 import { motion } from 'framer-motion';
 import { Command } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/utils/cn';
 
 const CommandBarTrigger = () => {
   const { query } = useKBar();
   const [isMac, setIsMac] = useState(false);
+  const pathname = usePathname();
+  const isBlogPage = pathname?.startsWith('/blogs');
 
   useEffect(() => {
     setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
@@ -19,12 +23,17 @@ const CommandBarTrigger = () => {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
       style={{ willChange: 'transform, opacity' }}
-      className="hidden sm:fixed sm:block top-4 right-[160px] md:right-[210px] lg:right-[230px] z-[4999]"
+      className={cn(
+        "hidden sm:fixed sm:block top-4 z-[4999] transition-all duration-300",
+        isBlogPage 
+          ? "right-4" 
+          : "right-[160px] md:right-[210px] lg:right-[230px]"
+      )}
     >
       <motion.button
         onClick={() => query.toggle()}
         whileTap={{ scale: 0.95 }}
-        className="border border-white/[0.25] rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 md:px-6 py-3 flex items-center gap-2 sm:gap-3 cursor-pointer transition-all duration-250 group hover:border-[var(--primaryColor)]"
+        className="border border-white/[0.25] rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 md:px-6 py-3 flex items-center gap-2 sm:gap-3 cursor-pointer transition-all duration-250 group"
       >
         <Command className="w-5 h-5 text-zinc-100 transition-colors duration-300 group-hover:text-[var(--primaryColor)]" />
         <span className="text-[var(--textColor)] font-semibold text-sm md:text-base transition-colors duration-300 group-hover:text-[var(--primaryColor)]">

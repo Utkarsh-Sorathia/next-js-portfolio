@@ -9,20 +9,41 @@ import { usePathname } from 'next/navigation';
 const BlogButton = () => {
   const [showButton, setShowButton] = useState(true);
   const [scrollY, setScrollY] = useState(0);
-  const [showMobileText, setShowMobileText] = useState(true);
+  const [isNudgeVisible, setIsNudgeVisible] = useState(false);
+  const [hasSeenNudge, setHasSeenNudge] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      // Show text when scroll to top button is not visible (scrollY <= 400)
-      // Hide text when scroll to top button appears (scrollY > 400)
-      setShowMobileText(window.scrollY <= 400);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Initial nudge timer (shows after 8s - slightly after chat nudge)
+  useEffect(() => {
+    if (hasSeenNudge) return;
+
+    const timer = setTimeout(() => {
+      setIsNudgeVisible(true);
+      setHasSeenNudge(true);
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, [hasSeenNudge]);
+
+  // Auto-hide nudge timer (hides after 10s)
+  useEffect(() => {
+    if (!isNudgeVisible) return;
+
+    const timer = setTimeout(() => {
+      setIsNudgeVisible(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [isNudgeVisible]);
 
   const showScrollTop = scrollY > 400;
 
@@ -47,27 +68,42 @@ const BlogButton = () => {
               willChange: 'transform, opacity'
             }}
           >
-            <Link href="/blogs">
-              <motion.div
-                whileTap={{ scale: 0.95 }}
-                className={`border-2 border-white rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[var(--primaryColor)] hover:bg-[var(--primaryColor)] ${showMobileText ? 'px-4 py-2.5 gap-1.5' : 'w-12 h-12 px-0'}`}
-              >
-                <BookOpen className={`text-[var(--textColor)] transition-all duration-300 ${showMobileText ? 'w-5 h-5' : 'w-6 h-6'}`} />
-                <AnimatePresence>
-                  {showMobileText && (
-                    <motion.span
-                      initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: 'auto' }}
-                      exit={{ opacity: 0, width: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-[var(--textColor)] font-semibold text-sm whitespace-nowrap ml-1.5 overflow-hidden"
-                    >
-                      Blogs
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            </Link>
+            <div className="relative flex items-center justify-end">
+              {/* Nudge Bubble */}
+              <AnimatePresence>
+                {isNudgeVisible && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                    className="bg-white dark:bg-zinc-800 px-3.5 py-2.5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-200 dark:border-zinc-700 absolute whitespace-nowrap bottom-full mb-3 right-0"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center flex-shrink-0 text-[var(--primaryColor)]">
+                        <BookOpen className="w-5 h-5" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase font-bold text-[var(--primaryColor)] tracking-widest leading-none mb-1">Articles</span>
+                        <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-100 leading-tight">Read Blogs! ✍️</span>
+                      </div>
+                    </div>
+                    {/* Arrow (Bottom) centered above 48px button */}
+                    <div className="absolute -bottom-1.5 right-[18px] w-3 h-3 bg-white dark:bg-zinc-800 border-r border-b border-zinc-200 dark:border-zinc-700 rotate-45"></div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <Link href="/blogs">
+                <motion.div
+                  onMouseEnter={() => setIsNudgeVisible(true)}
+                  onMouseLeave={() => setIsNudgeVisible(false)}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 border-2 border-white rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[var(--primaryColor)] hover:bg-[var(--primaryColor)]"
+                >
+                  <BookOpen className="text-[var(--textColor)] w-6 h-6 transition-all duration-300" />
+                </motion.div>
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

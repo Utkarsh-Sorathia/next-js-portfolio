@@ -57,7 +57,7 @@ export default function ChatWidget() {
 
     const timer = setTimeout(() => {
       setIsNudgeVisible(false);
-    }, 10000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [isNudgeVisible]);
@@ -174,7 +174,7 @@ export default function ChatWidget() {
                         <ReactMarkdown 
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            a: (props: any) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline font-bold text-[var(--primaryColor)] dark:text-blue-400" />
+                            a: (props: any) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline font-bold text-[var(--primaryColor)]" />
                           }}
                         >
                           {textContent}

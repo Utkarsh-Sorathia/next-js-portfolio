@@ -12,7 +12,11 @@ function KBarContent({ children }: { children: React.ReactNode }) {
         <KBarPositioner className="fixed inset-0 bg-black/80 backdrop-blur-[2px] z-[99999] flex items-start justify-center pt-[15vh] px-4">
           <KBarAnimator className="w-full max-w-[600px] bg-[#0c0c0e] border border-white/10 rounded-2xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden scale-in">
             <div className="flex flex-col">
-              <KBarSearch className="w-full py-5 px-6 bg-transparent outline-none text-lg text-white placeholder:text-zinc-500 border-b border-white/5" placeholder="Type a command or search..." />
+              <KBarSearch 
+                className="w-full py-5 px-6 bg-transparent outline-none text-lg text-white placeholder:text-zinc-500 border-b border-white/5" 
+                placeholder="Type a command or search..."
+                autoFocus={typeof window !== 'undefined' && window.innerWidth > 768}
+              />
               <RenderResults />
               <div className="px-6 py-4 bg-zinc-900/30 flex items-center justify-between border-t border-white/5">
                 <div className="flex items-center gap-4">
