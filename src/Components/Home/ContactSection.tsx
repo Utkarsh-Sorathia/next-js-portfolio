@@ -7,7 +7,6 @@ import ContactForm from "../UI/ContactForm";
 import { ArrowRight } from "lucide-react";
 import { SiWhatsapp, SiGmail, SiLinkedin } from "react-icons/si";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 const ContactSection = ({ id }: { id: string }) => {
   return (
@@ -23,12 +22,7 @@ const ContactSection = ({ id }: { id: string }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 w-full items-start">
           {/* Left Column: Let's Talk */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-8 w-full"
-          >
+          <div className="flex flex-col gap-8 w-full">
             <div className="pt-8 bg-transparent">
               <h3 className="text-2xl font-bold text-zinc-100 mb-4">Let&apos;s Talk</h3>
               <p className="text-zinc-400 text-lg leading-relaxed">
@@ -94,7 +88,7 @@ const ContactSection = ({ id }: { id: string }) => {
                 </div>
               </Link>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Contact Form */}
           <div className="w-full">
