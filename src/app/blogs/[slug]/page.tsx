@@ -291,7 +291,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Featured Image */}
               {post.image?.asset?.url ? (
-                <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden bg-gray-900">
+                <div className="relative w-full aspect-video mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden bg-gray-900">
                   <BlogImageWithLoader
                     src={post.image.asset.url}
                     alt={post.image.asset.altText || getBlogAltText(post.title)}
@@ -300,7 +300,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   />
                 </div>
               ) : (
-                <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden bg-gray-800 flex items-center justify-center">
+                <div className="relative w-full aspect-video mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden bg-gray-800 flex items-center justify-center">
                   <div className="text-gray-400 text-6xl">📝</div>
                 </div>
               )}

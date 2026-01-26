@@ -48,10 +48,7 @@ const ContactForm = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
+    <div
       className="bg-white/5 dark:bg-zinc-900/50 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/10 dark:border-zinc-800/50 relative overflow-hidden"
     >
       <AnimatePresence mode="wait">
@@ -166,7 +163,7 @@ const ContactForm = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 

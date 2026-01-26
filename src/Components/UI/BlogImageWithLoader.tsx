@@ -10,6 +10,7 @@ interface BlogImageWithLoaderProps {
   priority?: boolean;
   quality?: number;
   sizes?: string;
+  roundedClass?: string;
 }
 
 export default function BlogImageWithLoader({
@@ -19,6 +20,7 @@ export default function BlogImageWithLoader({
   priority = false,
   quality = 85,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw',
+  roundedClass = 'rounded-[var(--borderRadius)]',
 }: BlogImageWithLoaderProps) {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -43,7 +45,7 @@ export default function BlogImageWithLoader({
     <div className={`relative ${className}`}>
       {/* Loading Shimmer */}
       {imageLoading && !imageError && (
-        <div className="absolute inset-0 image-shimmer bg-gray-700 rounded-[var(--borderRadius)]" />
+        <div className={`absolute inset-0 image-shimmer bg-gray-700 ${roundedClass}`} />
       )}
 
       {/* Image */}
@@ -51,7 +53,7 @@ export default function BlogImageWithLoader({
         src={src}
         alt={alt}
         fill
-        className={`object-cover rounded-[var(--borderRadius)] transition-opacity duration-300 ${
+        className={`object-cover transition-opacity duration-300 ${roundedClass} ${
           imageLoading ? 'opacity-0' : 'opacity-100'
         }`}
         style={{ objectPosition }}
@@ -67,7 +69,7 @@ export default function BlogImageWithLoader({
 
       {/* Error Fallback */}
       {imageError && (
-        <div className="absolute inset-0 bg-gray-800 rounded-[var(--borderRadius)] flex items-center justify-center">
+        <div className={`absolute inset-0 bg-gray-800 flex items-center justify-center ${roundedClass}`}>
           <div className="text-gray-400 text-6xl">📝</div>
         </div>
       )}

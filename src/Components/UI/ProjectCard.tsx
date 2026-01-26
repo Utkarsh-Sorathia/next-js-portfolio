@@ -12,7 +12,7 @@ import CardBox from "../../Components/core/CardBox";
 
 const ProjectCard = ({ project }: { project: IProjectItem }) => {
   return (
-    <CardBox classNames="w-full lg:min-h-[450px] p-6 rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group slide_in overflow-hidden hover:shadow-[4px_8px_24px_0px_rgba(100,100,100,0.12)_inset] transition-shadow duration-300">
+    <CardBox classNames="w-full min-h-[450px] h-full p-6 rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group slide_in overflow-hidden hover:shadow-[4px_8px_24px_0px_rgba(100,100,100,0.12)_inset] transition-shadow duration-300">
       <div className="w-full h-full flex flex-col justify-between items-center gap-4">
         {/* Top Section: Header & Info */}
         <div className="w-full flex flex-col items-center">

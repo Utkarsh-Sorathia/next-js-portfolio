@@ -10,15 +10,13 @@ import Column from '../core/Column';
 import Row from '../core/Row';
 import { getTimeSincePublished } from '@/lib/sanity';
 import { getBlogAltText, validateAltText } from '@/utils/imageValidation';
+import BlogImageWithLoader from './BlogImageWithLoader';
 
 interface BlogCardProps {
   post: IBlogPost;
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
-  const [imageLoading, setImageLoading] = useState(true);
-  const [imageError, setImageError] = useState(false);
-
   const publishedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -33,43 +31,20 @@ export default function BlogCard({ post }: BlogCardProps) {
         {/* Image */}
         {post.image?.asset?.url ? (
           <Link href={`/blogs/${post.slug.current}`} className="block">
-            <div className="relative w-full h-48 sm:h-56 overflow-hidden cursor-pointer">
-              {/* Loading Shimmer */}
-              {imageLoading && !imageError && (
-                <div className="absolute inset-0 image-shimmer bg-gray-700" />
-              )}
-              
-              {/* Image */}
-              <Image
+            <div className="relative w-full aspect-video overflow-hidden cursor-pointer">
+              <BlogImageWithLoader
                 src={post.image.asset.url}
                 alt={validateAltText(post.image.asset.altText, getBlogAltText(post.title), 'Blog post image')}
-                fill
-                className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
-                  imageLoading ? 'opacity-0' : 'opacity-100'
-                }`}
-                style={{ willChange: imageLoading ? 'opacity' : 'transform' }}
-                quality={85}
+                className="w-full h-full group-hover:scale-105 transition-transform duration-300"
+                roundedClass="rounded-t-[var(--borderRadius)]"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                onLoad={() => setImageLoading(false)}
-                onError={() => {
-                  setImageLoading(false);
-                  setImageError(true);
-                }}
               />
-              
-              {/* Error Fallback */}
-              {imageError && (
-                <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
-                  <div className="text-gray-400 text-4xl">📝</div>
-                </div>
-              )}
-              
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </div>
           </Link>
         ) : (
           <Link href={`/blogs/${post.slug.current}`} className="block">
-            <div className="relative w-full h-48 sm:h-56 overflow-hidden cursor-pointer bg-gray-800 flex items-center justify-center">
+            <div className="relative w-full aspect-video overflow-hidden cursor-pointer bg-gray-800 flex items-center justify-center">
               <div className="text-gray-400 text-4xl">📝</div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>

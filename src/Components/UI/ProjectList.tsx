@@ -85,7 +85,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
         {/* Carousel */}
         <div
           ref={carouselRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth flex-1 no-scrollbar touch-auto snap-x snap-mandatory"
+          className="flex gap-4 overflow-x-auto scroll-smooth flex-1 no-scrollbar touch-auto snap-x snap-mandatory py-4"
         >
           {projects.map((item, index) => (
             <div
