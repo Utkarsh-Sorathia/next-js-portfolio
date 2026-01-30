@@ -12,7 +12,8 @@ import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
 import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 import { baseURL } from '@/utils/api';
 
-export const revalidate = 0;
+export const revalidate = 3600; // Revalidate every 1 hour (ISR with webhook support)
+export const dynamicParams = true; // Allow new blogs without rebuild
 
 interface BlogPostPageProps {
   params: Promise<{

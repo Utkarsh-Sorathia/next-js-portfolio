@@ -23,10 +23,20 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // Revalidate the blog listing page
     revalidatePath("/blogs", "page");
+    
+    // Revalidate the specific blog post page
     revalidatePath(`/blogs/${slug}`, "page");
+    
+    // Revalidate the sitemap so Google discovers the new blog
+    revalidatePath("/sitemap.xml", "page");
 
-    return NextResponse.json({ revalidated: true, slug });
+    return NextResponse.json({ 
+      revalidated: true, 
+      slug,
+      paths: ["/blogs", `/blogs/${slug}`, "/sitemap.xml"]
+    });
   } catch (err) {
     return NextResponse.json({ message: "Error revalidating", err }, { status: 500 });
   }

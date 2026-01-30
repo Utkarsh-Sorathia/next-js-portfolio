@@ -9,10 +9,37 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const { name, email, subject, message } = await req.json();
+    const { name, email, subject, message, gRecaptchaToken } = await req.json();
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    }
+
+    // reCAPTCHA verification
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (secretKey && gRecaptchaToken) {
+      try {
+        const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `secret=${secretKey}&response=${gRecaptchaToken}`,
+        });
+
+        const verifyData = await verifyRes.json();
+
+        if (!verifyData.success || verifyData.score < 0.5) {
+          return NextResponse.json(
+            { error: "Security check failed. Please try again." },
+            { status: 400 }
+          );
+        }
+      } catch (error) {
+        console.error("reCAPTCHA verification error:", error);
+        // We continue if the verification service itself is down, 
+        // but in a production environment, you might want more strict handling.
+      }
+    } else if (secretKey && !gRecaptchaToken) {
+        return NextResponse.json({ error: "Security token missing" }, { status: 400 });
     }
 
     const client = await clientPromise;

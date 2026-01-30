@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllBlogPosts } from '@/lib/sanity'
 import { baseURL } from '@/utils/api';
 
-export const revalidate = 0;
+export const revalidate = 3600; // Revalidate every 1 hour (ISR with webhook support)
 
 const baseUrl = baseURL;
 
