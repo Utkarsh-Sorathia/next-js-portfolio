@@ -9,10 +9,35 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { email, gRecaptchaToken } = await req.json();
 
     if (!email) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+
+    // reCAPTCHA verification
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (secretKey && gRecaptchaToken) {
+      try {
+        const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `secret=${secretKey}&response=${gRecaptchaToken}`,
+        });
+
+        const verifyData = await verifyRes.json();
+
+        if (!verifyData.success || verifyData.score < 0.5) {
+          return NextResponse.json(
+            { error: "Security check failed. Please try again." },
+            { status: 400 }
+          );
+        }
+      } catch (error) {
+        console.error("Newsletter reCAPTCHA error:", error);
+      }
+    } else if (secretKey && !gRecaptchaToken) {
+        return NextResponse.json({ error: "Security token missing" }, { status: 400 });
     }
 
     const client = await clientPromise;

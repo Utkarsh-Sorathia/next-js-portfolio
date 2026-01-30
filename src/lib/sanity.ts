@@ -169,7 +169,16 @@ export function extractExcerpt(body: any[], maxLength: number = 150): string {
 // API Functions
 export async function getAllBlogPosts() {
   try {
-    const posts = await client.fetch(getAllBlogPostsQuery, {}, { cache: 'no-store' });
+    const posts = await client.fetch(
+      getAllBlogPostsQuery, 
+      {}, 
+      { 
+        next: { 
+          revalidate: 3600, // Cache for 1 hour, works with ISR
+          tags: ['blog-posts'] // Tag for on-demand revalidation
+        } 
+      }
+    );
     return posts || [];
   } catch (error) {
     console.error('Error fetching blog posts:', error);
@@ -179,7 +188,16 @@ export async function getAllBlogPosts() {
 
 export async function getBlogPostBySlug(slug: string) {
   try {
-    const post = await client.fetch(getBlogPostBySlugQuery, { slug }, { cache: 'no-store' });
+    const post = await client.fetch(
+      getBlogPostBySlugQuery, 
+      { slug }, 
+      { 
+        next: { 
+          revalidate: 3600, // Cache for 1 hour, works with ISR
+          tags: ['blog-posts', `blog-${slug}`] // Tag for on-demand revalidation
+        } 
+      }
+    );
     return post || null;
   } catch (error) {
     console.error('Error fetching blog post:', error);
@@ -189,7 +207,16 @@ export async function getBlogPostBySlug(slug: string) {
 
 export async function getAllBlogPostSlugs() {
   try {
-    const slugs = await client.fetch(getAllBlogPostSlugsQuery,{}, { cache: 'no-store' });
+    const slugs = await client.fetch(
+      getAllBlogPostSlugsQuery,
+      {}, 
+      { 
+        next: { 
+          revalidate: 3600, // Cache for 1 hour, works with ISR
+          tags: ['blog-slugs'] // Tag for on-demand revalidation
+        } 
+      }
+    );
     return slugs?.map((item: any) => item.slug.current) || [];
   } catch (error) {
     console.error('Error fetching blog post slugs:', error);

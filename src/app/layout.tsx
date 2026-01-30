@@ -160,6 +160,8 @@ export const metadata: Metadata = {
   },
 };
 
+import ReCaptchaProvider from "@/Components/core/ReCaptchaProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -186,24 +188,26 @@ export default function RootLayout({
 
       </head>
       <body className="flex flex-col min-h-screen antialiased">
-        <KBarWrapper>
-          <ErrorBoundary>
-            <Header className="app_nav" navItems={navMenus} />
-            <Suspense fallback={null}>
-              <GoogleAnalytics />
-            </Suspense>
-            <main className="flex-grow">{children}
-              <Analytics />
-              <SpeedInsights />
-            </main>
-            <Footer />
-            <ScrollToTop />
-            <CommandBarTrigger />
-            <BlogButton />
-            <WhatsAppButton />
-            <ChatWidget />
-          </ErrorBoundary>
-        </KBarWrapper>
+        <ReCaptchaProvider>
+          <KBarWrapper>
+            <ErrorBoundary>
+              <Header className="app_nav" navItems={navMenus} />
+              <Suspense fallback={null}>
+                <GoogleAnalytics />
+              </Suspense>
+              <main className="flex-grow">{children}
+                <Analytics />
+                <SpeedInsights />
+              </main>
+              <Footer />
+              <ScrollToTop />
+              <CommandBarTrigger />
+              <BlogButton />
+              <WhatsAppButton />
+              <ChatWidget />
+            </ErrorBoundary>
+          </KBarWrapper>
+        </ReCaptchaProvider>
       </body>
     </html>
   );

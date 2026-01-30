@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const ContactForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,14 +25,25 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!executeRecaptcha) {
+      setError('ReCAPTCHA not ready. Please try again in a moment.');
+      return;
+    }
+
     setIsSubmitting(true);
     setError(null);
 
     try {
+      const gRecaptchaToken = await executeRecaptcha('contact_form');
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          gRecaptchaToken,
+        }),
       });
 
       if (response.ok) {
@@ -143,7 +156,7 @@ const ContactForm = () => {
                 </div>
               )}
 
-              <div className="flex justify-center pt-2">
+              <div className="flex flex-col items-center gap-4 pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -158,6 +171,18 @@ const ContactForm = () => {
                     </>
                   )}
                 </button>
+                
+                <p className="text-[10px] text-zinc-500 text-center leading-relaxed max-w-[300px]">
+                  Protected by reCAPTCHA. Google{' '}
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-zinc-400">
+                    Privacy
+                  </a>{' '}
+                  &{' '}
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-zinc-400">
+                    Terms
+                  </a>{' '}
+                  apply.
+                </p>
               </div>
             </form>
           </motion.div>

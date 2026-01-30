@@ -350,3 +350,9 @@ body::-webkit-scrollbar {
   border: 1px solid rgba(67, 97, 238, 0.3) !important;
   border-radius: 0.5rem !important;
 }
+
+/* Hide reCAPTCHA badge */
+.grecaptcha-badge {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}

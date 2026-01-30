@@ -3,30 +3,48 @@ import Link from "next/link";
 import socialLinks from "../../data/importantLinks";
 import { useState } from "react";
 import Image from "next/image";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const Footer = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage("");
+    
+    if (!executeRecaptcha) {
+      setMessage("ReCAPTCHA not ready. Please try again.");
+      return;
+    }
 
-    if (!email) return setMessage("Please enter an email.");
+    setMessage("");
+    setIsSubmitting(true);
+
+    if (!email) {
+      setMessage("Please enter an email.");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
+      const gRecaptchaToken = await executeRecaptcha('subscribe_newsletter');
+
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, gRecaptchaToken }),
       });
 
       const data = await res.json();
-      setMessage(data.message);
+      setMessage(data.message || data.error);
 
-      if (data.success) setEmail("");
+      if (res.ok) setEmail("");
     } catch {
       setMessage("Failed to subscribe. Try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -108,11 +126,18 @@ const Footer = () => {
 
               <button
                 type="submit"
-                className="px-4 py-2 bg-[var(--primaryColor)] text-white rounded-md hover:opacity-90 transition"
+                disabled={isSubmitting}
+                className="px-4 py-2 bg-[var(--primaryColor)] text-white rounded-md hover:opacity-90 transition disabled:opacity-50"
               >
-                Subscribe
+                {isSubmitting ? "..." : "Subscribe"}
               </button>
             </form>
+            <p className="text-[9px] text-gray-500 mt-2 leading-tight">
+              Protected by reCAPTCHA. Google{' '}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-gray-400">Privacy</a>{' '}
+              &{' '}
+              <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-gray-400">Terms</a> apply.
+            </p>
 
             {message && (
               <p className="text-xs mt-2 text-[var(--primaryColor)]">
