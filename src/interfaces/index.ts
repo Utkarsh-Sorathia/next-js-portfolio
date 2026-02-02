@@ -190,6 +190,7 @@ export interface IBlogPost {
   slug: ISanitySlug;
   body: string | any; // Can be plain markdown string or legacy Portable Text
   image?: ISanityImage;
+  recommended?: IBlogPost[];
 }
 
 // Additional interfaces for enhanced blog functionality

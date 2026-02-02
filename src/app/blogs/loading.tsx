@@ -19,15 +19,11 @@ export default function Loading() {
             </p>
           </div>
 
-          {/* Loading Text with Animated Dots */}
+          {/* Processing Animation */}
           <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold">
-              Loading Blogs
-              <span className="loading-dots">
-                <span className="dot dot-1">.</span>
-                <span className="dot dot-2">.</span>
-                <span className="dot dot-3">.</span>
-              </span>
+            <div className="relative w-16 h-16">
+              <div className="absolute top-0 left-0 w-full h-full border-4 border-[var(--primaryColor)]/20 rounded-full animate-ping"></div>
+              <div className="absolute top-0 left-0 w-full h-full border-4 border-t-[var(--primaryColor)] rounded-full animate-spin"></div>
             </div>
           </div>
         </ConstrainedBox>

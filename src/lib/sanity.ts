@@ -87,6 +87,22 @@ export const getBlogPostBySlugQuery = `
         description,
         url
       }
+    },
+    "recommended": *[_type == "post" && slug.current != $slug] | order(publishedAt desc) [0...3] {
+      _id,
+      _createdAt,
+      _updatedAt,
+      title,
+      publishedAt,
+      slug {
+        current
+      },
+      image {
+        asset->{
+          url,
+          altText
+        }
+      }
     }
   }
 `;

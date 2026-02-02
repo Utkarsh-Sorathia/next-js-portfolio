@@ -15,14 +15,15 @@ export default function BlogsPageClient({ posts }: BlogsPageClientProps) {
     setVisibleCount((prev) => prev + 9);
   };
 
-  const visiblePosts = posts.slice(0, visibleCount);
 
   return (
     <>
       {/* Blog Posts Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-16">
-        {visiblePosts.map((post) => (
-          <BlogCard key={post._id} post={post} />
+        {posts.map((post, index) => (
+          <div key={post._id} className={index < visibleCount ? "block" : "hidden sm:hidden lg:hidden"}>
+             <BlogCard post={post} />
+          </div>
         ))}
       </div>
 
