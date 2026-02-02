@@ -146,9 +146,6 @@ export const metadata: Metadata = {
     creator: "@utkarshsor03",
     site: "@utkarshsor03",
   },
-  alternates: {
-    canonical: baseUrl,
-  },
   other: {
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",

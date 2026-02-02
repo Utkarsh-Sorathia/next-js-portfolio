@@ -47,7 +47,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   }, [])
 
   return (
-    <div className="w-full mt-16 flex flex-col items-center px-4 lg:px-0">
+    <div className="w-full mt-8 md:mt-10 flex flex-col items-center px-4 lg:px-0">
       {/* Desktop: Static Grid with Load More */}
       <div className="hidden lg:block w-full">
         <div className="w-full grid grid-cols-3 gap-6">

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllBlogPosts } from '@/lib/sanity'
 import { baseURL } from '@/utils/api';
 
-export const revalidate = 3600; // Revalidate every 1 hour (ISR with webhook support)
+export const revalidate = 60; // Revalidate every 60 seconds
 
 const baseUrl = baseURL;
 
@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: baseUrl,
       lastModified: now,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'daily' as const,
       priority: 1,
     },
     {
@@ -30,8 +30,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogRoutes = posts.map((post: any) => ({
     url: `${baseUrl}/blogs/${post.slug.current}`,
     lastModified: new Date(post._updatedAt || post._createdAt),
-    changeFrequency: 'monthly' as const,
-    priority: 0.85, // Higher priority for blog posts
+    changeFrequency: 'daily' as const,
+    priority: 0.9, // Max priority for blog posts to encourage indexing
   }))
   
   return [...staticRoutes, ...blogRoutes]

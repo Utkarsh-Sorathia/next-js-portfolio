@@ -14,7 +14,7 @@ export const HoverGrid = ({
   return (
     <div
       className={cn(
-        "w-full grid grid-cols-1 md:grid-cols-2 mt-16 gap-4",
+        "w-full grid grid-cols-1 md:grid-cols-2 mt-8 md:mt-10 gap-4",
         className
       )}
     >

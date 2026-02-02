@@ -4,7 +4,7 @@ import type { TimelineEntry } from '@/interfaces'
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-const Education = ({ data }: { data: TimelineEntry }) => {
+const Education = ({ data }: { data: TimelineEntry[] }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const ref = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState(0)
@@ -14,7 +14,7 @@ const Education = ({ data }: { data: TimelineEntry }) => {
       const rect = ref.current.getBoundingClientRect()
       setHeight(rect.height)
     }
-  }, [ref])
+  }, [data]) 
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -24,23 +24,23 @@ const Education = ({ data }: { data: TimelineEntry }) => {
   const heightTransform = useTransform(
     scrollYProgress,
     [0, 1],
-    [0, height + 60],
+    [0, height - 40],
   )
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 2])
+  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1])
 
   return (
-    <div className="w-full mt-8 mb-8" ref={containerRef}>
+    <div className="w-full" ref={containerRef}>
       <div ref={ref} className="relative max-w-7xl mx-auto">
-        {/* Static White Background for the Line */}
+        {/* Static Track Line - Single continuous background line */}
         <div
-          className="absolute lg:left-8.5 left-7.5 top-0 w-[2px] bg-white"
-          style={{ height: height + 60 }}
+          className="absolute lg:left-8.75 left-2.75 top-10 w-[2px] bg-white/10 z-0"
+          style={{ height: height - 40 }}
         />
 
-        {/* Animated Progress Line */}
-        <div className="absolute lg:left-8.5 left-7.5 top-0 overflow-hidden w-[2px]">
+        {/* Animated Progress Line - Single continuous animated line */}
+        <div className="absolute lg:left-8.75 left-2.75 top-10 overflow-hidden w-[2px] z-10 transition-all duration-300">
           <motion.div
-            className="w-1 bg-gradient-to-b from-blue-600 to-blue-600"
+            className="w-full bg-[var(--primaryColor)]"
             style={{
               height: heightTransform,
               opacity: opacityTransform,
@@ -49,40 +49,56 @@ const Education = ({ data }: { data: TimelineEntry }) => {
           />
         </div>
 
-        {/* Loop through the educations to create bullets */}
-        {data.educations.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
-            style={{ willChange: 'transform, opacity' }}
-          >
-            <div className="relative flex items-start py-10">
-              {/* Bullet Point */}
-              <div className="absolute left-5 top-10 z-10 flex flex-col items-center">
-                <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
-                  <div className="h-3 w-3 lg:h-4 lg:w-4 p-1 lg:p-2 rounded-full bg-blue-600 dark:bg-blue-600 dark:border-blue-600" />
-                </div>
-              </div>
+        {/* Unified List of Education Items */}
+        <div className="space-y-0">
+          {data.map((entry, entryIndex) => (
+            <div key={`entry-${entryIndex}`}>
+              {entry.educations.map((item, itemIndex) => {
+                const globalIndex = entryIndex + itemIndex;
+                return (
+                  <motion.div
+                    key={`edu-${entryIndex}-${itemIndex}`}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: globalIndex * 0.1, ease: "easeOut" }}
+                    className="relative flex items-start py-8"
+                  >
+                    {/* Bullet Point */}
+                    <div className="absolute lg:left-5 left-0 top-8 z-20 flex flex-col items-center">
+                      <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-zinc-900 border border-white/10">
+                        <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-[var(--primaryColor)] shadow-[0_0_10px_var(--primaryColor)]" />
+                      </div>
+                    </div>
 
-              {/* Timeline Content */}
-              <div className="ml-16">
-                <h2 className="md:block text-2xl font-bold text-[var(--primaryColor)] dark:text-[var(--primaryColor)] mb-4">
-                  {data.degree}
-                </h2>
-                <h3 className="text-lg">
-                  {item.institute} - {item.location}
-                </h3>
-                <h4>
-                  Duration - {item.startDate} - {item.endDate}
-                </h4>
-                <h4>CGPA/Percentage - {item.cgpa}</h4>
-              </div>
+                    {/* Timeline Content */}
+                    <div className="ml-12 lg:ml-16 w-full text-left">
+                      <h2 className="text-xl lg:text-2xl font-bold text-[var(--primaryColor)] mb-2">
+                        {entry.degree}
+                      </h2>
+                      <div className="space-y-1 text-zinc-300">
+                        <p className="text-lg font-medium text-white">
+                          {item.institute}
+                        </p>
+                        <p className="text-sm lg:text-base opacity-80">
+                           {item.location}
+                        </p>
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm pt-2">
+                          <span className="flex items-center gap-1">
+                            {item.startDate} - {item.endDate}
+                          </span>
+                          <span className="flex items-center gap-1 font-semibold text-white border-l border-white/20 pl-4">
+                            CGPA: {item.cgpa}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              })}
             </div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

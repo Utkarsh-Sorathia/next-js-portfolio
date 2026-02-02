@@ -23,12 +23,12 @@ const AboutSection = ({ id }: { id: string }) => {
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   return (
     <ResponsiveBox
-      classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40"
+      classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40 lg:scroll-mt-12"
       id={id}
     >
       <ConstrainedBox classNames="py-12">
         <SectionTitle>About me</SectionTitle>
-        <div className="w-full flex flex-col md:flex-row justify-between gap-8">
+        <div className="w-full flex flex-col md:flex-row justify-between gap-4 md:gap-8 mt-2 md:mt-4">
           <div className="flex-1 p-6 flex flex-col gap-8 my-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -142,10 +142,8 @@ const AboutSection = ({ id }: { id: string }) => {
           </div>
 
           <div className="flex-1 p-6">
-            <span className='block md:hidden py-8'><SectionTitle>Education</SectionTitle></span>
-            {education.map((edu, i) => (
-              <Education key={`education-${i}`} data={edu} />
-            ))}
+            <span className='block md:hidden py-4'><SectionTitle>Education</SectionTitle></span>
+            <Education data={education} />
           </div>
         </div>
       </ConstrainedBox>
