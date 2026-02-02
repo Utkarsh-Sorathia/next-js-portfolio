@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+@keyframes soft-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
 :root {
   --background: url(/images/dark-mode.webp), #121212;
   /* Permanent dark mode background */

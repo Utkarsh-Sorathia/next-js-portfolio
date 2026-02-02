@@ -73,6 +73,11 @@ const Home = () => {
         }}
       />
 
+      {/* Hidden SEO Link for Crawler Discovery */}
+      <div className="sr-only" aria-hidden="true">
+        <a href="/blogs">Utkarsh Sorathia Blogs - Web Development, Programming and Technology</a>
+      </div>
+
       <PageBox>
         <HomeSection id="/" />
         <AboutSection id="about" />
