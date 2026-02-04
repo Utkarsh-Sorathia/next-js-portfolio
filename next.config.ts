@@ -40,6 +40,18 @@ const nextConfig: NextConfig = {
         destination: "https://utkarshsorathia.in/:path*",
         permanent: true,
       },
+      // www to non-www redirect
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.utkarshsorathia.in",
+          },
+        ],
+        destination: "https://utkarshsorathia.in/:path*",
+        permanent: true,
+      },
     ];
   },
 

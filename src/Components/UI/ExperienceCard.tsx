@@ -11,10 +11,10 @@ interface ExperienceCardProps {
 
 const ExperienceCard = ({ data }: ExperienceCardProps) => {
   return (
-    <section className="w-full px-6 py-16 max-w-5xl mx-auto">
+    <section className="w-full px-6 py-8 md:py-12 max-w-5xl mx-auto">
       <div className="relative">
-        <div className="md:hidden absolute left-8 w-[3px] h-full bg-[var(--primaryColor)]"></div>
-        <div className="hidden md:block absolute left-1/2 w-[3px] h-full bg-[var(--primaryColor)] transform -translate-x-1/2"></div>
+        <div className="md:hidden absolute left-7.5 w-[3px] top-16 h-[calc(100%-4rem)] bg-[var(--primaryColor)] opacity-50"></div>
+        <div className="hidden md:block absolute left-[50.1%] w-[3px] top-12 h-[calc(100%-3rem)] bg-[var(--primaryColor)] transform -translate-x-1/2 opacity-50"></div>
         {data.map((item, index) => {
           const isLeft = index % 2 === 0;
           return (
@@ -83,8 +83,8 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                   transform: "translateX(-50%)",
                 }}
               >
-                <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
-                  <div className="h-3 w-3 lg:h-4 lg:w-4 p-1 lg:p-2 rounded-full bg-blue-600 dark:bg-blue-600 dark:border-blue-600" />
+                <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-zinc-900 border border-white/10">
+                  <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-[var(--primaryColor)] shadow-[0_0_10px_var(--primaryColor)]" />
                 </div>
               </div>
               <div
