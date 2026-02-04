@@ -15,8 +15,10 @@ export const NameAnimation = ({
 }) => {
   const [index, setIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
+    setIsFirstRender(false);
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -80,7 +82,7 @@ export const NameAnimation = ({
         <AnimatePresence mode="wait">
           <motion.span
             key={index}
-            initial={{ opacity: 0, filter: "blur(8px)", y: 5 }}
+            initial={isFirstRender ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(8px)", y: 5 }}
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
             exit={{ opacity: 0, filter: "blur(8px)", y: -5 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}

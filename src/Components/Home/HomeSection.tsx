@@ -7,7 +7,8 @@ import ResponsiveBox from '../core/ResponsiveBox'
 import Row from '../core/Row'
 import socialLinks from '../../data/importantLinks'
 import { NameAnimation } from '../common/nameAnimation'
-import ParticlesBackground from '../common/ParticlesBackground'
+import dynamic from 'next/dynamic';
+const ParticlesBackground = dynamic(() => import('../common/ParticlesBackground'), { ssr: false });
 
 const HomeSection = ({ id }: Readonly<{ id: string }>) => {
   return (
