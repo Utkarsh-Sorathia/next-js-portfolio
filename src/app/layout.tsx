@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import 'github-markdown-css/github-markdown.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import Header from "@/Components/UI/Header";
 import ScrollToTop from "@/Components/common/ScrollToTop";
 import { navMenus } from "../data/navItems";
@@ -167,15 +168,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
         <link rel="preconnect" href="https://cdn.sanity.io" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-        />
+
         <link rel="me" href="https://www.wikidata.org/wiki/Q137171536" />
         <link rel="me" href="https://www.github.com/Utkarsh-Sorathia" />
         <link rel="me" href="https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a" />

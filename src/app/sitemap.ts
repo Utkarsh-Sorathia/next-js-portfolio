@@ -30,8 +30,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogRoutes = posts.map((post: any) => ({
     url: `${baseUrl}/blogs/${post.slug.current}`,
     lastModified: new Date(post._updatedAt || post._createdAt),
-    changeFrequency: 'daily' as const,
-    priority: 0.9, // Max priority for blog posts to encourage indexing
+    changeFrequency: 'weekly' as const,
+    priority: 0.8, // Good priority for blog posts
   }))
   
   return [...staticRoutes, ...blogRoutes]

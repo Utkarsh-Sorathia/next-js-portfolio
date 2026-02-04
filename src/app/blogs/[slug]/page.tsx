@@ -7,6 +7,7 @@ import ResponsiveBox from '@/Components/core/ResponsiveBox';
 import ConstrainedBox from '@/Components/core/constrained-box';
 import MarkdownRenderer from '@/Components/UI/MarkdownRenderer';
 import { getTimeSincePublished, getBlogPostBySlug, getAllBlogPostSlugs } from '@/lib/sanity';
+import BlogCard from '@/Components/UI/BlogCard';
 import { getBlogAltText } from '@/utils/imageValidation';
 import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
 import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
@@ -135,6 +136,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound();
   }
+
+  const recommendedPosts = post.recommended || [];
 
   const publishedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -318,7 +321,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-semibold text-[var(--textColor)] mb-2">About Me</h3>
                   <p className="text-sm sm:text-base text-[var(--textColorLight)]">
-                    I'm Utkarsh Sorathia, a Full Stack Developer passionate about React, Next.js, and modern JavaScript.
+                    I&apos;m Utkarsh Sorathia, a Full Stack Developer passionate about React, Next.js, and modern JavaScript.
                     I love building scalable web applications and sharing programming insights on my blog.
                   </p>
                 </div>
@@ -330,6 +333,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </Link>
               </div>
             </footer>
+
+            {/* Recommended Posts */}
+            {recommendedPosts.length > 0 && (
+              <div className="mt-16 sm:mt-24">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--textColor)] mb-8">
+                  Recommended <span className="text-[var(--primaryColor)]">Posts</span>
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {recommendedPosts.map((recommendedPost: any) => (
+                    <BlogCard key={recommendedPost._id} post={recommendedPost} />
+                  ))}
+                </div>
+              </div>
+            )}
           </article>
         </ConstrainedBox>
       </ResponsiveBox>
