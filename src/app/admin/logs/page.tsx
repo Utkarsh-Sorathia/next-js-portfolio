@@ -2,24 +2,47 @@
 
 import { useState } from "react";
 import Head from "next/head";
+import { RefreshCw } from "lucide-react";
 
-interface Log {
+interface IPAPILog {
   timestamp: string;
   ip: string;
   fullResponse: any;
 }
 
+interface VercelLog {
+  _id?: string;
+  timestamp: string;
+  ip: string;
+  path: string;
+  userAgent: string;
+  referer?: string;
+  city: string;
+  country: string;
+  region: string;
+  latitude: string;
+  longitude: string;
+  timezone: string;
+  isMobile: boolean;
+  isLocal?: boolean;
+}
+
+type TabType = "ipapi" | "vercel";
+
 export default function AdminLogs() {
   const [secretKey, setSecretKey] = useState("");
-  const [logs, setLogs] = useState<Log[]>([]);
+  const [activeTab, setActiveTab] = useState<TabType>("vercel");
+  const [ipapiLogs, setIPAPILogs] = useState<IPAPILog[]>([]);
+  const [vercelLogs, setVercelLogs] = useState<VercelLog[]>([]);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalLogs, setTotalLogs] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [selectedRawLog, setSelectedRawLog] = useState<any>(null);
 
-  // New: Filters
+  // Filters
   const [sort, setSort] = useState<"asc" | "desc">("desc");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
@@ -35,7 +58,7 @@ export default function AdminLogs() {
       });
       if (!res.ok) throw new Error("Invalid secret key");
       setIsAuthenticated(true);
-      fetchLogs(1, sort, dateFrom, dateTo);
+      fetchLogs(1, activeTab, sort, dateFrom, dateTo);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
       setIsAuthenticated(false);
@@ -46,6 +69,7 @@ export default function AdminLogs() {
 
   const fetchLogs = async (
     page: number,
+    tab = activeTab,
     sortOrder = sort,
     from = dateFrom,
     to = dateTo
@@ -60,21 +84,35 @@ export default function AdminLogs() {
       if (from) params.append("dateFrom", from);
       if (to) params.append("dateTo", to);
 
-      const res = await fetch(`/api/logs?${params.toString()}`);
+      const endpoint = tab === "vercel" ? "/api/logs/vercel" : "/api/logs";
+      const res = await fetch(`${endpoint}?${params.toString()}`);
+      
       if (!res.ok) throw new Error("Failed to fetch logs");
       const data = await res.json();
-      setLogs(data.logs);
+      
+      if (tab === "vercel") {
+        setVercelLogs(data.logs);
+      } else {
+        setIPAPILogs(data.logs);
+      }
+      
       setTotalPages(data.totalPages);
       setCurrentPage(data.currentPage);
       setTotalLogs(data.totalRecords);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error fetching logs");
-      setLogs([]);
+      setVercelLogs([]);
+      setIPAPILogs([]);
       setTotalPages(1);
       setCurrentPage(1);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleTabChange = (tab: TabType) => {
+    setActiveTab(tab);
+    fetchLogs(1, tab, sort, dateFrom, dateTo);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -88,16 +126,16 @@ export default function AdminLogs() {
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return;
-    fetchLogs(page, sort, dateFrom, dateTo);
+    fetchLogs(page, activeTab, sort, dateFrom, dateTo);
   };
 
   const handleFilter = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchLogs(1, sort, dateFrom, dateTo);
+    fetchLogs(1, activeTab, sort, dateFrom, dateTo);
   };
 
   return (
-    <div className="min-h-screen p-8 text-gray-900">
+    <div className="min-h-screen p-4 md:p-8 text-gray-900">
       <Head>
         <title>Admin Logs</title>
         <meta name="robots" content="noindex" />
@@ -137,125 +175,186 @@ export default function AdminLogs() {
           </form>
         </>
       ) : (
-        <div className="px-10 mx-auto">
-          <h1 className="text-3xl font-bold text-center py-12 text-[var(--primaryColor)]">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-bold text-center py-6 md:py-12 text-[var(--primaryColor)]">
             Visitor Logs
           </h1>
+
+          {/* Tab Navigation */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-gray-800 p-1 rounded-lg flex gap-1">
+              <button
+                onClick={() => handleTabChange("vercel")}
+                className={`px-4 md:px-6 py-2 rounded-md font-semibold transition ${
+                  activeTab === "vercel"
+                    ? "bg-[var(--primaryColor)] text-white shadow-lg"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Vercel Edge
+              </button>
+              <button
+                onClick={() => handleTabChange("ipapi")}
+                className={`px-4 md:px-6 py-2 rounded-md font-semibold transition ${
+                  activeTab === "ipapi"
+                    ? "bg-[var(--primaryColor)] text-white shadow-lg"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                IP-API
+              </button>
+            </div>
+          </div>
 
           {/* Filter Controls */}
           <form
             onSubmit={handleFilter}
-            className="flex flex-wrap gap-4 items-end justify-center mb-6"
+            className="flex flex-wrap gap-4 items-end justify-center mb-6 bg-gray-800/50 p-4 rounded-xl border border-gray-700"
           >
-            <div>
-              <label className="block text-sm mb-1 text-[var(--primaryColor)] font-semibold">
-                Sort by Date
+            <div className="flex flex-col">
+              <label className="text-xs mb-1 text-gray-400 font-semibold uppercase tracking-wider">
+                Sort
               </label>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as "asc" | "desc")}
-                className="p-2.5 border rounded border-white text-white"
+                className="p-2 border rounded border-gray-600 bg-gray-900 text-white text-sm"
               >
                 <option value="desc">Newest First</option>
                 <option value="asc">Oldest First</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm mb-1 text-[var(--primaryColor)]  font-semibold">
+            <div className="flex flex-col">
+              <label className="text-xs mb-1 text-gray-400 font-semibold uppercase tracking-wider">
                 From
               </label>
               <input
                 type="date"
                 value={dateFrom}
                 onChange={(e) => setDateFrom(e.target.value)}
-                className="p-2 border rounded border-white text-white"
+                className="p-2 border rounded border-gray-600 bg-gray-900 text-white text-sm"
               />
             </div>
-            <div>
-              <label className="block text-sm mb-1 text-[var(--primaryColor)]  font-semibold">
+            <div className="flex flex-col">
+              <label className="text-xs mb-1 text-gray-400 font-semibold uppercase tracking-wider">
                 To
               </label>
               <input
                 type="date"
                 value={dateTo}
                 onChange={(e) => setDateTo(e.target.value)}
-                className="p-2 border rounded border-white text-white"
+                className="p-2 border rounded border-gray-600 bg-gray-900 text-white text-sm"
               />
             </div>
-            <button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition w-[50%] md:w-[10%]"
-            >
-              Apply
-            </button>
+            <div className="flex gap-2">
+              <button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition shrink-0"
+              >
+                Apply
+              </button>
+              <button
+                type="button"
+                onClick={() => fetchLogs(currentPage)}
+                disabled={loading}
+                className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center justify-center gap-2 disabled:opacity-50"
+                title="Refresh logs"
+              >
+                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                <span className="md:hidden lg:inline">Refresh</span>
+              </button>
+            </div>
           </form>
 
           {loading ? (
-            <p className="text-center">Loading...</p>
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--primaryColor)]"></div>
+            </div>
           ) : error ? (
-            <p className="text-center text-red-500">{error}</p>
+            <p className="text-center text-red-500 py-20">{error}</p>
           ) : (
             <>
-              {/* Table for Desktop view */}
-              <div className="overflow-x-auto rounded-lg shadow-md md:block hidden">
-                <table className="min-w-full">
+              {/* Desktop View */}
+              <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-800 md:block hidden">
+                <table className="min-w-full bg-gray-900/50 backdrop-blur-sm">
                   <thead>
-                    <tr className="border border-[var(--primaryColor)]">
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        Sr. No.
-                      </th>
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        IP Address
-                      </th>
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        Timestamp
-                      </th>
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        City
-                      </th>
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        Region
-                      </th>
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        Country
-                      </th>
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        Zip Code
-                      </th>
-                      <th className="px-6 py-3 text-left font-medium font-semibold text-[var(--primaryColor)]">
-                        Continent
-                      </th>
+                    <tr className="bg-gray-800/50">
+                      <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">#</th>
+                      <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">IP & Time</th>
+                      <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Location</th>
+                      {activeTab === "vercel" ? (
+                        <>
+                          <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Details</th>
+                          <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Page / Referer</th>
+                        </>
+                      ) : (
+                        <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Extra Info</th>
+                      )}
+                      <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Raw</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {logs.map((log, i) => (
-                      <tr key={i} className="text-white border border-white">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {(currentPage - 1) * 10 + i + 1}
+                  <tbody className="divide-y divide-gray-800">
+                    {(activeTab === "vercel" ? vercelLogs : ipapiLogs).map((log, i) => (
+                      <tr key={i} className="hover:bg-gray-800/30 transition-colors">
+                        <td className="px-6 py-4 text-gray-400">{(currentPage - 1) * 10 + i + 1}</td>
+                        <td className="px-6 py-4">
+                          <div className="text-white font-mono text-sm">
+                            {log.ip}
+                            {activeTab === "vercel" && (log as VercelLog).isLocal && (
+                              <span className="ml-2 bg-gray-700 text-[10px] px-1.5 py-0.5 rounded text-gray-400">LOCAL</span>
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-500">{new Date(log.timestamp).toLocaleString()}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {log.ip}
+                        <td className="px-6 py-4">
+                          {activeTab === "vercel" ? (
+                            (log as VercelLog).isLocal ? (
+                              <div className="text-gray-500 italic">Localhost (No-Geo)</div>
+                            ) : (
+                              <>
+                                <div className="text-white">{(log as VercelLog).city}, {(log as VercelLog).region}</div>
+                                <div className="text-xs text-gray-400">{(log as VercelLog).country}</div>
+                              </>
+                            )
+                          ) : (
+                            <>
+                              <div className="text-white">{(log as IPAPILog).fullResponse.city}, {(log as IPAPILog).fullResponse.region_name}</div>
+                              <div className="text-xs text-gray-400 flex items-center gap-2">
+                                <span>{(log as IPAPILog).fullResponse.location?.country_flag_emoji}</span>
+                                {(log as IPAPILog).fullResponse.country_name}
+                              </div>
+                            </>
+                          )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {new Date(log.timestamp).toLocaleString()}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {log.fullResponse.city}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {log.fullResponse.region_name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="mx-2">
-                            {log.fullResponse.location?.country_flag_emoji}
-                          </span>
-                          {log.fullResponse.country_name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {log.fullResponse.zip}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {log.fullResponse.continent_name}
+                        {activeTab === "vercel" ? (
+                          <>
+                            <td className="px-6 py-4">
+                              <div className="text-xs text-gray-300">Lat: {(log as VercelLog).latitude}</div>
+                              <div className="text-xs text-gray-300">Long: {(log as VercelLog).longitude}</div>
+                              <div className="text-[10px] text-gray-500 font-mono mt-1">{(log as VercelLog).timezone}</div>
+                            </td>
+                            <td className="px-6 py-4">
+                               <div className="text-xs text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded inline-block mb-1">
+                                 {(log as VercelLog).path}
+                               </div>
+                               <div className="text-[10px] text-gray-500 truncate max-w-[150px]">
+                                 From: {(log as VercelLog).referer || 'Direct'}
+                               </div>
+                            </td>
+                          </>
+                        ) : (
+                          <td className="px-6 py-4">
+                            <div className="text-xs text-gray-400">Zip: {(log as IPAPILog).fullResponse.zip}</div>
+                            <div className="text-xs text-gray-400">Cont: {(log as IPAPILog).fullResponse.continent_name}</div>
+                          </td>
+                        )}
+                        <td className="px-6 py-4">
+                           <button 
+                             onClick={() => setSelectedRawLog(log)}
+                             className="text-[var(--primaryColor)] hover:underline text-xs bg-[var(--primaryColor)]/10 px-2 py-1 rounded"
+                           >
+                             Full JSON
+                           </button>
                         </td>
                       </tr>
                     ))}
@@ -263,203 +362,164 @@ export default function AdminLogs() {
                 </table>
               </div>
 
-              {/* Cards for mobile view */}
-              <div className="md:hidden flex flex-col gap-6">
-                {logs.map((log, i) => (
-                  <div
-                    key={i}
-                    className={`rounded shadow text-white p-4 border ${
-                      i % 2 === 0
-                        ? "border-[var(--primaryColor)]"
-                        : "border-white"
-                    }`}
-                  >
-                    <div className="flex justify-between mb-2">
-                      <span className="font-bold text-[var(--primaryColor)]">
-                        #{(currentPage - 1) * 10 + i + 1}
-                      </span>
-                      <span className="text-xs text-white">
+              {/* Mobile View */}
+              <div className="md:hidden space-y-4">
+                {(activeTab === "vercel" ? vercelLogs : ipapiLogs).map((log, i) => (
+                  <div key={i} className="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-lg">
+                    <div className="flex justify-between items-start mb-3 border-b border-gray-700 pb-2">
+                       <div className="flex items-center gap-2">
+                          <span className="bg-[var(--primaryColor)] text-white text-[10px] px-2 py-0.5 rounded-full">
+                            #{(currentPage - 1) * 10 + i + 1}
+                          </span>
+                          {activeTab === "vercel" && (log as VercelLog).isLocal && (
+                             <span className="bg-gray-700 text-[8px] px-1.5 py-0.5 rounded text-gray-400 uppercase">Local</span>
+                          )}
+                       </div>
+                      <span className="text-[10px] text-gray-400">
                         {new Date(log.timestamp).toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div>
-                        <span className="font-semibold text-[var(--primaryColor)]">
-                          IP:
-                        </span>{" "}
-                        {log.ip}
-                      </div>
-                      <div>
-                        <span className="font-semibold text-[var(--primaryColor)]">
-                          City:
-                        </span>{" "}
-                        {log.fullResponse.city}
-                      </div>
-                      <div>
-                        <span className="font-semibold text-[var(--primaryColor)]">
-                          Region:
-                        </span>{" "}
-                        {log.fullResponse.region_name}
-                      </div>
-                      <div>
-                        <span className="font-semibold text-[var(--primaryColor)]">
-                          Country:
-                        </span>{" "}
-                        <span className="mx-2">
-                          {log.fullResponse.location?.country_flag_emoji}
-                        </span>
-                        {log.fullResponse.country_name}
-                      </div>
-                      <div>
-                        <span className="font-semibold text-[var(--primaryColor)]">
-                          Zip:
-                        </span>{" "}
-                        {log.fullResponse.zip}
-                      </div>
-                      <div>
-                        <span className="font-semibold text-[var(--primaryColor)]">
-                          Continent:
-                        </span>{" "}
-                        {log.fullResponse.continent_name}
-                      </div>
+                    
+                    <div className="grid grid-cols-2 gap-y-3 gap-x-2">
+                       <div className="col-span-1">
+                         <p className="text-[10px] text-gray-500 uppercase font-bold">IP Address</p>
+                         <p className="text-xs text-white font-mono">{log.ip}</p>
+                       </div>
+                       <div className="col-span-1">
+                         <p className="text-[10px] text-gray-500 uppercase font-bold">Location</p>
+                         <p className="text-xs text-white flex items-center gap-1">
+                           {activeTab === "vercel" 
+                             ? (log as VercelLog).isLocal ? "Localhost" : `${(log as VercelLog).city}, ${(log as VercelLog).country}`
+                             : (
+                               <>
+                                 <span>{(log as IPAPILog).fullResponse.location?.country_flag_emoji}</span>
+                                 {(log as IPAPILog).fullResponse.city}, {(log as IPAPILog).fullResponse.country_name}
+                               </>
+                             )
+                           }
+                         </p>
+                       </div>
+                       {activeTab === "vercel" ? (
+                         <>
+                           <div className="col-span-1">
+                             <p className="text-[10px] text-gray-500 uppercase font-bold">Coords</p>
+                             <p className="text-[9px] text-gray-300 italic">
+                               {(log as VercelLog).latitude}, {(log as VercelLog).longitude}
+                             </p>
+                           </div>
+                           <div className="col-span-1">
+                             <p className="text-[10px] text-gray-500 uppercase font-bold">Page</p>
+                             <p className="text-[10px] text-emerald-400 font-bold">{(log as VercelLog).path}</p>
+                           </div>
+                           <div className="col-span-2">
+                             <p className="text-[10px] text-gray-500 uppercase font-bold">From (Referer)</p>
+                             <p className="text-[10px] text-blue-400 truncate">{(log as VercelLog).referer || 'Direct'}</p>
+                           </div>
+                         </>
+                       ) : (
+                         <div className="col-span-2">
+                            <p className="text-[10px] text-gray-500 uppercase font-bold">Extra</p>
+                            <p className="text-xs text-white">Zip: {(log as IPAPILog).fullResponse.zip} | Cont: {(log as IPAPILog).fullResponse.continent_name}</p>
+                         </div>
+                       )}
                     </div>
+                    <button 
+                         onClick={() => setSelectedRawLog(log)}
+                         className="w-full mt-4 bg-gray-700/50 text-[var(--primaryColor)] text-[10px] py-1.5 rounded-lg border border-gray-600 font-bold uppercase tracking-wider"
+                    >
+                        View Raw JSON Data
+                    </button>
                   </div>
                 ))}
               </div>
 
               {/* Pagination */}
-              <div className="flex justify-center items-center mt-6 space-x-1 md:space-x-3 select-none">
+              <div className="flex justify-center items-center mt-10 space-x-2 select-none">
                 <button
                   onClick={() => goToPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`px-2 md:px-3 py-1 rounded border text-sm md:text-base ${
+                  className={`px-4 py-2 rounded-lg border text-sm transition-all ${
                     currentPage === 1
-                      ? "cursor-not-allowed text-white border-[var(--primaryColor)]"
-                      : "text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      ? "opacity-30 cursor-not-allowed border-gray-700 text-gray-500"
+                      : "border-[var(--primaryColor)] text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white"
                   }`}
-                  aria-label="Previous page"
                 >
-                  <span className="hidden md:inline">&laquo; Prev</span>
-                  <span className="md:hidden">&laquo;</span>
+                  &larr; Prev
                 </button>
 
-                {/* Smart pagination with ellipsis */}
-                {(() => {
-                  const pages = [];
-                  const maxVisiblePages = 5; // Show max 5 page numbers
-                  
-                  if (totalPages <= maxVisiblePages) {
-                    // Show all pages if total is small
-                    for (let i = 1; i <= totalPages; i++) {
-                      pages.push(
-                        <button
-                          key={i}
-                          onClick={() => goToPage(i)}
-                          className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
-                            i === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
-                          }`}
-                          aria-current={i === currentPage ? "page" : undefined}
-                        >
-                          {i}
-                        </button>
-                      );
+                <div className="flex gap-1 overflow-x-auto max-w-[150px] md:max-w-none no-scrollbar">
+                  {[...Array(totalPages)].map((_, i) => {
+                    const pageNum = i + 1;
+                    if (totalPages > 5 && Math.abs(pageNum - currentPage) > 1 && pageNum !== 1 && pageNum !== totalPages) {
+                      if (pageNum === 2 || pageNum === totalPages - 1) return <span key={i} className="px-1 text-gray-600">.</span>;
+                      return null;
                     }
-                  } else {
-                    // Always show first page
-                    pages.push(
+                    return (
                       <button
-                        key={1}
-                        onClick={() => goToPage(1)}
-                        className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
-                          1 === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                        key={i}
+                        onClick={() => goToPage(pageNum)}
+                        className={`min-w-[32px] h-8 rounded-lg border text-xs transition-all ${
+                          pageNum === currentPage
+                            ? "bg-[var(--primaryColor)] border-[var(--primaryColor)] text-white shadow-lg"
+                            : "border-gray-700 text-gray-400 hover:border-gray-500"
                         }`}
-                        aria-current={1 === currentPage ? "page" : undefined}
                       >
-                        1
+                        {pageNum}
                       </button>
                     );
-
-                    if (currentPage > 3) {
-                      pages.push(
-                        <span key="ellipsis1" className="px-2 text-white text-sm md:text-base">
-                          ...
-                        </span>
-                      );
-                    }
-
-                    // Show pages around current page
-                    const start = Math.max(2, currentPage - 1);
-                    const end = Math.min(totalPages - 1, currentPage + 1);
-
-                    for (let i = start; i <= end; i++) {
-                      if (i !== 1 && i !== totalPages) {
-                        pages.push(
-                          <button
-                            key={i}
-                            onClick={() => goToPage(i)}
-                            className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
-                              i === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
-                            }`}
-                            aria-current={i === currentPage ? "page" : undefined}
-                          >
-                            {i}
-                          </button>
-                        );
-                      }
-                    }
-
-                    if (currentPage < totalPages - 2) {
-                      pages.push(
-                        <span key="ellipsis2" className="px-2 text-white text-sm md:text-base">
-                          ...
-                        </span>
-                      );
-                    }
-
-                    // Always show last page (if not already shown)
-                    if (totalPages > 1) {
-                      pages.push(
-                        <button
-                          key={totalPages}
-                          onClick={() => goToPage(totalPages)}
-                          className={`px-2 md:px-3 py-1 rounded border border-[var(--primaryColor)] text-white text-sm md:text-base ${
-                            totalPages === currentPage ? "bg-[var(--primaryColor)]" : "hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
-                          }`}
-                          aria-current={totalPages === currentPage ? "page" : undefined}
-                        >
-                          {totalPages}
-                        </button>
-                      );
-                    }
-                  }
-
-                  return pages;
-                })()}
+                  })}
+                </div>
 
                 <button
                   onClick={() => goToPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={`px-2 md:px-3 py-1 rounded border text-sm md:text-base ${
+                  className={`px-4 py-2 rounded-lg border text-sm transition-all ${
                     currentPage === totalPages
-                      ? "cursor-not-allowed text-white border-[var(--primaryColor)]"
-                      : "text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      ? "opacity-30 cursor-not-allowed border-gray-700 text-gray-500"
+                      : "border-[var(--primaryColor)] text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white"
                   }`}
-                  aria-label="Next page"
                 >
-                  <span className="hidden md:inline">Next &raquo;</span>
-                  <span className="md:hidden">&raquo;</span>
+                  Next &rarr;
                 </button>
+              </div>
+
+              <div className="text-gray-500 text-sm mt-6 text-center">
+                Displaying <span className="text-white font-bold">
+                  {activeTab === "vercel" ? vercelLogs.length : ipapiLogs.length}
+                </span> results of <span className="text-white font-bold">{totalLogs}</span> total records
               </div>
             </>
           )}
-          <div className="text-white text-lg mt-4 mx-auto flex justify-center">
-            <span>
-              Showing{" "}
-              <span className="text-[var(--primaryColor)]">{logs.length}</span>{" "}
-              logs of{" "}
-              <span className="text-[var(--primaryColor)]">{totalLogs}</span>
-            </span>
-          </div>
+
+          {/* Raw JSON Modal */}
+          {selectedRawLog && (
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+                <div className="bg-gray-900 border border-gray-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+                    <div className="p-4 border-b border-gray-800 flex justify-between items-center bg-gray-800/20">
+                        <h3 className="text-white font-bold uppercase tracking-widest text-sm">Full Raw Log Data</h3>
+                        <button 
+                          onClick={() => setSelectedRawLog(null)}
+                          className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-red-500 transition-colors"
+                        >
+                          &times;
+                        </button>
+                    </div>
+                    <div className="p-6 overflow-y-auto flex-grow bg-gray-950">
+                        <pre className="text-emerald-400 font-mono text-xs whitespace-pre-wrap">
+                            {JSON.stringify(selectedRawLog, null, 2)}
+                        </pre>
+                    </div>
+                    <div className="p-4 border-t border-gray-800 flex justify-end">
+                        <button 
+                          onClick={() => setSelectedRawLog(null)}
+                          className="px-6 py-2 bg-[var(--primaryColor)] text-white rounded-lg font-bold"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+          )}
         </div>
       )}
     </div>
