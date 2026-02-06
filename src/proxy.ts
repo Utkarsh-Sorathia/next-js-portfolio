@@ -4,13 +4,21 @@ import type { NextRequest } from 'next/server';
 export function proxy(request: NextRequest) {
     const path = request.nextUrl.pathname;
 
-    // 1. Filter out non-page requests
+    // 1. Filter out non-page requests & Background Pre-fetches
+    const isPrefetch = request.headers.get('purpose') === 'prefetch';
+    const isNextData = request.headers.get('x-nextjs-data');
+
     if (
+        isPrefetch || 
+        isNextData ||
         path.startsWith('/_next') || 
         path.startsWith('/api') || 
         path.startsWith('/admin') ||
         path.startsWith('/favicon') ||
-        path.includes('.')
+        path.includes('.') ||
+        path.endsWith('.png') ||
+        path.endsWith('.jpg') ||
+        path.endsWith('.svg')
     ) {
         return NextResponse.next();
     }
