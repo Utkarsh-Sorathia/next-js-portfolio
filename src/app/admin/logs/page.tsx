@@ -10,30 +10,9 @@ interface IPAPILog {
   fullResponse: any;
 }
 
-interface VercelLog {
-  _id?: string;
-  timestamp: string;
-  ip: string;
-  path: string;
-  userAgent: string;
-  referer?: string;
-  city: string;
-  country: string;
-  region: string;
-  latitude: string;
-  longitude: string;
-  timezone: string;
-  isMobile: boolean;
-  isLocal?: boolean;
-}
-
-type TabType = "ipapi" | "vercel";
-
 export default function AdminLogs() {
   const [secretKey, setSecretKey] = useState("");
-  const [activeTab, setActiveTab] = useState<TabType>("vercel");
   const [ipapiLogs, setIPAPILogs] = useState<IPAPILog[]>([]);
-  const [vercelLogs, setVercelLogs] = useState<VercelLog[]>([]);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -58,7 +37,7 @@ export default function AdminLogs() {
       });
       if (!res.ok) throw new Error("Invalid secret key");
       setIsAuthenticated(true);
-      fetchLogs(1, activeTab, sort, dateFrom, dateTo);
+      fetchLogs(1, sort, dateFrom, dateTo);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
       setIsAuthenticated(false);
@@ -69,7 +48,6 @@ export default function AdminLogs() {
 
   const fetchLogs = async (
     page: number,
-    tab = activeTab,
     sortOrder = sort,
     from = dateFrom,
     to = dateTo
@@ -84,35 +62,23 @@ export default function AdminLogs() {
       if (from) params.append("dateFrom", from);
       if (to) params.append("dateTo", to);
 
-      const endpoint = tab === "vercel" ? "/api/logs/vercel" : "/api/logs";
-      const res = await fetch(`${endpoint}?${params.toString()}`);
+      const res = await fetch(`/api/logs?${params.toString()}`);
       
       if (!res.ok) throw new Error("Failed to fetch logs");
       const data = await res.json();
       
-      if (tab === "vercel") {
-        setVercelLogs(data.logs);
-      } else {
-        setIPAPILogs(data.logs);
-      }
-      
+      setIPAPILogs(data.logs);
       setTotalPages(data.totalPages);
       setCurrentPage(data.currentPage);
       setTotalLogs(data.totalRecords);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error fetching logs");
-      setVercelLogs([]);
       setIPAPILogs([]);
       setTotalPages(1);
       setCurrentPage(1);
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleTabChange = (tab: TabType) => {
-    setActiveTab(tab);
-    fetchLogs(1, tab, sort, dateFrom, dateTo);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -126,12 +92,12 @@ export default function AdminLogs() {
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return;
-    fetchLogs(page, activeTab, sort, dateFrom, dateTo);
+    fetchLogs(page, sort, dateFrom, dateTo);
   };
 
   const handleFilter = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchLogs(1, activeTab, sort, dateFrom, dateTo);
+    fetchLogs(1, sort, dateFrom, dateTo);
   };
 
   return (
@@ -179,32 +145,6 @@ export default function AdminLogs() {
           <h1 className="text-2xl md:text-3xl font-bold text-center py-6 md:py-12 text-[var(--primaryColor)]">
             Visitor Logs
           </h1>
-
-          {/* Tab Navigation */}
-          <div className="flex justify-center mb-8">
-            <div className="bg-gray-800 p-1 rounded-lg flex gap-1">
-              <button
-                onClick={() => handleTabChange("vercel")}
-                className={`px-4 md:px-6 py-2 rounded-md font-semibold transition ${
-                  activeTab === "vercel"
-                    ? "bg-[var(--primaryColor)] text-white shadow-lg"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                Vercel Edge
-              </button>
-              <button
-                onClick={() => handleTabChange("ipapi")}
-                className={`px-4 md:px-6 py-2 rounded-md font-semibold transition ${
-                  activeTab === "ipapi"
-                    ? "bg-[var(--primaryColor)] text-white shadow-lg"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                IP-API
-              </button>
-            </div>
-          </div>
 
           {/* Filter Controls */}
           <form
@@ -282,72 +222,29 @@ export default function AdminLogs() {
                       <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">#</th>
                       <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">IP & Time</th>
                       <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Location</th>
-                      {activeTab === "vercel" ? (
-                        <>
-                          <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Details</th>
-                          <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Page / Referer</th>
-                        </>
-                      ) : (
-                        <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Extra Info</th>
-                      )}
+                      <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Extra Info</th>
                       <th className="px-6 py-4 text-left font-bold text-[var(--primaryColor)] uppercase tracking-wider text-xs">Raw</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-800">
-                    {(activeTab === "vercel" ? vercelLogs : ipapiLogs).map((log, i) => (
+                    {ipapiLogs.map((log, i) => (
                       <tr key={i} className="hover:bg-gray-800/30 transition-colors">
                         <td className="px-6 py-4 text-gray-400">{(currentPage - 1) * 10 + i + 1}</td>
                         <td className="px-6 py-4">
-                          <div className="text-white font-mono text-sm">
-                            {log.ip}
-                            {activeTab === "vercel" && (log as VercelLog).isLocal && (
-                              <span className="ml-2 bg-gray-700 text-[10px] px-1.5 py-0.5 rounded text-gray-400">LOCAL</span>
-                            )}
-                          </div>
+                          <div className="text-white font-mono text-sm">{log.ip}</div>
                           <div className="text-xs text-gray-500">{new Date(log.timestamp).toLocaleString()}</div>
                         </td>
                         <td className="px-6 py-4">
-                          {activeTab === "vercel" ? (
-                            (log as VercelLog).isLocal ? (
-                              <div className="text-gray-500 italic">Localhost (No-Geo)</div>
-                            ) : (
-                              <>
-                                <div className="text-white">{(log as VercelLog).city}, {(log as VercelLog).region}</div>
-                                <div className="text-xs text-gray-400">{(log as VercelLog).country}</div>
-                              </>
-                            )
-                          ) : (
-                            <>
-                              <div className="text-white">{(log as IPAPILog).fullResponse.city}, {(log as IPAPILog).fullResponse.region_name}</div>
-                              <div className="text-xs text-gray-400 flex items-center gap-2">
-                                <span>{(log as IPAPILog).fullResponse.location?.country_flag_emoji}</span>
-                                {(log as IPAPILog).fullResponse.country_name}
-                              </div>
-                            </>
-                          )}
+                          <div className="text-white">{log.fullResponse.city}, {log.fullResponse.region_name}</div>
+                          <div className="text-xs text-gray-400 flex items-center gap-2">
+                            <span>{log.fullResponse.location?.country_flag_emoji}</span>
+                            {log.fullResponse.country_name}
+                          </div>
                         </td>
-                        {activeTab === "vercel" ? (
-                          <>
-                            <td className="px-6 py-4">
-                              <div className="text-xs text-gray-300">Lat: {(log as VercelLog).latitude}</div>
-                              <div className="text-xs text-gray-300">Long: {(log as VercelLog).longitude}</div>
-                              <div className="text-[10px] text-gray-500 font-mono mt-1">{(log as VercelLog).timezone}</div>
-                            </td>
-                            <td className="px-6 py-4">
-                               <div className="text-xs text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded inline-block mb-1">
-                                 {(log as VercelLog).path}
-                               </div>
-                               <div className="text-[10px] text-gray-500 truncate max-w-[150px]">
-                                 From: {(log as VercelLog).referer || 'Direct'}
-                               </div>
-                            </td>
-                          </>
-                        ) : (
-                          <td className="px-6 py-4">
-                            <div className="text-xs text-gray-400">Zip: {(log as IPAPILog).fullResponse.zip}</div>
-                            <div className="text-xs text-gray-400">Cont: {(log as IPAPILog).fullResponse.continent_name}</div>
-                          </td>
-                        )}
+                        <td className="px-6 py-4">
+                          <div className="text-xs text-gray-400">Zip: {log.fullResponse.zip}</div>
+                          <div className="text-xs text-gray-400">Cont: {log.fullResponse.continent_name}</div>
+                        </td>
                         <td className="px-6 py-4">
                            <button 
                              onClick={() => setSelectedRawLog(log)}
@@ -364,17 +261,12 @@ export default function AdminLogs() {
 
               {/* Mobile View */}
               <div className="md:hidden space-y-4">
-                {(activeTab === "vercel" ? vercelLogs : ipapiLogs).map((log, i) => (
+                {ipapiLogs.map((log, i) => (
                   <div key={i} className="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-lg">
                     <div className="flex justify-between items-start mb-3 border-b border-gray-700 pb-2">
-                       <div className="flex items-center gap-2">
-                          <span className="bg-[var(--primaryColor)] text-white text-[10px] px-2 py-0.5 rounded-full">
-                            #{(currentPage - 1) * 10 + i + 1}
-                          </span>
-                          {activeTab === "vercel" && (log as VercelLog).isLocal && (
-                             <span className="bg-gray-700 text-[8px] px-1.5 py-0.5 rounded text-gray-400 uppercase">Local</span>
-                          )}
-                       </div>
+                       <span className="bg-[var(--primaryColor)] text-white text-[10px] px-2 py-0.5 rounded-full">
+                         #{(currentPage - 1) * 10 + i + 1}
+                       </span>
                       <span className="text-[10px] text-gray-400">
                         {new Date(log.timestamp).toLocaleString()}
                       </span>
@@ -388,40 +280,14 @@ export default function AdminLogs() {
                        <div className="col-span-1">
                          <p className="text-[10px] text-gray-500 uppercase font-bold">Location</p>
                          <p className="text-xs text-white flex items-center gap-1">
-                           {activeTab === "vercel" 
-                             ? (log as VercelLog).isLocal ? "Localhost" : `${(log as VercelLog).city}, ${(log as VercelLog).country}`
-                             : (
-                               <>
-                                 <span>{(log as IPAPILog).fullResponse.location?.country_flag_emoji}</span>
-                                 {(log as IPAPILog).fullResponse.city}, {(log as IPAPILog).fullResponse.country_name}
-                               </>
-                             )
-                           }
+                           <span>{log.fullResponse.location?.country_flag_emoji}</span>
+                           {log.fullResponse.city}, {log.fullResponse.country_name}
                          </p>
                        </div>
-                       {activeTab === "vercel" ? (
-                         <>
-                           <div className="col-span-1">
-                             <p className="text-[10px] text-gray-500 uppercase font-bold">Coords</p>
-                             <p className="text-[9px] text-gray-300 italic">
-                               {(log as VercelLog).latitude}, {(log as VercelLog).longitude}
-                             </p>
-                           </div>
-                           <div className="col-span-1">
-                             <p className="text-[10px] text-gray-500 uppercase font-bold">Page</p>
-                             <p className="text-[10px] text-emerald-400 font-bold">{(log as VercelLog).path}</p>
-                           </div>
-                           <div className="col-span-2">
-                             <p className="text-[10px] text-gray-500 uppercase font-bold">From (Referer)</p>
-                             <p className="text-[10px] text-blue-400 truncate">{(log as VercelLog).referer || 'Direct'}</p>
-                           </div>
-                         </>
-                       ) : (
-                         <div className="col-span-2">
-                            <p className="text-[10px] text-gray-500 uppercase font-bold">Extra</p>
-                            <p className="text-xs text-white">Zip: {(log as IPAPILog).fullResponse.zip} | Cont: {(log as IPAPILog).fullResponse.continent_name}</p>
-                         </div>
-                       )}
+                       <div className="col-span-2">
+                          <p className="text-[10px] text-gray-500 uppercase font-bold">Extra</p>
+                          <p className="text-xs text-white">Zip: {log.fullResponse.zip} | Cont: {log.fullResponse.continent_name}</p>
+                       </div>
                     </div>
                     <button 
                          onClick={() => setSelectedRawLog(log)}
@@ -484,9 +350,7 @@ export default function AdminLogs() {
               </div>
 
               <div className="text-gray-500 text-sm mt-6 text-center">
-                Displaying <span className="text-white font-bold">
-                  {activeTab === "vercel" ? vercelLogs.length : ipapiLogs.length}
-                </span> results of <span className="text-white font-bold">{totalLogs}</span> total records
+                Displaying <span className="text-white font-bold">{ipapiLogs.length}</span> results of <span className="text-white font-bold">{totalLogs}</span> total records
               </div>
             </>
           )}
