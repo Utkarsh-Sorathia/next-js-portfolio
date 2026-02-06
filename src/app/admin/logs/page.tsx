@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Head from "next/head";
+import { RefreshCw } from "lucide-react";
 
 interface IPAPILog {
   timestamp: string;
@@ -245,12 +246,24 @@ export default function AdminLogs() {
                 className="p-2 border rounded border-gray-600 bg-gray-900 text-white text-sm"
               />
             </div>
-            <button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition"
-            >
-              Apply
-            </button>
+            <div className="flex gap-2">
+              <button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition shrink-0"
+              >
+                Apply
+              </button>
+              <button
+                type="button"
+                onClick={() => fetchLogs(currentPage)}
+                disabled={loading}
+                className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition flex items-center justify-center gap-2 disabled:opacity-50"
+                title="Refresh logs"
+              >
+                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                <span className="md:hidden lg:inline">Refresh</span>
+              </button>
+            </div>
           </form>
 
           {loading ? (
