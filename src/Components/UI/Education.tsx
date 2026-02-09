@@ -29,7 +29,7 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1])
 
   return (
-    <div className="w-full" ref={containerRef}>
+    <div className="w-full relative" ref={containerRef}>
       <div ref={ref} className="relative max-w-7xl mx-auto">
         {/* Static Track Line - Single continuous background line */}
         <div
