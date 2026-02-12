@@ -20,7 +20,11 @@ import {
   getProjectSchema 
 } from "@/utils/structuredData";
 
-const Home = () => {
+import { getSettings } from "@/utils/getSettings";
+
+const Home = async () => {
+  const settings = await getSettings();
+
   return (
     <>
       {/* Structural Data for Home Page Only */}
@@ -79,8 +83,8 @@ const Home = () => {
       </div>
 
       <PageBox>
-        <HomeSection id="/" />
-        <AboutSection id="about" />
+        <HomeSection id="/" isOpenToWork={settings.openToWork} />
+        <AboutSection id="about" isOpenToWork={settings.openToWork} />
         <SkillSection id="skills" />
         <ProjectSection id="projects" />
         <ExperienceSection id="experience" />

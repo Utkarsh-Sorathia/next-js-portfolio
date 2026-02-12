@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import ResponsiveBox from '../core/ResponsiveBox'
 import ConstrainedBox from '../core/constrained-box'
@@ -18,19 +17,8 @@ const techStack = [
   { name: 'Firebase', icon: '/skills/firebase.svg' }
 ]
 
-const AboutSection = ({ id }: { id: string }) => {
-  const [isOpenToWork, setIsOpenToWork] = useState(process.env.NEXT_PUBLIC_OPEN_TO_WORK === 'true');
 
-  React.useEffect(() => {
-    fetch('/api/admin/settings')
-      .then(res => res.json())
-      .then(data => {
-        if (data.openToWork !== undefined) {
-          setIsOpenToWork(data.openToWork);
-        }
-      })
-      .catch(err => console.error('Error fetching settings:', err));
-  }, []);
+const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean }) => {
 
   return (
     <ResponsiveBox

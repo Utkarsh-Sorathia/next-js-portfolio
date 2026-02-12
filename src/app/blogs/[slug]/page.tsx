@@ -315,6 +315,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <MarkdownRenderer content={bodyMarkdown} />
             )}
 
+            {/* Recommended Posts */}
+            {recommendedPosts.length > 0 && (
+              <div className="mt-16 sm:mt-16">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--textColor)] mb-8">
+                  Recommended <span className="text-[var(--primaryColor)]">Posts</span>
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {recommendedPosts.map((recommendedPost: any) => (
+                    <BlogCard key={recommendedPost._id} post={recommendedPost} />
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Article Footer */}
             <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-[var(--textColor50)]">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6">
@@ -333,20 +347,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </Link>
               </div>
             </footer>
-
-            {/* Recommended Posts */}
-            {recommendedPosts.length > 0 && (
-              <div className="mt-16 sm:mt-24">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--textColor)] mb-8">
-                  Recommended <span className="text-[var(--primaryColor)]">Posts</span>
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {recommendedPosts.map((recommendedPost: any) => (
-                    <BlogCard key={recommendedPost._id} post={recommendedPost} />
-                  ))}
-                </div>
-              </div>
-            )}
           </article>
         </ConstrainedBox>
       </ResponsiveBox>

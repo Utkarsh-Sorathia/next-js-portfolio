@@ -8,22 +8,9 @@ import Row from '../core/Row'
 import socialLinks from '../../data/importantLinks'
 import { NameAnimation } from '../common/nameAnimation'
 import dynamic from 'next/dynamic';
-import { useState, useEffect } from 'react';
 const ParticlesBackground = dynamic(() => import('../common/ParticlesBackground'), { ssr: false });
 
-const HomeSection = ({ id }: Readonly<{ id: string }>) => {
-  const [isOpenToWork, setIsOpenToWork] = useState(process.env.NEXT_PUBLIC_OPEN_TO_WORK === 'true');
-
-  useEffect(() => {
-    fetch('/api/admin/settings')
-      .then(res => res.json())
-      .then(data => {
-        if (data.openToWork !== undefined) {
-          setIsOpenToWork(data.openToWork);
-        }
-      })
-      .catch(err => console.error('Error fetching settings:', err));
-  }, []);
+const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: boolean }>) => {
 
   return (
     <ResponsiveBox
