@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
+import { cache } from 'react';
 
 // Sanity CMS configuration
 export const sanityConfig = {
@@ -183,7 +184,7 @@ export function extractExcerpt(body: any[], maxLength: number = 150): string {
 
 
 // API Functions
-export async function getAllBlogPosts() {
+export const getAllBlogPosts = cache(async function getAllBlogPosts() {
   try {
     const posts = await client.fetch(
       getAllBlogPostsQuery, 
@@ -200,9 +201,9 @@ export async function getAllBlogPosts() {
     console.error('Error fetching blog posts:', error);
     return [];
   }
-}
+});
 
-export async function getBlogPostBySlug(slug: string) {
+export const getBlogPostBySlug = cache(async function getBlogPostBySlug(slug: string) {
   try {
     const post = await client.fetch(
       getBlogPostBySlugQuery, 
@@ -219,7 +220,7 @@ export async function getBlogPostBySlug(slug: string) {
     console.error('Error fetching blog post:', error);
     return null;
   }
-}
+});
 
 export async function getAllBlogPostSlugs() {
   try {

@@ -7,11 +7,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { INavItem } from '@/interfaces'
 import Row from '../../Components/core/Row'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-
-// Get the URL from environment variables
-const locationsApiUrl = process.env.NEXT_PUBLIC_LOCATIONS_API_URL;
-
 const FloatingNavbar = ({
   navItems,
   className,
@@ -21,22 +16,6 @@ const FloatingNavbar = ({
 }) => {
   const pathname = usePathname();
   const router = useRouter();
-  const [locations, setLocations] = useState<any>(null);
-
-  useEffect(() => {
-    if (locationsApiUrl) {
-      const fetchLocations = async () => {
-        try {
-          const response = await axios.get(locationsApiUrl);
-          setLocations(response.data);
-        } catch (error) {
-          console.error('Error fetching locations:', error);
-        }
-      };
-
-      fetchLocations();
-    }
-  }, [locationsApiUrl]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
     // Handle home link with smooth scroll

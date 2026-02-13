@@ -6,8 +6,6 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
-import Column from "../../Components/core/Column";
-import Row from "../../Components/core/Row";
 import CardBox from "../../Components/core/CardBox";
 
 const ProjectCard = ({ project }: { project: IProjectItem }) => {

@@ -13,8 +13,57 @@ import { getAllBlogPosts } from '@/lib/sanity';
 
 export const runtime = 'edge';
 
+// Rate limiting map
+const rateLimitMap = new Map<string, { count: number; lastReset: number }>();
+const RATELIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_REQUESTS = 5;
+
+function getRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const userData = rateLimitMap.get(ip) || { count: 0, lastReset: now };
+
+  if (now - userData.lastReset > RATELIMIT_WINDOW) {
+    userData.count = 1;
+    userData.lastReset = now;
+  } else {
+    userData.count++;
+  }
+
+  rateLimitMap.set(ip, userData);
+  return userData.count <= MAX_REQUESTS;
+}
+
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json();
+  // 1. Rate Limiting
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
+  if (!getRateLimit(ip)) {
+    return new Response("Too many requests. Please slow down!", { status: 429 });
+  }
+
+  const { messages, metadata } = await req.json();
+  const gRecaptchaToken = metadata?.gRecaptchaToken;
+
+  // reCAPTCHA verification
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  if (secretKey && gRecaptchaToken) {
+    try {
+      const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${secretKey}&response=${gRecaptchaToken}`,
+      });
+
+      const verifyData = await verifyRes.json();
+
+      if (!verifyData.success || verifyData.score < 0.5) {
+        return new Response("Security check failed.", { status: 400 });
+      }
+    } catch (error) {
+      console.error("reCAPTCHA verification error:", error);
+    }
+  } else if (secretKey && !gRecaptchaToken) {
+    return new Response("Security token missing.", { status: 400 });
+  }
 
   // Fetch blogs for context
   const allBlogs = await getAllBlogPosts();
@@ -48,10 +97,10 @@ export async function POST(req: NextRequest) {
     ${skills.map(cat => `${cat.title}: ${cat.items.map(s => s.title).join(', ')}`).join('\n')}
     
     --- EXPERIENCE ---
-    ${experience.map(exp => `- ${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate}): ${exp.description}`).join('\n')}
+    ${experience.map(exp => `- ${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate}): ${exp.description.substring(0, 150)}...`).join('\n')}
     
     --- PROJECTS ---
-    ${projects.map(p => `- ${p.title}: ${p.description} (Tech: ${p.tags?.join(', ') || 'N/A'}) [Link: ${p.url}]`).join('\n')}
+    ${projects.map(p => `- ${p.title}: ${p.description.substring(0, 150)}... (Tech: ${p.tags?.join(', ') || 'N/A'}) [Link: ${p.url}]`).join('\n')}
     
     --- EDUCATION ---
     ${educations.map(edu => `- ${edu.degree} at ${edu.educations[0].institute} (${edu.educations[0].startDate} - ${edu.educations[0].endDate})`).join('\n')}

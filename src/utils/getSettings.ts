@@ -1,6 +1,7 @@
 import clientPromise from '@/lib/mongodb';
+import { cache } from 'react';
 
-export async function getSettings() {
+export const getSettings = cache(async function getSettings() {
   try {
     const client = await clientPromise;
     const db = client.db();
@@ -18,4 +19,4 @@ export async function getSettings() {
       openToWork: process.env.NEXT_PUBLIC_OPEN_TO_WORK === 'true' 
     };
   }
-}
+});
