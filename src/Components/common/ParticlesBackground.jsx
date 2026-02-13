@@ -24,7 +24,7 @@ const ParticlesBackground = () => {
 
       if (isMobile) {
         setParticleSize({ min: 1, max: 5 });
-        setParticleSpeed(1.5);
+        setParticleSpeed(1);
         setHoverEnabled(false);
         setParticleCount(250);
       } else {

@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send } from 'lucide-react';
+import { X, Send, AlertCircle } from 'lucide-react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from '@/app/chat.module.css';
@@ -15,6 +16,8 @@ export default function ChatWidget() {
   const [hasSeenNudge, setHasSeenNudge] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  const [error, setError] = useState<string | null>(null);
   const { messages, sendMessage, status } = useChat();
   const isLoading = status === 'submitted' || status === 'streaming';
   const [input, setInput] = useState('');
@@ -28,8 +31,23 @@ export default function ChatWidget() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-    await sendMessage({ text: input });
-    setInput('');
+
+    if (!executeRecaptcha) {
+      setError('Security service not ready. Please try again.');
+      return;
+    }
+
+    try {
+      setError(null);
+      const token = await executeRecaptcha('chat_message');
+      await sendMessage({ 
+        text: input,
+        metadata: { gRecaptchaToken: token } 
+      });
+      setInput('');
+    } catch (err) {
+      setError('Security verification failed. Please try again.');
+    }
   };
 
   // Auto-scroll to bottom
@@ -201,6 +219,12 @@ export default function ChatWidget() {
 
             {/* Input Area */}
             <form onSubmit={handleSubmit} className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-700">
+              {error && (
+                <div className="mb-2 px-3 py-2 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-[10px] text-red-500">
+                  <AlertCircle className="w-3 h-3" />
+                  {error}
+                </div>
+              )}
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
@@ -235,9 +259,11 @@ export default function ChatWidget() {
             >
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0">
-                  <img 
+                  <Image 
                     src="/android-chrome-192x192.png" 
                     alt="AI Assistant" 
+                    width={32}
+                    height={32}
                     className="w-full h-full object-cover"
                   />
                 </div>

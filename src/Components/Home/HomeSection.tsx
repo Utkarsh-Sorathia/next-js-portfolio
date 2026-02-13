@@ -10,7 +10,8 @@ import { NameAnimation } from '../common/nameAnimation'
 import dynamic from 'next/dynamic';
 const ParticlesBackground = dynamic(() => import('../common/ParticlesBackground'), { ssr: false });
 
-const HomeSection = ({ id }: Readonly<{ id: string }>) => {
+const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: boolean }>) => {
+
   return (
     <ResponsiveBox
       classNames="min-h-screen items-center justify-center relative overflow-hidden rounded-md"
@@ -23,15 +24,17 @@ const HomeSection = ({ id }: Readonly<{ id: string }>) => {
 
       <ConstrainedBox classNames="px-4 py-8 pt-16 z-10 items-center justify-center my-auto">
         <Column classNames="w-full items-center justify-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-8 scale-in">
-            <div className="relative flex h-2 w-2">
-              <span className="animate-soft-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 z-0"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 z-10"></span>
+          {isOpenToWork && (
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-8 scale-in">
+              <div className="relative flex h-2 w-2">
+                <span className="animate-soft-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 z-0"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 z-10"></span>
+              </div>
+              <p className="text-xs font-medium text-emerald-500 tracking-wide uppercase">
+                Available for New Opportunities
+              </p>
             </div>
-            <p className="text-xs font-medium text-emerald-500 tracking-wide uppercase">
-              Available for New Opportunities
-            </p>
-          </div>
+          )}
           <div className="inline-flex items-center mx-auto pb-4">
             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
               Hi there, I am

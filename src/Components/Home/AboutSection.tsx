@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import ResponsiveBox from '../core/ResponsiveBox'
 import ConstrainedBox from '../core/constrained-box'
@@ -18,9 +17,9 @@ const techStack = [
   { name: 'Firebase', icon: '/skills/firebase.svg' }
 ]
 
-const AboutSection = ({ id }: { id: string }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean }) => {
+
   return (
     <ResponsiveBox
       classNames="dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40 lg:scroll-mt-12"
@@ -36,22 +35,31 @@ const AboutSection = ({ id }: { id: string }) => {
               viewport={{ amount: 0.3, once: true }}
               transition={{ duration: 0.4, ease: "easeOut" }}
               style={{ willChange: 'transform, opacity' }}
-              className="flex items-center gap-6"
+              className="relative flex items-center gap-6"
             >
-              <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-blue-600/50">
-                <button
-                  aria-label="View full profile image"
-                  className="relative w-28 h-28 rounded-full overflow-hidden"
-                  onClick={toggleModal}
-                >
+              <div className={`relative w-40 h-40 rounded-full p-0 overflow-visible ${!isOpenToWork ? 'border-4 border-blue-600/50' : ''}`}>
+                <div className="absolute inset-0 rounded-full overflow-hidden">
                   <Image
                     src="/UtkarshSorathia.webp"
                     alt="Utkarsh Sorathia"
                     fill
                     priority
+                    sizes="160px"
                     className="object-cover"
                   />
-                </button>
+                </div>
+                {/* Open to Work Badge - Conditional */}
+                {isOpenToWork ? (
+                  <div className="absolute inset-[-48px] pointer-events-none">
+                    <Image
+                      src="/open-to-work.webp"
+                      alt="Open to Work"
+                      fill
+                      sizes="168px"
+                      className="object-contain"
+                    />
+                  </div>
+                ) : null}
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-[var(--primaryColor)] mb-1">
@@ -71,40 +79,17 @@ const AboutSection = ({ id }: { id: string }) => {
               transition={{ duration: 0.4, ease: "easeOut" }}
               style={{ willChange: 'transform, opacity' }}
             >
-              <p className="mb-4 text-xl leading-relaxed">
+              <p className="mb-4 text-xl leading-relaxed text-justify">
                 I’m a <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> focused on building scalable web applications with
                 <span className="font-semibold text-[var(--primaryColor)]"> Next.js, TypeScript</span>, and the
                 <span className="font-semibold text-[var(--primaryColor)]"> MERN stack</span>.
                 I enjoy working across the stack to turn product ideas into reliable, production-ready solutions.
               </p>
-              <p className="text-lg text-blue-100">
+              <p className="text-lg text-blue-100 text-justify">
                 My approach emphasizes clean architecture, performance, and user-focused design, with a strong preference for maintainable and readable code.
               </p>
             </motion.div>
-            {isModalOpen && (
-              <div
-                className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
-                role="dialog"
-                aria-modal="true"
-              >
-                <div className="relative bg-white rounded-lg overflow-hidden shadow-lg">
-                  <button
-                    className="absolute top-2 right-2 text-black rounded-full p-2 hover:text-gray-700 transition"
-                    onClick={toggleModal}
-                    aria-label="Close image modal"
-                  >
-                    ✖
-                  </button>
-                  <Image
-                    src="/UtkarshSorathia.webp"
-                    alt="Full-size profile image of Utkarsh Sorathia"
-                    width={500}
-                    height={500}
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            )}
+
             <div className="flex flex-wrap gap-4 mt-2 justify-start sm:justify-center">
               {techStack.map(({ name, icon }) => (
                 <div

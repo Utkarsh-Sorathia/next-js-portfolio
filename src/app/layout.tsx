@@ -44,7 +44,7 @@ export const viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Utkarsh Sorathia - Computer Engineer / Full Stack Developer",
+  title: "Utkarsh Sorathia - Computer Engineer | Full Stack Developer",
   description:
     "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
   authors: [{ name: "Utkarsh Sorathia", url: baseUrl }],
@@ -159,6 +159,7 @@ export const metadata: Metadata = {
 };
 
 import ReCaptchaProvider from "@/Components/core/ReCaptchaProvider";
+import VisitorTracker from "@/Components/core/VisitorTracker";
 
 export default function RootLayout({
   children,
@@ -168,7 +169,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
-
+ 
         <link rel="preconnect" href="https://cdn.sanity.io" />
 
         <link rel="me" href="https://www.wikidata.org/wiki/Q137171536" />
@@ -180,6 +181,7 @@ export default function RootLayout({
 
       </head>
       <body className="flex flex-col min-h-screen antialiased">
+        <VisitorTracker />
         <ReCaptchaProvider>
           <KBarWrapper>
             <ErrorBoundary>

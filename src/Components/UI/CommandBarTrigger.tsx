@@ -18,11 +18,7 @@ const CommandBarTrigger = () => {
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8, y: -20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      style={{ willChange: 'transform, opacity' }}
+    <div
       className={cn(
         "hidden sm:fixed sm:block top-4 z-[4999] transition-all duration-300",
         isBlogPage 
@@ -48,7 +44,7 @@ const CommandBarTrigger = () => {
             </kbd>
         </div>
       </motion.button>
-    </motion.div>
+    </div>
   );
 };
 

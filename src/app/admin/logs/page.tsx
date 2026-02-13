@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, LogOut } from "lucide-react";
 
 interface IPAPILog {
   timestamp: string;
@@ -20,11 +20,45 @@ export default function AdminLogs() {
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedRawLog, setSelectedRawLog] = useState<any>(null);
+  const [isOpenToWork, setIsOpenToWork] = useState(false);
+  const [isUpdatingSettings, setIsUpdatingSettings] = useState(false);
 
   // Filters
   const [sort, setSort] = useState<"asc" | "desc">("desc");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
+
+  useEffect(() => {
+    checkSession();
+    
+    // Heartbeat: Check session every 60 seconds to handle auto-lock
+    const interval = setInterval(() => {
+      if (isAuthenticated) {
+        checkSession();
+      }
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [isAuthenticated]);
+
+  const checkSession = async () => {
+    try {
+      const res = await fetch("/api/logs?limit=1");
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
+      if (res.ok) {
+        if (!isAuthenticated) {
+          setIsAuthenticated(true);
+          fetchSettings();
+          fetchLogs(1);
+        }
+      }
+    } catch (err) {
+      console.error("Session check failed", err);
+    }
+  };
 
   const login = async () => {
     setError("");
@@ -37,6 +71,7 @@ export default function AdminLogs() {
       });
       if (!res.ok) throw new Error("Invalid secret key");
       setIsAuthenticated(true);
+      fetchSettings();
       fetchLogs(1, sort, dateFrom, dateTo);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
@@ -64,6 +99,11 @@ export default function AdminLogs() {
 
       const res = await fetch(`/api/logs?${params.toString()}`);
       
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
+      
       if (!res.ok) throw new Error("Failed to fetch logs");
       const data = await res.json();
       
@@ -78,6 +118,48 @@ export default function AdminLogs() {
       setCurrentPage(1);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch("/api/admin/settings");
+      if (res.ok) {
+        const data = await res.json();
+        setIsOpenToWork(data.openToWork);
+      }
+    } catch (err) {
+      console.error("Failed to fetch settings", err);
+    }
+  };
+
+  const toggleOpenToWork = async () => {
+    setIsUpdatingSettings(true);
+    try {
+      const res = await fetch("/api/admin/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ openToWork: !isOpenToWork }),
+      });
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
+      if (!res.ok) throw new Error("Failed to update settings");
+      setIsOpenToWork(!isOpenToWork);
+    } catch (err) {
+      alert("Failed to update status");
+    } finally {
+      setIsUpdatingSettings(false);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      setIsAuthenticated(false);
+    } catch (err) {
+      console.error("Logout failed", err);
     }
   };
 
@@ -142,9 +224,46 @@ export default function AdminLogs() {
         </>
       ) : (
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold text-center py-6 md:py-12 text-[var(--primaryColor)]">
-            Visitor Logs
-          </h1>
+          <div className="flex justify-between items-center py-6 md:py-12">
+            <div className="w-10 md:w-20"></div> {/* Spacer for symmetry */}
+            <h1 className="text-2xl md:text-3xl font-bold text-center text-[var(--primaryColor)]">
+              Visitor Logs
+            </h1>
+            <button
+                onClick={logout}
+                className="flex items-center gap-2 bg-red-600/10 hover:bg-red-600/20 text-red-500 font-bold py-2 px-4 rounded-xl border border-red-500/30 transition-all active:scale-95"
+            >
+                <LogOut className="w-4 h-4" />
+                <span className="hidden md:inline">Logout</span>
+            </button>
+          </div>
+
+          {/* Settings Section */}
+          <div className="mb-8 p-6 bg-gray-800/50 rounded-2xl border border-blue-500/30 backdrop-blur-sm">
+            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+              Global Settings
+            </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-white font-semibold">Open to Work Badge</p>
+                <p className="text-sm text-gray-400">Show or hide the "Open to Work" banner on your profile picture.</p>
+              </div>
+              <button
+                onClick={toggleOpenToWork}
+                disabled={isUpdatingSettings}
+                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none ${
+                    isOpenToWork ? 'bg-green-600' : 'bg-gray-600'
+                }`}
+              >
+                <span
+                  className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                    isOpenToWork ? 'translate-x-7' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+          </div>
 
           {/* Filter Controls */}
           <form
