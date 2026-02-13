@@ -42,7 +42,9 @@ export default function ChatWidget() {
       const token = await executeRecaptcha('chat_message');
       await sendMessage({ 
         text: input,
-        metadata: { gRecaptchaToken: token } 
+      }, { 
+        headers: { 'x-recaptcha-token': token },
+        body: { metadata: { gRecaptchaToken: token } } 
       });
       setInput('');
     } catch (err) {
@@ -146,19 +148,43 @@ export default function ChatWidget() {
                   <p>I'm Utkarsh's virtual assistant. Ask me about his projects, skills, or experience!</p>
                   <div className="mt-4 flex flex-wrap gap-2 justify-center">
                     <button 
-                      onClick={() => sendMessage({ text: "What are Utkarsh's top skills?" })}
+                      onClick={async () => {
+                        if (executeRecaptcha) {
+                          const token = await executeRecaptcha('chat_message');
+                          sendMessage({ text: "What are Utkarsh's top skills?" }, { 
+                            headers: { 'x-recaptcha-token': token },
+                            body: { metadata: { gRecaptchaToken: token } } 
+                          });
+                        }
+                      }}
                       className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                     >
                       Skills?
                     </button>
                     <button 
-                      onClick={() => sendMessage({ text: "Show me his latest projects" })}
+                      onClick={async () => {
+                        if (executeRecaptcha) {
+                          const token = await executeRecaptcha('chat_message');
+                          sendMessage({ text: "Show me his latest projects" }, { 
+                            headers: { 'x-recaptcha-token': token },
+                            body: { metadata: { gRecaptchaToken: token } } 
+                          });
+                        }
+                      }}
                       className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                     >
                       Projects?
                     </button>
                     <button 
-                      onClick={() => sendMessage({ text: "How can I contact him?" })}
+                      onClick={async () => {
+                        if (executeRecaptcha) {
+                          const token = await executeRecaptcha('chat_message');
+                          sendMessage({ text: "How can I contact him?" }, { 
+                            headers: { 'x-recaptcha-token': token },
+                            body: { metadata: { gRecaptchaToken: token } } 
+                          });
+                        }
+                      }}
                       className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                     >
                       Contact?

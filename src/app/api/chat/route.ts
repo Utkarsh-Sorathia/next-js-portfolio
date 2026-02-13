@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { messages, metadata } = await req.json();
-  const gRecaptchaToken = metadata?.gRecaptchaToken;
+  const gRecaptchaToken = metadata?.gRecaptchaToken || req.headers.get('x-recaptcha-token');
 
   // reCAPTCHA verification
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
