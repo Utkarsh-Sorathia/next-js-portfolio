@@ -19,6 +19,8 @@ import CommandBarTrigger from "@/Components/UI/CommandBarTrigger";
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import ReCaptchaProvider from "@/Components/core/ReCaptchaProvider";
+import VisitorTracker from "@/Components/core/VisitorTracker";
 
 const baseUrl = baseURL;
 
@@ -44,9 +46,9 @@ export const viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Utkarsh Sorathia - Computer Engineer | Full Stack Developer",
+  title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
   description:
-    "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
+    "Full Stack Developer specializing in Next.js, React, and MERN Stack. Building scalable, high-performance web applications and sharing modern development insights.",
   authors: [{ name: "Utkarsh Sorathia", url: baseUrl }],
   creator: "Utkarsh Sorathia",
   publisher: "Utkarsh Sorathia",
@@ -91,39 +93,17 @@ export const metadata: Metadata = {
   ],
   manifest: "/manifest.json",
   keywords: [
-    "utkarsh sorathia",
     "Utkarsh Sorathia",
-    "utkarsh",
-    "Utkarsh",
-    "Utkarsh CV",
-    "UtkarshSorathia",
-    "sorathiautkarsh",
-    "Sorathia Utkarsh",
-    "sorathia utkarsh",
-    "utkarsh resume",
-    "utkarsh portfolio",
-    "utkarsh github",
-    "Utkarsh developer",
-    "Utkarsh programmer",
-    "Utkarsh software engineer",
-    "Utkarsh web developer",
-    "Utkarsh full stack",
-    "Utkarsh React developer",
-    "Utkarsh Next.js developer",
-    "Utkarsh Node.js developer",
-    "Utkarsh MERN developer",
-    "Utkarsh portfolio website",
-    "Utkarsh India",
-    "Utkarsh Surat",
-    "Utkarsh Gujarat",
-    "full stack developer",
-    "web developer india",
-    "react developer",
+    "Full Stack Developer",
+    "MERN Stack Developer",
+    "Next.js Developer",
+    "React Developer",
+    "Web Developer India"
   ],
   openGraph: {
-    title: "Utkarsh Sorathia | Full Stack Developer",
+    title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
     description:
-      "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
+      "Full Stack Developer specializing in Next.js, React, and MERN Stack. Building scalable, high-performance web applications and sharing modern development insights.",
     url: baseUrl,
     siteName: "Utkarsh Sorathia Portfolio",
     images: [
@@ -140,9 +120,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Utkarsh Sorathia | Full Stack Developer",
+    title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
     description:
-      "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies.",
+      "Full Stack Developer specializing in Next.js, React, and MERN Stack. Building scalable, high-performance web applications and sharing modern development insights.",
     images: [`${baseUrl}/UtkarshSorathia.webp`],
     creator: "@utkarshsor03",
     site: "@utkarshsor03",
@@ -156,10 +136,13 @@ export const metadata: Metadata = {
     "geo.position": "21.1702; 72.8311",
     "ICBM": "21.1702, 72.8311",
   },
+  alternates: {
+    canonical: baseUrl,
+    types: {
+      "application/rss+xml": `${baseUrl}/rss.xml`,
+    },
+  },
 };
-
-import ReCaptchaProvider from "@/Components/core/ReCaptchaProvider";
-import VisitorTracker from "@/Components/core/VisitorTracker";
 
 export default function RootLayout({
   children,
