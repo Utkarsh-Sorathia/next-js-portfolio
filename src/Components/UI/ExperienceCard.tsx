@@ -11,7 +11,7 @@ interface ExperienceCardProps {
 
 const ExperienceCard = ({ data }: ExperienceCardProps) => {
   return (
-    <section className="w-full px-6 py-8 md:py-12 max-w-5xl mx-auto">
+    <section className="w-full px-6 py-0 md:py-8 max-w-5xl mx-auto">
       <div className="relative">
         <div className="md:hidden absolute left-7.5 w-[3px] top-16 h-[calc(100%-4rem)] bg-[var(--primaryColor)] opacity-50"></div>
         <div className="hidden md:block absolute left-[50.1%] w-[3px] top-12 h-[calc(100%-3rem)] bg-[var(--primaryColor)] transform -translate-x-1/2 opacity-50"></div>
