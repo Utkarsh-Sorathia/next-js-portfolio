@@ -19,8 +19,8 @@ import CommandBarTrigger from "@/Components/UI/CommandBarTrigger";
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import ReCaptchaProvider from "@/Components/core/ReCaptchaProvider";
 import VisitorTracker from "@/Components/core/VisitorTracker";
+import Script from "next/script";
 
 const baseUrl = baseURL;
 
@@ -152,7 +152,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
- 
+
         <link rel="preconnect" href="https://cdn.sanity.io" />
 
         <link rel="me" href="https://www.wikidata.org/wiki/Q137171536" />
@@ -165,26 +165,30 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen antialiased">
         <VisitorTracker />
-        <ReCaptchaProvider>
-          <KBarWrapper>
-            <ErrorBoundary>
-              <Header className="app_nav" navItems={navMenus} />
-              <Suspense fallback={null}>
-                <GoogleAnalytics />
-              </Suspense>
-              <main className="flex-grow">{children}
-                <Analytics />
-                <SpeedInsights />
-              </main>
-              <Footer />
-              <ScrollToTop />
-              <CommandBarTrigger />
-              <BlogButton />
-              <WhatsAppButton />
-              <ChatWidget />
-            </ErrorBoundary>
-          </KBarWrapper>
-        </ReCaptchaProvider>
+        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+          <Script
+            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+            strategy="lazyOnload"
+          />
+        )}
+        <KBarWrapper>
+          <ErrorBoundary>
+            <Header className="app_nav" navItems={navMenus} />
+            <Suspense fallback={null}>
+              <GoogleAnalytics />
+            </Suspense>
+            <main className="flex-grow">{children}
+              <Analytics />
+              <SpeedInsights />
+            </main>
+            <Footer />
+            <ScrollToTop />
+            <CommandBarTrigger />
+            <BlogButton />
+            <WhatsAppButton />
+            <ChatWidget />
+          </ErrorBoundary>
+        </KBarWrapper>
       </body>
     </html>
   );

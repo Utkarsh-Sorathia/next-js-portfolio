@@ -13,7 +13,7 @@ import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
 import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 import { baseURL } from '@/utils/api';
 
-export const revalidate = 3600; // Revalidate every 1 hour (ISR with webhook support)
+export const revalidate = 86400; // Revalidate every 1 day (ISR with webhook support)
 export const dynamicParams = true; // Allow new blogs without rebuild
 
 interface BlogPostPageProps {
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   } else {
     excerpt = post.body?.[0]?.children?.[0]?.text?.substring(0, 160) || '';
   }
-  
+
   const metaDescription = excerpt || `Read about ${post.title}`;
 
   return {
@@ -99,14 +99,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.title,
       description: excerpt,
       url: `${baseURL}/blogs/${post.slug.current}`,
-      images: post.image?.asset?.url 
-        ? [post.image.asset.url] 
+      images: post.image?.asset?.url
+        ? [post.image.asset.url]
         : [{
-            url: `${baseURL}/UtkarshSorathia.webp`,
-            alt: post.title,
-            width: 1200,
-            height: 630,
-          }],
+          url: `${baseURL}/UtkarshSorathia.webp`,
+          alt: post.title,
+          width: 1200,
+          height: 630,
+        }],
       type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post._updatedAt,
@@ -118,8 +118,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       card: 'summary_large_image',
       title: post.title,
       description: excerpt,
-      images: post.image?.asset?.url 
-        ? [post.image.asset.url] 
+      images: post.image?.asset?.url
+        ? [post.image.asset.url]
         : [`${baseURL}/UtkarshSorathia.webp`],
       creator: '@utkarshsor03',
     },
@@ -159,13 +159,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       if (block._type === 'block') {
         const style = block.style || 'normal';
         const listItem = block.listItem;
-        
+
         let text = '';
-        
+
         if (block.children && Array.isArray(block.children)) {
           block.children.forEach((child: any) => {
             let childText = String(child?.text || '');
-            
+
             // Apply marks from the child
             if (child?.marks && Array.isArray(child.marks)) {
               // Check for strong
@@ -181,7 +181,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 childText = `\`${childText}\``;
               }
             }
-            
+
             text += childText;
           });
         }
@@ -205,23 +205,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   // Convert body to markdown string if needed
-  const bodyMarkdown = typeof post.body === 'string' 
-    ? post.body 
+  const bodyMarkdown = typeof post.body === 'string'
+    ? post.body
     : convertPortableTextToMarkdown(post.body);
 
   // Get image URL for structured data
   const imageUrl = post.image?.asset?.url || `${baseURL}/UtkarshSorathia.webp`;
   const excerpt = typeof post.body === 'string'
     ? post.body
-        .replace(/^#{1,6}\s+/gm, '')
-        .replace(/\*\*([^*]+)\*\*/g, '$1')
-        .replace(/\*([^*]+)\*/g, '$1')
-        .replace(/`([^`]+)`/g, '$1')
-        .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')
-        .replace(/\[|\]|\(|\)|`|#|\*/g, '')
-        .replace(/\s+/g, ' ')
-        .trim()
-        .substring(0, 160)
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')
+      .replace(/\[|\]|\(|\)|`|#|\*/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .substring(0, 160)
     : post.body?.[0]?.children?.[0]?.text?.substring(0, 160) || '';
 
   // Generate structured data
@@ -254,7 +254,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
-        <ResponsiveBox
+      <ResponsiveBox
         classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40"
         id="blog-post"
       >

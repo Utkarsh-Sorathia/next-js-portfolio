@@ -10,7 +10,7 @@ import { getBlogListingSchema, getBreadcrumbSchema, getCompleteBlogSchema } from
 import { baseURL } from "@/utils/api";
 import BlogsPageClient from "@/app/blogs/BlogsPageClient";
 
-export const revalidate = 0;
+export const revalidate = 86400; // Revalidate every 1 day
 
 export const metadata: Metadata = {
   title: "Blogs | Utkarsh Sorathia - Full Stack Developer",

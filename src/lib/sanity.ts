@@ -191,7 +191,7 @@ export const getAllBlogPosts = cache(async function getAllBlogPosts() {
       {}, 
       { 
         next: { 
-          revalidate: 3600, // Cache for 1 hour, works with ISR
+          revalidate: 86400, // Cache for 1 day, works with ISR
           tags: ['blog-posts'] // Tag for on-demand revalidation
         } 
       }
@@ -210,7 +210,7 @@ export const getBlogPostBySlug = cache(async function getBlogPostBySlug(slug: st
       { slug }, 
       { 
         next: { 
-          revalidate: 3600, // Cache for 1 hour, works with ISR
+          revalidate: 86400, // Cache for 1 day, works with ISR
           tags: ['blog-posts', `blog-${slug}`] // Tag for on-demand revalidation
         } 
       }
@@ -229,7 +229,7 @@ export async function getAllBlogPostSlugs() {
       {}, 
       { 
         next: { 
-          revalidate: 3600, // Cache for 1 hour, works with ISR
+          revalidate: 86400, // Cache for 1 day, works with ISR
           tags: ['blog-slugs'] // Tag for on-demand revalidation
         } 
       }

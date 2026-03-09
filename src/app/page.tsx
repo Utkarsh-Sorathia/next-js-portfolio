@@ -9,15 +9,15 @@ const SkillSection = dynamic(() => import("@/Components/Home/SkillSection"));
 const ProjectSection = dynamic(() => import("@/Components/Home/ProjectSection"));
 const ContactSection = dynamic(() => import("@/Components/Home/ContactSection"));
 
-import { 
-  getPersonSchema, 
-  getWebSiteSchema, 
-  getProfilePageSchema, 
-  getFAQSchema, 
-  getSiteNavigationSchema, 
-  getProfessionalServiceSchema, 
-  getServiceSchema, 
-  getProjectSchema 
+import {
+  getPersonSchema,
+  getWebSiteSchema,
+  getProfilePageSchema,
+  getFAQSchema,
+  getSiteNavigationSchema,
+  getProfessionalServiceSchema,
+  getServiceSchema,
+  getProjectSchema
 } from "@/utils/structuredData";
 
 import { getSettings } from "@/utils/getSettings";
@@ -76,11 +76,6 @@ const Home = async () => {
           __html: JSON.stringify(getProjectSchema()),
         }}
       />
-
-      {/* Hidden SEO Link for Crawler Discovery */}
-      <div className="sr-only" aria-hidden="true">
-        <a href="/blogs">Utkarsh Sorathia Blogs - Web Development, Programming and Technology</a>
-      </div>
 
       <PageBox>
         <HomeSection id="/" isOpenToWork={settings.openToWork} />

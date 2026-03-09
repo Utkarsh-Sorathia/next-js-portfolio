@@ -3,7 +3,7 @@ import Link from "next/link";
 import socialLinks from "../../data/importantLinks";
 import { useState } from "react";
 import Image from "next/image";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useGoogleReCaptcha } from "@/hooks/useGoogleReCaptcha";
 
 const Footer = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -13,7 +13,7 @@ const Footer = () => {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!executeRecaptcha) {
       setMessage("ReCAPTCHA not ready. Please try again.");
       return;
@@ -30,6 +30,7 @@ const Footer = () => {
 
     try {
       const gRecaptchaToken = await executeRecaptcha('subscribe_newsletter');
+      if (!gRecaptchaToken) throw new Error("Recaptcha failed");
 
       const res = await fetch("/api/subscribe", {
         method: "POST",
@@ -156,10 +157,10 @@ const Footer = () => {
         <div className="sr-only" aria-hidden="true">
           <h2>SEO Keywords for Utkarsh Sorathia</h2>
           <p>
-            Utkarsh, Utkarsh Sorathia, Utkarsh Portfolio, Utkarsh CV, Full Stack Developer, 
-            Software Engineer India, MERN Stack Developer, React.js Expert, Next.js Developer, 
-            Utkarsh Developer, Web Developer Surat, Gujarat Software Engineer, Utkarsh Programming, 
-            Javascript Developer, Node.js Backend Developer, MongoDB Expert, Frontend Engineer, 
+            Utkarsh, Utkarsh Sorathia, Utkarsh Portfolio, Utkarsh CV, Full Stack Developer,
+            Software Engineer India, MERN Stack Developer, React.js Expert, Next.js Developer,
+            Utkarsh Developer, Web Developer Surat, Gujarat Software Engineer, Utkarsh Programming,
+            Javascript Developer, Node.js Backend Developer, MongoDB Expert, Frontend Engineer,
             Utkarsh Sorathia Projects, Utkarsh Sorathia Blogs, Portfolio Website, Web Application Developer,
             TypeScript, Express.js Expert, Computer Engineer, Coding, Programming Insights,
             Tech Blog by Utkarsh, Software Solutions, Modern Web Development, Clean Code.

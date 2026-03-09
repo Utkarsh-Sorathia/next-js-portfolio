@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, AlertCircle } from 'lucide-react';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useGoogleReCaptcha } from '@/hooks/useGoogleReCaptcha';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from '@/app/chat.module.css';
@@ -40,11 +40,11 @@ export default function ChatWidget() {
     try {
       setError(null);
       const token = await executeRecaptcha('chat_message');
-      await sendMessage({ 
+      await sendMessage({
         text: input,
-      }, { 
+      }, {
         headers: { 'x-recaptcha-token': token },
-        body: { metadata: { gRecaptchaToken: token } } 
+        body: { metadata: { gRecaptchaToken: token } }
       });
       setInput('');
     } catch (err) {
@@ -86,13 +86,13 @@ export default function ChatWidget() {
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     const handleResize = () => setIsMobile(window.innerWidth < 640);
-    
+
     // Initial check
     handleResize();
-    
+
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
@@ -102,9 +102,9 @@ export default function ChatWidget() {
   const showScrollTop = scrollY > 400;
 
   return (
-    <div 
+    <div
       className="fixed right-4 z-[9999] flex flex-col items-end gap-3 transition-all duration-300"
-      style={{ 
+      style={{
         bottom: showScrollTop ? '136px' : '76px'
       }}
     >
@@ -131,7 +131,7 @@ export default function ChatWidget() {
                   </div>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 hover:bg-white/20 rounded-full transition-colors focus:outline-none"
                 aria-label="Close Chat"
@@ -147,13 +147,13 @@ export default function ChatWidget() {
                   <p className="mb-2">👋 Hi there!</p>
                   <p>I'm Utkarsh's virtual assistant. Ask me about his projects, skills, or experience!</p>
                   <div className="mt-4 flex flex-wrap gap-2 justify-center">
-                    <button 
+                    <button
                       onClick={async () => {
                         if (executeRecaptcha) {
                           const token = await executeRecaptcha('chat_message');
-                          sendMessage({ text: "What are Utkarsh's top skills?" }, { 
+                          sendMessage({ text: "What are Utkarsh's top skills?" }, {
                             headers: { 'x-recaptcha-token': token },
-                            body: { metadata: { gRecaptchaToken: token } } 
+                            body: { metadata: { gRecaptchaToken: token } }
                           });
                         }
                       }}
@@ -161,13 +161,13 @@ export default function ChatWidget() {
                     >
                       Skills?
                     </button>
-                    <button 
+                    <button
                       onClick={async () => {
                         if (executeRecaptcha) {
                           const token = await executeRecaptcha('chat_message');
-                          sendMessage({ text: "Show me his latest projects" }, { 
+                          sendMessage({ text: "Show me his latest projects" }, {
                             headers: { 'x-recaptcha-token': token },
-                            body: { metadata: { gRecaptchaToken: token } } 
+                            body: { metadata: { gRecaptchaToken: token } }
                           });
                         }
                       }}
@@ -175,13 +175,13 @@ export default function ChatWidget() {
                     >
                       Projects?
                     </button>
-                    <button 
+                    <button
                       onClick={async () => {
                         if (executeRecaptcha) {
                           const token = await executeRecaptcha('chat_message');
-                          sendMessage({ text: "How can I contact him?" }, { 
+                          sendMessage({ text: "How can I contact him?" }, {
                             headers: { 'x-recaptcha-token': token },
-                            body: { metadata: { gRecaptchaToken: token } } 
+                            body: { metadata: { gRecaptchaToken: token } }
                           });
                         }
                       }}
@@ -192,30 +192,29 @@ export default function ChatWidget() {
                   </div>
                 </div>
               )}
-              
+
               {messages.map((m: any) => {
                 // Extract text content from parts array or use content directly
-                const rawContent = m.parts 
+                const rawContent = m.parts
                   ? m.parts.map((part: any) => part.type === 'text' ? part.text : '').join('')
                   : m.content || '';
-                
+
                 // Strip out <think>...</think> blocks (and unclosed <think> during streaming)
                 const textContent = rawContent.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
-                
+
                 return (
                   <div
                     key={m.id}
                     className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} mb-2`}
                   >
                     <div
-                      className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed ${
-                        m.role === 'user'
+                      className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed ${m.role === 'user'
                           ? 'bg-[var(--primaryColor)] text-white rounded-tr-none'
                           : 'bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-700 rounded-tl-none'
-                      }`}
+                        }`}
                     >
                       <div className="prose dark:prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:mb-4 last:prose-p:mb-0 prose-pre:bg-zinc-200 dark:prose-pre:bg-zinc-900 prose-ul:my-2 prose-li:my-1">
-                        <ReactMarkdown 
+                        <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
                             a: (props: any) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline font-bold text-[var(--primaryColor)]" />
@@ -228,7 +227,7 @@ export default function ChatWidget() {
                   </div>
                 );
               })}
-              
+
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="bg-white dark:bg-zinc-800 rounded-2xl rounded-tl-none px-4 py-3 border border-zinc-100 dark:border-zinc-700">
@@ -285,9 +284,9 @@ export default function ChatWidget() {
             >
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0">
-                  <Image 
-                    src="/android-chrome-192x192.png" 
-                    alt="AI Assistant" 
+                  <Image
+                    src="/android-chrome-192x192.png"
+                    alt="AI Assistant"
                     width={32}
                     height={32}
                     className="w-full h-full object-cover"
@@ -304,18 +303,18 @@ export default function ChatWidget() {
             </motion.div>
           )}
         </AnimatePresence>
- 
+
         {/* Toggle Button */}
         <motion.button
           onMouseEnter={() => !isOpen && setIsNudgeVisible(true)}
           onMouseLeave={() => !isOpen && setIsNudgeVisible(false)}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
-        className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50`}
-        aria-label="Open AI Assistant"
-      >
-        {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.png" alt="AI Assistant" width={50} height={50} />}
-      </motion.button>
+          className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50`}
+          aria-label="Open AI Assistant"
+        >
+          {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.png" alt="AI Assistant" width={50} height={50} />}
+        </motion.button>
       </div>
     </div>
   );

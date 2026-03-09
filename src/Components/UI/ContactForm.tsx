@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useGoogleReCaptcha } from '@/hooks/useGoogleReCaptcha';
 
 const ContactForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -25,7 +25,7 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!executeRecaptcha) {
       setError('ReCAPTCHA not ready. Please try again in a moment.');
       return;
@@ -36,6 +36,7 @@ const ContactForm = () => {
 
     try {
       const gRecaptchaToken = await executeRecaptcha('contact_form');
+      if (!gRecaptchaToken) throw new Error("Recaptcha verification failed");
 
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -90,7 +91,7 @@ const ContactForm = () => {
         ) : (
           <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <h3 className="text-2xl font-bold mb-8 text-zinc-100">Send Me a Message</h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
@@ -171,7 +172,7 @@ const ContactForm = () => {
                     </>
                   )}
                 </button>
-                
+
                 <p className="text-[10px] text-zinc-500 text-center leading-relaxed max-w-[300px]">
                   Protected by reCAPTCHA. Google{' '}
                   <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-zinc-400">
