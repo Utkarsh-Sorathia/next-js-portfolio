@@ -11,7 +11,7 @@ import GoogleAnalytics from "@/Components/core/GoogleAnalytics";
 import BlogButton from "@/Components/UI/BlogButton";
 import ErrorBoundary from "@/Components/common/ErrorBoundary";
 import { Suspense } from "react";
-import WhatsAppButton from "@/Components/UI/WhatsAppButton";
+
 import ChatWidget from "@/Components/UI/ChatWidget";
 import KBarWrapper from "@/Components/core/KBarWrapper";
 import CommandBarTrigger from "@/Components/UI/CommandBarTrigger";
@@ -185,7 +185,7 @@ export default function RootLayout({
             <ScrollToTop />
             <CommandBarTrigger />
             <BlogButton />
-            <WhatsAppButton />
+
             <ChatWidget />
           </ErrorBoundary>
         </KBarWrapper>

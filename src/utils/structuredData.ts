@@ -81,10 +81,10 @@ export function getPersonSchema() {
       addressLocality: "Surat",
       addressRegion: "Gujarat",
       addressCountry: "IN",
-      streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+      streetAddress: "",
       postalCode: "395002"
     },
-    telephone: "+918758453292",
+
     ...(worksFor && { worksFor }),
     alumniOf,
     hasOccupation: {
@@ -170,7 +170,7 @@ export function getWebSiteSchema() {
       ),
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+        streetAddress: "",
         addressLocality: "Surat",
         addressRegion: "Gujarat",
         postalCode: "395002",
@@ -245,7 +245,7 @@ export function getOrganizationSchema(companyName: string, companyUrl: string, l
       "@type": "PostalAddress",
       addressLocality: location,
       addressCountry: "IN",
-      streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+      streetAddress: "",
       postalCode: "395002"
     },
     logo: {
@@ -320,7 +320,7 @@ export function getArticleSchema(
       },
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+        streetAddress: "",
         addressLocality: "Surat",
         addressRegion: "Gujarat",
         postalCode: "395002",
@@ -397,7 +397,7 @@ export function getBlogListingSchema(posts?: { title: string; url: string; dateP
       },
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate",
+        streetAddress: "",
         addressLocality: "Surat",
         addressRegion: "Gujarat",
         postalCode: "395002",
@@ -508,10 +508,10 @@ export function getProfessionalServiceSchema() {
     "image": `${baseUrl}/UtkarshSorathia.webp`,
     "url": baseUrl,
     "priceRange": "$$",
-    "telephone": "+918758453292",
+
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Pushpam, Vishwakarma Society, 11, near International Trade Center Building, Majura Gate, Surat, Gujarat",
+      "streetAddress": "Surat, Gujarat, India",
       "addressLocality": "Surat",
       "addressRegion": "Gujarat",
       "postalCode": "395002",

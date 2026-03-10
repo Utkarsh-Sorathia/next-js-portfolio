@@ -24,10 +24,6 @@ class Strings {
   static twitterLink = "https://x.com/utkarshsor03?t=fWrMF32Y7DivN7FJJMITYw&s=08";
   static twitterUsername = "utkarshsor03";
 
-  static whatsapp = "whatsapp";
-  static whatsappIcon = "bi bi-whatsapp text-[#198754]";
-  static primarywhatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP}?text=${process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE}`;
-  static primarywhatsapp = "Utkarsh Sorathia";
 
   static fullName = "Utkarsh Sorathia";
   static shortName = "U.S.";

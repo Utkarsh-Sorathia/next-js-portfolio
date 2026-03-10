@@ -54,8 +54,8 @@ const BlogButton = () => {
       {/* Mobile: Bottom Right */}
       <div
         className="fixed sm:hidden right-4 z-[4999] transition-all duration-300"
-        style={{ 
-          bottom: scrollY > 400 ? '204px' : '144px',
+        style={{
+          bottom: scrollY > 400 ? '144px' : '76px',
         }}
       >
         <div className="relative flex items-center justify-end">

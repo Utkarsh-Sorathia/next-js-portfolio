@@ -105,7 +105,7 @@ export default function ChatWidget() {
     <div
       className="fixed right-4 z-[9999] flex flex-col items-end gap-3 transition-all duration-300"
       style={{
-        bottom: showScrollTop ? '136px' : '76px'
+        bottom: showScrollTop ? '76px' : '16px'
       }}
     >
       {/* Chat Window */}
@@ -209,8 +209,8 @@ export default function ChatWidget() {
                   >
                     <div
                       className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed ${m.role === 'user'
-                          ? 'bg-[var(--primaryColor)] text-white rounded-tr-none'
-                          : 'bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-700 rounded-tl-none'
+                        ? 'bg-[var(--primaryColor)] text-white rounded-tr-none'
+                        : 'bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-700 rounded-tl-none'
                         }`}
                     >
                       <div className="prose dark:prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:mb-4 last:prose-p:mb-0 prose-pre:bg-zinc-200 dark:prose-pre:bg-zinc-900 prose-ul:my-2 prose-li:my-1">
