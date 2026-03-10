@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server';
+import { logout } from '@/lib/auth';
 
 export async function POST() {
-    const response = NextResponse.json({ success: true });
-    response.cookies.set('admin_auth', '', {
-        maxAge: 0,
-        path: '/',
-    });
-    return response;
+    await logout();
+    return NextResponse.json({ success: true });
 }

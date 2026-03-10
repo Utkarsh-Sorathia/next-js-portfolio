@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { getSession } from '@/lib/auth';
 
 export async function GET(request: Request) {
+    const session = await getSession();
+    if (!session) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     try {
         const client = await clientPromise;
         const db = client.db();
@@ -16,8 +22,8 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-    const cookie = request.headers.get('cookie') || '';
-    if (!cookie.includes('admin_auth=true')) {
+    const session = await getSession();
+    if (!session) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

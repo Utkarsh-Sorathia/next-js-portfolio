@@ -1,20 +1,18 @@
-// app/api/admin/login/route.ts
 import { NextResponse } from 'next/server';
+import { login } from '@/lib/auth';
 
 export async function POST(request: Request) {
-  const { secretKey } = await request.json();
+  try {
+    const { secretKey } = await request.json();
 
-  if (secretKey === process.env.SECRET_KEY) {
-    const response = NextResponse.json({ success: true });
-    response.cookies.set('admin_auth', 'true', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 1800, // 30 minutes
-      path: '/',
-      sameSite: 'strict',
-    });
-    return response;
+    const success = await login(secretKey);
+
+    if (success) {
+      return NextResponse.json({ success: true });
+    }
+
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  } catch (error) {
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
-
-  return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 }

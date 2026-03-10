@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { getSession } from '@/lib/auth';
 
 interface LogEntry {
     timestamp: Date;
@@ -8,8 +9,8 @@ interface LogEntry {
 }
 
 export async function GET(request: Request) {
-    const cookie = request.headers.get('cookie') || '';
-    if (!cookie.includes('admin_auth=true')) {
+    const session = await getSession();
+    if (!session) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
