@@ -25,7 +25,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
   return (
     <article className="h-full">
-      <CardBox classNames="group h-full flex flex-col overflow-hidden hover:bg-zinc-800/10 hover:border-zinc-500 border-zinc-500">
+      <CardBox classNames="group h-full flex flex-col overflow-hidden hover:bg-white/5 hover:border-[var(--primaryColor)]/50 border-white/10 transition-all duration-300">
         {/* Image */}
         {post.image?.asset?.url ? (
           <Link href={`/blogs/${post.slug.current}`} className="block">
@@ -42,7 +42,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           </Link>
         ) : (
           <Link href={`/blogs/${post.slug.current}`} className="block">
-            <div className="relative w-full aspect-video overflow-hidden cursor-pointer bg-gray-800 flex items-center justify-center">
+            <div className="relative w-full aspect-video overflow-hidden cursor-pointer bg-[var(--dialogColor)] flex items-center justify-center">
               <div className="text-gray-400 text-4xl">📝</div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
@@ -72,25 +72,25 @@ export default function BlogCard({ post }: BlogCardProps) {
             </Link>
 
             {/* Excerpt */}
-                <p className="text-[var(--textColorLight)] text-sm leading-relaxed mb-4 line-clamp-3">
-                  {(() => {
-                    let excerpt = '';
-                    if (typeof post.body === 'string') {
-                      // Clean markdown: remove headers (#), bold (**), italic (*), code (`), links, etc.
-                      excerpt = post.body
-                        .replace(/^#{1,6}\s+/gm, '') // Remove headers
-                        .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
-                        .replace(/\*([^*]+)\*/g, '$1') // Remove italic
-                        .replace(/`([^`]+)`/g, '$1') // Remove inline code
-                        .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links
-                        .replace(/\[|\]|\(|\)|`|#|\*/g, ''); // Remove any remaining markdown special chars
-                      // Clean up extra spaces
-                      excerpt = excerpt.replace(/\s+/g, ' ').trim();
-                      return excerpt.substring(0, 150) + (excerpt.length > 150 ? '...' : '');
-                    }
-                    return post.body?.[0]?.children?.[0]?.text || 'No excerpt available...';
-                  })()}
-                </p>
+            <p className="text-[var(--textColorLight)] text-sm leading-relaxed mb-4 line-clamp-3">
+              {(() => {
+                let excerpt = '';
+                if (typeof post.body === 'string') {
+                  // Clean markdown: remove headers (#), bold (**), italic (*), code (`), links, etc.
+                  excerpt = post.body
+                    .replace(/^#{1,6}\s+/gm, '') // Remove headers
+                    .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+                    .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+                    .replace(/`([^`]+)`/g, '$1') // Remove inline code
+                    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links
+                    .replace(/\[|\]|\(|\)|`|#|\*/g, ''); // Remove any remaining markdown special chars
+                  // Clean up extra spaces
+                  excerpt = excerpt.replace(/\s+/g, ' ').trim();
+                  return excerpt.substring(0, 150) + (excerpt.length > 150 ? '...' : '');
+                }
+                return post.body?.[0]?.children?.[0]?.text || 'No excerpt available...';
+              })()}
+            </p>
           </div>
 
           {/* Read More Link */}

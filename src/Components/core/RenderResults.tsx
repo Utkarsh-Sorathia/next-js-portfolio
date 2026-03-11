@@ -15,12 +15,11 @@ export default function RenderResults() {
           </div>
         ) : (
           <div
-            className={`px-6 py-3.5 flex items-center justify-between cursor-pointer transition-all ${
-              active ? 'bg-blue-600/10 border-l-2 border-blue-500' : 'bg-transparent border-l-2 border-transparent'
-            }`}
+            className={`px-6 py-3.5 flex items-center justify-between cursor-pointer transition-all ${active ? 'bg-[var(--primaryColor)]/10 border-l-2 border-[var(--primaryColor)]' : 'bg-transparent border-l-2 border-transparent'
+              }`}
           >
             <div className="flex items-center gap-4">
-              <div className={`p-2 rounded-lg transition-colors ${active ? 'bg-blue-500/20 text-blue-400' : 'bg-zinc-800/50 text-zinc-400'}`}>
+              <div className={`p-2 rounded-lg transition-colors ${active ? 'bg-[var(--primaryColor)]/20 text-[var(--primaryColor)]' : 'bg-zinc-800/50 text-zinc-400'}`}>
                 {item.section === 'Navigation' && (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
                 )}
@@ -37,7 +36,7 @@ export default function RenderResults() {
               <div className="flex flex-col">
                 <span className={`text-sm font-semibold ${active ? 'text-white' : 'text-zinc-300'}`}>{item.name}</span>
                 {item.subtitle && (
-                    <span className="text-[11px] text-zinc-500 font-medium mt-0.5">{item.subtitle}</span>
+                  <span className="text-[11px] text-zinc-500 font-medium mt-0.5">{item.subtitle}</span>
                 )}
               </div>
             </div>
@@ -46,9 +45,8 @@ export default function RenderResults() {
                 {item.shortcut.map((sc) => (
                   <kbd
                     key={sc}
-                    className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
-                      active ? 'bg-blue-500 text-white' : 'bg-zinc-800 text-zinc-500 border border-white/5'
-                    }`}
+                    className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${active ? 'bg-[var(--primaryColor)] text-white' : 'bg-zinc-800 text-zinc-500 border border-white/5'
+                      }`}
                   >
                     {sc}
                   </kbd>

@@ -29,28 +29,27 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
           </div>
 
           <p className="text-lg lg:text-xl font-semibold text-[var(--primaryColor)] text-center">{project.title}</p>
-          
+
           <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
             {project.isCurrent && (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--primaryColor)]/10 border border-[var(--primaryColor)]/20">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primaryColor)] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--primaryColor)]"></span>
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400">Current</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--primaryColor)]">Current</span>
               </div>
             )}
 
             <div
-              className={`flex flex-row items-center justify-center rounded-full py-[0.05rem] px-[0.75rem] capitalize text-center border ${
-                project.repoType === RepoType.Private
+              className={`flex flex-row items-center justify-center rounded-full py-[0.05rem] px-[0.75rem] capitalize text-center border ${project.repoType === RepoType.Private
                   ? "text-[var(--errorColor)] border-[var(--errorColor50)]"
                   : "text-[var(--successColor)] border-[var(--successColor50)]"
-              }`}
+                }`}
             >
-            <p className="text-[10px] font-bold uppercase tracking-widest">
-              {project.repoType === RepoType.Private ? "Private" : "Public"}
-            </p>
+              <p className="text-[10px] font-bold uppercase tracking-widest">
+                {project.repoType === RepoType.Private ? "Private" : "Public"}
+              </p>
             </div>
           </div>
 

@@ -14,7 +14,7 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
       const rect = ref.current.getBoundingClientRect()
       setHeight(rect.height)
     }
-  }, [data]) 
+  }, [data])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -76,18 +76,18 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
                       <h2 className="text-xl lg:text-2xl font-bold text-[var(--primaryColor)] mb-2">
                         {entry.degree}
                       </h2>
-                      <div className="space-y-1 text-zinc-300">
-                        <p className="text-lg font-medium text-white">
+                      <div className="space-y-1 text-[var(--textColorLight)]">
+                        <p className="text-lg font-medium text-[var(--textColor)]">
                           {item.institute}
                         </p>
                         <p className="text-sm lg:text-base opacity-80">
-                           {item.location}
+                          {item.location}
                         </p>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm pt-2">
                           <span className="flex items-center gap-1">
                             {item.startDate} - {item.endDate}
                           </span>
-                          <span className="flex items-center gap-1 font-semibold text-white border-l border-white/20 pl-4">
+                          <span className="flex items-center gap-1 font-semibold text-[var(--textColor)] border-l border-[var(--textColor50)] pl-4">
                             CGPA: {item.cgpa}
                           </span>
                         </div>

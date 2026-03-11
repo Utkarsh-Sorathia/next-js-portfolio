@@ -64,7 +64,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
             <button
               onClick={handleLoadMore}
               aria-label="Load more projects"
-              className="app__filled_btn px-8 py-3 rounded-full bg-[#4361ee] text-white font-semibold hover:bg-[#3a54d4] active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
+              className="app__filled_btn px-8 py-3 rounded-full bg-[var(--primaryColor)] text-white font-semibold hover:opacity-90 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primaryColor)]"
             >
               Load More Projects
             </button>
@@ -78,7 +78,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
         {projects.length > 3 ? <button
           onClick={() => scrollByOffset(-400, carouselRef)}
           aria-label="Scroll to previous project"
-          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
+          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primaryColor)]"
         >
           <i className="bi bi-chevron-left text-xl" />
         </button> : null}
@@ -100,7 +100,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
         {projects.length > 3 ? <button
           onClick={() => scrollByOffset(400, carouselRef)}
           aria-label="Scroll to next project"
-          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[#4361ee] text-white hover:bg-[#3a54d4] active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4361ee]"
+          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primaryColor)]"
         >
           <i className="bi bi-chevron-right text-xl" />
         </button> : null}
@@ -111,7 +111,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
           <button
             key={index}
             onClick={() => scrollToIndex(index)}
-            className={`h-2 w-2 rounded-full transition-all duration-300 ${index === activeIndex ? 'bg-[#4361ee]' : 'bg-gray-300'}`}
+            className={`h-2 w-2 rounded-full transition-all duration-300 ${index === activeIndex ? 'bg-[var(--primaryColor)]' : 'bg-gray-300'}`}
           />
         ))}
       </div>

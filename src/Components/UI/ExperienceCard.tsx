@@ -47,8 +47,8 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                   left: isLeft ? "5%" : "10%",
                   transform: "translateX(-50%)",
                 }}
-              > <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-blue-900">
-                  <div className="h-3 w-3 lg:h-4 lg:w-4 p-1 lg:p-2 rounded-full bg-blue-600 dark:bg-blue-600 dark:border-blue-600" />
+              > <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-[var(--primaryColor)]/30">
+                  <div className="h-3 w-3 lg:h-4 lg:w-4 p-1 lg:p-2 rounded-full bg-[var(--primaryColor)]" />
                 </div>
               </div> */}
               {item.companyLink ? (

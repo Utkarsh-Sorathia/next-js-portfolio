@@ -103,7 +103,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-zinc-500 dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group hover:bg-white/10 transition duration-300",
+        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-white/10 dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(0,0,0,0.2)_inset] group hover:bg-white/5 transition duration-300",
         className
       )}
     >
@@ -143,7 +143,7 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "text-sm/6 lg:text-base/6 font-normal tracking-wide",
+        "text-sm/6 lg:text-base/6 text-[var(--textColorLight)] font-normal tracking-wide",
         className
       )}
     >
@@ -167,7 +167,7 @@ export const CardSkeletonContainer = ({
         "rounded-[var(--borderRadius)] z-40 mb-2",
         className,
         showGradient &&
-          "bg-bg-[rgba(40,40,40,0.70)] dark:bg-[rgba(40,40,40,0.70)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]"
+        "bg-[rgba(15,18,20,0.70)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]"
       )}
     >
       {children}
@@ -185,8 +185,8 @@ const IconContainer = ({
   return (
     <div
       className={cn(
-        `h-16 w-16 rounded-full flex items-center justify-center bg-[rgba(248,248,248,0.01)]
-    shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]
+        `h-16 w-16 rounded-full flex items-center justify-center bg-white/[0.01]
+    shadow-[0px_0px_8px_0px_rgba(255,255,255,0.1)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]
     `,
         className
       )}

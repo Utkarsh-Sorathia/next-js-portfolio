@@ -103,7 +103,7 @@ export default function UnsubscribePageClient({ token }: { token: string }) {
             </p>
             <button
               onClick={() => router.push("/")}
-              className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition text-white font-medium"
+              className="w-full py-2 rounded-lg bg-[var(--primaryColor)] hover:opacity-90 transition text-white font-medium shadow-lg shadow-[var(--primaryColor)]/20 active:scale-95"
             >
               Go to Home
             </button>

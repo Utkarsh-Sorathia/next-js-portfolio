@@ -31,8 +31,8 @@
   }
 
   .btnStyle:hover {
-    border-color: #4361ee;
-    background-color: #4361ee;
+    border-color: var(--primaryColor);
+    background-color: var(--primaryColor);
     color: white;
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);

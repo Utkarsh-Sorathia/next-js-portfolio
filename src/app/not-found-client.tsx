@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function NotFoundClient() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
-      
+
       <motion.h1
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -33,13 +33,13 @@ export default function NotFoundClient() {
       >
         <Link
           href="/"
-          className="inline-block bg-[#4361ee] text-white px-6 py-3 rounded-full font-medium shadow-md hover:bg-[#2e4ac7] transition-colors"
+          className="inline-block bg-[var(--primaryColor)] text-white px-6 py-3 rounded-full font-medium shadow-md hover:opacity-90 transition-colors"
         >
           Back to Home
         </Link>
         <Link
           href="/blogs"
-          className="inline-block border border-[#4361ee] text-[#4361ee] hover:text-white px-6 py-3 rounded-full font-medium hover:bg-[#4361ee] transition-all duration-300"
+          className="inline-block border border-[var(--primaryColor)] text-[var(--primaryColor)] hover:text-white px-6 py-3 rounded-full font-medium hover:bg-[var(--primaryColor)] transition-all duration-300"
         >
           Read Blogs
         </Link>

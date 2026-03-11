@@ -37,7 +37,7 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
               style={{ willChange: 'transform, opacity' }}
               className="relative flex items-center gap-6"
             >
-              <div className={`relative w-40 h-40 rounded-full p-0 overflow-visible ${!isOpenToWork ? 'border-4 border-blue-600/50' : ''}`}>
+              <div className={`relative w-40 h-40 rounded-full p-0 overflow-visible ${!isOpenToWork ? 'border-4 border-[var(--primaryColor)]/50' : ''}`}>
                 <div className="absolute inset-0 rounded-full overflow-hidden">
                   <Image
                     src="/UtkarshSorathia.webp"
@@ -65,9 +65,9 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
                 <h3 className="text-2xl font-bold text-[var(--primaryColor)] mb-1">
                   Utkarsh Sorathia
                 </h3>
-                <p className="text-lg text-white">
+                <p className="text-lg text-[var(--textColor)]">
                   Full Stack Developer <br />
-                  <span className="text-base text-white">MERN | Next.js | Typescript</span>
+                  <span className="text-base text-[var(--textColor)]">MERN | Next.js | Typescript</span>
                 </p>
               </div>
             </motion.div>
@@ -85,7 +85,7 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
                 <span className="font-semibold text-[var(--primaryColor)]"> MERN stack</span>.
                 I enjoy working across the stack to turn product ideas into reliable, production-ready solutions.
               </p>
-              <p className="text-lg text-blue-100 text-justify">
+              <p className="text-lg text-[var(--textColorLight)] text-justify">
                 My approach emphasizes clean architecture, performance, and user-focused design, with a strong preference for maintainable and readable code.
               </p>
             </motion.div>
@@ -96,11 +96,11 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
                   key={name}
                   className="w-24 h-20 bg-white/5 border border-white/10 p-3 rounded-xl flex flex-col items-center justify-center shadow-sm hover:scale-105 hover:bg-white/10 transition-all duration-300 group"
                 >
-                  <Image 
-                    src={icon} 
-                    alt={name} 
-                    width={32} 
-                    height={32} 
+                  <Image
+                    src={icon}
+                    alt={name}
+                    width={32}
+                    height={32}
                     className="group-hover:scale-110 transition-transform duration-300"
                   />
                   <span className="text-[10px] uppercase font-bold tracking-widest mt-2 text-zinc-400 group-hover:text-white transition-colors">{name}</span>
@@ -116,7 +116,7 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
               className="mt-8 flex justify-center"
             >
               <a
-                className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-blue-600 transition text-white font-semibold py-3 px-6 rounded-lg shadow-md"
+                className="inline-block bg-[var(--primaryColor)] hover:opacity-90 transition-all text-white font-semibold py-3 px-8 rounded-lg shadow-lg active:scale-95"
                 href="/Utkarsh-Sorathia-CV.pdf"
                 download="UtkarshSorathia.pdf"
                 title="Download Resume"

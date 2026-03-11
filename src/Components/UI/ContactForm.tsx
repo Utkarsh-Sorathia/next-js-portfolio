@@ -161,7 +161,7 @@ const ContactForm = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full max-w-[200px] py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-xl shadow-blue-500/20 active:scale-95 group"
+                  className="w-full max-w-[200px] py-3.5 rounded-2xl bg-[var(--primaryColor)] text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-xl shadow-[var(--primaryColor)]/20 active:scale-95 group"
                 >
                   {isSubmitting ? (
                     <span className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />

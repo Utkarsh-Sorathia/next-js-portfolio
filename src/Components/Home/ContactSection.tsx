@@ -73,18 +73,18 @@ const ContactSection = ({ id }: { id: string }) => {
               <Link
                 href="/Utkarsh-Sorathia-CV.pdf"
                 download="UtkarshSorathia.pdf"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#4361ee]/30 transition-all duration-300"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[var(--primaryColor)]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row items-center gap-1.5 lg:gap-6 overflow-hidden w-full">
-                  <div className="p-2.5 md:p-4 bg-indigo-100 dark:bg-indigo-900/20 rounded-xl text-[#4361ee] shrink-0">
+                  <div className="p-2.5 md:p-4 bg-[var(--primaryColor)]/10 dark:bg-[var(--primaryColor)]/20 rounded-xl text-[var(--primaryColor)] shrink-0">
                     <FileText className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
-                    <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#4361ee] mb-0.5 lg:mb-1 opacity-80">Resume</p>
+                    <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[var(--primaryColor)] mb-0.5 lg:mb-1 opacity-80">Resume</p>
                     <p className="text-white font-semibold truncate hidden lg:block">Download CV</p>
                   </div>
                 </div>
-                <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[#4361ee] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[var(--primaryColor)] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
                   Get PDF <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>

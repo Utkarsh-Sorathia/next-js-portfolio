@@ -341,7 +341,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
                 <Link
                   href="/blogs"
-                  className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[var(--primaryColor)] to-indigo-600 hover:from-indigo-600 hover:to-[var(--primaryColor)] text-white rounded-[var(--borderRadius)] transition-all duration-300 text-sm sm:text-base whitespace-nowrap"
+                  className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-[var(--primaryColor)] hover:opacity-90 text-white rounded-[var(--borderRadius)] transition-all duration-300 text-sm sm:text-base whitespace-nowrap shadow-lg shadow-[var(--primaryColor)]/20 active:scale-95"
                 >
                   Read More Blogs
                 </Link>

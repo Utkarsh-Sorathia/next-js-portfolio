@@ -22,7 +22,7 @@ export default function BlogsPageClient({ posts }: BlogsPageClientProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-16">
         {posts.map((post, index) => (
           <div key={post._id} className={index < visibleCount ? "block" : "hidden sm:hidden lg:hidden"}>
-             <BlogCard post={post} />
+            <BlogCard post={post} />
           </div>
         ))}
       </div>
@@ -32,7 +32,7 @@ export default function BlogsPageClient({ posts }: BlogsPageClientProps) {
         <div className="flex justify-center mt-10">
           <button
             onClick={handleLoadMore}
-            className="px-6 py-3 bg-[var(--primaryColor)] text-white rounded-lg hover:bg-indigo-600 transition-all duration-200"
+            className="px-6 py-3 bg-[var(--primaryColor)] text-white rounded-lg hover:opacity-90 transition-all duration-200 active:scale-95 shadow-lg shadow-[var(--primaryColor)]/20"
           >
             Load More
           </button>
