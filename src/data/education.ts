@@ -5,7 +5,7 @@ const educations: TimelineEntry[] = [
     degree: "Bachelor of Engineering in Computer Engineering",
     educations: [
       {
-        institute: "Sarvajna College of Engineering and Technology (B.E.)",
+        institute: "Sarvajanik College of Engineering and Technology (B.E.)",
         startDate: "Aug 2020",
         endDate: "May 2024",
         location: "Surat, Gujarat, India",

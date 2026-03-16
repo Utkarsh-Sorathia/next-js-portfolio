@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { IProjectItem } from '@/interfaces'
 import ProjectCard from './ProjectCard'
 
-const PROJECTS_PER_PAGE = 3
+const PROJECTS_PER_PAGE = 6
 
 const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   // Desktop: Load More functionality
