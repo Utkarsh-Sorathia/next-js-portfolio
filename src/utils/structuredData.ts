@@ -232,30 +232,6 @@ export function getSiteNavigationSchema() {
 
 
 /**
- * ORGANIZATION SCHEMA
- */
-export function getOrganizationSchema(companyName: string, companyUrl: string, location: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${companyUrl}#organization`,
-    name: companyName,
-    url: companyUrl,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: location,
-      addressCountry: "IN",
-      streetAddress: "",
-      postalCode: "395002"
-    },
-    logo: {
-      "@type": "ImageObject",
-      url: `${baseUrl}/UtkarshSorathia.webp`,
-    },
-  };
-}
-
-/**
  * ARTICLE SCHEMA
  *
  * imageUrl can be a string or array of strings or ImageObject-like items.

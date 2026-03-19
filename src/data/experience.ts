@@ -6,17 +6,17 @@ const experience: IExperienceItem[] = [
     position: "MERN Stack Developer",
     startDate: "Nov 2024",
     endDate: "Present",
-    description: "I’m currently working as a MERN Stack Developer at Sparkle Infotech, specializing in React.js, Express.js, MongoDB, and Node.js. I’m also expanding my expertise in frameworks like Next.js, CMS platforms such as Strapi, and other emerging technologies.",
+    description: "Leading development of scalable MERN systems serving production workloads with improved API performance and modular architecture adoption. Building SEO-centric Next.js apps and custom Strapi plugins with GraphQL optimization, achieving 40% faster data fetching.",
     location: "Surat, Gujarat, India",
     companyLogo: "/experience/sparkle-logo.webp",
     companyLink:"https://sparkleinfotech.com/"
   },
   {
     company: "PIXML IT Solutions",
-    position: "React js developer Intern",
+    position: "Frontend Developer Intern",
     startDate: "Jan 2024",
     endDate: "May 2024",
-    description: "I have developed strong skills in web development, including core technologies like HTML, CSS, and JavaScript. Additionally, I have hands-on experience with React.js, Firebase, and popular styling frameworks like Bootstrap and Tailwind CSS.",
+    description: "Engineered responsive React.js interfaces using Bootstrap, Tailwind CSS and component-based design principles. Collaborated on production-ready features with a strong focus on clean UI/UX and seamless backend integration.",
     location: "Surat, Gujarat, India",
     companyLogo: "/experience/pixml-logo.webp",
     companyLink:"https://www.pixml.in/"

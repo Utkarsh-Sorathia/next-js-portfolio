@@ -171,21 +171,20 @@ export default function RootLayout({
             strategy="lazyOnload"
           />
         )}
+        <Header className="app_nav" navItems={navMenus} />
+        <main className="flex-grow">{children}
+          <Analytics />
+          <SpeedInsights />
+        </main>
+        <Footer />
+        <ScrollToTop />
         <KBarWrapper>
           <ErrorBoundary>
-            <Header className="app_nav" navItems={navMenus} />
             <Suspense fallback={null}>
               <GoogleAnalytics />
             </Suspense>
-            <main className="flex-grow">{children}
-              <Analytics />
-              <SpeedInsights />
-            </main>
-            <Footer />
-            <ScrollToTop />
             <CommandBarTrigger />
             <BlogButton />
-
             <ChatWidget />
           </ErrorBoundary>
         </KBarWrapper>

@@ -1,39 +1,11 @@
 import { IconDefinition, IconProp } from "@fortawesome/fontawesome-svg-core";
 import type { MouseEventHandler, ReactNode, RefObject } from "react";
 
-export interface INavMenuItem {
-  id: string;
-  title: string;
-  path: string;
-  section: string;
-  submenu?: INavMenuItem[];
-}
-
 export interface INavItem {
   name: string;
   link: string;
   icon: string;
 }
-
-// export interface IEducationItem {
-//   degree: string;
-//   institute: string;
-//   startDate: string;
-//   endDate?: string;
-//   location: string;
-//   cgpa: number;
-// }
-
-// export interface IExperienceItem {
-//   designation: string;
-//   company: string;
-//   startDate: string;
-//   endDate?: string;
-//   isCurrentJob: boolean;
-//   location: string;
-//   shortDescription?: string;
-//   description: string[];
-// }
 
 export enum RepoType {
   Public,
@@ -94,44 +66,12 @@ export interface ISocialLinkItem {
   name?: string;
 }
 
-export interface MenuItemProps {
-  items: INavMenuItem;
-  depthLevel: number;
-  mobileNav: boolean;
-  handleCloseMobileMenu: () => void;
-  current?: string;
-}
-
-export interface DropdownMenuProps
-  extends Omit<MenuItemProps, "items" | "current"> {
-  submenus: INavMenuItem[];
-  dropdown: boolean;
-}
-
-export interface ButtonComponentProps {
-  label: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  classNames?: string;
-  name?: string;
-}
-
 export interface CoreComponentsProps {
   children: ReactNode;
   classNames?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
   id?: string;
   elementRef?: RefObject<HTMLDivElement | null>;
-}
-
-export interface ViewportProps {
-  root?: null | undefined;
-  rootMargin?: string | undefined;
-  threshold?: number | undefined;
-}
-
-export interface ShootingStarProps {
-  vw: number;
-  vh: number;
 }
 
 export interface TimelineEntry {
@@ -148,13 +88,6 @@ export interface IEducationItem {
   cgpa: string;
 }
 
-
-export interface BulletedTextProps {
-  children: ReactNode;
-  classNames?: string;
-  iconSize?: string | number;
-  bulletColor?: string;
-}
 
 export interface IExperienceItem {
   company: string;
@@ -191,21 +124,4 @@ export interface IBlogPost {
   body: string | any; // Can be plain markdown string or legacy Portable Text
   image?: ISanityImage;
   recommended?: IBlogPost[];
-}
-
-// Additional interfaces for enhanced blog functionality
-export interface IBlogPostWithMetadata extends IBlogPost {
-  excerpt?: string;
-  readTime?: number; // in minutes
-  tags?: string[];
-  category?: string;
-  featured?: boolean;
-}
-
-export interface IBlogCategory {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  color?: string;
 }

@@ -3,7 +3,8 @@ import imageUrlBuilder from '@sanity/image-url';
 import { cache } from 'react';
 
 // Sanity CMS configuration
-export const sanityConfig = {
+// Sanity CMS configuration
+const sanityConfig = {
   projectId: 'roupwgmh',
   dataset: 'production',
   apiVersion: '2022-06-01',
@@ -15,7 +16,7 @@ export const sanityConfig = {
 };
 
 // Create Sanity client
-export const client = createClient(sanityConfig);
+const client = createClient(sanityConfig);
 
 // Image URL builder
 const builder = imageUrlBuilder(client);
@@ -25,7 +26,7 @@ export function urlFor(source: any) {
 }
 
 // GROQ query for fetching all blog posts
-export const getAllBlogPostsQuery = `
+const getAllBlogPostsQuery = `
   *[_type == "post"] | order(publishedAt desc) {
     _id,
     _createdAt,
@@ -51,7 +52,7 @@ export const getAllBlogPostsQuery = `
 
 
 // GROQ query for fetching a single blog post by slug
-export const getBlogPostBySlugQuery = `
+const getBlogPostBySlugQuery = `
   *[_type == "post" && slug.current == $slug][0] {
     _id,
     _createdAt,
@@ -109,7 +110,7 @@ export const getBlogPostBySlugQuery = `
 `;
 
 // GROQ query for fetching all blog post slugs (for static generation)
-export const getAllBlogPostSlugsQuery = `
+const getAllBlogPostSlugsQuery = `
   *[_type == "post"] {
     slug {
       current
@@ -139,47 +140,6 @@ export function getTimeSincePublished(publishedAt: string): string {
   } else {
     return 'Today';
   }
-}
-
-// Utility function to calculate read time
-export function calculateReadTime(body: any[]): number {
-  if (!body || !Array.isArray(body)) return 1;
-  
-  const wordsPerMinute = 200;
-  let totalWords = 0;
-  
-  body.forEach((block: any) => {
-    if (block.children) {
-      block.children.forEach((child: any) => {
-        if (child.text) {
-          totalWords += child.text.split(' ').length;
-        }
-      });
-    }
-  });
-  
-  return Math.ceil(totalWords / wordsPerMinute) || 1;
-}
-
-// Utility function to extract excerpt from body
-export function extractExcerpt(body: any[], maxLength: number = 150): string {
-  if (!body || !Array.isArray(body) || body.length === 0) return '';
-  
-  let text = '';
-  
-  for (const block of body) {
-    if (block.children) {
-      for (const child of block.children) {
-        if (child.text) {
-          text += child.text + ' ';
-          if (text.length > maxLength) break;
-        }
-      }
-    }
-    if (text.length > maxLength) break;
-  }
-  
-  return text.trim().substring(0, maxLength) + (text.length > maxLength ? '...' : '');
 }
 
 
