@@ -50,20 +50,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   let excerpt = '';
   if (typeof post.body === 'string') {
-    // Clean markdown for excerpt
-    excerpt = post.body
-      .replace(/^#{1,6}\s+/gm, '') // Remove headers
-      .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
-      .replace(/\*([^*]+)\*/g, '$1') // Remove italic
-      .replace(/`([^`]+)`/g, '$1') // Remove inline code
-      .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links
-      .replace(/\[|\]|\(|\)|`|#|\*/g, '') // Remove any remaining markdown special chars
-      .replace(/\s+/g, ' ')
-      .trim()
-      .substring(0, 160);
-  } else {
-    excerpt = post.body?.[0]?.children?.[0]?.text?.substring(0, 160) || '';
+    excerpt = post.body.replace(/[#*`[\]()]/g, '').trim(); 
+  } else if (Array.isArray(post.body)) {
+    const firstTextBlock = post.body.find((block: any) => 
+      block._type === 'block' && 
+      block.children?.some((child: any) => child.text?.trim())
+    );
+    excerpt = firstTextBlock?.children?.map((c: any) => c.text).join('') || '';
   }
+  excerpt = excerpt.substring(0, 160).trim();
 
   const metaDescription = excerpt || `Read about ${post.title}`;
 
@@ -211,18 +206,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   // Get image URL for structured data
   const imageUrl = post.image?.asset?.url || `${baseURL}/UtkarshSorathia.webp`;
-  const excerpt = typeof post.body === 'string'
-    ? post.body
-      .replace(/^#{1,6}\s+/gm, '')
-      .replace(/\*\*([^*]+)\*\*/g, '$1')
-      .replace(/\*([^*]+)\*/g, '$1')
-      .replace(/`([^`]+)`/g, '$1')
-      .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')
-      .replace(/\[|\]|\(|\)|`|#|\*/g, '')
-      .replace(/\s+/g, ' ')
-      .trim()
-      .substring(0, 160)
-    : post.body?.[0]?.children?.[0]?.text?.substring(0, 160) || '';
+  let excerpt = '';
+  if (typeof post.body === 'string') {
+    excerpt = post.body.replace(/[#*`[\]()]/g, '').trim(); 
+  } else if (Array.isArray(post.body)) {
+    const firstTextBlock = post.body.find((block: any) => 
+      block._type === 'block' && 
+      block.children?.some((child: any) => child.text?.trim())
+    );
+    excerpt = firstTextBlock?.children?.map((c: any) => c.text).join('') || '';
+  }
+  excerpt = excerpt.substring(0, 160).trim();
 
   // Generate structured data
   const articleSchema = getArticleSchema(
