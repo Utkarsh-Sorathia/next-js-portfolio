@@ -11,7 +11,7 @@ interface ExperienceCardProps {
 
 const ExperienceCard = ({ data }: ExperienceCardProps) => {
   return (
-    <section className="w-full px-6 py-0 md:py-8 max-w-5xl mx-auto">
+    <section className="w-full px-6 py-0 md:py-8 max-w-5xl mx-auto relative">
       <div className="relative">
         <div className="md:hidden absolute left-7.5 w-[3px] top-16 h-[calc(100%-4rem)] bg-[var(--primaryColor)] opacity-50"></div>
         <div className="hidden md:block absolute left-[50.1%] w-[3px] top-12 h-[calc(100%-3rem)] bg-[var(--primaryColor)] transform -translate-x-1/2 opacity-50"></div>
@@ -23,7 +23,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05, ease: "easeOut" }}
-              viewport={{ amount: 0.3, once: true }}
+              viewport={{ once: true }}
               style={{
                 willChange: 'transform, opacity', marginLeft: !isLeft ? "auto" : undefined,
                 right: !isLeft ? 0 : undefined
@@ -36,7 +36,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                     mb-10 last:mb-0
                     pt-8 md:pt-0
                     pl-16 md:pl-0
-                    w-full
+                    w-auto
                     max-w-full
                     box-border
                     `}

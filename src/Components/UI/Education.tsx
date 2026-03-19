@@ -52,7 +52,7 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
         {/* Unified List of Education Items */}
         <div className="space-y-0">
           {data.map((entry, entryIndex) => (
-            <div key={`entry-${entryIndex}`}>
+            <div key={`entry-${entryIndex}`} className="relative">
               {entry.educations.map((item, itemIndex) => {
                 const globalIndex = entryIndex + itemIndex;
                 return (

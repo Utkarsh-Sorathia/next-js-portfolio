@@ -39,16 +39,6 @@ export function validateAltText(
   return fallback || 'Image';
 }
 
-/**
- * Gets a descriptive alt text for project images
- */
-export function getProjectAltText(projectTitle: string): string {
-  return `${projectTitle} project`;
-}
-
-/**
- * Gets a descriptive alt text for blog images
- */
 export function getBlogAltText(postTitle: string): string {
   return `Blog post image for: ${postTitle}`;
 }
@@ -58,12 +48,5 @@ export function getBlogAltText(postTitle: string): string {
  */
 export function getSkillAltText(skillName: string): string {
   return `${skillName} skill icon`;
-}
-
-/**
- * Gets a descriptive alt text for experience logos
- */
-export function getExperienceLogoAltText(companyName: string): string {
-  return `${companyName} company logo`;
 }
 

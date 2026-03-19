@@ -36,14 +36,14 @@ const skills: ISkillListItem[] = [
       },
       {
         title: "CSS",
-        level: SkillLevel.Intermediate,
+        level: SkillLevel.Expert,
         icon: "/skills/css.svg",
       },
-      // {
-      //   title: "SASS",
-      //   level: SkillLevel.Intermediate,
-      //   icon: "/skills/sass.svg",
-      // },
+      {
+        title: "Tailwind CSS",
+        level: SkillLevel.Expert,
+        icon: "/skills/tailwind.svg",
+      },
       {
         title: "Redux Toolkit",
         level: SkillLevel.Expert,
@@ -65,14 +65,59 @@ const skills: ISkillListItem[] = [
         icon: "/skills/express.svg",
       },
       {
+        title: "NestJS",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/nestjs.svg",
+      },
+      {
         title: "Socket.io",
         level: SkillLevel.Intermediate,
         icon: "/skills/socket-io.webp",
       },
       {
-        title: "Nest.js",
+        title: "GraphQL",
         level: SkillLevel.Intermediate,
-        icon: "/skills/nestjs.svg",
+        icon: "/skills/graphql.svg",
+      },
+    ],
+  },
+  {
+    title: "Database Management",
+    items: [
+      {
+        title: "MongoDB",
+        level: SkillLevel.Expert,
+        icon: "/skills/mongodb.svg",
+      },
+      {
+        title: "PostgreSQL",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/postgresql.svg",
+      },
+      {
+        title: "MySQL",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/mysql.svg",
+      },
+    ],
+  },
+  {
+    title: "Tools & Platforms",
+    items: [
+      {
+        title: "Firebase",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/firebase.svg",
+      },
+      {
+        title: "Supabase",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/supabase.svg",
+      },
+      {
+        title: "Strapi",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/strapi.svg",
       },
     ],
   },
@@ -80,7 +125,7 @@ const skills: ISkillListItem[] = [
     title: "Mobile App Development",
     items: [
       {
-        title: "React Native(Andriod & iOS)",
+        title: "React Native (Android & iOS)",
         level: SkillLevel.Intermediate,
         icon: "/skills/react-native.svg",
       },
@@ -92,38 +137,8 @@ const skills: ISkillListItem[] = [
     ],
   },
   {
-    title: "Database Management",
+    title: "DevOps / VCS",
     items: [
-      {
-        title: "MongoDB",
-        level: SkillLevel.Intermediate,
-        icon: "/skills/mongodb.svg",
-      },
-      {
-        title: "PostgreSQL",
-        level: SkillLevel.Intermediate,
-        icon: "/skills/postgresql.svg",
-      },
-      {
-        title: "MySQL",
-        level: SkillLevel.Beginner,
-        icon: "/skills/mysql.svg",
-      },
-    ],
-  },
-  {
-    title: "DevOps/VCS",
-    items: [
-      {
-        title: "Docker",
-        level: SkillLevel.Beginner,
-        icon: "/skills/docker.svg",
-      },
-      // {
-      //   title: "AWS",
-      //   level: SkillLevel.Intermediate,
-      //   icon: "/skills/aws.svg",
-      // },
       {
         title: "Git",
         level: SkillLevel.Expert,
@@ -134,15 +149,10 @@ const skills: ISkillListItem[] = [
         level: SkillLevel.Expert,
         icon: "/skills/github-white.webp",
       },
-    ],
-  },
-  {
-    title: "Miscellaneous",
-    items: [
       {
-        title: "Firebase",
-        level: SkillLevel.Intermediate,
-        icon: "/skills/firebase.svg",
+        title: "Docker",
+        level: SkillLevel.Beginner,
+        icon: "/skills/docker.svg",
       },
       {
         title: "Ubuntu",
