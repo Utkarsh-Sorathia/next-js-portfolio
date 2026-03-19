@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Allow local network access for mobile testing
+  allowedDevOrigins: ['192.168.1.20'],
+
   async redirects() {
     return [
       // Force HTTPS redirect

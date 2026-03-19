@@ -59,19 +59,19 @@ export default function ChatWidget() {
     }
   }, [messages]);
 
-  // Initial nudge timer (shows after 5s)
+  // Initial nudge timer (shows after 4s)
   useEffect(() => {
     if (isOpen || hasSeenNudge) return;
 
     const timer = setTimeout(() => {
       setIsNudgeVisible(true);
       setHasSeenNudge(true);
-    }, 5000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [isOpen, hasSeenNudge]);
 
-  // Auto-hide nudge timer (hides after 10s)
+  // Auto-hide nudge timer (hides after 5s)
   useEffect(() => {
     if (!isNudgeVisible) return;
 
