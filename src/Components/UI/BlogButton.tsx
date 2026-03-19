@@ -21,19 +21,19 @@ const BlogButton = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Initial nudge timer
+  // Initial nudge timer (shows after 12s)
   useEffect(() => {
     if (hasSeenNudge) return;
 
     const timer = setTimeout(() => {
       setIsNudgeVisible(true);
       setHasSeenNudge(true);
-    }, 8000);
+    }, 12000);
 
     return () => clearTimeout(timer);
   }, [hasSeenNudge]);
 
-  // Auto-hide nudge timer
+  // Auto-hide nudge timer (hides after 5s)
   useEffect(() => {
     if (!isNudgeVisible) return;
 

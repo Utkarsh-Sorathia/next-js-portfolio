@@ -1,8 +1,9 @@
 import ConstrainedBox from "../../Components/core/constrained-box";
 import ResponsiveBox from "../../Components/core/ResponsiveBox";
 import SectionTitle from "../../Components/common/SectionTitle";
-import { HoverGrid } from "../../Components/common/HoverGrid";
 import services from "@/data/services";
+import { HoverGrid } from "../../Components/common/HoverGrid";
+import { ServiceAccordion } from "../../Components/UI/ServiceAccordion";
 
 const HomeSection2 = ({ id }: { id: string }) => {
   return (
@@ -12,7 +13,16 @@ const HomeSection2 = ({ id }: { id: string }) => {
     >
       <ConstrainedBox classNames="px-4 py-12 z-20">
         <SectionTitle>Services</SectionTitle>
-        <HoverGrid cards={services} />
+        
+        {/* Mobile Accordion */}
+        <div className="md:hidden">
+          <ServiceAccordion items={services} />
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden md:block">
+          <HoverGrid cards={services} />
+        </div>
       </ConstrainedBox>
     </ResponsiveBox>
   );
