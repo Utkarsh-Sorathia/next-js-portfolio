@@ -76,19 +76,16 @@ export default function BlogCard({ post }: BlogCardProps) {
               {(() => {
                 let excerpt = '';
                 if (typeof post.body === 'string') {
-                  // Clean markdown: remove headers (#), bold (**), italic (*), code (`), links, etc.
-                  excerpt = post.body
-                    .replace(/^#{1,6}\s+/gm, '') // Remove headers
-                    .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
-                    .replace(/\*([^*]+)\*/g, '$1') // Remove italic
-                    .replace(/`([^`]+)`/g, '$1') // Remove inline code
-                    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links
-                    .replace(/\[|\]|\(|\)|`|#|\*/g, ''); // Remove any remaining markdown special chars
-                  // Clean up extra spaces
-                  excerpt = excerpt.replace(/\s+/g, ' ').trim();
-                  return excerpt.substring(0, 150) + (excerpt.length > 150 ? '...' : '');
+                  excerpt = post.body.replace(/[#*`[\]()]/g, '').trim(); 
+                } else if (Array.isArray(post.body)) {
+                  // Find the first block that actually contains text
+                  const firstTextBlock = post.body.find((block: any) => 
+                    block._type === 'block' && 
+                    block.children?.some((child: any) => child.text?.trim())
+                  );
+                  excerpt = firstTextBlock?.children?.map((c: any) => c.text).join('') || '';
                 }
-                return post.body?.[0]?.children?.[0]?.text || 'No excerpt available...';
+                return excerpt.substring(0, 150).trim() || 'Read more about this project...';
               })()}
             </p>
           </div>
