@@ -59,7 +59,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
                 href={project.githubUrl}
                 aria-label={`${project.title} GitHub URL`}
                 target="_blank"
-                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] transition-all"
+                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] hover:scale-110 transition-all active:scale-90"
               >
                 <FontAwesomeIcon icon={faGithub} className="text-lg text-zinc-100" />
               </Link>
@@ -69,7 +69,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
                 href={project.url}
                 aria-label={`${project.title} Project URL`}
                 target="_blank"
-                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] transition-all"
+                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] hover:scale-110 transition-all active:scale-90"
               >
                 <FontAwesomeIcon icon={faEye} className="text-lg text-zinc-100" />
               </Link>
