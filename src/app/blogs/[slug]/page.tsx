@@ -12,6 +12,9 @@ import { getBlogAltText } from '@/utils/imageValidation';
 import BlogImageWithLoader from '@/Components/UI/BlogImageWithLoader';
 import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 import { baseURL } from '@/utils/api';
+import ReadingProgressBar from '@/Components/UI/ReadingProgressBar';
+import ShareButtons from '@/Components/UI/ShareButtons';
+import { getBlogExcerpt, formatDate, getReadingTime } from '@/utils/blog';
 
 export const revalidate = 86400; // Revalidate every 1 day (ISR with webhook support)
 export const dynamicParams = true; // Allow new blogs without rebuild
@@ -48,18 +51,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
-  let excerpt = '';
-  if (typeof post.body === 'string') {
-    excerpt = post.body.replace(/[#*`[\]()]/g, '').trim(); 
-  } else if (Array.isArray(post.body)) {
-    const firstTextBlock = post.body.find((block: any) => 
-      block._type === 'block' && 
-      block.children?.some((child: any) => child.text?.trim())
-    );
-    excerpt = firstTextBlock?.children?.map((c: any) => c.text).join('') || '';
-  }
-  excerpt = excerpt.substring(0, 160).trim();
-
+  const excerpt = getBlogExcerpt(post, 160);
   const metaDescription = excerpt || `Read about ${post.title}`;
 
   return {
@@ -134,13 +126,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const recommendedPosts = post.recommended || [];
 
-  const publishedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const publishedDate = formatDate(post.publishedAt);
 
   const timeSincePublished = getTimeSincePublished(post.publishedAt);
+  const readingTime = getReadingTime(post.body);
 
   // Convert Portable Text to Markdown string
   const convertPortableTextToMarkdown = (body: any): string => {
@@ -206,17 +195,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   // Get image URL for structured data
   const imageUrl = post.image?.asset?.url || `${baseURL}/UtkarshSorathia.webp`;
-  let excerpt = '';
-  if (typeof post.body === 'string') {
-    excerpt = post.body.replace(/[#*`[\]()]/g, '').trim(); 
-  } else if (Array.isArray(post.body)) {
-    const firstTextBlock = post.body.find((block: any) => 
-      block._type === 'block' && 
-      block.children?.some((child: any) => child.text?.trim())
-    );
-    excerpt = firstTextBlock?.children?.map((c: any) => c.text).join('') || '';
-  }
-  excerpt = excerpt.substring(0, 160).trim();
+  const excerpt = getBlogExcerpt(post, 160);
 
   // Generate structured data
   const articleSchema = getArticleSchema(
@@ -236,6 +215,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <PageBox>
+      <ReadingProgressBar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -283,7 +263,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
                 <div className="flex items-center">
                   <Clock className="w-4 h-4 mr-2" />
-                  <span>{timeSincePublished}</span>
+                  <span>{timeSincePublished} • {readingTime}</span>
                 </div>
               </div>
 
@@ -308,6 +288,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {bodyMarkdown && (
               <MarkdownRenderer content={bodyMarkdown} />
             )}
+
+            {/* Share Buttons */}
+            <ShareButtons url={`${baseURL}/blogs/${post.slug.current}`} title={post.title} />
 
             {/* Recommended Posts */}
             {recommendedPosts.length > 0 && (
