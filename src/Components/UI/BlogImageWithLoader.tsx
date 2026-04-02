@@ -11,6 +11,7 @@ interface BlogImageWithLoaderProps {
   quality?: number;
   sizes?: string;
   roundedClass?: string;
+  blurDataURL?: string;
 }
 
 export default function BlogImageWithLoader({
@@ -21,6 +22,7 @@ export default function BlogImageWithLoader({
   quality = 85,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw',
   roundedClass = 'rounded-[var(--borderRadius)]',
+  blurDataURL,
 }: BlogImageWithLoaderProps) {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -43,8 +45,8 @@ export default function BlogImageWithLoader({
 
   return (
     <div className={`relative ${className}`}>
-      {/* Loading Shimmer */}
-      {imageLoading && !imageError && (
+      {/* Loading Shimmer (only if no blur data URL) */}
+      {imageLoading && !imageError && !blurDataURL && (
         <div className={`absolute inset-0 image-shimmer bg-gray-700 ${roundedClass}`} />
       )}
 
@@ -54,12 +56,14 @@ export default function BlogImageWithLoader({
         alt={alt}
         fill
         className={`object-cover transition-opacity duration-300 ${roundedClass} ${
-          imageLoading ? 'opacity-0' : 'opacity-100'
+          imageLoading && !blurDataURL ? 'opacity-0' : 'opacity-100'
         }`}
         style={{ objectPosition }}
         quality={quality}
         priority={priority}
         sizes={sizes}
+        placeholder={blurDataURL ? 'blur' : 'empty'}
+        blurDataURL={blurDataURL}
         onLoad={handleImageLoad}
         onError={() => {
           setImageLoading(false);

@@ -1,4 +1,3 @@
-'use client';
 
 import { IBlogPost } from '@/interfaces';
 import Link from 'next/link';
@@ -33,6 +32,7 @@ export default function BlogCard({ post }: BlogCardProps) {
                 className="w-full h-full transition-transform duration-300"
                 roundedClass="rounded-t-[var(--borderRadius)]"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                blurDataURL={post.image.asset.lqip}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </div>

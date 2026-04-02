@@ -4,7 +4,14 @@ import { IBlogPost } from "@/interfaces";
  * Extracts a plain text excerpt from blog post body
  */
 export function getBlogExcerpt(post: IBlogPost, length: number = 160): string {
-  if (!post || !post.body) return "";
+  if (!post) return "";
+
+  // Use manual excerpt if it exists
+  if (post.excerpt) {
+    return post.excerpt.substring(0, length).trim();
+  }
+
+  if (!post.body) return "";
 
   let excerpt = "";
   if (typeof post.body === "string") {

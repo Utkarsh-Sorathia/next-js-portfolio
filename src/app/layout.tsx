@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import 'github-markdown-css/github-markdown.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Header from "@/Components/UI/Header";
 import ScrollToTop from "@/Components/common/ScrollToTop";
 import { navMenus } from "../data/navItems";
 import Footer from "@/Components/UI/Footer";
+import Strings from "@/constants/strings";
 import GoogleAnalytics from "@/Components/core/GoogleAnalytics";
 import BlogButton from "@/Components/UI/BlogButton";
 import ErrorBoundary from "@/Components/common/ErrorBoundary";
@@ -156,10 +156,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://cdn.sanity.io" />
 
         <link rel="me" href="https://www.wikidata.org/wiki/Q137171536" />
-        <link rel="me" href="https://www.github.com/Utkarsh-Sorathia" />
-        <link rel="me" href="https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a" />
-        <link rel="me" href="https://x.com/utkarshsor03" />
-        <link rel="me" href="https://www.instagram.com/utkarsh__sorathia" />
+        <link rel="me" href={Strings.githubLink} />
+        <link rel="me" href={Strings.linkedInLink} />
+        <link rel="me" href={Strings.twitterLink} />
+        <link rel="me" href={Strings.instagramLink} />
+        <link rel="me" href={Strings.upworkLink} />
         <link rel="alternate" type="application/rss+xml" title="Utkarsh Sorathia Blog RSS Feed" href={`${baseUrl}/rss.xml`} />
 
       </head>

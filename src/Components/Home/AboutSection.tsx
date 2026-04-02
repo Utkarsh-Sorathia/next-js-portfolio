@@ -112,7 +112,7 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
             </motion.div>
           </div>
 
-          <div className="flex-1 p-6 relative">
+          <div className="flex-1 p-6" style={{ position: 'relative' }}>
             <span className='block md:hidden py-4'><SectionTitle>Education</SectionTitle></span>
             <Education data={education} />
           </div>

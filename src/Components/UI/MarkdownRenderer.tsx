@@ -1,58 +1,37 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import { marked } from 'marked';
+import { useEffect, useRef, useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { createRoot } from 'react-dom/client';
 
 interface MarkdownRendererProps {
-  content: string;
+  html: string;
 }
 
-const MarkdownRenderer = ({ content }: MarkdownRendererProps) => {
-  const [html, setHtml] = useState<string>('');
+const MarkdownRenderer = ({ html }: MarkdownRendererProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const processContent = async () => {
-      try {
-        if (!content) {
-          setHtml('');
-          return;
-        }
-
-        const DOMPurify = (await import('dompurify')).default;
-        
-        const rawMarkup = await marked.parse(content, { 
-          async: true,
-          gfm: true,
-          breaks: true 
-        });
-
-        const cleanMarkup = DOMPurify.sanitize(rawMarkup, {
-          USE_PROFILES: { html: true }
-        });
-        
-        setHtml(cleanMarkup);
-      } catch (error) {
-        console.error('Markdown processing error:', error);
-        setHtml(content); 
-      }
-    };
-
-    processContent();
-  }, [content]);
-
-  useEffect(() => {
     if (!containerRef.current || !html) return;
+
+    // Clean up any existing wrappers if re-rendering
+    const existingWrappers = containerRef.current.querySelectorAll('.code-block-wrapper');
+    existingWrappers.forEach(wrapper => {
+      const pre = wrapper.querySelector('pre');
+      if (pre) {
+        wrapper.parentNode?.insertBefore(pre, wrapper);
+        wrapper.remove();
+      }
+    });
 
     // Add copy buttons to pre tags
     const preTags = containerRef.current.querySelectorAll('pre');
     
     preTags.forEach((pre) => {
+      // Small delay to ensure DOM is settled
       if (pre.parentElement?.classList.contains('code-block-wrapper')) return;
 
-      // Wrap pre in a div
+      // Wrap pre in a div for relative positioning
       const wrapper = document.createElement('div');
       wrapper.className = 'relative group code-block-wrapper';
       pre.parentNode?.insertBefore(wrapper, pre);
@@ -79,7 +58,7 @@ const MarkdownRenderer = ({ content }: MarkdownRendererProps) => {
             className="p-2 bg-zinc-800/80 hover:bg-zinc-700 text-zinc-400 hover:text-white rounded-md border border-white/10 backdrop-blur-sm transition-all active:scale-90"
             title="Copy code"
           >
-            {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+            {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-zinc-400" />}
           </button>
         );
       };
