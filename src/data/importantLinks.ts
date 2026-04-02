@@ -32,6 +32,12 @@
       icon: Strings.twitterIcon,
       text: Strings.twitterUsername,
     },
+    {
+      name: Strings.upwork,
+      url: Strings.upworkLink,
+      icon: Strings.upworkIcon,
+      text: Strings.upworkUsername,
+    },
   ];
   
   export default socialLinks;

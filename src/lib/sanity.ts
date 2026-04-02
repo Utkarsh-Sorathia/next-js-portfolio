@@ -33,7 +33,7 @@ const getAllBlogPostsQuery = `
     _updatedAt,
     title,
     publishedAt,
-    body,
+    excerpt,
     slug {
       current
     },
@@ -44,7 +44,8 @@ const getAllBlogPostsQuery = `
         altText,
         title,
         description,
-        url
+        url,
+        "lqip": metadata.lqip
       }
     }
   }
@@ -59,6 +60,7 @@ const getBlogPostBySlugQuery = `
     _updatedAt,
     title,
     publishedAt,
+    excerpt,
     body[] {
       ...,
       "listItem": listItem,
@@ -87,7 +89,8 @@ const getBlogPostBySlugQuery = `
         altText,
         title,
         description,
-        url
+        url,
+        "lqip": metadata.lqip
       }
     },
     "recommended": *[_type == "post" && slug.current != $slug] | order(publishedAt desc) [0...3] {
@@ -102,7 +105,8 @@ const getBlogPostBySlugQuery = `
       image {
         asset->{
           url,
-          altText
+          altText,
+          "lqip": metadata.lqip
         }
       }
     }

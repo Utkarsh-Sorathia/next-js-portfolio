@@ -1,4 +1,3 @@
-"use client";
 
 import { RepoType, type IProjectItem } from "@/interfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

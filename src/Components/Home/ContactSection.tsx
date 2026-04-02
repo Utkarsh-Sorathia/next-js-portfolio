@@ -1,12 +1,12 @@
-'use client';
 
 import ResponsiveBox from "../../Components/core/ResponsiveBox";
 import ConstrainedBox from "../../Components/core/constrained-box";
 import SectionTitle from "../../Components/common/SectionTitle";
 import ContactForm from "../UI/ContactForm";
 import { ArrowRight, FileText } from "lucide-react";
-import { SiLinkedin, SiGithub } from "react-icons/si";
+import { SiLinkedin, SiGithub, SiUpwork } from "react-icons/si";
 import Link from "next/link";
+import Strings from "@/constants/strings";
 
 const ContactSection = ({ id }: { id: string }) => {
   return (
@@ -33,7 +33,7 @@ const ContactSection = ({ id }: { id: string }) => {
             <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 lg:gap-4 lg:space-y-4">
               {/* Contact Cards */}
               <Link
-                href="https://www.linkedin.com/in/utkarsh-sorathia-a9292b22a"
+                href={Strings.linkedInLink}
                 target="_blank"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
               >
@@ -43,7 +43,7 @@ const ContactSection = ({ id }: { id: string }) => {
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
                     <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#0077b5] mb-0.5 lg:mb-1 opacity-80">LinkedIn</p>
-                    <p className="text-white font-semibold truncate hidden lg:block">utkarsh-sorathia</p>
+                    <p className="text-white font-semibold truncate hidden lg:block">{Strings.linkedInUsername}</p>
                   </div>
                 </div>
                 <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[#0077b5] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
@@ -52,7 +52,7 @@ const ContactSection = ({ id }: { id: string }) => {
               </Link>
 
               <Link
-                href="https://github.com/Utkarsh-Sorathia"
+                href={Strings.githubLink}
                 target="_blank"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-white/30 transition-all duration-300"
               >
@@ -62,33 +62,32 @@ const ContactSection = ({ id }: { id: string }) => {
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
                     <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#fff] mb-0.5 lg:mb-1 opacity-80">GitHub</p>
-                    <p className="text-white font-semibold truncate hidden lg:block">Utkarsh-Sorathia</p>
+                    <p className="text-white font-semibold truncate hidden lg:block">{Strings.githubUsername}</p>
                   </div>
                 </div>
                 <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-white opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
                   View Code <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
-
+              
               <Link
-                href="/Utkarsh-Sorathia-CV.pdf"
-                download="UtkarshSorathia.pdf"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[var(--primaryColor)]/30 transition-all duration-300"
+                href={Strings.upworkLink}
+                target="_blank"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#14a800]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row items-center gap-1.5 lg:gap-6 overflow-hidden w-full">
-                  <div className="p-2.5 md:p-4 bg-[var(--primaryColor)]/10 dark:bg-[var(--primaryColor)]/20 rounded-xl text-[var(--primaryColor)] shrink-0">
-                    <FileText className="w-5 h-5 md:w-6 md:h-6" />
+                  <div className="p-2.5 md:p-4 bg-[#14a800]/10 dark:bg-[#14a800]/20 rounded-xl text-[#14a800] shrink-0">
+                    <SiUpwork className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
-                    <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[var(--primaryColor)] mb-0.5 lg:mb-1 opacity-80">Resume</p>
-                    <p className="text-white font-semibold truncate hidden lg:block">Download CV</p>
+                    <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#14a800] mb-0.5 lg:mb-1 opacity-80">Upwork</p>
+                    <p className="text-white font-semibold truncate hidden lg:block">{Strings.upworkUsername}</p>
                   </div>
                 </div>
-                <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[var(--primaryColor)] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
-                  Get PDF <ArrowRight className="w-4 h-4" />
+                <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[#14a800] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                  Hire Me <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
-
 
             </div>
           </div>

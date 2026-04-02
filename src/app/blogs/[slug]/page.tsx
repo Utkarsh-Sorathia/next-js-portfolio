@@ -15,6 +15,8 @@ import { baseURL } from '@/utils/api';
 import ReadingProgressBar from '@/Components/UI/ReadingProgressBar';
 import ShareButtons from '@/Components/UI/ShareButtons';
 import { getBlogExcerpt, formatDate, getReadingTime } from '@/utils/blog';
+import { parseMarkdownToHtml } from '@/utils/markdown';
+import 'github-markdown-css/github-markdown.css';
 
 export const revalidate = 86400; // Revalidate every 1 day (ISR with webhook support)
 export const dynamicParams = true; // Allow new blogs without rebuild
@@ -193,6 +195,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ? post.body
     : convertPortableTextToMarkdown(post.body);
 
+  const bodyHtml = await parseMarkdownToHtml(bodyMarkdown);
+
   // Get image URL for structured data
   const imageUrl = post.image?.asset?.url || `${baseURL}/UtkarshSorathia.webp`;
   const excerpt = getBlogExcerpt(post, 160);
@@ -275,6 +279,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     alt={post.image.asset.altText || getBlogAltText(post.title)}
                     className="w-full h-full"
                     priority
+                    blurDataURL={post.image.asset.lqip}
                   />
                 </div>
               ) : (
@@ -285,8 +290,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </header>
 
             {/* Article Content */}
-            {bodyMarkdown && (
-              <MarkdownRenderer content={bodyMarkdown} />
+            {bodyHtml && (
+              <MarkdownRenderer html={bodyHtml} />
             )}
 
             {/* Share Buttons */}

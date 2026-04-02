@@ -108,6 +108,7 @@ export interface ISanitySlug {
 export interface ISanityAsset {
   altText?: string;
   url: string;
+  lqip?: string;
 }
 
 export interface ISanityImage {
@@ -121,6 +122,7 @@ export interface IBlogPost {
   title: string;
   publishedAt: string;
   slug: ISanitySlug;
+  excerpt?: string;
   body: string | any; // Can be plain markdown string or legacy Portable Text
   image?: ISanityImage;
   recommended?: IBlogPost[];

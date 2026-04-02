@@ -22,7 +22,8 @@ const FloatingNavbar = ({
     if (link === '/') {
       e.preventDefault();
       if (pathname === '/') {
-        // Already on home page, just scroll to top smoothly
+        // Already on home page, clear hash and scroll to top smoothly
+        router.push('/');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         // Navigate to home then scroll

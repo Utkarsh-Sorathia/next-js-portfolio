@@ -1,13 +1,12 @@
-import dynamic from "next/dynamic";
 
-const PageBox = dynamic(() => import("@/Components/core/PageBox"));
+import PageBox from "@/Components/core/PageBox";
 import HomeSection from "@/Components/Home/HomeSection";
-const AboutSection = dynamic(() => import("@/Components/Home/AboutSection"));
-const ServiceSection = dynamic(() => import("@/Components/Home/ServiceSection"));
-const ExperienceSection = dynamic(() => import("@/Components/Home/ExperienceSection"));
-const SkillSection = dynamic(() => import("@/Components/Home/SkillSection"));
-const ProjectSection = dynamic(() => import("@/Components/Home/ProjectSection"));
-const ContactSection = dynamic(() => import("@/Components/Home/ContactSection"));
+import AboutSection from "@/Components/Home/AboutSection";
+import ServiceSection from "@/Components/Home/ServiceSection";
+import ExperienceSection from "@/Components/Home/ExperienceSection";
+import SkillSection from "@/Components/Home/SkillSection";
+import ProjectSection from "@/Components/Home/ProjectSection";
+import ContactSection from "@/Components/Home/ContactSection";
 
 import {
   getPersonSchema,
