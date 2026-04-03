@@ -53,6 +53,7 @@ export default async function BlogsPage() {
         <ConstrainedBox classNames="px-4 py-16">
           {/* Header Section */}
           <div>
+            <h1 className="sr-only">Utkarsh Sorathia Blog - Web Development & Technology Insights</h1>
             <SectionTitle>
               My <span className="text-[var(--primaryColor)]">Blogs</span>
             </SectionTitle>
