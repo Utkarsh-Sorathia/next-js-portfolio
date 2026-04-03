@@ -70,7 +70,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
             {/* Excerpt */}
             <p className="text-[var(--textColorLight)] text-sm leading-relaxed mb-4 line-clamp-3">
-              {excerpt || 'Read more about this project...'}
+              {excerpt || 'Click to read the full article and explore more insights into modern development...'}
             </p>
           </div>
 
