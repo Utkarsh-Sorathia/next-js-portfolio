@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Redirect singular /Blog to plural /blogs
+      {
+        source: "/Blog/:path*",
+        destination: "/blogs/:path*",
+        permanent: true,
+      },
       // Force HTTPS redirect
       {
         source: "/:path*",
