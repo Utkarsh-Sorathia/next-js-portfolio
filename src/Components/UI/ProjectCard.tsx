@@ -1,5 +1,5 @@
 
-import { RepoType, type IProjectItem } from "@/interfaces";
+import { RepoType, ProjectType, type IProjectItem } from "@/interfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -9,93 +9,104 @@ import CardBox from "../../Components/core/CardBox";
 
 const ProjectCard = ({ project }: { project: IProjectItem }) => {
   return (
-    <CardBox classNames="w-full min-h-[450px] h-full p-6 rounded-[var(--borderRadius)] border border-[rgba(255,255,255,0.10)] dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(100,100,100,0.06)_inset] group slide_in overflow-hidden hover:shadow-[4px_8px_24px_0px_rgba(100,100,100,0.12)_inset] transition-shadow duration-300">
-      <div className="w-full h-full flex flex-col justify-between items-center gap-4">
-        {/* Top Section: Header & Info */}
-        <div className="w-full flex flex-col items-center">
-          <div className="w-[3rem] aspect-square flex items-center justify-center mb-4">
-            <Image
-              src={project.icon}
-              alt={`project-${project.title}`}
-              width={100}
-              height={100}
-              sizes="100%"
-              loading="lazy"
-              placeholder="blur"
-              blurDataURL={project.icon}
-              className="w-full h-full object-cover aspect-square"
-            />
-          </div>
-
-          <p className="text-lg lg:text-xl font-semibold text-[var(--primaryColor)] text-center">{project.title}</p>
-
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
-            {project.isCurrent && (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--primaryColor)]/10 border border-[var(--primaryColor)]/20">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primaryColor)] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--primaryColor)]"></span>
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--primaryColor)]">Current</span>
-              </div>
-            )}
-
-            <div
-              className={`flex flex-row items-center justify-center rounded-full py-[0.05rem] px-[0.75rem] capitalize text-center border ${project.repoType === RepoType.Private
-                  ? "text-[var(--errorColor)] border-[var(--errorColor50)]"
-                  : "text-[var(--successColor)] border-[var(--successColor50)]"
-                }`}
-            >
-              <p className="text-[10px] font-bold uppercase tracking-widest">
-                {project.repoType === RepoType.Private ? "Private" : "Public"}
-              </p>
+    <CardBox classNames="px-5 py-6 md:px-6 md:py-7 h-full min-h-auto md:min-h-[420px]">
+      <div className="flex flex-col h-full">
+        {/* 🏷️ Top Header: Icon and Badges */}
+        <div className="flex items-start justify-between w-full mb-6">
+          <div className="relative group/icon">
+            <div className="absolute -inset-2 bg-[var(--primaryColor)]/10 rounded-xl blur-lg opacity-0 group-hover/icon:opacity-100 transition-opacity" />
+            <div className="relative w-12 h-12 md:w-14 md:h-14 p-2.5 md:p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center shadow-2xl">
+              <Image
+                src={project.icon}
+                alt={project.title}
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
 
-          <div className="flex items-center justify-center mt-4 gap-3">
-            {project.githubUrl && (
-              <Link
-                href={project.githubUrl}
-                aria-label={`${project.title} GitHub URL`}
-                target="_blank"
-                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] hover:scale-110 transition-all active:scale-90"
-              >
-                <FontAwesomeIcon icon={faGithub} className="text-lg text-zinc-100" />
-              </Link>
-            )}
-            {project.url && (
-              <Link
-                href={project.url}
-                aria-label={`${project.title} Project URL`}
-                target="_blank"
-                className="p-2 border border-white/10 rounded-full hover:bg-white/10 hover:border-[var(--primaryColor)] hover:scale-110 transition-all active:scale-90"
-              >
-                <FontAwesomeIcon icon={faEye} className="text-lg text-zinc-100" />
-              </Link>
+          <div className="flex flex-col items-end">
+            {project.isCurrent && (
+              <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                <span className="relative flex h-1 w-1">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1 w-1 bg-emerald-500"></span>
+                </span>
+                <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider text-emerald-400">Live</span>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Middle Section: Description (Flex Grow) */}
-        <div className="flex-grow flex flex-col justify-center">
-          <p className="text-sm lg:text-base text-zinc-400 leading-relaxed line-clamp-4 text-justify">
-            {project.description}
-          </p>
+        {/* 📄 Content Section */}
+        <div className="flex flex-col gap-2 md:gap-3 flex-grow">
+          {/* Title Area (Consistent min-height only on desktop) */}
+          <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-[var(--primaryColor)] transition-colors duration-300 tracking-tight leading-tight md:min-h-[3.5rem] flex items-center">
+            {project.title}
+          </h3>
+          
+          {/* Description Area (Flexible height to show entire text) */}
+          <div className="flex-grow">
+            <p className="text-sm md:text-sm text-zinc-400 leading-relaxed">
+              {project.description}
+            </p>
+          </div>
         </div>
 
-        {/* Bottom Section: Tags */}
-        {project.tags && project.tags.length > 0 && (
-          <div className="w-full flex flex-wrap items-center justify-center gap-2 pt-4">
-            {project.tags.map((tag, i) => (
-              <span
-                key={`tag-${i}`}
-                className="rounded-md border border-white/5 bg-white/5 py-1 px-2.5 text-[10px] font-bold uppercase tracking-tighter text-zinc-400"
-              >
-                {tag}
-              </span>
-            ))}
+        {/* 🛠️ Footer Area: Tags and Links (Engineered for Alignment) */}
+        <div className="mt-6 md:mt-8 flex flex-col gap-5 md:gap-6">
+          {/* Tech Stack Tags (Sits above buttons) */}
+          {project.tags && project.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1 md:gap-1.5 pt-4 border-t border-white/5">
+              {project.tags.map((tag, i) => (
+                <span
+                  key={i}
+                  className="text-[9px] md:text-[10px] font-semibold px-2 py-0.5 md:py-1 rounded-md bg-white/5 text-zinc-400 border border-white/10 uppercase tracking-tight"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Links Area (Pinned to the absolute bottom) */}
+          <div className="flex items-center gap-2 mt-auto">
+            {project.githubUrl || project.url ? (
+              <>
+                {project.githubUrl && (
+                  <Link
+                    href={project.githubUrl}
+                    target="_blank"
+                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-zinc-800/50 border border-white/10 text-[10px] font-bold text-zinc-300 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                  >
+                    <FontAwesomeIcon icon={faGithub} className="text-xs" />
+                    <span>Source</span>
+                  </Link>
+                )}
+                {project.url && (
+                  <Link
+                    href={project.url}
+                    target="_blank"
+                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[var(--primaryColor)]/10 border border-[var(--primaryColor)]/20 text-[10px] font-bold text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white transition-all duration-300"
+                  >
+                    <FontAwesomeIcon icon={faEye} className="text-xs" />
+                    <span>Demo</span>
+                  </Link>
+                )}
+              </>
+            ) : (
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-800/30 border border-white/5 text-[9px] font-bold uppercase tracking-widest text-zinc-500">
+                <span className="w-1 h-1 rounded-full bg-zinc-600" />
+                <span>
+                  {project.projectType === ProjectType.JobWork && "Corporate Work"}
+                  {project.projectType === ProjectType.Freelance && "Client Project"}
+                  {project.projectType === ProjectType.Personal && "Private Project"}
+                </span>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </CardBox>
   );

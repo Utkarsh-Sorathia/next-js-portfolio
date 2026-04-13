@@ -3,6 +3,7 @@ import { cn } from "@/utils/cn";
 import { IServiceItem } from "@/interfaces";
 import Image from "next/image";
 import { validateAltText, getSkillAltText } from "@/utils/imageValidation";
+import CardBox from "../core/CardBox";
 
 export function ServiceCard({
   item,
@@ -100,16 +101,9 @@ export const Card = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div
-      className={cn(
-        "relative w-full h-full mx-auto overflow-hidden rounded-[var(--borderRadius)] border border-white/10 dark:bg-[var(--primaryColor5)] bg-[var(--primaryColor5)] shadow-[2px_4px_16px_0px_rgba(0,0,0,0.2)_inset] group hover:bg-white/5 transition duration-300",
-        className
-      )}
-    >
-      <div className="relative z-50">
-        <div className="p-4">{children}</div>
-      </div>
-    </div>
+    <CardBox classNames={cn("h-full", className)}>
+      <div className="p-4 md:p-6 h-full flex flex-col">{children}</div>
+    </CardBox>
   );
 };
 

@@ -4,6 +4,7 @@ import { IExperienceItem } from "../../interfaces";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import CardBox from "../core/CardBox";
 
 interface ExperienceCardProps {
   data: IExperienceItem[];
@@ -107,13 +108,16 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 </div>
 
                 <div
-                  className={`border border-[rgba(255,255,255,0.50)] p-3 md:p-8 transition-all duration-300 hover:bg-white/10 rounded-[var(--borderRadius)] ${
+                  className={`relative p-3 md:p-8 transition-all duration-500 border rounded-[var(--borderRadius)] border-white/10 hover:border-zinc-500 group overflow-hidden shadow-[2px_4px_16px_0px_rgba(0,0,0,0.1)_inset] ${
                     isLeft
                       ? "md:mr-8 md:pr-8 translate-x-0 md:translate-x-[-150px]"
                       : "md:ml-8 md:pl-8 translate-x-0 md:translate-x-40"
                   }`}
                 >
-                  <div className="flex flex-col sm:flex-row items-start gap-3">
+                  {/* ⚪ The "Skill Card" White Glow Overlay */}
+                  <div className="absolute inset-0 bg-white/[0.12] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[var(--borderRadius)] z-0" />
+                  
+                  <div className="relative z-10 flex flex-col sm:flex-row items-start gap-3">
                     {item.companyLink ? (
                       <Link href={item.companyLink} target="_blank" rel="noopener noreferrer">
                         {item.companyLogo && (

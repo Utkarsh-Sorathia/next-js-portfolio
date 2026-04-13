@@ -2,6 +2,17 @@ import { IProjectItem, ProjectType, RepoType } from "@/interfaces";
 
 const projects: IProjectItem[] = [
   {
+    id: "Sparkle Infotech Site",
+    title: "Sparkle Infotech (Company Site)",
+    description:
+      "Built and maintained the Sparkle Infotech company website using Next.js, Strapi CMS, and GraphQL. Delivered UI design fixes, layout improvements, and optimized GraphQL queries for significantly faster data fetching.",
+    icon: "/skills/nextjs.webp",
+    repoType: RepoType.Private,
+    projectType: ProjectType.JobWork,
+    url: "https://sparkleinfotech.com/",
+    tags: ["Next.js", "Strapi", "GraphQL", "TypeScript", "Tailwind CSS"],
+  },
+  {
     id: "Griffin GPS AT SYS",
     title: "Griffin (GPS AT SYS)",
     description:
@@ -22,17 +33,6 @@ const projects: IProjectItem[] = [
     tags: ["MERN", "PostgreSQL", "Playwright", "E2E Testing", "Node.js"],
   },
   {
-    id: "Sparkle Infotech Site",
-    title: "Sparkle Infotech (Company Site)",
-    description:
-      "Built and maintained the Sparkle Infotech company website using Next.js, Strapi CMS, and GraphQL. Delivered UI design fixes, layout improvements, and optimized GraphQL queries for significantly faster data fetching.",
-    icon: "/skills/nextjs.webp",
-    repoType: RepoType.Private,
-    projectType: ProjectType.JobWork,
-    url: "https://sparkleinfotech.com/",
-    tags: ["Next.js", "Strapi", "GraphQL", "TypeScript", "Tailwind CSS"],
-  },
-  {
     id: "Baheer Euregio Master",
     title: "Baheer Euregio (Custom CMS)",
     description:
@@ -41,17 +41,6 @@ const projects: IProjectItem[] = [
     repoType: RepoType.Private,
     projectType: ProjectType.JobWork,
     tags: ["Strapi", "React.js", "Custom Plugins", "CMS", "Node.js"],
-  },
-  {
-    id: "Kachnar Nursery and Farm",
-    title: "Kachnar Nursery & Farm (Website)",
-    description:
-      "A premium plant nursery website built with Next.js featuring a full plant catalog, newsletter, and structured data for SEO. Designed with a rich, nature-inspired aesthetic and a roadmap e-commerce with Supabase and Cloudinary.",
-    icon: "/skills/nextjs.webp",
-    repoType: RepoType.Private,
-    url: "https://kachnar-nursery-and-farm.vercel.app/",
-    projectType: ProjectType.Freelance,
-    tags: ["Next.js", "TypeScript", "Supabase", "Cloudinary", "Tailwind CSS", "SEO"],
   },
   {
     id: "Next.js Portfolio Website",
@@ -67,6 +56,17 @@ const projects: IProjectItem[] = [
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity CMS", "MongoDB", "Resend"],
   },
   {
+    id: "Kachnar Nursery and Farm",
+    title: "Kachnar Nursery & Farm (Website)",
+    description:
+      "A premium plant nursery website built with Next.js featuring a full plant catalog, newsletter, and structured data for SEO. Designed with a rich, nature-inspired aesthetic and a roadmap e-commerce with Supabase and Cloudinary.",
+    icon: "/skills/nextjs.webp",
+    repoType: RepoType.Private,
+    url: "https://kachnar-nursery-and-farm.vercel.app/",
+    projectType: ProjectType.Freelance,
+    tags: ["Next.js", "TypeScript", "Supabase", "Cloudinary", "Tailwind CSS", "SEO"],
+  },
+  {
     id: "ChatApp Premium",
     title: "ChatApp Premium (PWA)",
     description:
@@ -76,18 +76,6 @@ const projects: IProjectItem[] = [
     projectType: ProjectType.Personal,
     url: "https://chat.utkarshsorathia.in/",
     tags: ["Next.js", "Supabase", "PWA", "Edge-Functions", "PostgreSQL", "Tailwind"],
-  },
-  {
-    id: "Project Management Website",
-    title: "Project Management Website",
-    description:
-      "A collaborative platform with secure authentication, detailed project dashboards, and real-time progress tracking. Features built-in comments section for effective teamwork and project delivery.",
-    icon: "/skills/react.svg",
-    repoType: RepoType.Public,
-    projectType: ProjectType.Personal,
-    githubUrl: "https://github.com/Utkarsh-Sorathia/Project-Management",
-    url: "https://utkarsh-project-management.netlify.app/",
-    tags: ["React.js", "Redux", "Bootstrap", "Firebase"],
   },
   {
     id: "Typing Test Website",
@@ -100,6 +88,18 @@ const projects: IProjectItem[] = [
     githubUrl: "https://github.com/Utkarsh-Sorathia/Typingo",
     url: "https://typingo.vercel.app/",
     tags: ["React.js", "Tailwind css", "Typescript"],
+  },
+  {
+    id: "Project Management Website",
+    title: "Project Management Website",
+    description:
+      "A collaborative platform with secure authentication, detailed project dashboards, and real-time progress tracking. Features built-in comments section for effective teamwork and project delivery.",
+    icon: "/skills/react.svg",
+    repoType: RepoType.Public,
+    projectType: ProjectType.Personal,
+    githubUrl: "https://github.com/Utkarsh-Sorathia/Project-Management",
+    url: "https://utkarsh-project-management.netlify.app/",
+    tags: ["React.js", "Redux", "Bootstrap", "Firebase"],
   },
 ];
 export default projects;

@@ -166,7 +166,7 @@ export function getWebSiteSchema() {
         `${baseUrl}/UtkarshSorathia.webp`,
         1200,
         630,
-        "Utkarsh Sorathia Logo"
+        "Utkarsh Sorathia Portfolio Logo"
       ),
       address: {
         "@type": "PostalAddress",
@@ -433,18 +433,26 @@ export function getFAQSchema() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Who is Utkarsh?",
+        "name": "Who is Utkarsh Sorathia?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Utkarsh (full name Utkarsh Sorathia) is a professional Full Stack Developer specializing in React, Next.js, and Node.js. He is based in India and creates modern web applications."
+          "text": "Utkarsh Sorathia is a professional Full Stack Developer specializing in React, Next.js, and Node.js. He is based in Surat, India, and focuses on building scalable, performance-driven web and mobile applications."
         }
       },
       {
         "@type": "Question",
-        "name": "What does Utkarsh do?",
+        "name": "What technologies does Utkarsh specialize in?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Utkarsh builds scalable, performance-driven web and mobile applications using the MERN stack and Next.js."
+          "text": "Utkarsh specializes in the MERN stack (MongoDB, Express.js, React, Node.js), Next.js, TypeScript, and React Native for cross-platform mobile development."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Utkarsh Sorathia provide freelance development services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Utkarsh provides professional freelance services for custom web application development, API design, and database optimization."
         }
       }
     ]

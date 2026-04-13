@@ -72,38 +72,44 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
         )}
       </div>
 
-      {/* Mobile/Tablet: Carousel (unchanged) */}
-      <div className="w-full flex items-center gap-4 lg:hidden">
+      {/* Mobile/Tablet: Carousel */}
+      <div className="w-full flex items-center gap-2 md:gap-4 lg:hidden">
         {/* Prev Button - Tablet only */}
-        {projects.length > 3 ? <button
-          onClick={() => scrollByOffset(-400, carouselRef)}
-          aria-label="Scroll to previous project"
-          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primaryColor)]"
-        >
-          <i className="bi bi-chevron-left text-xl" />
-        </button> : null}
-        {/* Carousel */}
+        {projects.length > 2 && (
+          <button
+            onClick={() => scrollByOffset(-350, carouselRef)}
+            aria-label="Scroll to previous project"
+            className="hidden sm:flex flex-shrink-0 items-center justify-center app__filled_btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-all duration-300 focus:outline-none shadow-lg z-10"
+          >
+            <i className="bi bi-chevron-left text-xl" />
+          </button>
+        )}
+        
+        {/* Carousel Container */}
         <div
           ref={carouselRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth flex-1 no-scrollbar touch-auto snap-x snap-mandatory py-4"
+          className="flex gap-4 overflow-x-auto scroll-smooth flex-1 no-scrollbar touch-auto snap-x snap-mandatory py-6 px-1"
         >
           {projects.map((item, index) => (
             <div
               key={`project-${index}`}
-              className="snap-start flex-shrink-0 w-full sm:w-auto"
+              className="snap-start flex-shrink-0 w-full sm:w-[calc(50%-8px)]"
             >
               <ProjectCard project={item} />
             </div>
           ))}
         </div>
+
         {/* Next Button - Tablet only */}
-        {projects.length > 3 ? <button
-          onClick={() => scrollByOffset(400, carouselRef)}
-          aria-label="Scroll to next project"
-          className="hidden sm:flex items-center justify-center app__filled_btn w-12 h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primaryColor)]"
-        >
-          <i className="bi bi-chevron-right text-xl" />
-        </button> : null}
+        {projects.length > 2 && (
+          <button
+            onClick={() => scrollByOffset(350, carouselRef)}
+            aria-label="Scroll to next project"
+            className="hidden sm:flex flex-shrink-0 items-center justify-center app__filled_btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-all duration-300 focus:outline-none shadow-lg z-10"
+          >
+            <i className="bi bi-chevron-right text-xl" />
+          </button>
+        )}
       </div>
       {/* Dot Indicators - Only on mobile */}
       <div className="flex sm:hidden items-center justify-center gap-2 mt-2">

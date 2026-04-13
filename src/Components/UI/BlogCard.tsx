@@ -21,7 +21,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
   return (
     <article className="h-full">
-      <CardBox classNames="group h-full flex flex-col overflow-hidden hover:bg-white/5 hover:border-[var(--primaryColor)]/50 border-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-[var(--primaryColor)]/10 hover:-translate-y-1">
+      <CardBox classNames="h-full flex flex-col overflow-hidden">
         {/* Image */}
         {post.image?.asset?.url ? (
           <Link href={`/blogs/${post.slug.current}`} className="block">

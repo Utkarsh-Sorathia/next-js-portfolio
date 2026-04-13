@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const excerpt = getBlogExcerpt(post, 160);
-  const metaDescription = excerpt || `Read about ${post.title}`;
+  const metaDescription = excerpt || `Explore insights on ${post.title}, web development, and modern technology by Utkarsh Sorathia.`;
 
   return {
     title: `${post.title} | Utkarsh Sorathia`,
@@ -213,7 +213,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: 'Home', url: baseURL },
-    { name: 'Blog', url: `${baseURL}/blogs` },
+    { name: 'Blogs', url: `${baseURL}/blogs` },
     { name: post.title, url: `${baseURL}/blogs/${post.slug.current}` },
   ]);
 
