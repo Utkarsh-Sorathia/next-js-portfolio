@@ -95,39 +95,27 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  /* ---------------- RECAPTCHA ---------------- */
+  /* ---------------- RECAPTCHA & CONTEXT DATA (PARALLEL) ---------------- */
 
-  const gRecaptchaToken =
-    metadata?.gRecaptchaToken || req.headers.get('x-recaptcha-token');
-
+  const gRecaptchaToken = metadata?.gRecaptchaToken || req.headers.get('x-recaptcha-token');
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
-  if (secretKey && gRecaptchaToken) {
-    try {
-      const verifyRes = await fetch(
-        "https://www.google.com/recaptcha/api/siteverify",
-        {
+  // Fetch blogs and verify recaptcha in parallel
+  const [verifyData, allBlogs] = await Promise.all([
+    secretKey && gRecaptchaToken 
+      ? fetch("https://www.google.com/recaptcha/api/siteverify", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: `secret=${secretKey}&response=${gRecaptchaToken}`,
-        }
-      );
+        }).then(res => res.json())
+      : Promise.resolve({ success: true, score: 1 }),
+    getAllBlogPosts()
+  ]);
 
-      const verifyData = await verifyRes.json();
-
-      if (!verifyData.success || verifyData.score < 0.5) {
-        return new Response("Security check failed.", { status: 400 });
-      }
-    } catch (error) {
-      console.error("reCAPTCHA verification error:", error);
-    }
-  } else if (secretKey && !gRecaptchaToken) {
-    return new Response("Security token missing.", { status: 400 });
+  if (!verifyData.success || (verifyData.score < 0.5)) {
+    return new Response("Security check failed.", { status: 400 });
   }
 
-  /* ---------------- FETCH BLOGS ---------------- */
-
-  const allBlogs = await getAllBlogPosts();
   const topBlogs = allBlogs.slice(0, 3);
 
   /* ---------------- CONTEXT ---------------- */
@@ -210,32 +198,15 @@ ${educations.map(edu =>
     apiKey: process.env.GROQ_API_KEY,
   });
 
-  /* ---------------- MODEL TIERS ---------------- */
+  /* ---------------- MODEL TIERS (GROQ NATIVE) ---------------- */
 
-  const topTier = [
+  const modelChain = [
     'llama-3.3-70b-versatile',
-    'openai/gpt-oss-120b',
-    'qwen/qwen3-32b',
-    'moonshotai/kimi-k2-instruct',
-  ];
-
-  const highQuotaTier = [
+    'llama-3.1-70b-versatile',
     'llama-3.1-8b-instant',
     'mixtral-8x7b-32768',
     'gemma2-9b-it',
-    'allam-2-7b',
   ];
-
-  const experimentalTier = [
-    'meta-llama/llama-4-maverick-17b-128e-instruct',
-    'meta-llama/llama-4-scout-17b-16e-instruct',
-    'openai/gpt-oss-20b',
-    'groq/compound',
-    'groq/compound-mini'
-  ];
-
-  const shuffledTopTier = [...topTier].sort(() => Math.random() - 0.5);
-  const modelChain = [...shuffledTopTier, ...highQuotaTier, ...experimentalTier];
 
   /* ---------------- MODEL EXECUTION ---------------- */
 

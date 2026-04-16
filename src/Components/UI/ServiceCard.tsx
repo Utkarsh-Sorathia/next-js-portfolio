@@ -10,88 +10,27 @@ export function ServiceCard({
 }: Readonly<{ item: IServiceItem }>) {
   return (
     <Card className="z-20">
-      <CardSkeletonContainer>
-        <IconSkeleton item={item} />
-      </CardSkeletonContainer>
+      <div className="flex flex-row items-center justify-center gap-4 mb-8">
+        {item.icons.map((icon, index) => (
+          <div key={index} className="relative group/icon flex-shrink-0">
+            <div className="absolute -inset-2 bg-[var(--primaryColor)]/10 rounded-xl blur-md opacity-0 group-hover/icon:opacity-100 transition-opacity" />
+            <div className="relative w-12 h-12 p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center shadow-xl">
+              <Image
+                src={icon}
+                alt={`${item.title} icon ${index}`}
+                width={28}
+                height={28}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
       <CardTitle className="text-center">{item.title}</CardTitle>
-      <CardDescription className="text-justify">{item.description}</CardDescription>
+      <CardDescription className="text-center">{item.description}</CardDescription>
     </Card>
   );
 }
-
-const IconSkeleton = ({ item }: Readonly<{ item: IServiceItem }>) => {
-  return (
-    <div className="overflow-hidden h-full relative flex items-center justify-center">
-      <div className="flex flex-row flex-shrink-0 justify-center items-center gap-2">
-        <IconContainer className="h-8 w-8 circle-1">
-          <Image
-            src={item.icons[0]}
-            alt={validateAltText(item.icons[0], getSkillAltText(`${item.title} service icon 1`), 'Service icon')}
-            width={144}
-            height={144}
-            sizes="100%"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.webp"
-            className="h-4 w-4 aspect-square"
-          />
-        </IconContainer>
-        <IconContainer className="h-12 w-12 circle-2">
-          <Image
-            src={item.icons[1]}
-            alt={validateAltText(item.icons[1], getSkillAltText(`${item.title} service icon 2`), 'Service icon')}
-            width={144}
-            height={144}
-            sizes="100%"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.webp"
-            className="h-6 w-6 aspect-square"
-          />
-        </IconContainer>
-        <IconContainer className="circle-3">
-          <Image
-            src={item.icons[2]}
-            alt={validateAltText(item.icons[2], getSkillAltText(`${item.title} service icon 3`), 'Service icon')}
-            width={144}
-            height={144}
-            sizes="100%"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.webp"
-            className="h-8 w-8 aspect-square"
-          />
-        </IconContainer>
-        <IconContainer className="h-12 w-12 circle-4">
-          <Image
-            src={item.icons[3]}
-            alt={validateAltText(item.icons[3], getSkillAltText(`${item.title} service icon 4`), 'Service icon')}
-            width={144}
-            height={144}
-            sizes="100%"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.webp"
-            className="h-6 w-6 aspect-square"
-          />
-        </IconContainer>
-        <IconContainer className="h-8 w-8 circle-5">
-          <Image
-            src={item.icons[4]}
-            alt={validateAltText(item.icons[4], getSkillAltText(`${item.title} service icon 5`), 'Service icon')}
-            width={144}
-            height={144}
-            sizes="100%"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.webp"
-            className="h-4 w-4 aspect-square"
-          />
-        </IconContainer>
-      </div>
-    </div>
-  );
-};
 
 export const Card = ({
   className,
@@ -117,7 +56,7 @@ export const CardTitle = ({
   return (
     <h3
       className={cn(
-        "text-lg lg:text-xl xl:text-2xl font-semibold text-[var(--primaryColor)] dark:text-[var(--primaryColor)] py-2 tracking-wide",
+        "text-lg lg:text-xl xl:text-2xl font-semibold text-[var(--primaryColor)] py-2 tracking-wide",
         className
       )}
     >
@@ -142,49 +81,5 @@ export const CardDescription = ({
     >
       {children}
     </p>
-  );
-};
-
-export const CardSkeletonContainer = ({
-  className,
-  children,
-  showGradient = true,
-}: {
-  className?: string;
-  children: React.ReactNode;
-  showGradient?: boolean;
-}) => {
-  return (
-    <div
-      className={cn(
-        "rounded-[var(--borderRadius)] z-40 mb-2",
-        className,
-        showGradient &&
-        "bg-[rgba(15,18,20,0.70)] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_0%,transparent_100%)]"
-      )}
-    >
-      {children}
-    </div>
-  );
-};
-
-const IconContainer = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <div
-      className={cn(
-        `h-16 w-16 rounded-full flex items-center justify-center bg-white/[0.01]
-    shadow-[0px_0px_8px_0px_rgba(255,255,255,0.1)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]
-    `,
-        className
-      )}
-    >
-      {children}
-    </div>
   );
 };

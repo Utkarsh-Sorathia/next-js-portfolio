@@ -1,9 +1,5 @@
 import { marked } from 'marked';
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
-
-const window = new JSDOM('').window;
-const purify = DOMPurify(window as any);
+import DOMPurify from 'isomorphic-dompurify';
 
 /**
  * Parses markdown to sanitized HTML on the server
@@ -17,7 +13,7 @@ export async function parseMarkdownToHtml(markdown: string): Promise<string> {
     breaks: true
   });
 
-  return purify.sanitize(rawHtml, {
+  return DOMPurify.sanitize(rawHtml, {
     USE_PROFILES: { html: true }
   });
 }

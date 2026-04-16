@@ -3,14 +3,14 @@ import { IProjectItem, ProjectType, RepoType } from "@/interfaces";
 const projects: IProjectItem[] = [
   {
     id: "Sparkle Infotech Site",
-    title: "Sparkle Infotech (Company Site)",
+    title: "Sparkle Infotech - On Demand Software Solution",
     description:
       "Built and maintained the Sparkle Infotech company website using Next.js, Strapi CMS, and GraphQL. Delivered UI design fixes, layout improvements, and optimized GraphQL queries for significantly faster data fetching.",
     icon: "/skills/nextjs.webp",
     repoType: RepoType.Private,
     projectType: ProjectType.JobWork,
     url: "https://sparkleinfotech.com/",
-    tags: ["Next.js", "Strapi", "GraphQL", "TypeScript", "Tailwind CSS"],
+    tags: ["Next.js", "Strapi", "GraphQL", "TypeScript", "Chakra UI"],
   },
   {
     id: "Griffin GPS AT SYS",
@@ -20,7 +20,7 @@ const projects: IProjectItem[] = [
     icon: "/skills/nodejs.svg",
     repoType: RepoType.Private,
     projectType: ProjectType.JobWork,
-    tags: ["MERN", "React.js", "Node.js", "MongoDB", "Filters", "Real-Time"],
+    tags: ["MERN", "React.js", "Node.js", "MongoDB", "Filters", "Realtime"],
   },
   {
     id: "Rediminds IDRE Client",
@@ -53,7 +53,7 @@ const projects: IProjectItem[] = [
     githubUrl: "https://github.com/Utkarsh-Sorathia/next-js-portfolio",
     url: "https://utkarshsorathia.in/",
     isCurrent: true,
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity CMS", "MongoDB", "Resend"],
+    tags: ["Next.js", "GROQ AI", "Tailwind CSS", "Sanity CMS", "MongoDB", "Resend"],
   },
   {
     id: "Kachnar Nursery and Farm",
@@ -90,16 +90,16 @@ const projects: IProjectItem[] = [
     tags: ["React.js", "Tailwind css", "Typescript"],
   },
   {
-    id: "Project Management Website",
-    title: "Project Management Website",
+    id: "Real-Time Tic Tac Toe Elite",
+    title: "Real-Time Tic Tac Toe Elite",
     description:
-      "A collaborative platform with secure authentication, detailed project dashboards, and real-time progress tracking. Features built-in comments section for effective teamwork and project delivery.",
+      "A high-performance multiplayer platform featuring instantaneous move synchronization via Pusher, a recursive Minimax AI engine for unbeatable offline play, and persistent match history with MongoDB. Engineered for an immersive gaming experience with PWA support.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
-    githubUrl: "https://github.com/Utkarsh-Sorathia/Project-Management",
-    url: "https://utkarsh-project-management.netlify.app/",
-    tags: ["React.js", "Redux", "Bootstrap", "Firebase"],
+    githubUrl: "https://github.com/Utkarsh-Sorathia/Realtime-Tic-Tac-Toe-Site",
+    url: "https://tictactoe-elite.vercel.app/",
+    tags: ["React.js", "Node.js", "Pusher", "MongoDB", "Minimax AI", "PWA"],
   },
 ];
 export default projects;

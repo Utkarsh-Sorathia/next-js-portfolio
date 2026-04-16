@@ -56,6 +56,7 @@ export function getReadingTime(text: string | any[]): string {
  * Formats a date string to a readable format
  */
 export function formatDate(dateString: string): string {
+  if (!dateString) return "Recently Published";
   return new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",

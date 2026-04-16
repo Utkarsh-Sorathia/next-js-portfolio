@@ -33,7 +33,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-1 w-1 bg-emerald-500"></span>
                 </span>
-                <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider text-emerald-400">Live</span>
+                <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider text-emerald-400">Current</span>
               </div>
             )}
           </div>
@@ -42,7 +42,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
         {/* 📄 Content Section */}
         <div className="flex flex-col gap-2 md:gap-3 flex-grow">
           {/* Title Area (Consistent min-height only on desktop) */}
-          <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-[var(--primaryColor)] transition-colors duration-300 tracking-tight leading-tight md:min-h-[3.5rem] flex items-center">
+          <h3 className="text-lg md:text-xl font-bold text-[var(--primaryColor)] transition-colors duration-300 tracking-tight leading-tight md:min-h-[3.5rem] flex items-center">
             {project.title}
           </h3>
           

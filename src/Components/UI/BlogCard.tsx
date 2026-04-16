@@ -34,7 +34,7 @@ export default function BlogCard({ post }: BlogCardProps) {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 blurDataURL={post.image.asset.lqip}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 pointer-events-none" />
             </div>
           </Link>
         ) : (
@@ -63,7 +63,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
             {/* Title */}
             <Link href={`/blogs/${post.slug.current}`}>
-              <h2 className="text-lg sm:text-xl font-semibold text-[var(--textColor)] mb-3 group-hover:text-[var(--primaryColor)] transition-colors line-clamp-2 leading-tight cursor-pointer hover:text-[var(--primaryColor)]">
+              <h2 className="text-lg sm:text-xl font-semibold text-[var(--primaryColor)] mb-3 transition-colors line-clamp-2 leading-tight cursor-pointer">
                 {post.title}
               </h2>
             </Link>
@@ -80,7 +80,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             className="inline-flex items-center text-[var(--primaryColor)] hover:text-[var(--primaryColor)]/80 font-medium transition-all duration-300 mt-auto text-sm group/btn"
           >
             Read More
-            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover/btn:translate-x-1.5 transition-transform duration-300" />
+            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
           </Link>
         </Column>
       </CardBox>

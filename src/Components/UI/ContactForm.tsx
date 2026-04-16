@@ -16,23 +16,45 @@ const ContactForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (message) setMessage("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!formData.name) {
+      setMessage("Please enter your name.");
+      return;
+    }
+    if (!formData.email) {
+      setMessage("Please enter your email.");
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+    if (!formData.subject) {
+      setMessage("Please enter a subject.");
+      return;
+    }
+    if (!formData.message) {
+      setMessage("Please enter your message.");
+      return;
+    }
+
     if (!executeRecaptcha) {
-      setError('ReCAPTCHA not ready. Please try again in a moment.');
+      setMessage("ReCAPTCHA not ready. Please try again.");
       return;
     }
 
     setIsSubmitting(true);
-    setError(null);
+    setMessage("");
 
     try {
       const gRecaptchaToken = await executeRecaptcha('contact_form');
@@ -52,10 +74,10 @@ const ContactForm = () => {
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         const data = await response.json();
-        setError(data.error || 'Failed to send message. Please try again.');
+        setMessage(data.error || 'Failed to send message. Please try again.');
       }
     } catch (err) {
-      setError('Something went wrong. Please check your connection.');
+      setMessage('Something went wrong. Please check your connection.');
     } finally {
       setIsSubmitting(false);
     }
@@ -77,7 +99,7 @@ const ContactForm = () => {
             <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6">
               <CheckCircle className="w-10 h-10" />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
+            <h3 className="text-2xl font-bold mb-2 text-zinc-100">Message Sent!</h3>
             <p className="text-zinc-400 mb-8">
               Thank you for reaching out. I&apos;ll get back to you as soon as possible.
             </p>
@@ -95,11 +117,12 @@ const ContactForm = () => {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-zinc-400 ml-1">Name</label>
+                  <label className="text-sm font-semibold text-zinc-400 ml-1">
+                    Name <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     name="name"
-                    required
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="John Doe"
@@ -108,11 +131,12 @@ const ContactForm = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-zinc-400 ml-1">Email</label>
+                  <label className="text-sm font-semibold text-zinc-400 ml-1">
+                    Email <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="email"
                     name="email"
-                    required
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="john@example.com"
@@ -123,11 +147,12 @@ const ContactForm = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-zinc-400 ml-1">Subject</label>
+                <label className="text-sm font-semibold text-zinc-400 ml-1">
+                  Subject <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   name="subject"
-                  required
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Project Inquiry"
@@ -137,10 +162,11 @@ const ContactForm = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-zinc-400 ml-1">Message</label>
+                <label className="text-sm font-semibold text-zinc-400 ml-1">
+                  Message <span className="text-red-500">*</span>
+                </label>
                 <textarea
                   name="message"
-                  required
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
@@ -149,13 +175,6 @@ const ContactForm = () => {
                   className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-600"
                 />
               </div>
-
-              {error && (
-                <div className="flex items-center gap-2 text-red-500 text-sm bg-red-500/10 p-4 rounded-xl border border-red-500/20">
-                  <AlertCircle className="w-4 h-4" />
-                  {error}
-                </div>
-              )}
 
               <div className="flex flex-col items-center gap-4 pt-2">
                 <button
@@ -172,6 +191,13 @@ const ContactForm = () => {
                     </>
                   )}
                 </button>
+
+                {message && (
+                  <div className="flex items-center justify-start gap-2.5 text-[var(--primaryColor)] animate-in fade-in slide-in-from-top-1 duration-300 px-1">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span className="text-[11px] font-bold uppercase tracking-[0.2em]">{message}</span>
+                  </div>
+                )}
 
                 <p className="text-[10px] text-zinc-500 text-center leading-relaxed max-w-[300px]">
                   Protected by reCAPTCHA. Google{' '}

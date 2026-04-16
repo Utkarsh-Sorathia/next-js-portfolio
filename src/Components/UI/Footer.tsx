@@ -50,38 +50,41 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-10 pb-6 border-t border-gray-800">
+    <footer className="bg-[#050505] text-zinc-400 pt-10 pb-6 border-t border-white/10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
           {/* Brand + About */}
           <div>
-            <div className="flex items-center mb-4 gap-3"><Image
-              src="/android-chrome-192x192.png"
-              alt="Utkarsh Sorathia"
-              width={100}
-              height={100}
-              sizes="100%"
-              loading="lazy"
-              className="w-12 h-auto aspect-square object-cover"
-            />
-              <h3 className="text-lg font-semibold text-white mb-3 tracking-wide items-center pt-4">
+            <div className="flex items-center mb-4 gap-3">
+              <Image
+                src="/android-chrome-192x192.png"
+                alt="Utkarsh Sorathia"
+                width={48}
+                height={48}
+                loading="lazy"
+                className="w-12 h-auto aspect-square object-cover rounded-lg"
+              />
+              <h3 className="text-lg font-bold text-white tracking-wide pt-2">
                 Utkarsh Sorathia
-              </h3></div>
-            <p className="text-sm text-gray-400 leading-relaxed">
+              </h3>
+            </div>
+            <p className="text-sm text-zinc-400 leading-relaxed">
               Full Stack Developer & Software Engineer crafting clean, performant,
               and modern digital experiences.
             </p>
 
-            <div className="flex items-center space-x-5 mt-4">
-              {socialLinks.map((link, index) => (
+            <div className="flex items-center space-x-4 mt-4">
+              {socialLinks
+                .filter(link => link.name?.toLowerCase() !== "upwork" && link.name?.toLowerCase() !== "strings.upwork")
+                .map((link, index) => (
                 <Link
                   key={index}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.name}
-                  className="text-gray-300 hover:text-[var(--primaryColor)] transition-colors duration-300"
+                  className="text-zinc-400 hover:text-white transition-colors duration-300"
                 >
                   <i className={`${link.icon} text-xl`} />
                 </Link>
@@ -93,14 +96,29 @@ const Footer = () => {
           <div className="w-full px-0 md:px-10 lg:px-20">
             <h4 className="text-md font-semibold text-white mb-3">Quick Links</h4>
             <div className="grid grid-cols-2 gap-3 text-sm">
-              <Link href="/" className="hover:text-[var(--primaryColor)]">Home</Link>
-              <Link href="#about" className="hover:text-[var(--primaryColor)]">About Me</Link>
-              <Link href="#services" className="hover:text-[var(--primaryColor)]">Services</Link>
-              <Link href="#projects" className="hover:text-[var(--primaryColor)]">Projects</Link>
-              <Link href="#experience" className="hover:text-[var(--primaryColor)]">Experience</Link>
-              <Link href="#skills" className="hover:text-[var(--primaryColor)]">Skills</Link>
-              <Link href="#contact" className="hover:text-[var(--primaryColor)]">Contact</Link>
-              <Link href="/blogs" className="hover:text-[var(--primaryColor)]">Blogs</Link>
+              {[
+                { name: "Home", href: "/" },
+                { name: "About Me", href: "#about" },
+                { name: "Services", href: "#services" },
+                { name: "Projects", href: "#projects" },
+                { name: "Experience", href: "#experience" },
+                { name: "Skills", href: "#skills" },
+                { name: "Contact", href: "#contact" },
+                { name: "Blogs", href: "/blogs" },
+              ].map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="relative overflow-hidden group w-fit"
+                >
+                  <span className="block transition-all duration-300">
+                    {link.name}
+                  </span>
+                  <span className="absolute inset-0 text-[var(--primaryColor)] transition-transform duration-300 translate-y-full group-hover:translate-y-0 font-medium">
+                    {link.name}
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -109,7 +127,7 @@ const Footer = () => {
             <h4 className="text-md font-semibold text-white mb-3">
               Newsletter
             </h4>
-            <p className="text-sm text-gray-400 mb-3">
+            <p className="text-sm text-zinc-500 mb-3">
               Subscribe to get updates on new blogs and tech tips.
             </p>
 
@@ -120,7 +138,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full sm:w-auto flex-1 px-3 py-2 rounded-md bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:border-[var(--primaryColor)]"
+                className="w-full sm:w-auto flex-1 px-3 py-2 rounded-md bg-white/5 text-zinc-300 border border-white/10 focus:outline-none focus:border-[var(--primaryColor)] focus:ring-2 focus:ring-[var(--primaryColor)]/20 transition-all duration-300"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -128,16 +146,16 @@ const Footer = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-4 py-2 bg-[var(--primaryColor)] text-white rounded-md hover:opacity-90 transition disabled:opacity-50"
+                className="px-4 py-2 bg-[var(--primaryColor)] text-white font-bold rounded-md hover:opacity-90 transition-all disabled:opacity-50"
               >
                 {isSubmitting ? "..." : "Subscribe"}
               </button>
             </form>
-            <p className="text-[9px] text-gray-500 mt-2 leading-tight">
+            <p className="text-[10px] text-zinc-600 mt-2 leading-tight">
               Protected by reCAPTCHA. Google{' '}
-              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-gray-400">Privacy</a>{' '}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-zinc-500">Privacy</a>{' '}
               &{' '}
-              <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-gray-400">Terms</a> apply.
+              <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-zinc-500">Terms</a> apply.
             </p>
 
             {message && (
@@ -149,8 +167,10 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="text-center text-xs text-gray-500 mt-8 pt-6 border-t border-gray-800">
-          © {new Date().getFullYear()} Utkarsh Sorathia. All Rights Reserved.
+        <div className="text-center mt-8 pt-6 border-t border-white/10">
+          <p className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">
+            © {new Date().getFullYear()} Utkarsh Sorathia. All Rights Reserved.
+          </p>
         </div>
 
         {/* Hidden SEO Keywords & Tags */}
