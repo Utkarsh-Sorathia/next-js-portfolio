@@ -150,7 +150,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
 
         <link rel="preconnect" href="https://cdn.sanity.io" />
@@ -164,7 +164,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="Utkarsh Sorathia Blog RSS Feed" href={`${baseUrl}/rss.xml`} />
 
       </head>
-      <body className="flex flex-col min-h-screen antialiased">
+      <body className="flex flex-col min-h-screen antialiased" suppressHydrationWarning>
         <VisitorTracker />
         {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
           <Script

@@ -201,11 +201,16 @@ ${educations.map(edu =>
   /* ---------------- MODEL TIERS (GROQ NATIVE) ---------------- */
 
   const modelChain = [
+    // Top Tier (High Capability)
     'llama-3.3-70b-versatile',
-    'llama-3.1-70b-versatile',
-    'llama-3.1-8b-instant',
-    'mixtral-8x7b-32768',
-    'gemma2-9b-it',
+    'openai/gpt-oss-120b',
+    
+    // Mid Tier (High Throughput & Speed)
+    'qwen/qwen3-32b', // 60 RPM (Highest request concurrency limit)
+    'meta-llama/llama-4-scout-17b-16e-instruct', // 30K TPM (Highest burst token throughput)
+    
+    // High Quota Tier (Ultimate Fallback)
+    'llama-3.1-8b-instant', // 14.4K Requests Per Day limit ensures it rarely goes offline
   ];
 
   /* ---------------- MODEL EXECUTION ---------------- */

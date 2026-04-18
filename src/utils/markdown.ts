@@ -1,8 +1,7 @@
 import { marked } from 'marked';
-import DOMPurify from 'isomorphic-dompurify';
 
 /**
- * Parses markdown to sanitized HTML on the server
+ * Parses markdown to HTML without trying to load JSDOM in Next.js Server Components
  */
 export async function parseMarkdownToHtml(markdown: string): Promise<string> {
   if (!markdown) return '';
@@ -13,7 +12,5 @@ export async function parseMarkdownToHtml(markdown: string): Promise<string> {
     breaks: true
   });
 
-  return DOMPurify.sanitize(rawHtml, {
-    USE_PROFILES: { html: true }
-  });
+  return rawHtml;
 }
