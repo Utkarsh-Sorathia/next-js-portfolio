@@ -71,18 +71,26 @@ const FloatingNavbar = ({
                   {/* Icon for mobile view */}
                   <span className="block sm:hidden relative overflow-hidden">
                     <span className="relative z-10 text-xl">
-                      <i
-                        className={navItem.icon}
-                        id={`nav-item-icon${idx}`}
-                        title={navItem.name}
-                      />
+                      {typeof navItem.icon === 'string' ? (
+                        <i
+                          className={navItem.icon}
+                          id={`nav-item-icon${idx}`}
+                          title={navItem.name}
+                        />
+                      ) : (
+                        navItem.icon
+                      )}
                     </span>
-                    <span className="absolute inset-0 text-[var(--primaryColor)] transition-transform transform translate-y-full group-hover:translate-y-0 duration-300 ease-in-out z-10 text-xl">
-                      <i
-                        className={navItem.icon}
-                        id={`nav-item-icon${idx}-hover`}
-                        title={navItem.name}
-                      />
+                    <span className="absolute inset-0 text-[var(--primaryColor)] transition-transform transform translate-y-full group-hover:translate-y-0 duration-300 ease-in-out z-10 text-xl flex items-center justify-center">
+                      {typeof navItem.icon === 'string' ? (
+                        <i
+                          className={navItem.icon}
+                          id={`nav-item-icon${idx}-hover`}
+                          title={navItem.name}
+                        />
+                      ) : (
+                        navItem.icon
+                      )}
                     </span>
                   </span>
 

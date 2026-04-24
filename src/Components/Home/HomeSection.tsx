@@ -8,6 +8,7 @@ import Row from '../core/Row'
 import socialLinks from '../../data/importantLinks'
 import { NameAnimation } from '../common/nameAnimation'
 import dynamic from 'next/dynamic';
+import { BsArrowRight } from 'react-icons/bs';
 const ParticlesBackground = dynamic(() => import('../common/ParticlesBackground'), { ssr: false });
 
 const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: boolean }>) => {
@@ -58,7 +59,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
             className="bg-[var(--primaryColor)] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
           >
             Hire Me
-            <i className="bi bi-arrow-right" />
+            <BsArrowRight size={20} />
           </Link>
           <Link
             href="#projects"
@@ -82,7 +83,11 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
                 aria-label={`${link.name}`}
                 className="flex items-center text-2xl hover:transform hover:scale-120 transition duration-200"
               >
-                <i className={link.icon} />
+                {typeof link.icon === 'string' ? (
+                  <i className={link.icon} />
+                ) : (
+                  link.icon
+                )}
               </Link>
             ))}
           </Row>

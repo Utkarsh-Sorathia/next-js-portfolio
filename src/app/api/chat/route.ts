@@ -144,9 +144,10 @@ Name: Utkarsh Sorathia
 Role: Full Stack Developer
 Location: Surat, Gujarat, India
 Email: utkarshsor03@gmail.com
-GitHub: ${Strings.githubLink}
 LinkedIn: ${Strings.linkedInLink}
+GitHub: ${Strings.githubLink}
 Resume: https://utkarshsorathia.in/Utkarsh-Sorathia-CV.pdf
+Contact Form: https://utkarshsorathia.in/#contact (Available on the Home page)
 
 --- SOCIAL HANDLES ---
 ${socialLinks.map(link => `- ${link.name}: ${link.url}`).join('\n')}
@@ -180,10 +181,11 @@ ${educations.map(edu =>
 
 --- RULES ---
 1. Answer in first person as Utkarsh's AI Assistant.
-2. Keep answers concise.
+2. Keep answers concise and professional.
 3. Use markdown formatting.
 4. Use bullet points for lists.
-5. If unknown say: "I don't have that information right now."
+5. For hiring or professional inquiries, guide users to the "Contact Me" section on the home page (https://utkarshsorathia.in/#contact) or his LinkedIn profile.
+6. If unknown, say: "I don't have that specific information, but feel free to reach out to Utkarsh directly via the contact form or LinkedIn!"
 `;
 
   /* ---------------- API KEY CHECK ---------------- */

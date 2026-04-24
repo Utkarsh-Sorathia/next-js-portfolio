@@ -4,7 +4,7 @@ import type { MouseEventHandler, ReactNode, RefObject } from "react";
 export interface INavItem {
   name: string;
   link: string;
-  icon: string;
+  icon: string | ReactNode;
 }
 
 export enum RepoType {
@@ -61,7 +61,7 @@ export interface ISkillItem {
 
 export interface ISocialLinkItem {
   url: string;
-  icon: string;
+  icon: string | ReactNode;
   text: string;
   name?: string;
 }

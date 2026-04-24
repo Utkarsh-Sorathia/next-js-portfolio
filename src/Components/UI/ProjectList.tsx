@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { IProjectItem } from '@/interfaces'
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import ProjectCard from './ProjectCard'
 
 const PROJECTS_PER_PAGE = 6
@@ -81,7 +82,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
             aria-label="Scroll to previous project"
             className="hidden sm:flex flex-shrink-0 items-center justify-center app__filled_btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-all duration-300 focus:outline-none shadow-lg z-10"
           >
-            <i className="bi bi-chevron-left text-xl" />
+            <BsChevronLeft size={24} />
           </button>
         )}
         
@@ -107,7 +108,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
             aria-label="Scroll to next project"
             className="hidden sm:flex flex-shrink-0 items-center justify-center app__filled_btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-all duration-300 focus:outline-none shadow-lg z-10"
           >
-            <i className="bi bi-chevron-right text-xl" />
+            <BsChevronRight size={24} />
           </button>
         )}
       </div>

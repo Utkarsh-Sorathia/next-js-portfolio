@@ -78,18 +78,6 @@ const projects: IProjectItem[] = [
     tags: ["Next.js", "Supabase", "PWA", "Edge-Functions", "PostgreSQL", "Tailwind"],
   },
   {
-    id: "Typing Test Website",
-    title: "Typingo - Typing Test Website",
-    description:
-      "A comprehensive web-based typing test platform designed to enhance typing speed, accuracy, and finger placement. Features interactive tests with real-time feedback and performance analytics.",
-    icon: "/skills/react.svg",
-    repoType: RepoType.Public,
-    projectType: ProjectType.Personal,
-    githubUrl: "https://github.com/Utkarsh-Sorathia/Typingo",
-    url: "https://typingo.vercel.app/",
-    tags: ["React.js", "Tailwind css", "Typescript"],
-  },
-  {
     id: "Real-Time Tic Tac Toe Elite",
     title: "Real-Time Tic Tac Toe Elite",
     description:
@@ -100,6 +88,18 @@ const projects: IProjectItem[] = [
     githubUrl: "https://github.com/Utkarsh-Sorathia/Realtime-Tic-Tac-Toe-Site",
     url: "https://tictactoe-elite.vercel.app/",
     tags: ["React.js", "Node.js", "Pusher", "MongoDB", "Minimax AI", "PWA"],
+  },
+  {
+    id: "Typing Test Website",
+    title: "Typingo - Typing Test Website",
+    description:
+      "A comprehensive web-based typing test platform designed to enhance typing speed, accuracy, and finger placement. Features interactive tests with real-time feedback and performance analytics.",
+    icon: "/skills/react.svg",
+    repoType: RepoType.Public,
+    projectType: ProjectType.Personal,
+    githubUrl: "https://github.com/Utkarsh-Sorathia/Typingo",
+    url: "https://typingo.vercel.app/",
+    tags: ["React.js", "Tailwind css", "Typescript"],
   },
 ];
 export default projects;

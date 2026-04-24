@@ -47,8 +47,7 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
               </div>
               <h3
                 className={cn(
-                  "text-lg font-semibold transition-colors duration-300",
-                  openIndex === idx ? "text-[var(--primaryColor)]" : "text-[var(--textColor)]"
+                  "text-lg font-semibold transition-colors duration-300 text-[var(--primaryColor)]"
                 )}
               >
                 {item.title}

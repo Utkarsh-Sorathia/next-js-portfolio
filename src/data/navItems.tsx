@@ -1,39 +1,48 @@
 import { INavItem } from "@/interfaces";
+import { 
+  BsHouseFill, 
+  BsPersonFill, 
+  BsAwardFill, 
+  BsCodeSquare, 
+  BsClockHistory, 
+  BsBriefcaseFill, 
+  BsPersonLinesFill 
+} from "react-icons/bs";
 
 export const navMenus: INavItem[] = [
   {
     name: "Home",
     link: "/",
-    icon: "bi bi-house-fill",
+    icon: <BsHouseFill size={20} />,
   },
   {
     name: "About",
     link: "/#about",
-    icon: "bi bi-person-fill",
+    icon: <BsPersonFill size={20} />,
   },
   {
     name: "Skills",
     link: "/#skills",
-    icon: "bi bi-award-fill",
+    icon: <BsAwardFill size={20} />,
   },
   {
     name: "Projects",
     link: "/#projects",
-    icon: "bi bi-code-square",
+    icon: <BsCodeSquare size={20} />,
   },
   {
     name: "Experience",
     link: "/#experience",
-    icon: "bi bi-clock-history",
+    icon: <BsClockHistory size={20} />,
   },
   {
     name: "Services",
     link: "/#services",
-    icon: "bi bi-briefcase-fill",
+    icon: <BsBriefcaseFill size={20} />,
   },
   {
     name: "Contact",
     link: "/#contact",
-    icon: "bi bi-person-lines-fill",
+    icon: <BsPersonLinesFill size={20} />,
   },
 ];

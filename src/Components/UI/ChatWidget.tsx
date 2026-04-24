@@ -313,7 +313,7 @@ export default function ChatWidget() {
           className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50`}
           aria-label="Open AI Assistant"
         >
-          {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.png" alt="AI Assistant" width={50} height={50} />}
+          {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.webp" alt="AI Assistant" width={50} height={50} />}
         </motion.button>
       </div>
     </div>

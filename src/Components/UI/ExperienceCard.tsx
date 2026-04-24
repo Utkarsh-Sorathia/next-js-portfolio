@@ -15,7 +15,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
     <section className="w-full py-0 md:py-8 max-w-5xl mx-auto relative">
       <div className="relative">
         {/* Desktop center line */}
-        <div className="hidden md:block absolute left-[50.1%] w-[3px] top-12 h-[calc(100%-3rem)] bg-[var(--primaryColor)] transform -translate-x-1/2 opacity-50"></div>
+        <div className="hidden md:block absolute left-[50.1%] w-[3px] top-0 h-full bg-[var(--primaryColor)] transform -translate-x-1/2 opacity-50"></div>
 
         {data.map((item, index) => {
           const isLeft = index % 2 === 0;

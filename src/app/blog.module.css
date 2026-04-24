@@ -1,0 +1,39 @@
+.blogBtn {
+  border: 2px solid white;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  color: white;
+  cursor: pointer;
+  animation: blogPulse 2s infinite;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.blogBtn:hover {
+  color: white;
+}
+
+.iconStyle {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+@keyframes blogPulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2), 0 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+}

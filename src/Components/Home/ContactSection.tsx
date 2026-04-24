@@ -3,7 +3,7 @@ import ResponsiveBox from "../../Components/core/ResponsiveBox";
 import ConstrainedBox from "../../Components/core/constrained-box";
 import SectionTitle from "../../Components/common/SectionTitle";
 import ContactForm from "../UI/ContactForm";
-import { ArrowRight, FileText } from "lucide-react";
+import { BsArrowRight } from "react-icons/bs";
 import { SiLinkedin, SiGithub, SiUpwork } from "react-icons/si";
 import Link from "next/link";
 import Strings from "@/constants/strings";
@@ -37,7 +37,7 @@ const ContactSection = ({ id }: { id: string }) => {
                 target="_blank"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
               >
-                <div className="flex flex-col lg:flex-row items-center gap-1.5 lg:gap-6 overflow-hidden w-full">
+                <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
                   <div className="p-2.5 md:p-4 bg-blue-100 dark:bg-blue-900/20 rounded-xl text-[#0077b5] shrink-0">
                     <SiLinkedin className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
@@ -46,8 +46,9 @@ const ContactSection = ({ id }: { id: string }) => {
                     <p className="text-white font-semibold truncate hidden lg:block">{Strings.linkedInUsername}</p>
                   </div>
                 </div>
-                <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[#0077b5] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
-                  Connect <ArrowRight className="w-4 h-4" />
+                <div className="hidden lg:flex items-center justify-end gap-3 text-xs font-bold uppercase tracking-tight text-[#0077b5] opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap min-w-[100px]">
+                  <span>Connect</span>
+                  <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
 
@@ -56,7 +57,7 @@ const ContactSection = ({ id }: { id: string }) => {
                 target="_blank"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-white/30 transition-all duration-300"
               >
-                <div className="flex flex-col lg:flex-row items-center gap-1.5 lg:gap-6 overflow-hidden w-full">
+                <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
                   <div className="p-2.5 md:p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-zinc-900 dark:text-white shrink-0">
                     <SiGithub className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
@@ -65,8 +66,9 @@ const ContactSection = ({ id }: { id: string }) => {
                     <p className="text-white font-semibold truncate hidden lg:block">{Strings.githubUsername}</p>
                   </div>
                 </div>
-                <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-white opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
-                  View Code <ArrowRight className="w-4 h-4" />
+                <div className="hidden lg:flex items-center justify-end gap-3 text-xs font-bold uppercase tracking-tight text-white opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap min-w-[100px]">
+                  <span>View Code</span>
+                  <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
               
@@ -75,7 +77,7 @@ const ContactSection = ({ id }: { id: string }) => {
                 target="_blank"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#14a800]/30 transition-all duration-300"
               >
-                <div className="flex flex-col lg:flex-row items-center gap-1.5 lg:gap-6 overflow-hidden w-full">
+                <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
                   <div className="p-2.5 md:p-4 bg-[#14a800]/10 dark:bg-[#14a800]/20 rounded-xl text-[#14a800] shrink-0">
                     <SiUpwork className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
@@ -84,8 +86,9 @@ const ContactSection = ({ id }: { id: string }) => {
                     <p className="text-white font-semibold truncate hidden lg:block">{Strings.upworkUsername}</p>
                   </div>
                 </div>
-                <div className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-[#14a800] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
-                  Hire Me <ArrowRight className="w-4 h-4" />
+                <div className="hidden lg:flex items-center justify-end gap-3 text-xs font-bold uppercase tracking-tight text-[#14a800] opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap min-w-[100px]">
+                  <span>Hire Me</span>
+                  <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
 

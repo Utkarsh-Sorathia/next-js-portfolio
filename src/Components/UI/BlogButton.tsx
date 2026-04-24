@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import styles from '@/app/blog.module.css';
+import Image from 'next/image';
 
 const BlogButton = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -83,14 +85,14 @@ const BlogButton = () => {
           </AnimatePresence>
 
           <Link href="/blogs">
-            <motion.div
-              onMouseEnter={() => setIsNudgeVisible(true)}
-              onMouseLeave={() => setIsNudgeVisible(false)}
-              whileTap={{ scale: 0.95 }}
-              className="w-12 h-12 border-2 border-white rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[var(--primaryColor)] hover:bg-[var(--primaryColor)]"
+            <motion.button
+              onTouchStart={() => setIsNudgeVisible(true)}
+              onTouchEnd={() => setTimeout(() => setIsNudgeVisible(false), 2000)}
+              whileTap={{ scale: 0.9 }}
+              className={styles.blogBtn}
             >
-              <BookOpen className="text-[var(--textColor)] w-6 h-6 transition-all duration-300" />
-            </motion.div>
+              <Image src="/blog-icon.webp" alt="Blog" width={24} height={24} />
+            </motion.button>
           </Link>
         </div>
       </div>
