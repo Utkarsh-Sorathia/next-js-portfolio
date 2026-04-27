@@ -29,7 +29,7 @@ const CommandBarTrigger = () => {
       <motion.button
         onClick={() => query.toggle()}
         whileTap={{ scale: 0.95 }}
-        className="border border-white/[0.25] rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 md:px-6 py-3 flex items-center gap-2 sm:gap-3 cursor-pointer transition-all duration-250 group"
+        className="border border-[var(--borderColor)] rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-sm px-5 md:px-6 py-3 flex items-center gap-2 sm:gap-3 cursor-pointer transition-all duration-250 group"
       >
         <div className="relative overflow-hidden flex items-center gap-2 sm:gap-3">
           <div className="relative z-10 flex items-center gap-2 sm:gap-3 transition-all duration-300">
@@ -46,10 +46,10 @@ const CommandBarTrigger = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center gap-1.5 ml-1 opacity-60 group-hover:opacity-100 transition-opacity">
-            <kbd className="bg-zinc-800/50 px-1.5 py-1 rounded border border-white/10 text-[10px] text-zinc-400 font-bold">
+            <kbd className="bg-[var(--dialogColor50)] px-1.5 py-1 rounded border border-[var(--borderColor)] text-[10px] text-[var(--textColorLight)] font-bold">
                 {isMac ? '⌘' : 'Ctrl'}
             </kbd>
-            <kbd className="bg-zinc-800/50 px-1.5 py-1 rounded border border-white/10 text-[10px] text-zinc-400 font-bold">
+            <kbd className="bg-[var(--dialogColor50)] px-1.5 py-1 rounded border border-[var(--borderColor)] text-[10px] text-[var(--textColorLight)] font-bold">
                 K
             </kbd>
         </div>

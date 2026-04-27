@@ -7,6 +7,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { INavItem } from '@/interfaces'
 import Row from '../../Components/core/Row'
 import { useEffect, useState } from 'react'
+import ThemeToggle from './ThemeToggle'
+
 const FloatingNavbar = ({
   navItems,
   className,
@@ -53,7 +55,7 @@ const FloatingNavbar = ({
         }}
         style={{ willChange: 'transform, opacity' }}
         className={cn(
-          'flex w-fit fixed top-4 inset-x-0 mx-auto border border-white/[0.25] rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-4 py-3 items-center space-x-4',
+          'flex w-fit fixed top-4 inset-x-0 mx-auto border border-[var(--borderColor)] rounded-full bg-[var(--dialogColor50)] backdrop-blur-sm shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-4 py-3 items-center space-x-4',
           className,
         )}
       >
@@ -65,7 +67,7 @@ const FloatingNavbar = ({
                   href={navItem.link}
                   onClick={(e) => handleNavClick(e, navItem.link)}
                   className={cn(
-                    'relative flex items-center space-x-1 text-neutral-50 group',
+                    'relative flex items-center space-x-1 text-[var(--textColor)] group',
                   )}
                 >
                   {/* Icon for mobile view */}
@@ -104,6 +106,7 @@ const FloatingNavbar = ({
                 </Link>
               </span>
             ))}
+            <ThemeToggle />
           </Row>
         </Row>
       </motion.div>

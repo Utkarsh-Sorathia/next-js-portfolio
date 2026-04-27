@@ -11,8 +11,19 @@ const ParticlesBackground = () => {
   const [particleSpeed, setParticleSpeed] = useState(1);
   const [hoverEnabled, setHoverEnabled] = useState(false);
   const [particleCount, setParticleCount] = useState(250);
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
+    const checkTheme = () => {
+      const isLight = document.documentElement.classList.contains("light");
+      setTheme(isLight ? "light" : "dark");
+    };
+
+    checkTheme();
+    // Use an observer to watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => {
@@ -56,7 +67,7 @@ const ParticlesBackground = () => {
               height: "100%",
             },
             background: {
-              color: { value: "#000000" },
+              color: { value: "transparent" },
             },
             fpsLimit: 60,
             interactivity: {
@@ -73,9 +84,9 @@ const ParticlesBackground = () => {
               },
             },
             particles: {
-              color: { value: "#ffffff" },
+              color: { value: theme === "dark" ? "#ffffff" : "#4361ee" },
               links: {
-                color: "#ffffff",
+                color: theme === "dark" ? "#ffffff" : "#4361ee",
                 distance: 150,
                 enable: true,
                 opacity: 0.4,

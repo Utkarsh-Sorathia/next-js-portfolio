@@ -30,10 +30,14 @@ const ScrollToTop = () => {
   };
 
   return (
-    <div className={styles.topToBottom}>
+    <div className="fixed bottom-4 right-4 z-[4999] transition-all duration-300">
       {showTopBtn ? (
-        <button onClick={goToTop} className={styles.btnStyle}>
-          <FontAwesomeIcon icon={faArrowUpLong} className={styles.iconStyle} />
+        <button
+          onClick={goToTop}
+          className="w-12 h-12 rounded-full bg-[var(--dialogColor)] border-2 border-[var(--primaryColor)] text-[var(--primaryColor)] flex items-center justify-center shadow-lg hover:bg-[var(--primaryColor)] hover:text-white transition-all duration-300 active:scale-90 group"
+          aria-label="Scroll to top"
+        >
+          <FontAwesomeIcon icon={faArrowUpLong} className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
         </button>
       ) : null}
     </div>

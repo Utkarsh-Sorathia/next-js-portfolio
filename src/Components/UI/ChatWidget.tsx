@@ -115,25 +115,25 @@ export default function ChatWidget() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-[90vw] sm:w-[380px] h-[500px] max-h-[70vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 flex flex-col overflow-hidden"
+            className="w-[92vw] sm:w-[450px] h-[600px] max-h-[85vh] bg-[var(--dialogColor)] rounded-3xl shadow-2xl border border-[var(--borderColor)] flex flex-col overflow-hidden backdrop-blur-xl"
           >
             {/* Header */}
-            <div className="bg-[var(--primaryColor)] p-4 flex items-center justify-between text-white shrink-0">
+            <div className="bg-[var(--primaryColor)] p-5 flex items-center justify-between text-white shrink-0">
               <div className="flex items-center gap-3">
-                <Image src="/favicon.ico" alt="Logo" width={24} height={24} />
+                <div className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center p-1.5 overflow-hidden">
+                  <Image src="/android-chrome-192x192.png" alt="Logo" width={32} height={32} className="object-cover" />
+                </div>
                 <div className="flex flex-col">
-                  <h3 className="font-semibold text-sm leading-none flex items-center gap-2">
+                  <h3 className="font-extrabold text-sm sm:text-base leading-none flex items-center gap-2">
                     AI Assistant
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" title="System Online"></span>
+                    <span className="flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_bg-emerald-400] animate-pulse"></span>
                   </h3>
-                  <div className="flex items-center gap-1 mt-1">
-                    <p className="text-[10px] opacity-80 uppercase tracking-wider font-bold">Powered by Groq</p>
-                  </div>
+                  <p className="text-[9px] opacity-90 uppercase tracking-[0.1em] font-bold mt-1.5">Powered by Groq</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-full transition-colors focus:outline-none"
+                className="p-2 hover:bg-white/20 rounded-full transition-all focus:outline-none active:scale-90"
                 aria-label="Close Chat"
               >
                 <X className="w-5 h-5" />
@@ -141,7 +141,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50 dark:bg-zinc-950/50 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700">
+            <div className="flex-1 overflow-y-auto p-5 space-y-5 bg-[var(--bgColor)]/50 scrollbar-thin scrollbar-thumb-[var(--borderColor)]">
               {messages.length === 0 && (
                 <div className="text-center text-zinc-500 text-sm mt-10 px-4">
                   <p className="mb-2">👋 Hi there!</p>
@@ -157,7 +157,7 @@ export default function ChatWidget() {
                           });
                         }
                       }}
-                      className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      className="text-[11px] font-bold uppercase tracking-wider bg-[var(--dialogColor)] text-[var(--textColorLight)] border border-[var(--borderColor)] px-4 py-2 rounded-full hover:bg-[var(--primaryColor)] hover:text-white hover:border-[var(--primaryColor)] transition-all duration-300 shadow-sm shadow-black/5 active:scale-95"
                     >
                       Skills?
                     </button>
@@ -171,7 +171,7 @@ export default function ChatWidget() {
                           });
                         }
                       }}
-                      className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      className="text-[11px] font-bold uppercase tracking-wider bg-[var(--dialogColor)] text-[var(--textColorLight)] border border-[var(--borderColor)] px-4 py-2 rounded-full hover:bg-[var(--primaryColor)] hover:text-white hover:border-[var(--primaryColor)] transition-all duration-300 shadow-sm shadow-black/5 active:scale-95"
                     >
                       Projects?
                     </button>
@@ -185,7 +185,7 @@ export default function ChatWidget() {
                           });
                         }
                       }}
-                      className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      className="text-[11px] font-bold uppercase tracking-wider bg-[var(--dialogColor)] text-[var(--textColorLight)] border border-[var(--borderColor)] px-4 py-2 rounded-full hover:bg-[var(--primaryColor)] hover:text-white hover:border-[var(--primaryColor)] transition-all duration-300 shadow-sm shadow-black/5 active:scale-95"
                     >
                       Contact?
                     </button>
@@ -208,9 +208,9 @@ export default function ChatWidget() {
                     className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} mb-2`}
                   >
                     <div
-                      className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed break-words overflow-hidden ${m.role === 'user'
+                      className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed break-words overflow-hidden ${m.role === 'user'
                         ? 'bg-[var(--primaryColor)] text-white rounded-tr-none'
-                        : 'bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-700 rounded-tl-none'
+                        : 'bg-[var(--dialogColor)] text-[var(--textColor)] border border-[var(--borderColor)] rounded-tl-none'
                         }`}
                     >
                       <div className="prose dark:prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:mb-4 last:prose-p:mb-0 prose-pre:bg-zinc-200 dark:prose-pre:bg-zinc-900 prose-ul:my-2 prose-li:my-1 break-words">
@@ -243,7 +243,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Input Area */}
-            <form onSubmit={handleSubmit} className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-700">
+            <form onSubmit={handleSubmit} className="p-4 bg-[var(--dialogColor)] border-t border-[var(--borderColor)]">
               {error && (
                 <div className="mb-2 px-3 py-2 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-[10px] text-red-500">
                   <AlertCircle className="w-3 h-3" />
@@ -253,10 +253,10 @@ export default function ChatWidget() {
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
-                  className="flex-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[var(--primaryColor)]/50 transition-all placeholder:text-zinc-400"
+                  className="flex-1 bg-[var(--dialogColor50)] text-[var(--textColor)] text-sm rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primaryColor)]/30 border border-[var(--borderColor)] transition-all placeholder:text-[var(--textColorLight)]/50"
                   value={input}
                   onChange={handleInputChange}
-                  placeholder="Ask something..."
+                  placeholder="Ask me anything..."
                   disabled={isLoading}
                 />
                 <button
@@ -277,29 +277,27 @@ export default function ChatWidget() {
         <AnimatePresence>
           {isNudgeVisible && !isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: 10, x: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, x: 20, scale: 0.9 }}
-              className="group bg-white dark:bg-zinc-800 px-3.5 py-2.5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-200 dark:border-zinc-700 absolute whitespace-nowrap right-full sm:right-0 bottom-0 sm:bottom-full mr-3 sm:mr-0 mb-0 sm:mb-3"
+              initial={{ opacity: 0, y: 10, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.9 }}
+              className="group bg-[var(--dialogColor)] px-4 py-3 rounded-2xl shadow-xl border border-[var(--borderColor)] absolute whitespace-nowrap bottom-full mb-3 right-0 sm:right-6 backdrop-blur-md"
             >
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[var(--dialogColor50)] border border-[var(--borderColor)] flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/android-chrome-192x192.png"
                     alt="AI Assistant"
-                    width={32}
-                    height={32}
-                    className="w-full h-full object-cover"
+                    width={28}
+                    height={28}
+                    className="object-cover rounded-lg"
                   />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase font-bold text-[var(--primaryColor)] tracking-widest leading-none mb-1">AI Assistant</span>
-                  <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-100 leading-tight">Ask me about Utkarsh! 🚀</span>
+                  <span className="text-xs font-semibold text-[var(--textColor)] leading-tight">Ask me about Utkarsh! 🚀</span>
                 </div>
               </div>
-              {/* Arrow - Desktop (Bottom) / Mobile (Right) */}
-              <div className="hidden sm:block absolute -bottom-1.5 right-4 w-3 h-3 bg-white dark:bg-zinc-800 border-r border-b border-zinc-200 dark:border-zinc-700 rotate-45"></div>
-              <div className="sm:hidden absolute top-1/2 -translate-y-1/2 -right-1.5 w-3 h-3 bg-white dark:bg-zinc-800 border-t border-r border-zinc-200 dark:border-zinc-700 rotate-45"></div>
+              <div className="absolute -bottom-1.5 right-[18px] w-3 h-3 bg-[var(--dialogColor)] border-r border-b border-[var(--borderColor)] rotate-45"></div>
             </motion.div>
           )}
         </AnimatePresence>

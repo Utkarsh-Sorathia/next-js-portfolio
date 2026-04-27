@@ -85,7 +85,7 @@ const ContactForm = () => {
 
   return (
     <div
-      className="bg-white/5 dark:bg-zinc-900/50 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/10 dark:border-zinc-800/50 relative overflow-hidden"
+      className="bg-[var(--cardBg)] backdrop-blur-xl p-8 rounded-3xl shadow-xl border border-[var(--borderColor)] relative overflow-hidden"
     >
       <AnimatePresence mode="wait">
         {isSuccess ? (
@@ -99,8 +99,8 @@ const ContactForm = () => {
             <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6">
               <CheckCircle className="w-10 h-10" />
             </div>
-            <h3 className="text-2xl font-bold mb-2 text-zinc-100">Message Sent!</h3>
-            <p className="text-zinc-400 mb-8">
+            <h3 className="text-2xl font-bold mb-2 text-[var(--textColor)]">Message Sent!</h3>
+            <p className="text-[var(--textColorLight)] mb-8">
               Thank you for reaching out. I&apos;ll get back to you as soon as possible.
             </p>
             <button
@@ -112,12 +112,12 @@ const ContactForm = () => {
           </motion.div>
         ) : (
           <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <h3 className="text-2xl font-bold mb-8 text-zinc-100">Send Me a Message</h3>
+            <h3 className="text-2xl font-bold mb-8 text-[var(--textColor)]">Send Me a Message</h3>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-zinc-400 ml-1">
+                  <label className="text-sm font-semibold text-[var(--textColorLight)] ml-1">
                     Name <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -127,11 +127,11 @@ const ContactForm = () => {
                     onChange={handleChange}
                     placeholder="John Doe"
                     disabled={isSubmitting}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-[var(--dialogColor50)] border border-[var(--borderColor)] text-[var(--textColor)] focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-[var(--textColor50)]"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-zinc-400 ml-1">
+                  <label className="text-sm font-semibold text-[var(--textColorLight)] ml-1">
                     Email <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -141,13 +141,13 @@ const ContactForm = () => {
                     onChange={handleChange}
                     placeholder="john@example.com"
                     disabled={isSubmitting}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-[var(--dialogColor50)] border border-[var(--borderColor)] text-[var(--textColor)] focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-[var(--textColor50)]"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-zinc-400 ml-1">
+                <label className="text-sm font-semibold text-[var(--textColorLight)] ml-1">
                   Subject <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -157,12 +157,12 @@ const ContactForm = () => {
                   onChange={handleChange}
                   placeholder="Project Inquiry"
                   disabled={isSubmitting}
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
+                  className="w-full px-5 py-3.5 rounded-2xl bg-[var(--dialogColor50)] border border-[var(--borderColor)] text-[var(--textColor)] focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-[var(--textColor50)]"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-zinc-400 ml-1">
+                <label className="text-sm font-semibold text-[var(--textColorLight)] ml-1">
                   Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -172,7 +172,7 @@ const ContactForm = () => {
                   onChange={handleChange}
                   placeholder="Tell me about your project..."
                   disabled={isSubmitting}
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-600"
+                  className="w-full px-5 py-3.5 rounded-2xl bg-[var(--dialogColor50)] border border-[var(--borderColor)] text-[var(--textColor)] focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all resize-none placeholder:text-[var(--textColor50)]"
                 />
               </div>
 
@@ -199,13 +199,13 @@ const ContactForm = () => {
                   </div>
                 )}
 
-                <p className="text-[10px] text-zinc-500 text-center leading-relaxed max-w-[300px]">
+                <p className="text-[10px] text-[var(--textColorLight)] text-center leading-relaxed max-w-[300px]">
                   Protected by reCAPTCHA. Google{' '}
-                  <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-zinc-400">
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-[var(--textColorLight)]">
                     Privacy
                   </a>{' '}
                   &{' '}
-                  <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-zinc-400">
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-[var(--textColorLight)]">
                     Terms
                   </a>{' '}
                   apply.

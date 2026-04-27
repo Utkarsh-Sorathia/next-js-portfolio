@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IServiceItem } from "@/interfaces";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronDown } from "react-icons/fi";
@@ -13,6 +13,24 @@ interface ServiceAccordionProps {
 
 export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    setIsLight(document.documentElement.classList.contains('light'));
+    const observer = new MutationObserver(() => {
+      setIsLight(document.documentElement.classList.contains('light'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const getIconSrc = (icon: string) => {
+    if (isLight) {
+      if (icon?.includes("nextjs.webp")) return "/skills/nextjs-dark.svg";
+      if (icon?.includes("github-white.webp")) return "/skills/github-dark.svg";
+    }
+    return icon;
+  };
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -24,10 +42,10 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
         <div
           key={item.id}
           className={cn(
-            "rounded-[var(--borderRadius)] border transition-all duration-300",
+            "rounded-[var(--borderRadius)] border transition-all duration-300 overflow-hidden",
             openIndex === idx
-              ? "border-[var(--primaryColor)]/50 bg-white/[0.03]"
-              : "border-white/10 bg-transparent hover:bg-white/[0.02]"
+              ? "border-[var(--primaryColor)]/40 bg-[var(--dialogColor)] shadow-sm"
+              : "border-[var(--borderColor)] bg-transparent hover:bg-[var(--dialogColor)]/50"
           )}
         >
           {/* Header */}
@@ -36,9 +54,9 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
             className="w-full flex items-center justify-between p-4 text-left focus:outline-none"
           >
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-[var(--dialogColor)] border border-white/10 flex items-center justify-center p-2">
+              <div className="w-10 h-10 rounded-lg bg-[var(--dialogColor)] border border-[var(--borderColor)] flex items-center justify-center p-2 shadow-sm">
                 <Image
-                  src={item.icons[Math.floor(item.icons.length / 2)]} // Main central icon
+                  src={getIconSrc(item.icons[Math.floor(item.icons.length / 2)])} // Main central icon
                   alt={item.title}
                   width={24}
                   height={24}
@@ -82,14 +100,14 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
                     {item.icons.map((icon, i) => (
                       <div
                         key={i}
-                        className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center p-1.5"
+                        className="w-10 h-10 rounded-xl bg-[var(--dialogColor)] border border-[var(--borderColor)] flex items-center justify-center p-2 shadow-sm hover:border-[var(--primaryColor)]/50 transition-colors"
                       >
                         <Image
-                          src={icon}
+                          src={getIconSrc(icon)}
                           alt={`${item.title} icon ${i + 1}`}
-                          width={20}
-                          height={20}
-                          className="object-contain opacity-80"
+                          width={24}
+                          height={24}
+                          className="object-contain"
                         />
                       </div>
                     ))}

@@ -50,7 +50,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#050505] text-zinc-400 pt-10 pb-6 border-t border-white/10">
+    <footer className="bg-[var(--bgColor)] text-[var(--textColorLight)] pt-10 pb-6 border-t border-[var(--borderColor)] transition-colors duration-300">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
@@ -65,18 +65,17 @@ const Footer = () => {
                 loading="lazy"
                 className="w-12 h-auto aspect-square object-cover rounded-lg"
               />
-              <h3 className="text-lg font-bold text-white tracking-wide pt-2">
+              <h3 className="text-lg font-bold text-[var(--textColor)] tracking-wide pt-2">
                 Utkarsh Sorathia
               </h3>
             </div>
-            <p className="text-sm text-zinc-400 leading-relaxed">
+            <p className="text-sm text-[var(--textColorLight)] leading-relaxed">
               Full Stack Developer & Software Engineer crafting clean, performant,
               and modern digital experiences.
             </p>
 
             <div className="flex items-center space-x-4 mt-4">
               {socialLinks
-                .filter(link => link.name?.toLowerCase() !== "upwork" && link.name?.toLowerCase() !== "strings.upwork")
                 .map((link, index) => (
                 <Link
                   key={index}
@@ -84,9 +83,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.name}
-                  className="text-zinc-400 hover:text-white transition-colors duration-300"
+                  className="text-[var(--textColorLight)] hover:text-[var(--primaryColor)] transition-all duration-300 hover:scale-110 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--dialogColor50)] border border-[var(--borderColor)] shadow-sm"
                 >
-                  <i className={`${link.icon} text-xl`} />
+                  <span className="text-lg flex items-center justify-center">
+                    {link.icon}
+                  </span>
                 </Link>
               ))}
             </div>
@@ -94,7 +95,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="w-full px-0 md:px-10 lg:px-20">
-            <h4 className="text-md font-semibold text-white mb-3">Quick Links</h4>
+            <h4 className="text-md font-semibold text-[var(--textColor)] mb-3">Quick Links</h4>
             <div className="grid grid-cols-2 gap-3 text-sm">
               {[
                 { name: "Home", href: "/" },
@@ -111,7 +112,7 @@ const Footer = () => {
                   href={link.href}
                   className="relative overflow-hidden group w-fit"
                 >
-                  <span className="block transition-all duration-300">
+                  <span className="block transition-all duration-300 text-[var(--textColorLight)]">
                     {link.name}
                   </span>
                   <span className="absolute inset-0 text-[var(--primaryColor)] transition-transform duration-300 translate-y-full group-hover:translate-y-0 font-medium">
@@ -124,10 +125,10 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-md font-semibold text-white mb-3">
+            <h4 className="text-md font-semibold text-[var(--textColor)] mb-3">
               Newsletter
             </h4>
-            <p className="text-sm text-zinc-500 mb-3">
+            <p className="text-sm text-[var(--textColorLight)] font-medium mb-3">
               Subscribe to get updates on new blogs and tech tips.
             </p>
 
@@ -138,7 +139,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full sm:w-auto flex-1 px-3 py-2 rounded-md bg-white/5 text-zinc-300 border border-white/10 focus:outline-none focus:border-[var(--primaryColor)] focus:ring-2 focus:ring-[var(--primaryColor)]/20 transition-all duration-300"
+                className="w-full sm:w-auto flex-1 px-3 py-2 rounded-md bg-[var(--dialogColor50)] text-[var(--textColor)] border border-[var(--borderColor)] focus:outline-none focus:border-[var(--primaryColor)] focus:ring-2 focus:ring-[var(--primaryColor)]/20 transition-all duration-300 placeholder:text-[var(--textColor50)]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -151,11 +152,11 @@ const Footer = () => {
                 {isSubmitting ? "..." : "Subscribe"}
               </button>
             </form>
-            <p className="text-[10px] text-zinc-600 mt-2 leading-tight">
+            <p className="text-[10px] text-[var(--textColorLight)] mt-2 leading-tight">
               Protected by reCAPTCHA. Google{' '}
-              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-zinc-500">Privacy</a>{' '}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-[var(--primaryColor)]">Privacy</a>{' '}
               &{' '}
-              <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-zinc-500">Terms</a> apply.
+              <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-[var(--primaryColor)]">Terms</a> apply.
             </p>
 
             {message && (
@@ -167,8 +168,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="text-center mt-8 pt-6 border-t border-white/10">
-          <p className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">
+        <div className="text-center mt-8 pt-6 border-t border-[var(--borderColor)]">
+          <p className="text-[11px] font-medium text-[var(--textColorLight)] uppercase tracking-wider">
             © {new Date().getFullYear()} Utkarsh Sorathia. All Rights Reserved.
           </p>
         </div>

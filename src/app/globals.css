@@ -22,38 +22,62 @@
 }
 
 :root {
-  --background: url(/images/dark-mode.webp), #121212;
-  /* Permanent dark mode background */
-  --foreground: #ededed;
-  /* Light text for dark background */
-  --primaryColor: #4361ee;
-  --borderRadius: 0.5rem;
+  --background: url(/images/dark-mode.webp), #0a0a0a;
+  --foreground: #f8fafc;
+  --textColor: #f1f5f9;
+  --textColor50: rgba(241, 245, 249, 0.5);
+  --textColorLight: #94a3b8;
+  --primaryColor: #6366f1; /* Electric Indigo */
+  --primaryColor5: rgba(99, 102, 241, 0.05);
+  --borderRadius: 0.75rem;
   --font-geist-sans: 'Geist Sans', sans-serif;
   --font-geist-mono: 'Geist Mono', monospace;
+  --dialogColor: #0a0a0a;
+  --dialogColor50: rgba(10, 10, 10, 0.7);
+  --bgColor: #0a0a0a;
+  --cardBg: rgba(255, 255, 255, 0.03);
+  --borderColor: rgba(255, 255, 255, 0.08);
 }
 
-/* No media query here, ensuring dark mode is permanent */
-html {
-  scroll-behavior: smooth;
+.light {
+  --background: #fdfdfd; /* Clean Alabaster */
+  --foreground: #0f172a; /* Slate 900 */
+  --textColor: #1e293b; /* Slate 800 */
+  --textColor50: rgba(30, 41, 59, 0.5);
+  --textColorLight: #475569; /* Slate 600 - Much better readability */
+  --primaryColor: #2563eb; /* Ocean Blue for perfect light mode contrast */
+  --primaryColor5: rgba(37, 99, 235, 0.05);
+  --dialogColor: #f8fafc;
+  --dialogColor50: rgba(255, 255, 255, 0.85);
+  --bgColor: #fdfdfd;
+  --cardBg: #ffffff;
+  --borderColor: #e2e8f0; /* Slate 200 */
 }
 
-/* Prefers Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
+/* Grid & Dot Background Utilities - Theme Aware */
+.bg-grid-white\/\[0\.1\] {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.light .bg-grid-white\/\[0\.1\] {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+.bg-dot-white\/\[0\.15\] {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.light .bg-dot-white\/\[0\.15\] {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Smooth scroll offset for fixed header handled by html scroll-padding-top */

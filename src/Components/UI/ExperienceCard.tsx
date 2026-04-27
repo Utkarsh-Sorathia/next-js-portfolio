@@ -21,6 +21,15 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
           const isLeft = index % 2 === 0;
           return (
             <div key={index} className="mb-10 last:mb-0 relative md:mb-12">
+              {/* Desktop center marker */}
+              <div 
+                className="hidden md:flex absolute left-[50.1%] top-10 items-center justify-center z-30"
+                style={{ transform: "translateX(-50%)" }}
+              >
+                <div className="h-6 w-6 rounded-full bg-[var(--dialogColor)] border-2 border-[var(--primaryColor)] flex items-center justify-center shadow-md">
+                  <div className="h-2.5 w-2.5 rounded-full bg-[var(--primaryColor)] shadow-[0_0_8px_var(--primaryColor)]" />
+                </div>
+              </div>
 
               {/* ── MOBILE LAYOUT: Clean Typography ── */}
               <motion.div
@@ -57,12 +66,12 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                       href={item.companyLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-lg font-medium opacity-90 hover:opacity-100 hover:text-[var(--primaryColor)] transition-colors"
+                      className="text-lg font-bold text-[var(--textColor)] hover:text-[var(--primaryColor)] transition-colors"
                     >
                       {item.company}
                     </Link>
                   ) : (
-                    <p className="text-lg font-medium opacity-90">{item.company}</p>
+                    <p className="text-lg font-bold text-[var(--textColor)]">{item.company}</p>
                   )}
 
                   <div className="flex flex-wrap items-center gap-2 mt-2">
@@ -76,7 +85,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                     )}
                   </div>
 
-                  <p className="text-base opacity-80 leading-relaxed mt-3">
+                  <p className="text-base text-[var(--textColorLight)] leading-relaxed mt-3">
                     {item.description}
                   </p>
                 </div>
@@ -93,29 +102,17 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                   !isLeft ? "md:ml-auto md:mr-0" : "md:ml-0 md:mr-auto"
                 }`}
               >
-                {/* Desktop dot */}
-                <div
-                  className="absolute top-10 w-6 h-6 z-10"
-                  style={{
-                    left: isLeft ? "76.5%" : "auto",
-                    right: isLeft ? "auto" : "73.7%",
-                    transform: "translateX(-50%)",
-                  }}
-                >
-                  <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center bg-zinc-900 border border-white/10">
-                    <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-[var(--primaryColor)] shadow-[0_0_10px_var(--primaryColor)]" />
-                  </div>
-                </div>
+
 
                 <div
-                  className={`relative p-3 md:p-8 transition-all duration-500 border rounded-[var(--borderRadius)] border-white/10 hover:border-zinc-500 group overflow-hidden shadow-[2px_4px_16px_0px_rgba(0,0,0,0.1)_inset] ${
+                  className={`relative p-3 md:p-8 transition-all duration-500 border rounded-[var(--borderRadius)] bg-[var(--cardBg)] border-[var(--borderColor)] hover:border-[var(--primaryColor)] group overflow-hidden shadow-sm ${
                     isLeft
                       ? "md:mr-8 md:pr-8 translate-x-0 md:translate-x-[-150px]"
                       : "md:ml-8 md:pl-8 translate-x-0 md:translate-x-40"
                   }`}
                 >
-                  {/* ⚪ The "Skill Card" White Glow Overlay */}
-                  <div className="absolute inset-0 bg-white/[0.12] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[var(--borderRadius)] z-0" />
+                  {/* ⚪ The "Skill Card" Hover Overlay */}
+                  <div className="absolute inset-0 bg-[var(--primaryColor)]/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[var(--borderRadius)] z-0" />
                   
                   <div className="relative z-10 flex flex-col sm:flex-row items-start gap-3">
                     {item.companyLink ? (
@@ -138,11 +135,11 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                       <p className="text-lg font-medium text-[var(--textColor)] mt-1 truncate">
                         {item.company}
                       </p>
-                      <span className="text-sm text-[var(--textColor)] opacity-80 whitespace-nowrap mt-1 mx-1">
+                      <span className="text-sm text-[var(--textColorLight)] font-semibold whitespace-nowrap mt-1 mx-1">
                         {item.startDate} - {item.endDate}
                       </span>
                       {item.location && (
-                        <p className="text-sm text-[var(--textColor)] opacity-80 mt-3 truncate">
+                        <p className="text-sm text-[var(--textColorLight)] font-medium mt-3 truncate">
                           📍 {item.location}
                         </p>
                       )}

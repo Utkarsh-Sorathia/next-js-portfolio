@@ -33,12 +33,12 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
       <div ref={ref} className="relative max-w-7xl mx-auto">
         {/* Static Track Line - Single continuous background line */}
         <div
-          className="absolute lg:left-8.75 left-2.75 top-10 w-[2px] bg-white/10 z-0"
+          className="absolute lg:left-[35px] left-2.75 top-10 w-[2px] bg-[var(--borderColor)] z-0"
           style={{ height: height - 40 }}
         />
 
         {/* Animated Progress Line - Single continuous animated line */}
-        <div className="absolute lg:left-8.75 left-2.75 top-10 overflow-hidden w-[2px] z-10 transition-all duration-300">
+        <div className="absolute lg:left-[35px] left-2.75 top-10 overflow-hidden w-[2px] z-10 transition-all duration-300">
           <motion.div
             className="w-full bg-[var(--primaryColor)]"
             style={{
@@ -65,8 +65,8 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
                     className="relative flex items-start py-8"
                   >
                     {/* Bullet Point */}
-                    <div className="absolute lg:left-5 left-0 top-8 z-20 flex flex-col items-center">
-                      <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-zinc-900 border border-white/10">
+                    <div className="absolute lg:left-[19px] left-[-1px] top-8 z-20 flex flex-col items-center">
+                      <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center transition-all duration-300 bg-[var(--dialogColor)] border-2 border-[var(--primaryColor)] shadow-md">
                         <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-[var(--primaryColor)] shadow-[0_0_10px_var(--primaryColor)]" />
                       </div>
                     </div>
@@ -80,7 +80,7 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
                         <p className="text-lg font-medium text-[var(--textColor)]">
                           {item.institute}
                         </p>
-                        <p className="text-sm lg:text-base opacity-80">
+                        <p className="text-sm lg:text-base text-[var(--textColorLight)]">
                           {item.location}
                         </p>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm pt-2">

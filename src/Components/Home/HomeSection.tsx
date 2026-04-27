@@ -15,7 +15,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
 
   return (
     <ResponsiveBox
-      classNames="min-h-screen items-center justify-center relative overflow-hidden rounded-md"
+      classNames="min-h-screen items-center justify-center relative overflow-hidden rounded-md bg-[var(--bgColor)]"
       id={id}
     >
       {/* 👉 Particle background limited to this section only */}
@@ -37,33 +37,33 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
             </div>
           )}
           <div className="inline-flex items-center mx-auto pb-4">
-            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center text-[var(--textColor)]">
               Hi there, I am
               <NameAnimation
                 words={['Utkarsh Sorathia.', 'Full Stack Developer.']}
-                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)] dark:text-[var(--primaryColor)]"
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center text-[var(--primaryColor)]"
               />
             </h1>
           </div>
           <h2 className="sr-only">
             Full Stack Developer specializing in MERN, Next.js, and React.js — creating modern web and mobile applications.
           </h2>
-          <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)] mx-auto text-wrap max-w-2xl text-center">
-            MERN & Next.js Developer 🚀 SDE 🛠️ Building Modern Web Experiences 💻
+          <p className="text-sm md:text-base text-[var(--textColorLight)] mx-auto text-wrap max-w-2xl text-center font-medium">
+            MERN & Next.js Developer 🚀 2+ Years of Experience 🛠️ Building Modern Web Experiences 💻
           </p>
         </Column>
 
         <div className="mt-10 flex flex-wrap gap-4 justify-center z-10">
           <Link
             href="#contact"
-            className="bg-[var(--primaryColor)] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+            className="bg-[var(--primaryColor)] text-white px-8 py-3 rounded-full font-extrabold shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
           >
             Hire Me
             <BsArrowRight size={20} />
           </Link>
           <Link
             href="#projects"
-            className="border border-[var(--primaryColor)] text-[var(--primaryColor)] px-8 py-3 rounded-full font-bold hover:bg-[var(--primaryColor)] hover:text-white transition-all duration-300"
+            className="border-2 border-[var(--primaryColor)] text-[var(--primaryColor)] px-8 py-3 rounded-full font-extrabold hover:bg-[var(--primaryColor)] hover:text-white transition-all duration-300"
           >
             View Projects
           </Link>
@@ -71,7 +71,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
 
 
         <div className="mt-12 lg:mt-16 w-full flex flex-col items-center">
-          <p className="text-base font-medium pb-3">Follow me here</p>
+          <p className="text-base font-bold pb-3 text-[var(--textColor)]">Follow me here</p>
 
           <Row classNames="mt-2 gap-4 md:gap-6">
             {socialLinks.map((link, index) => (

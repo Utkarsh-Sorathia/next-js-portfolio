@@ -1,3 +1,4 @@
+"use client";
 
 import { cn } from "@/utils/cn";
 import { IServiceItem } from "@/interfaces";
@@ -5,18 +6,38 @@ import Image from "next/image";
 import { validateAltText, getSkillAltText } from "@/utils/imageValidation";
 import CardBox from "../core/CardBox";
 
+import { useEffect, useState } from "react";
+
 export function ServiceCard({
   item,
 }: Readonly<{ item: IServiceItem }>) {
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    setIsLight(document.documentElement.classList.contains('light'));
+    const observer = new MutationObserver(() => {
+      setIsLight(document.documentElement.classList.contains('light'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const getIconSrc = (icon: string) => {
+    if (isLight) {
+      if (icon?.includes("nextjs.webp")) return "/skills/nextjs-dark.svg";
+      if (icon?.includes("github-white.webp")) return "/skills/github-dark.svg";
+    }
+    return icon;
+  };
   return (
     <Card className="z-20">
       <div className="flex flex-row items-center justify-center gap-4 mb-8">
         {item.icons.map((icon, index) => (
           <div key={index} className="relative group/icon flex-shrink-0">
             <div className="absolute -inset-2 bg-[var(--primaryColor)]/10 rounded-xl blur-md opacity-0 group-hover/icon:opacity-100 transition-opacity" />
-            <div className="relative w-12 h-12 p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center shadow-xl">
+            <div className="relative w-12 h-12 p-2.5 rounded-xl bg-[var(--dialogColor50)] border border-[var(--borderColor)] backdrop-blur-sm flex items-center justify-center shadow-xl">
               <Image
-                src={icon}
+                src={getIconSrc(icon)}
                 alt={`${item.title} icon ${index}`}
                 width={28}
                 height={28}

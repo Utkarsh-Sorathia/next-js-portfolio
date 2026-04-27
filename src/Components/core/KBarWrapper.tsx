@@ -9,28 +9,28 @@ function KBarContent({ children }: { children: React.ReactNode }) {
   return (
     <>
       <KBarPortal>
-        <KBarPositioner className="fixed inset-0 bg-black/80 backdrop-blur-[2px] z-[99999] flex items-start justify-center pt-[15vh] px-4">
-          <KBarAnimator className="w-full max-w-[600px] bg-[#0c0c0e] border border-white/10 rounded-2xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden scale-in">
+        <KBarPositioner className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-[99999] flex items-start justify-center pt-[15vh] px-4">
+          <KBarAnimator className="w-full max-w-[600px] bg-[var(--dialogColor)] border border-[var(--borderColor)] rounded-2xl shadow-2xl overflow-hidden scale-in">
             <div className="flex flex-col">
               <KBarSearch
-                className="w-full py-5 px-6 bg-transparent outline-none text-lg text-white placeholder:text-zinc-500 border-b border-white/5"
+                className="w-full py-5 px-6 bg-transparent outline-none text-lg text-[var(--textColor)] placeholder:text-[var(--textColor50)] border-b border-[var(--borderColor)]"
                 placeholder="Type a command or search..."
                 autoFocus={typeof window !== 'undefined' && window.innerWidth > 768}
               />
               <RenderResults />
-              <div className="px-6 py-4 bg-zinc-900/30 flex items-center justify-between border-t border-white/5">
+              <div className="px-6 py-4 bg-[var(--dialogColor50)] flex items-center justify-between border-t border-[var(--borderColor)]">
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
-                    <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded border border-white/10 text-white">Enter</kbd>
+                  <div className="flex items-center gap-1.5 text-[10px] text-[var(--textColorLight)] font-bold uppercase tracking-widest">
+                    <kbd className="bg-[var(--dialogColor)] px-1.5 py-0.5 rounded border border-[var(--borderColor)] text-[var(--textColor)]">Enter</kbd>
                     <span>Select</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
-                    <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded border border-white/10 text-white">↑↓</kbd>
+                  <div className="flex items-center gap-1.5 text-[10px] text-[var(--textColorLight)] font-bold uppercase tracking-widest">
+                    <kbd className="bg-[var(--dialogColor)] px-1.5 py-0.5 rounded border border-[var(--borderColor)] text-[var(--textColor)]">↑↓</kbd>
                     <span>Navigate</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-bold uppercase tracking-widest leading-none">
-                  <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded border border-white/10 text-white">Esc</kbd>
+                <div className="flex items-center gap-1.5 text-[10px] text-[var(--textColorLight)] font-bold uppercase tracking-widest leading-none">
+                  <kbd className="bg-[var(--dialogColor)] px-1.5 py-0.5 rounded border border-[var(--borderColor)] text-[var(--textColor)]">Esc</kbd>
                   <span>Close</span>
                 </div>
               </div>
