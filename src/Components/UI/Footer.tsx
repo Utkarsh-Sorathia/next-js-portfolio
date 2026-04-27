@@ -63,7 +63,7 @@ const Footer = () => {
                 width={48}
                 height={48}
                 loading="lazy"
-                className="w-12 h-auto aspect-square object-cover rounded-lg"
+                className="w-12 h-auto aspect-square object-cover rounded-full bg-zinc-100"
               />
               <h3 className="text-lg font-bold text-white tracking-wide pt-2">
                 Utkarsh Sorathia
@@ -75,18 +75,20 @@ const Footer = () => {
             </p>
 
             <div className="flex items-center space-x-4 mt-4">
-              {socialLinks
-                .filter(link => link.name?.toLowerCase() !== "upwork" && link.name?.toLowerCase() !== "strings.upwork")
-                .map((link, index) => (
+              {socialLinks.map((link, index) => (
                 <Link
                   key={index}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.name}
-                  className="text-zinc-400 hover:text-white transition-colors duration-300"
+                  className="text-zinc-400 hover:text-white transition-colors duration-300 text-xl"
                 >
-                  <i className={`${link.icon} text-xl`} />
+                  {typeof link.icon === 'string' ? (
+                    <i className={link.icon} />
+                  ) : (
+                    link.icon
+                  )}
                 </Link>
               ))}
             </div>

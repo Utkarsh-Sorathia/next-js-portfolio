@@ -18,7 +18,7 @@ import { getBlogExcerpt, formatDate, getReadingTime } from '@/utils/blog';
 import { parseMarkdownToHtml } from '@/utils/markdown';
 import 'github-markdown-css/github-markdown.css';
 
-export const revalidate = 86400; // Revalidate every 1 day (ISR with webhook support)
+export const revalidate = 2592000; // Revalidate every 30 days (ISR with webhook support)
 export const dynamicParams = true; // Allow new blogs without rebuild
 
 interface BlogPostPageProps {
@@ -233,24 +233,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         }}
       />
       <ResponsiveBox
-        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40"
+        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1]"
         id="blog-post"
       >
-        <ConstrainedBox classNames="px-4 py-16">
-          {/* Back Button */}
-          <div className="mb-6 sm:mb-8">
-            <Link
-              href="/blogs"
-              className="inline-flex items-center text-[var(--primaryColor)] hover:text-[var(--primaryColor)]/80 transition-colors text-sm sm:text-base"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Blogs
-            </Link>
-          </div>
-
-          {/* Article Header */}
+        <ConstrainedBox classNames="px-4 mt-28 pb-16">
           <article className="max-w-4xl mx-auto">
-            <header className="mb-8 sm:mb-12">
+            {/* Back Button */}
+            <div className="mb-6 sm:mb-8">
+              <Link
+                href="/blogs"
+                className="inline-flex items-center text-[var(--primaryColor)] hover:text-[var(--primaryColor)]/80 transition-colors text-sm sm:text-base"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Blogs
+              </Link>
+            </div>
+
+            {/* Article Header */}
+            <header className="mb-8 p-1 sm:mb-12">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--textColor)] mb-4 sm:mb-6 leading-tight">
                 {post.title}
               </h1>

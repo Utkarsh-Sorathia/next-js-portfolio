@@ -23,7 +23,7 @@ const services: IServiceItem[] = [
       "/skills/docker.svg",
       "/skills/nodejs.svg",
       "/skills/express.svg",
-      "/skills/aws.svg",
+      "/skills/aws.webp",
     ],
     shortDescription: "I create robust and scalable backend infrastructures.",
     description:
@@ -64,7 +64,7 @@ const services: IServiceItem[] = [
     icons: [
       "/skills/docker.svg",
       "/skills/kubernetes.svg",
-      "/skills/aws.svg",
+      "/skills/aws.webp",
       "/skills/github-white.webp",
       "/skills/git.svg",
     ],

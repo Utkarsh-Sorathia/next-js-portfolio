@@ -13,7 +13,7 @@ export function ServiceCard({
       <div className="flex flex-row items-center justify-center gap-4 mb-8">
         {item.icons.map((icon, index) => (
           <div key={index} className="relative group/icon flex-shrink-0">
-            <div className="absolute -inset-2 bg-[var(--primaryColor)]/10 rounded-xl blur-md opacity-0 group-hover/icon:opacity-100 transition-opacity" />
+            <div className="absolute -inset-2 bg-[var(--primaryColor)]/10 rounded-xl blur-md opacity-0 transition-opacity" />
             <div className="relative w-12 h-12 p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center shadow-xl">
               <Image
                 src={icon}

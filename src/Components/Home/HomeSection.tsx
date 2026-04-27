@@ -15,7 +15,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
 
   return (
     <ResponsiveBox
-      classNames="min-h-screen items-center justify-center relative overflow-hidden rounded-md"
+      classNames="min-h-screen items-center justify-center relative overflow-hidden rounded-md bg-[var(--bgColor)]"
       id={id}
     >
       {/* 👉 Particle background limited to this section only */}
@@ -49,7 +49,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
             Full Stack Developer specializing in MERN, Next.js, and React.js — creating modern web and mobile applications.
           </h2>
           <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)] mx-auto text-wrap max-w-2xl text-center">
-            MERN & Next.js Developer 🚀 SDE 🛠️ Building Modern Web Experiences 💻
+            MERN & Next.js Developer 🚀 2+ Years of Experience 🛠️ Building Modern <span className="whitespace-nowrap">Web Experiences 💻</span>
           </p>
         </Column>
 

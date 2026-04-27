@@ -7,6 +7,7 @@ import SectionTitle from '../common/SectionTitle'
 import education from '../../data/education'
 import Education from '../UI/Education'
 import Image from 'next/image'
+import CardBox from '../core/CardBox'
 
 const techStack = [
   { name: 'Next.js', icon: '/skills/nextjs.webp' },
@@ -22,7 +23,7 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
 
   return (
     <ResponsiveBox
-      classNames="relative dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40 lg:scroll-mt-12"
+      classNames="relative bg-transparent items-center justify-center lg:px-40 lg:scroll-mt-12"
       id={id}
     >
       <ConstrainedBox classNames="relative py-12">
@@ -66,30 +67,35 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
               style={{ willChange: 'transform, opacity' }}
             >
               <p className="mb-4 text-xl leading-relaxed text-justify">
-                I'm a <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> specializing in
+                I'm a <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> with <span className="font-semibold text-[var(--primaryColor)]">2+ years of experience</span> specializing in
                 <span className="font-semibold text-[var(--primaryColor)]"> React, Next.js, Node.js</span>, and
                 <span className="font-semibold text-[var(--primaryColor)]"> MongoDB</span>.
-                I have experience building responsive web applications, REST APIs, and real-time systems at production scale.
+                I build responsive web applications, REST APIs, and real-time systems at production scale.
               </p>
               <p className="text-lg text-[var(--textColorLight)] text-justify">
                 My approach emphasizes clean architecture, performance, and user-focused design — turning product ideas into reliable, maintainable solutions.
               </p>
             </motion.div>
 
-            <div className="flex flex-wrap gap-4 mt-2 justify-start sm:justify-center">
+            <div className="flex flex-wrap gap-4 mt-8 justify-start sm:justify-center">
               {techStack.map(({ name, icon }) => (
-                <div
-                  key={name}
-                  className="w-24 h-20 bg-white/5 border border-white/10 p-3 rounded-xl flex flex-col items-center justify-center shadow-sm hover:scale-105 hover:bg-white/10 transition-all duration-300 group"
-                >
-                  <Image
-                    src={icon}
-                    alt={name}
-                    width={32}
-                    height={32}
-                    className="group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <span className="text-[10px] uppercase font-bold tracking-widest mt-2 text-zinc-400 group-hover:text-white transition-colors">{name}</span>
+                <div key={name} className="w-24 h-20">
+                  <CardBox
+                    classNames="h-full cursor-pointer shadow-sm group"
+                  >
+                    <div className="flex flex-col items-center justify-center h-full w-full">
+                      <Image
+                        src={icon}
+                        alt={name}
+                        width={32}
+                        height={32}
+                        className="transition-transform duration-300"
+                      />
+                      <span className="text-[10px] uppercase font-bold tracking-widest mt-2 text-zinc-400 group-hover:text-white transition-colors">
+                        {name}
+                      </span>
+                    </div>
+                  </CardBox>
                 </div>
               ))}
             </div>

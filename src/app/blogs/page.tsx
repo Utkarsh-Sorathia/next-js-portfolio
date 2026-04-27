@@ -10,7 +10,7 @@ import { getBlogListingSchema, getBreadcrumbSchema, getCompleteBlogSchema } from
 import { baseURL } from "@/utils/api";
 import BlogsPageClient from "@/app/blogs/BlogsPageClient";
 
-export const revalidate = 86400; // Revalidate every 1 day
+export const revalidate = 2592000; // Revalidate every 30 days
 
 export const metadata: Metadata = {
   title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
@@ -47,20 +47,21 @@ export default async function BlogsPage() {
       />
 
       <ResponsiveBox
-        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] items-center justify-center lg:px-40"
-        id="blogs"
+        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] lg:px-40"
       >
-        <ConstrainedBox classNames="px-4 py-16">
-          {/* Header Section */}
-          <div>
-            <h1 className="sr-only">Utkarsh Sorathia Blog - Web Development & Technology Insights</h1>
-            <SectionTitle>
-              My <span className="text-[var(--primaryColor)]">Blogs</span>
-            </SectionTitle>
-            <p className="text-center text-base sm:text-lg text-[var(--textColorLight)] max-w-2xl mx-auto mt-4 sm:mt-6">
-              Thoughts, tutorials, and insights about web development,
-              technology, and programming.
-            </p>
+        <ConstrainedBox classNames="px-4 pb-16">
+          <div className="pt-24">
+            {/* Header Section */}
+            <div>
+              <h1 className="sr-only">Utkarsh Sorathia Blog - Web Development & Technology Insights</h1>
+              <SectionTitle>
+                My <span className="text-[var(--primaryColor)]">Blogs</span>
+              </SectionTitle>
+              <p className="text-center text-base sm:text-lg text-[var(--textColorLight)] max-w-2xl mx-auto mt-4 sm:mt-6">
+                Thoughts, tutorials, and insights about web development,
+                technology, and programming.
+              </p>
+            </div>
           </div>
 
           {/* LOAD MORE PAGINATION */}

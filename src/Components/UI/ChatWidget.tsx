@@ -115,7 +115,7 @@ export default function ChatWidget() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-[90vw] sm:w-[380px] h-[500px] max-h-[70vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 flex flex-col overflow-hidden"
+            className="w-[90vw] sm:w-[450px] h-[600px] max-h-[85vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="bg-[var(--primaryColor)] p-4 flex items-center justify-between text-white shrink-0">
@@ -310,7 +310,7 @@ export default function ChatWidget() {
           onMouseLeave={() => !isOpen && setIsNudgeVisible(false)}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
-          className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50`}
+          className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50 border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0`}
           aria-label="Open AI Assistant"
         >
           {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.webp" alt="AI Assistant" width={50} height={50} />}

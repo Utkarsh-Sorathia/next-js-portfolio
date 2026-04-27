@@ -159,6 +159,11 @@ const skills: ISkillListItem[] = [
         level: SkillLevel.Intermediate,
         icon: "/skills/ubuntu.webp",
       },
+      {
+        title: "AWS",
+        level: SkillLevel.Beginner,
+        icon: "/skills/aws.webp",
+      },
     ],
   },
   {
