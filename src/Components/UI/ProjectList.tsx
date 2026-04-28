@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { IProjectItem } from '@/interfaces'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import ProjectCard from './ProjectCard'
 
 const PROJECTS_PER_PAGE = 6
+const AUTO_PLAY_INTERVAL = 4000
 
 const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   // Desktop: Load More functionality
@@ -20,32 +21,95 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   // Mobile: Carousel functionality
   const carouselRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
-  const scrollByOffset = (offset: number, ref: React.RefObject<HTMLDivElement | null>) => {
-    if (ref.current) {
-      ref.current.scrollBy({ left: offset, behavior: 'smooth' })
-    }
-  }
+  // For infinite loop, we clone the first few projects at the end
+  const extendedProjects = [...projects, ...projects.slice(0, 2)]
 
-  const scrollToIndex = (index: number) => {
+  const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = 'smooth') => {
     if (carouselRef.current) {
-      const cardWidth = carouselRef.current.offsetWidth
-      carouselRef.current.scrollTo({ left: index * cardWidth, behavior: 'smooth' })
+      const container = carouselRef.current
+      const card = container.children[0] as HTMLElement
+      if (card) {
+        const cardWidth = card.offsetWidth + 16 // 16px is the gap-4
+        container.scrollTo({ left: index * cardWidth, behavior })
+      }
+    }
+  }, [])
+
+  const scrollByOffset = (offset: number) => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: offset, behavior: 'smooth' })
     }
   }
 
+  // Auto-play effect
   useEffect(() => {
+    if (isPaused || projects.length <= 1) return
+
+    const interval = setInterval(() => {
+      if (!carouselRef.current) return
+      const container = carouselRef.current
+      const card = container.children[0] as HTMLElement
+      if (!card) return
+
+      const cardWidth = card.offsetWidth + 16
+      const currentScrollIndex = Math.round(container.scrollLeft / cardWidth)
+      
+      scrollToIndex(currentScrollIndex + 1, 'smooth')
+    }, AUTO_PLAY_INTERVAL)
+
+    return () => clearInterval(interval)
+  }, [isPaused, projects.length, scrollToIndex])
+
+  // Handle scroll events for teleportation and updating dots
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const handleScroll = () => {
       if (!carouselRef.current) return
-      const scrollLeft = carouselRef.current.scrollLeft
-      const containerWidth = carouselRef.current.offsetWidth
-      const index = Math.round(scrollLeft / containerWidth)
-      setActiveIndex(index)
+      const container = carouselRef.current
+      const cards = container.children
+      if (cards.length < 2) return
+
+      const firstCard = cards[0] as HTMLElement
+      const secondCard = cards[1] as HTMLElement
+      const cardWidth = secondCard.offsetLeft - firstCard.offsetLeft
+      
+      const scrollLeft = container.scrollLeft
+      const index = Math.round(scrollLeft / cardWidth)
+
+      // Update the active dot immediately for better feedback
+      const realIndex = index % projects.length
+      setActiveIndex(realIndex)
+
+      // Teleportation logic: 
+      // We only teleport if we've landed on a clone (index >= projects.length)
+      if (index >= projects.length) {
+        // Wait for the smooth scroll/snap to actually finish
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
+          if (!carouselRef.current) return
+          const cont = carouselRef.current
+          
+          // Disable smooth scroll for the instant jump
+          cont.style.scrollBehavior = 'auto'
+          cont.scrollLeft = (index % projects.length) * cardWidth
+          
+          // Force a reflow to ensure the jump is applied before re-enabling smooth scroll
+          void cont.offsetHeight 
+          cont.style.scrollBehavior = 'smooth'
+        }, 150) // 150ms is usually enough for the snap to settle
+      }
     }
+
     const ref = carouselRef.current
-    if (ref) ref.addEventListener('scroll', handleScroll)
-    return () => { if (ref) ref.removeEventListener('scroll', handleScroll) }
-  }, [])
+    if (ref) ref.addEventListener('scroll', handleScroll, { passive: true })
+    return () => { 
+      if (ref) ref.removeEventListener('scroll', handleScroll)
+      clearTimeout(timeoutId)
+    }
+  }, [projects.length])
 
   return (
     <div className="w-full mt-8 md:mt-10 flex flex-col items-center px-4 lg:px-0">
@@ -74,11 +138,17 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
       </div>
 
       {/* Mobile/Tablet: Carousel */}
-      <div className="w-full flex items-center gap-2 md:gap-4 lg:hidden">
+      <div 
+        className="w-full flex items-center gap-2 md:gap-4 lg:hidden"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+      >
         {/* Prev Button - Tablet only */}
         {projects.length > 2 && (
           <button
-            onClick={() => scrollByOffset(-350, carouselRef)}
+            onClick={() => scrollByOffset(-350)}
             aria-label="Scroll to previous project"
             className="hidden sm:flex flex-shrink-0 items-center justify-center app__filled_btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-all duration-300 focus:outline-none shadow-lg z-10"
           >
@@ -91,7 +161,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
           ref={carouselRef}
           className="flex gap-4 overflow-x-auto scroll-smooth flex-1 no-scrollbar touch-auto snap-x snap-mandatory py-6 px-1"
         >
-          {projects.map((item, index) => (
+          {extendedProjects.map((item, index) => (
             <div
               key={`project-${index}`}
               className="snap-start flex-shrink-0 w-full sm:w-[calc(50%-8px)]"
@@ -104,7 +174,7 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
         {/* Next Button - Tablet only */}
         {projects.length > 2 && (
           <button
-            onClick={() => scrollByOffset(350, carouselRef)}
+            onClick={() => scrollByOffset(350)}
             aria-label="Scroll to next project"
             className="hidden sm:flex flex-shrink-0 items-center justify-center app__filled_btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--primaryColor)] text-white hover:opacity-90 active:scale-95 transition-all duration-300 focus:outline-none shadow-lg z-10"
           >
@@ -112,13 +182,14 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
           </button>
         )}
       </div>
-      {/* Dot Indicators - Only on mobile */}
-      <div className="flex sm:hidden items-center justify-center gap-2 mt-2">
+      {/* Dot Indicators - Only on mobile/tablet */}
+      <div className="flex lg:hidden items-center justify-center gap-2 mt-2">
         {projects.map((_, index) => (
           <button
             key={index}
             onClick={() => scrollToIndex(index)}
-            className={`h-2 w-2 rounded-full transition-all duration-300 ${index === activeIndex ? 'bg-[var(--primaryColor)]' : 'bg-gray-300'}`}
+            className={`h-2 w-[8px] rounded-full transition-all duration-400 ${index === activeIndex ? 'bg-[var(--primaryColor)] w-[24px]' : 'bg-gray-300'}`}
+            aria-label={`Go to project ${index + 1}`}
           />
         ))}
       </div>

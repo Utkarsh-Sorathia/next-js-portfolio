@@ -106,6 +106,13 @@ body {
   -ms-overflow-style: none;
 }
 
+/* Hide default cursor on all elements for mouse users to support custom cursor consistency */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;

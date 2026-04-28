@@ -20,6 +20,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import VisitorTracker from "@/Components/core/VisitorTracker";
 import Script from "next/script";
+import CustomCursor from "@/Components/core/CustomCursor";
 
 const baseUrl = baseURL;
 
@@ -164,6 +165,7 @@ export default function RootLayout({
 
       </head>
       <body className="flex flex-col min-h-screen antialiased" suppressHydrationWarning>
+        <CustomCursor />
         <VisitorTracker />
         {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
           <Script

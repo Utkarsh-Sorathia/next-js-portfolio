@@ -12,7 +12,7 @@ const HomeSection2 = ({ id }: { id: string }) => {
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-12 z-20">
-        <SectionTitle>Services</SectionTitle>
+        <SectionTitle>What I Contribute</SectionTitle>
         
         {/* Mobile Accordion */}
         <div className="md:hidden">
