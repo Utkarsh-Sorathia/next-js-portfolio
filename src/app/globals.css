@@ -26,6 +26,9 @@
   /* Permanent dark mode background */
   --foreground: #ededed;
   /* Light text for dark background */
+  --textColor: #ffffff;
+  --textColorLight: #a1a1aa;
+  --bgColor: #050505;
   --primaryColor: #4361ee;
   --borderRadius: 0.5rem;
   --font-geist-sans: 'Geist Sans', sans-serif;
@@ -35,6 +38,7 @@
 /* No media query here, ensuring dark mode is permanent */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 10px;
 }
 
 /* Prefers Reduced Motion Support */

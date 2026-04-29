@@ -13,7 +13,6 @@ import { Suspense } from "react";
 
 import ChatWidget from "@/Components/UI/ChatWidget";
 import KBarWrapper from "@/Components/core/KBarWrapper";
-import CommandBarTrigger from "@/Components/UI/CommandBarTrigger";
 
 import { baseURL } from "@/utils/api";
 import { Analytics } from '@vercel/analytics/next';
@@ -165,27 +164,26 @@ export default function RootLayout({
 
       </head>
       <body className="flex flex-col min-h-screen antialiased" suppressHydrationWarning>
-        <CustomCursor />
-        <VisitorTracker />
-        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-          <Script
-            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-            strategy="lazyOnload"
-          />
-        )}
-        <Header className="app_nav" navItems={navMenus} />
-        <main className="flex-grow">{children}
-          <Analytics />
-          <SpeedInsights />
-        </main>
-        <Footer />
-        <ScrollToTop />
         <KBarWrapper>
+          <CustomCursor />
+          <VisitorTracker />
+          {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+            <Script
+              src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+              strategy="lazyOnload"
+            />
+          )}
+          <Header className="app_nav" navItems={navMenus} />
+          <main className="flex-grow">{children}
+            <Analytics />
+            <SpeedInsights />
+          </main>
+          <Footer />
+          <ScrollToTop />
           <ErrorBoundary>
             <Suspense fallback={null}>
               <GoogleAnalytics />
             </Suspense>
-            <CommandBarTrigger />
             <BlogButton />
             <ChatWidget />
           </ErrorBoundary>

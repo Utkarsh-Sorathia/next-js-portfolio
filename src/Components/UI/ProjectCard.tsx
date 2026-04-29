@@ -14,8 +14,8 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
         {/* 🏷️ Top Header: Icon and Badges */}
         <div className="flex items-start justify-between w-full mb-6">
           <div className="relative group/icon">
-            <div className="absolute -inset-2 bg-[var(--primaryColor)]/10 rounded-xl blur-lg opacity-0 group-hover/icon:opacity-100 transition-opacity" />
-            <div className="relative w-12 h-12 md:w-14 md:h-14 p-2.5 md:p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center shadow-2xl">
+            <div className="absolute -inset-2 bg-[var(--primaryColor)]/10 rounded-xl blur-lg opacity-0 transition-opacity" />
+            <div className="relative w-12 h-12 md:w-14 md:h-14 p-2.5 md:p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
               <Image
                 src={project.icon}
                 alt={project.title}
