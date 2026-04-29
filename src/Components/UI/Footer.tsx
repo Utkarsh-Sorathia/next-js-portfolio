@@ -111,14 +111,9 @@ const Footer = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="relative overflow-hidden group w-fit"
+                  className="text-[var(--textColorLight)] hover:text-white transition-colors duration-200"
                 >
-                  <span className="block transition-all duration-300">
-                    {link.name}
-                  </span>
-                  <span className="absolute inset-0 text-[var(--primaryColor)] transition-transform duration-300 translate-y-full group-hover:translate-y-0 font-medium">
-                    {link.name}
-                  </span>
+                  {link.name}
                 </Link>
               ))}
             </div>

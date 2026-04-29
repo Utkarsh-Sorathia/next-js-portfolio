@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import { Calendar, Clock, User } from 'lucide-react';
 import PageBox from '@/Components/core/PageBox';
 import ResponsiveBox from '@/Components/core/ResponsiveBox';
 import ConstrainedBox from '@/Components/core/constrained-box';
@@ -238,17 +238,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       >
         <ConstrainedBox classNames="px-4 mt-28 pb-16">
           <article className="max-w-4xl mx-auto">
-            {/* Back Button */}
-            <div className="mb-6 sm:mb-8">
-              <Link
-                href="/blogs"
-                className="inline-flex items-center text-[var(--primaryColor)] hover:text-[var(--primaryColor)]/80 transition-colors text-sm sm:text-base"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Blogs
-              </Link>
-            </div>
-
             {/* Article Header */}
             <header className="mb-8 p-1 sm:mb-12">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--textColor)] mb-4 sm:mb-6 leading-tight">
