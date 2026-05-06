@@ -86,7 +86,7 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
                     <div className="flex flex-col items-center justify-center h-full w-full">
                       <Image
                         src={icon}
-                        alt={name}
+                        alt={`${name} tech icon`}
                         width={32}
                         height={32}
                         className="transition-transform duration-300"

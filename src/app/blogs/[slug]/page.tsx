@@ -5,6 +5,7 @@ import { Calendar, Clock, User } from 'lucide-react';
 import PageBox from '@/Components/core/PageBox';
 import ResponsiveBox from '@/Components/core/ResponsiveBox';
 import ConstrainedBox from '@/Components/core/constrained-box';
+import Breadcrumbs from '@/Components/common/Breadcrumbs';
 import MarkdownRenderer from '@/Components/UI/MarkdownRenderer';
 import { getTimeSincePublished, getBlogPostBySlug, getAllBlogPostSlugs } from '@/lib/sanity';
 import BlogCard from '@/Components/UI/BlogCard';
@@ -233,11 +234,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         }}
       />
       <ResponsiveBox
-        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1]"
+        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] lg:px-40"
         id="blog-post"
       >
-        <ConstrainedBox classNames="px-4 mt-28 pb-16">
-          <article className="max-w-4xl mx-auto">
+        <ConstrainedBox classNames="px-4 pb-16">
+          <div className="pt-24">
+            <Breadcrumbs 
+              items={[
+                { name: 'Blogs', url: `${baseURL}/blogs` },
+                { name: post.title, url: `${baseURL}/blogs/${post.slug.current}` }
+              ]} 
+            />
+          </div>
+          <article className="max-w-4xl mx-auto mt-4 sm:mt-8">
             {/* Article Header */}
             <header className="mb-8 p-1 sm:mb-12">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--textColor)] mb-4 sm:mb-6 leading-tight">

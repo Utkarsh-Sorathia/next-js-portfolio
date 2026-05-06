@@ -21,7 +21,7 @@ const SkillCard = ({ data }: { data: ISkillListItem }) => {
                   {skill.icon ? (
                     <Image
                       src={skill.icon}
-                      alt={`logo-${skill.title}`}
+                      alt={`${skill.title} technology icon`}
                       width={144}
                       height={144}
                       sizes="100%"

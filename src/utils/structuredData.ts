@@ -1,5 +1,7 @@
 import experience from "@/data/experience";
 import educations from "@/data/education";
+import projects from "@/data/projects";
+import services from "@/data/services";
 import Strings from "@/constants/strings";
 import { baseURL } from "@/utils/api";
 
@@ -542,32 +544,14 @@ export function getServiceSchema() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Professional Services by Utkarsh Sorathia",
-    "itemListElement": [
-      {
-        "@type": "Service",
-        "position": 1,
-        "name": "Mobile App Development",
-        "serviceType": "Mobile App Development (iOS & Android)",
-        "provider": { "@id": `${baseUrl}#person` },
-        "description": "I build scalable mobile applications for iOS and Android using React Native and TypeScript."
-      },
-      {
-        "@type": "Service",
-        "position": 2,
-        "name": "Web Development",
-        "serviceType": "Full Stack Web Development",
-        "provider": { "@id": `${baseUrl}#person` },
-        "description": "Modern, responsive web applications using React, Next.js, and TypeScript."
-      },
-      {
-        "@type": "Service",
-        "position": 3,
-        "name": "Backend Development",
-        "serviceType": "Backend Infrastructure & API Development",
-        "provider": { "@id": `${baseUrl}#person` },
-        "description": "Secure, scalable backend systems using Node.js, Express, and NestJS."
-      }
-    ]
+    "itemListElement": services.map((service, index) => ({
+      "@type": "Service",
+      "position": index + 1,
+      "name": service.title,
+      "serviceType": service.title,
+      "provider": { "@id": `${baseUrl}#person` },
+      "description": service.shortDescription
+    }))
   };
 }
 
@@ -579,23 +563,14 @@ export function getProjectSchema() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Portfolio Projects by Utkarsh Sorathia",
-    "itemListElement": [
-      {
-        "@type": "CreativeWork",
-        "position": 1,
-        "name": "E-commerce Website (Kachnaar)",
-        "url": "https://kachnaar.netlify.app/",
-        "author": { "@id": `${baseUrl}#person` },
-        "description": "A seamless shopping platform with user authentication and secure payment integration."
-      },
-      {
-        "@type": "CreativeWork",
-        "position": 2,
-        "name": "Typingo - Typing Test Website",
-        "url": "https://typingo.vercel.app/",
-        "author": { "@id": `${baseUrl}#person` },
-        "description": "An interactive web-based typing test platform designed to enhance typing speed."
-      }
-    ]
+    "itemListElement": projects.map((project, index) => ({
+      "@type": "CreativeWork",
+      "position": index + 1,
+      "name": project.title,
+      "url": project.url || `${baseUrl}/#projects`,
+      "author": { "@id": `${baseUrl}#person` },
+      "description": project.description,
+      "image": project.icon.startsWith("http") ? project.icon : `${baseUrl}${project.icon}`
+    }))
   };
 }

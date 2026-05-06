@@ -7,7 +7,7 @@ const educations: TimelineEntry[] = [
       {
         institute: "Sarvajanik College of Engineering and Technology (B.E.)",
         startDate: "Aug 2020",
-        endDate: "May 2024",
+        endDate: "Jun 2024",
         location: "Surat, Gujarat, India",
         cgpa: "8.5",
       },

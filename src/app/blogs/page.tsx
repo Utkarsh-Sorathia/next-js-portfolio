@@ -5,6 +5,7 @@ import PageBox from "@/Components/core/PageBox";
 import ResponsiveBox from "@/Components/core/ResponsiveBox";
 import ConstrainedBox from "@/Components/core/constrained-box";
 import SectionTitle from "@/Components/common/SectionTitle";
+import Breadcrumbs from "@/Components/common/Breadcrumbs";
 
 import { getBlogListingSchema, getBreadcrumbSchema, getCompleteBlogSchema } from "@/utils/structuredData";
 import { baseURL } from "@/utils/api";
@@ -51,6 +52,8 @@ export default async function BlogsPage() {
       >
         <ConstrainedBox classNames="px-4 pb-16">
           <div className="pt-24">
+            <Breadcrumbs items={[{ name: "Blogs", url: `${baseURL}/blogs` }]} />
+            
             {/* Header Section */}
             <div>
               <h1 className="sr-only">Utkarsh Sorathia Blog - Web Development & Technology Insights</h1>

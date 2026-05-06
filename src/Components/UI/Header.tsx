@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/utils/cn'
 import Link from 'next/link'
@@ -21,6 +21,16 @@ const Header = ({
   const router = useRouter();
   const { query } = useKBar();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
     // Close the mobile menu immediately
@@ -40,9 +50,14 @@ const Header = ({
     }
   };
 
+  const isAtTop = !scrolled && pathname === '/';
+
   return (
     <header className={cn(
-      "fixed top-0 left-0 right-0 z-[5000] bg-[#050505] border-b border-white/5",
+      "fixed top-0 left-0 right-0 z-[5000] transition-all duration-300",
+      isAtTop 
+        ? "bg-transparent border-transparent py-2" 
+        : "bg-[#050505]/80 backdrop-blur-md border-b border-white/5 py-0",
       className
     )}>
       {/* Top Bar Container */}

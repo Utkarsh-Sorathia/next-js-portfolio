@@ -85,7 +85,7 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
                         </p>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm pt-2">
                           <span className="flex items-center gap-1">
-                            {item.startDate} - {item.endDate}
+                            {item.endDate}
                           </span>
                           <span className="flex items-center gap-1 font-semibold text-[var(--textColor)] border-l border-[var(--textColor50)] pl-4">
                             CGPA: {item.cgpa}
