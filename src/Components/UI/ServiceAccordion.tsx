@@ -34,15 +34,19 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
           <button
             onClick={() => toggle(idx)}
             className="w-full flex items-center justify-between p-4 text-left focus:outline-none"
+            aria-expanded={openIndex === idx}
+            aria-controls={`service-panel-${idx}`}
+            id={`service-header-${idx}`}
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-lg bg-[var(--dialogColor)] border border-white/10 flex items-center justify-center p-2">
                 <Image
                   src={item.icons[Math.floor(item.icons.length / 2)]} // Main central icon
-                  alt={item.title}
+                  alt=""
                   width={24}
                   height={24}
                   className="object-contain"
+                  aria-hidden="true"
                 />
               </div>
               <h3
@@ -58,7 +62,7 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
               transition={{ duration: 0.3 }}
               className="text-[var(--textColorLight)] opacity-60"
             >
-              <FiChevronDown size={20} />
+              <FiChevronDown size={20} aria-hidden="true" />
             </motion.div>
           </button>
 
@@ -66,6 +70,10 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
           <AnimatePresence initial={false}>
             {openIndex === idx && (
               <motion.div
+                key="content"
+                id={`service-panel-${idx}`}
+                role="region"
+                aria-labelledby={`service-header-${idx}`}
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
@@ -78,7 +86,7 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
                   </p>
 
                   {/* Icons row */}
-                  <div className="flex flex-wrap gap-3 mt-6 pl-4">
+                  <div className="flex flex-wrap gap-3 mt-6 pl-4" aria-label="Technologies used">
                     {item.icons.map((icon, i) => (
                       <div
                         key={i}
@@ -86,10 +94,11 @@ export const ServiceAccordion = ({ items }: ServiceAccordionProps) => {
                       >
                         <Image
                           src={icon}
-                          alt={`${item.title} icon ${i + 1}`}
+                          alt=""
                           width={20}
                           height={20}
                           className="object-contain opacity-80"
+                          aria-hidden="true"
                         />
                       </div>
                     ))}

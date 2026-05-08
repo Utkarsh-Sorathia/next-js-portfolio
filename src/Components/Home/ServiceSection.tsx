@@ -8,7 +8,7 @@ import { ServiceAccordion } from "../../Components/UI/ServiceAccordion";
 const HomeSection2 = ({ id }: { id: string }) => {
   return (
     <ResponsiveBox
-      classNames="bg-transparent items-center justify-center lg:px-40"
+      classNames="bg-transparent items-center justify-center lg:px-12 xl:px-40"
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-12 z-20">

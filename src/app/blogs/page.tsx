@@ -48,7 +48,7 @@ export default async function BlogsPage() {
       />
 
       <ResponsiveBox
-        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] lg:px-40"
+        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] lg:px-12 xl:px-40"
       >
         <ConstrainedBox classNames="px-4 pb-16">
           <div className="pt-24">

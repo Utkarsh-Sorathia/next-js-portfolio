@@ -52,7 +52,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#050505] text-zinc-400 pt-10 pb-6 border-t border-white/10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-20">
 
           {/* Brand + About */}
           <div>
@@ -95,7 +95,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="w-full px-0 md:px-10 lg:px-20">
+          <div className="w-full lg:px-10">
             <h4 className="text-md font-semibold text-white mb-3">Quick Links</h4>
             <div className="grid grid-cols-2 gap-3 text-sm">
               {[
@@ -120,7 +120,7 @@ const Footer = () => {
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="md:col-span-2 lg:col-span-1">
             <h4 className="text-md font-semibold text-white mb-3">
               Newsletter
             </h4>
@@ -136,7 +136,7 @@ const Footer = () => {
                 type="email"
                 aria-label="Email address for newsletter"
                 placeholder="Enter your email"
-                className="w-full sm:w-auto flex-1 px-3 py-2 rounded-md bg-white/5 text-zinc-300 border border-white/10 focus:outline-none focus:border-[var(--primaryColor)] focus:ring-2 focus:ring-[var(--primaryColor)]/20 transition-all duration-300"
+                className="w-full sm:w-auto flex-1 min-w-0 px-3 py-2 rounded-md bg-white/5 text-zinc-300 border border-white/10 focus:outline-none focus:border-[var(--primaryColor)] focus:ring-2 focus:ring-[var(--primaryColor)]/20 transition-all duration-300"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -144,7 +144,7 @@ const Footer = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-4 py-2 bg-[var(--primaryColor)] text-white font-bold rounded-md hover:opacity-90 transition-all disabled:opacity-50"
+                className="w-full sm:w-auto px-6 py-2 bg-[var(--primaryColor)] text-white font-bold rounded-md hover:opacity-90 transition-all disabled:opacity-50 flex-shrink-0 whitespace-nowrap"
               >
                 {isSubmitting ? "..." : "Subscribe"}
               </button>

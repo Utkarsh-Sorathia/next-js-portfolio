@@ -88,28 +88,37 @@ const Header = ({
         </Link>
 
         {/* Desktop Links */}
-        <nav className="hidden lg:flex items-center gap-8">
-          {navItems.map((item, idx) => (
-            <Link
-              key={idx}
-              href={item.link}
-              onClick={(e) => handleNavClick(e, item.link)}
-              className="text-sm font-medium text-[var(--textColorLight)] hover:text-white transition-colors"
-            >
-              {item.name}
-            </Link>
-          ))}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-10 transition-all" aria-label="Main navigation">
+          {navItems.map((item, idx) => {
+            const isActive = pathname === item.link;
+            return (
+              <Link
+                key={idx}
+                href={item.link}
+                onClick={(e) => handleNavClick(e, item.link)}
+                aria-current={isActive ? 'page' : undefined}
+                className={cn(
+                  "text-[13px] xl:text-sm font-medium transition-colors whitespace-nowrap",
+                  isActive ? "text-white" : "text-[var(--textColorLight)] hover:text-white"
+                )}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4 xl:gap-6">
           {/* Blogs Button (Desktop) */}
           <Link
             href="/blogs"
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 border border-white/10 text-white text-sm font-semibold hover:bg-zinc-800 transition-all"
+            className="hidden sm:flex items-center gap-2 px-3 xl:px-4 py-2 rounded-lg bg-zinc-900 border border-white/10 text-white text-sm font-semibold hover:bg-zinc-800 transition-all"
+            title="Blogs"
+            aria-label="Read my blogs"
           >
             <BookOpen className="w-4 h-4" />
-            <span>Blogs</span>
+            <span className="hidden xl:inline">Blogs</span>
           </Link>
 
           {/* Search Button */}
@@ -118,14 +127,15 @@ const Header = ({
               setIsOpen(false);
               query.toggle();
             }}
-            className="flex items-center gap-2 md:gap-3 px-2.5 md:px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/20 text-zinc-300 hover:text-white transition-all group shadow-[0_0_15px_rgba(0,0,0,0.5)] active:scale-95"
-            aria-label="Search"
+            className="flex items-center gap-2 px-2.5 xl:px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/20 text-zinc-300 hover:text-white transition-all group shadow-[0_0_15px_rgba(0,0,0,0.5)] active:scale-95"
+            aria-label="Open search command palette"
           >
             <div className="flex items-center gap-2">
               <Command className="w-4 h-4 text-[var(--primaryColor)]" />
-              <span className="hidden sm:inline text-xs font-semibold">Search...</span>
+              <span className="hidden sm:inline xl:hidden text-xs font-semibold">Search</span>
+              <span className="hidden xl:inline text-xs font-semibold">Search...</span>
             </div>
-            <div className="hidden lg:flex items-center gap-1 opacity-60">
+            <div className="hidden xl:flex items-center gap-1 opacity-60">
               <kbd className="bg-zinc-800 px-1 py-0.5 rounded text-[9px] font-bold border border-white/5">Ctrl</kbd>
               <kbd className="bg-zinc-800 px-1 py-0.5 rounded text-[9px] font-bold border border-white/5">K</kbd>
             </div>
@@ -135,6 +145,9 @@ const Header = ({
           <button
             className="lg:hidden p-1.5 text-zinc-400 hover:text-white transition-colors"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X className="w-6 h-6 text-[var(--primaryColor)]" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -145,28 +158,42 @@ const Header = ({
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-menu"
+            role="region"
+            aria-label="Mobile menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
             className="lg:hidden bg-[#050505] border-t border-white/5 overflow-hidden"
           >
-            <nav className="flex flex-col py-2 items-center text-center px-6">
-              {navItems.map((item, idx) => (
-                <Link
-                  key={idx}
-                  href={item.link}
-                  onClick={(e) => handleNavClick(e, item.link)}
-                  className="text-lg font-medium text-zinc-400 hover:text-white transition-all py-3 w-full block rounded-lg hover:bg-white/5 active:bg-white/10"
-                >
-                  {item.name}
-                </Link>
-              ))}
+            <nav className="flex flex-col py-2 items-center text-center px-6" aria-label="Mobile navigation">
+              {navItems.map((item, idx) => {
+                const isActive = pathname === item.link;
+                return (
+                  <Link
+                    key={idx}
+                    href={item.link}
+                    onClick={(e) => handleNavClick(e, item.link)}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={cn(
+                      "text-lg font-medium transition-all py-3 w-full block rounded-lg hover:bg-white/5 active:bg-white/10",
+                      isActive ? "text-white" : "text-zinc-400 hover:text-white"
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
               {/* Add Blogs link for mobile drawer */}
               <Link
                 href="/blogs"
                 onClick={(e) => handleNavClick(e, '/blogs')}
-                className="text-lg font-medium text-[var(--primaryColor)] hover:text-[var(--primaryColor)]/80 transition-all py-3 w-full block rounded-lg hover:bg-[var(--primaryColor)]/5 active:bg-[var(--primaryColor)]/10 border-t border-white/5"
+                aria-current={pathname === '/blogs' ? 'page' : undefined}
+                className={cn(
+                  "text-lg font-medium transition-all py-3 w-full block rounded-lg hover:bg-[var(--primaryColor)]/5 active:bg-[var(--primaryColor)]/10 border-t border-white/5",
+                  pathname === '/blogs' ? "text-white bg-[var(--primaryColor)]/10" : "text-[var(--primaryColor)]"
+                )}
               >
                 Blogs
               </Link>

@@ -7,7 +7,7 @@ export default function Loading() {
   return (
     <PageBox>
       <ResponsiveBox
-        classNames="min-h-screen items-center justify-center lg:px-40"
+        classNames="min-h-screen items-center justify-center lg:px-12 xl:px-40"
         id="blogs"
       >
         <ConstrainedBox classNames="px-4 py-16">

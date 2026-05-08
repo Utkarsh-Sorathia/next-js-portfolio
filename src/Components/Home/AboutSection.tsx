@@ -23,11 +23,11 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
 
   return (
     <ResponsiveBox
-      classNames="relative bg-transparent items-center justify-center lg:px-40 lg:scroll-mt-12"
+      classNames="relative bg-transparent items-center justify-center lg:px-12 xl:px-40 lg:scroll-mt-12"
       id={id}
     >
       <ConstrainedBox classNames="relative py-12">
-        <SectionTitle>About me</SectionTitle>
+        <SectionTitle>About Me</SectionTitle>
         <div className="w-full flex flex-col md:flex-row justify-between gap-4 md:gap-8 mt-2 md:mt-4">
           <div className="flex-1 p-6 flex flex-col gap-8 my-auto">
             <motion.div
@@ -66,13 +66,13 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
               transition={{ duration: 0.4, ease: "easeOut" }}
               style={{ willChange: 'transform, opacity' }}
             >
-              <p className="mb-4 text-xl leading-relaxed text-justify">
+              <p className="mb-4 text-lg md:text-xl leading-relaxed text-left">
                 I'm a <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> with <span className="font-semibold text-[var(--primaryColor)]">2+ years of experience</span> specializing in
                 <span className="font-semibold text-[var(--primaryColor)]"> React, Next.js, Node.js</span>, and
                 <span className="font-semibold text-[var(--primaryColor)]"> MongoDB</span>.
                 I build responsive web applications, REST APIs, and real-time systems at production scale.
               </p>
-              <p className="text-lg text-[var(--textColorLight)] text-justify">
+              <p className="text-base md:text-lg text-[var(--textColorLight)] text-left">
                 My approach emphasizes clean architecture, performance, and user-focused design — turning product ideas into reliable, maintainable solutions.
               </p>
             </motion.div>

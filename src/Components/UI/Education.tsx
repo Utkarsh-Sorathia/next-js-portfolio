@@ -73,9 +73,9 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
 
                     {/* Timeline Content */}
                     <div className="ml-12 lg:ml-16 w-full text-left">
-                      <h2 className="text-xl lg:text-2xl font-bold text-[var(--primaryColor)] mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-[var(--primaryColor)] mb-2">
                         {entry.degree}
-                      </h2>
+                      </h3>
                       <div className="space-y-1 text-[var(--textColorLight)]">
                         <p className="text-lg font-medium text-[var(--textColor)]">
                           {item.institute}

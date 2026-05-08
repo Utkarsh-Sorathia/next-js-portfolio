@@ -8,7 +8,7 @@ const SkillCard = ({ data }: { data: ISkillListItem }) => {
   return (
     <CardBox classNames="p-4 items-center justify-start w-full">
       <div className="relative z-10 w-full">
-        <p className="text-lg/6 font-semibold text-center text-[var(--primaryColor)]">{data.title}</p>
+        <h3 className="text-lg/6 font-semibold text-center text-[var(--primaryColor)]">{data.title}</h3>
 
         {data.items.length > 0 ? (
           <Row classNames="gap-4 mt-8 flex-wrap justify-center items-center">
@@ -22,9 +22,8 @@ const SkillCard = ({ data }: { data: ISkillListItem }) => {
                     <Image
                       src={skill.icon}
                       alt={`${skill.title} technology icon`}
-                      width={144}
-                      height={144}
-                      sizes="100%"
+                      width={56}
+                      height={56}
                       loading="lazy"
                       className="w-12 lg:w-14 h-auto aspect-square object-cover"
                     />

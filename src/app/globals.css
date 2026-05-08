@@ -108,6 +108,7 @@ html,
 body {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow-x: hidden;
 }
 
 /* Hide default cursor on all elements for mouse users to support custom cursor consistency */

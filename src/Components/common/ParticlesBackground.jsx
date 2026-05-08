@@ -52,11 +52,12 @@ const ParticlesBackground = () => {
             fullScreen: { enable: false },
             style: {
               position: "absolute",
+              inset: 0,
               width: "100%",
               height: "100%",
             },
             background: {
-              color: { value: "#000000" },
+              color: { value: "transparent" },
             },
             fpsLimit: 60,
             interactivity: {

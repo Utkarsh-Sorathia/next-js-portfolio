@@ -1,13 +1,13 @@
-import ExperienceCard from "../UI/ExperienceCard";
+import ExperienceCard from "@/Components/UI/ExperienceCard";
 import experiences from "@/data/experience";
-import ConstrainedBox from "../core/constrained-box";
-import SectionTitle from "../common/SectionTitle";
-import ResponsiveBox from "../core/ResponsiveBox";
+import ConstrainedBox from "@/Components/core/constrained-box";
+import SectionTitle from "@/Components/common/SectionTitle";
+import ResponsiveBox from "@/Components/core/ResponsiveBox";
 
 const ExperienceSection = ({ id }: { id: string }) => {
   return (
     <ResponsiveBox
-      classNames="bg-transparent items-center justify-center lg:px-40"
+      classNames="bg-transparent items-center justify-center lg:px-12 xl:px-40"
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-12 lg:py-16">

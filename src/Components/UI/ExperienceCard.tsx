@@ -15,7 +15,7 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
     <section className="w-full py-0 md:py-8 max-w-5xl mx-auto relative">
       <div className="relative">
         {/* Desktop center line */}
-        <div className="hidden md:block absolute left-[50.1%] w-[3px] top-0 h-full bg-[var(--primaryColor)] transform -translate-x-1/2 opacity-50"></div>
+        <div className="hidden md:block absolute left-1/2 w-[2px] top-0 bottom-0 bg-[var(--primaryColor)]/30 transform -translate-x-1/2"></div>
 
         {data.map((item, index) => {
           const isLeft = index % 2 === 0;
@@ -82,76 +82,76 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 </div>
               </motion.div>
 
-              {/* ── DESKTOP LAYOUT: Alternating timeline (unchanged) ── */}
+              {/* ── DESKTOP LAYOUT: Alternating timeline ── */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05, ease: "easeOut" }}
                 viewport={{ once: true }}
                 style={{ willChange: "transform, opacity" }}
-                className={`hidden md:block md:w-[65%] ${
-                  !isLeft ? "md:ml-auto md:mr-0" : "md:ml-0 md:mr-auto"
+                className={`hidden md:flex md:w-full items-center gap-8 ${
+                  isLeft ? "flex-row" : "flex-row-reverse"
                 }`}
               >
-                {/* Desktop dot */}
-                <div
-                  className="absolute top-10 w-6 h-6 z-10"
-                  style={{
-                    left: isLeft ? "76.5%" : "auto",
-                    right: isLeft ? "auto" : "73.7%",
-                    transform: "translateX(-50%)",
-                  }}
-                >
-                  <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center bg-zinc-900 border border-white/10">
-                    <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-[var(--primaryColor)] shadow-[0_0_10px_var(--primaryColor)]" />
-                  </div>
-                </div>
-
-                <div
-                  className={`relative p-3 md:p-8 transition-all duration-500 border rounded-[var(--borderRadius)] border-white/10 hover:border-zinc-500 group overflow-hidden shadow-[2px_4px_16px_0px_rgba(0,0,0,0.1)_inset] ${
-                    isLeft
-                      ? "md:mr-8 md:pr-8 translate-x-0 md:translate-x-[-150px]"
-                      : "md:ml-8 md:pl-8 translate-x-0 md:translate-x-40"
-                  }`}
-                >
-                  {/* ⚪ The "Skill Card" White Glow Overlay */}
-                  <div className="absolute inset-0 bg-white/[0.12] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[var(--borderRadius)] z-0" />
-                  
-                  <div className="relative z-10 flex flex-col sm:flex-row items-start gap-3">
-                    {item.companyLink ? (
-                      <Link href={item.companyLink} target="_blank" rel="noopener noreferrer">
-                        {item.companyLogo && (
+                {/* Content Card */}
+                <div className="w-[45%]">
+                  <div
+                    className="relative p-6 transition-all duration-500 border rounded-[var(--borderRadius)] border-white/10 hover:border-zinc-500 group overflow-hidden shadow-[2px_4px_16px_0px_rgba(0,0,0,0.1)_inset]"
+                  >
+                    <div className="absolute inset-0 bg-white/[0.12] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[var(--borderRadius)] z-0" />
+                    
+                    <div className="relative z-10 flex flex-col xl:flex-row items-start gap-4">
+                      {item.companyLink ? (
+                        <Link href={item.companyLink} target="_blank" rel="noopener noreferrer" className="shrink-0">
+                          {item.companyLogo && (
+                            <Image
+                              src={item.companyLogo}
+                              alt={`${item.company} logo`}
+                              width={64}
+                              height={64}
+                              className="w-16 h-16 object-contain rounded-lg"
+                            />
+                          )}
+                        </Link>
+                      ) : (
+                        item.companyLogo && (
                           <Image
                             src={item.companyLogo}
                             alt={`${item.company} logo`}
-                            width={72}
-                            height={72}
-                            className="w-18 h-18 object-contain rounded-lg flex-shrink-0"
+                            width={64}
+                            height={64}
+                            className="w-16 h-16 object-contain rounded-lg shrink-0"
                           />
-                        )}
-                      </Link>
-                    ) : null}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-xl font-semibold text-[var(--primaryColor)] leading-snug">
-                        {item.position}
-                      </h3>
-                      <p className="text-lg font-medium text-[var(--textColor)] mt-1 truncate">
-                        {item.company}
-                      </p>
-                      <span className="text-sm text-[var(--textColor)] opacity-80 whitespace-nowrap mt-1 mx-1">
-                        {item.startDate} - {item.endDate}
-                      </span>
-                      {item.location && (
-                        <p className="text-sm text-[var(--textColor)] opacity-80 mt-3 truncate">
-                          📍 {item.location}
-                        </p>
+                        )
                       )}
-                      <p className="text-base text-[var(--textColor)] leading-relaxed mt-5">
-                        {item.description}
-                      </p>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg xl:text-xl font-semibold text-[var(--primaryColor)] leading-tight">
+                          {item.position}
+                        </h3>
+                        <p className="text-base xl:text-lg font-medium text-[var(--textColor)] mt-1 truncate">
+                          {item.company}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-sm text-[var(--textColor)] opacity-70">
+                          <span className="whitespace-nowrap">{item.startDate} - {item.endDate}</span>
+                          {item.location && <span className="truncate">📍 {item.location}</span>}
+                        </div>
+                        <p className="text-sm xl:text-base text-[var(--textColor)] leading-relaxed mt-4 opacity-90">
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                {/* Center Space for line & dot */}
+                <div className="w-[10%] flex justify-center relative">
+                  <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center bg-zinc-950 border border-white/20 z-20 shadow-xl">
+                    <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-[var(--primaryColor)] shadow-[0_0_15px_var(--primaryColor)]" />
+                  </div>
+                </div>
+
+                {/* Empty Space for alignment */}
+                <div className="w-[45%]"></div>
               </motion.div>
 
             </div>

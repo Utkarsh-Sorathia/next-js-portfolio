@@ -11,7 +11,7 @@ import Strings from "@/constants/strings";
 const ContactSection = ({ id }: { id: string }) => {
   return (
     <ResponsiveBox
-      classNames="bg-transparent items-center justify-center lg:px-40 lg:min-h-screen"
+      classNames="bg-transparent items-center justify-center lg:px-12 xl:px-40 lg:min-h-screen"
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-12 sm:py-16 lg:py-16">

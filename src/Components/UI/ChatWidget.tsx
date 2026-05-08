@@ -120,9 +120,9 @@ export default function ChatWidget() {
             {/* Header */}
             <div className="bg-[var(--primaryColor)] p-4 flex items-center justify-between text-white shrink-0">
               <div className="flex items-center gap-3">
-                <Image src="/favicon.ico" alt="Logo" width={24} height={24} />
+                <Image src="/favicon.ico" alt="Logo" width={24} height={24} aria-hidden="true" />
                 <div className="flex flex-col">
-                  <h3 className="font-semibold text-sm leading-none flex items-center gap-2">
+                  <h3 id="chat-window-title" className="font-semibold text-sm leading-none flex items-center gap-2">
                     AI Assistant
                     <span className="flex h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" title="System Online"></span>
                   </h3>
@@ -141,7 +141,12 @@ export default function ChatWidget() {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50 dark:bg-zinc-950/50 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700">
+            <div 
+              role="log"
+              aria-live="polite"
+              aria-labelledby="chat-window-title"
+              className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50 dark:bg-zinc-950/50 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700"
+            >
               {messages.length === 0 && (
                 <div className="text-center text-zinc-500 text-sm mt-10 px-4">
                   <p className="mb-2">👋 Hi there!</p>
@@ -157,6 +162,7 @@ export default function ChatWidget() {
                           });
                         }
                       }}
+                      aria-label="Ask about skills"
                       className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                     >
                       Skills?
@@ -171,6 +177,7 @@ export default function ChatWidget() {
                           });
                         }
                       }}
+                      aria-label="Ask about projects"
                       className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                     >
                       Projects?
@@ -185,6 +192,7 @@ export default function ChatWidget() {
                           });
                         }
                       }}
+                      aria-label="Ask about contact information"
                       className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
                     >
                       Contact?
@@ -194,12 +202,10 @@ export default function ChatWidget() {
               )}
 
               {messages.map((m: any) => {
-                // Extract text content from parts array or use content directly
+                // ... (unchanged logic)
                 const rawContent = m.parts
                   ? m.parts.map((part: any) => part.type === 'text' ? part.text : '').join('')
                   : m.content || '';
-
-                // Strip out <think>...</think> blocks (and unclosed <think> during streaming)
                 const textContent = rawContent.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
 
                 return (
@@ -213,6 +219,7 @@ export default function ChatWidget() {
                         : 'bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-700 rounded-tl-none'
                         }`}
                     >
+                      <div className="sr-only">{m.role === 'user' ? 'You said:' : 'AI said:'}</div>
                       <div className="prose dark:prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:mb-4 last:prose-p:mb-0 prose-pre:bg-zinc-200 dark:prose-pre:bg-zinc-900 prose-ul:my-2 prose-li:my-1 break-words">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
@@ -229,7 +236,7 @@ export default function ChatWidget() {
               })}
 
               {isLoading && (
-                <div className="flex justify-start">
+                <div className="flex justify-start" aria-label="AI is thinking">
                   <div className="bg-white dark:bg-zinc-800 rounded-2xl rounded-tl-none px-4 py-3 border border-zinc-100 dark:border-zinc-700">
                     <div className="flex gap-1.5">
                       <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
@@ -245,8 +252,8 @@ export default function ChatWidget() {
             {/* Input Area */}
             <form onSubmit={handleSubmit} className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-700">
               {error && (
-                <div className="mb-2 px-3 py-2 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-[10px] text-red-500">
-                  <AlertCircle className="w-3 h-3" />
+                <div role="alert" className="mb-2 px-3 py-2 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-[10px] text-red-500">
+                  <AlertCircle className="w-3 h-3" aria-hidden="true" />
                   {error}
                 </div>
               )}
@@ -258,13 +265,15 @@ export default function ChatWidget() {
                   onChange={handleInputChange}
                   placeholder="Ask something..."
                   disabled={isLoading}
+                  aria-label="Ask AI Assistant something"
                 />
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
                   className="bg-[var(--primaryColor)] text-white p-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  aria-label="Send message"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4" aria-hidden="true" />
                 </button>
               </div>
             </form>
@@ -280,13 +289,14 @@ export default function ChatWidget() {
               initial={{ opacity: 0, y: 10, x: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, x: 20, scale: 0.9 }}
+              role="status"
               className="group bg-white dark:bg-zinc-800 px-3.5 py-2.5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-200 dark:border-zinc-700 absolute whitespace-nowrap right-full sm:right-0 bottom-0 sm:bottom-full mr-3 sm:mr-0 mb-0 sm:mb-3"
             >
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0">
                   <Image
                     src="/android-chrome-192x192.png"
-                    alt="AI Assistant"
+                    alt="AI Assistant Icon"
                     width={32}
                     height={32}
                     className="w-full h-full object-cover"
@@ -311,9 +321,11 @@ export default function ChatWidget() {
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
           className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50 border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0`}
-          aria-label="Open AI Assistant"
+          aria-label={isOpen ? "Close AI Assistant" : "Open AI Assistant"}
+          aria-expanded={isOpen}
+          aria-haspopup="true"
         >
-          {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.webp" alt="AI Assistant" width={50} height={50} />}
+          {isOpen ? <X className="w-5 h-5" /> : <Image src="/chatbot-icon.webp" alt="Chat with AI" width={50} height={50} />}
         </motion.button>
       </div>
     </div>

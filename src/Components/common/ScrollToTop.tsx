@@ -32,8 +32,13 @@ const ScrollToTop = () => {
   return (
     <div className={styles.topToBottom}>
       {showTopBtn ? (
-        <button onClick={goToTop} className={styles.btnStyle}>
-          <FontAwesomeIcon icon={faArrowUpLong} className={styles.iconStyle} />
+        <button 
+          onClick={goToTop} 
+          className={styles.btnStyle}
+          aria-label="Scroll back to top"
+          title="Scroll back to top"
+        >
+          <FontAwesomeIcon icon={faArrowUpLong} className={styles.iconStyle} aria-hidden="true" />
         </button>
       ) : null}
     </div>

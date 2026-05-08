@@ -1,15 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import Column from '../core/Column'
-import ConstrainedBox from '../core/constrained-box'
-import ResponsiveBox from '../core/ResponsiveBox'
-import Row from '../core/Row'
-import socialLinks from '../../data/importantLinks'
-import { NameAnimation } from '../common/nameAnimation'
+import Column from '@/Components/core/Column'
+import ConstrainedBox from '@/Components/core/constrained-box'
+import ResponsiveBox from '@/Components/core/ResponsiveBox'
+import Row from '@/Components/core/Row'
+import socialLinks from '@/data/importantLinks'
+import { NameAnimation } from '@/Components/common/nameAnimation'
 import dynamic from 'next/dynamic';
 import { BsArrowRight } from 'react-icons/bs';
-const ParticlesBackground = dynamic(() => import('../common/ParticlesBackground'), { ssr: false });
+const ParticlesBackground = dynamic(() => import('@/Components/common/ParticlesBackground'), { ssr: false });
 
 const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: boolean }>) => {
 
@@ -19,7 +19,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
       id={id}
     >
       {/* 👉 Particle background limited to this section only */}
-      <div className="absolute top-0 left-0 w-full h-full z-0">
+      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-screen h-full z-0 pointer-events-none">
         <ParticlesBackground />
       </div>
 

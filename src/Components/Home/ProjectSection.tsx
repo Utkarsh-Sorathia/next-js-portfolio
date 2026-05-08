@@ -7,11 +7,11 @@ import projects from "@/data/projects";
 const ProjectSection = ({ id }: { id: string }) => {
   return (
     <ResponsiveBox
-      classNames="bg-transparent items-center justify-center lg:px-40 scroll-mt-8 lg:scroll-mt-12"
+      classNames="bg-transparent items-center justify-center lg:px-12 xl:px-40 scroll-mt-8 lg:scroll-mt-12"
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-14 lg:py-16">
-        <SectionTitle>Projects/Recent Works</SectionTitle>
+        <SectionTitle>Projects & Recent Works</SectionTitle>
 
         <ProjectList projects={projects} />
       </ConstrainedBox>

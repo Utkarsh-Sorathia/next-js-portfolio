@@ -91,13 +91,15 @@ const ContactForm = () => {
         {isSuccess ? (
           <motion.div
             key="success"
+            role="alert"
+            aria-live="polite"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             className="flex flex-col items-center justify-center py-12 text-center"
           >
             <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6">
-              <CheckCircle className="w-10 h-10" />
+              <CheckCircle className="w-10 h-10" aria-hidden="true" />
             </div>
             <h3 className="text-2xl font-bold mb-2 text-zinc-100">Message Sent!</h3>
             <p className="text-zinc-400 mb-8">
@@ -106,72 +108,85 @@ const ContactForm = () => {
             <button
               onClick={() => setIsSuccess(false)}
               className="px-8 py-3 bg-[var(--primaryColor)] text-white rounded-full font-bold hover:scale-105 transition-transform"
+              aria-label="Send another message"
             >
               Send Another
             </button>
           </motion.div>
         ) : (
           <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <h3 className="text-2xl font-bold mb-8 text-zinc-100">Send Me a Message</h3>
+            <h3 id="contact-form-title" className="text-2xl font-bold mb-8 text-zinc-100">Send Me a Message</h3>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5" aria-labelledby="contact-form-title">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-zinc-400 ml-1">
-                    Name <span className="text-red-500">*</span>
+                  <label htmlFor="contact-name" className="text-sm font-semibold text-zinc-400 ml-1">
+                    Name <span className="text-red-500" aria-hidden="true">*</span>
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="John Doe"
                     disabled={isSubmitting}
+                    required
+                    aria-required="true"
                     className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-zinc-400 ml-1">
-                    Email <span className="text-red-500">*</span>
+                  <label htmlFor="contact-email" className="text-sm font-semibold text-zinc-400 ml-1">
+                    Email <span className="text-red-500" aria-hidden="true">*</span>
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="john@example.com"
                     disabled={isSubmitting}
+                    required
+                    aria-required="true"
                     className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-zinc-400 ml-1">
-                  Subject <span className="text-red-500">*</span>
+                <label htmlFor="contact-subject" className="text-sm font-semibold text-zinc-400 ml-1">
+                  Subject <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <input
+                  id="contact-subject"
                   type="text"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Project Inquiry"
                   disabled={isSubmitting}
+                  required
+                  aria-required="true"
                   className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-zinc-400 ml-1">
-                  Message <span className="text-red-500">*</span>
+                <label htmlFor="contact-message" className="text-sm font-semibold text-zinc-400 ml-1">
+                  Message <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project..."
                   disabled={isSubmitting}
+                  required
+                  aria-required="true"
                   className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-600"
                 />
               </div>
@@ -183,22 +198,26 @@ const ContactForm = () => {
                   className="w-full max-w-[200px] py-3.5 rounded-2xl bg-[var(--primaryColor)] text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-xl shadow-[var(--primaryColor)]/20 active:scale-95 group"
                 >
                   {isSubmitting ? (
-                    <span className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
                   ) : (
                     <>
                       <span className="text-sm">Send Message</span>
-                      <Send className="w-4 h-4" />
+                      <Send className="w-4 h-4" aria-hidden="true" />
                     </>
                   )}
                 </button>
 
                 {message && (
-                  <div className="flex items-center justify-start gap-2.5 text-[var(--primaryColor)] animate-in fade-in slide-in-from-top-1 duration-300 px-1">
-                    <AlertCircle className="w-4 h-4 shrink-0" />
+                  <div 
+                    role="alert"
+                    aria-live="polite"
+                    className="flex items-center justify-start gap-2.5 text-[var(--primaryColor)] animate-in fade-in slide-in-from-top-1 duration-300 px-1"
+                  >
+                    <AlertCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="text-[11px] font-bold uppercase tracking-[0.2em]">{message}</span>
                   </div>
                 )}
-
+...
                 <p className="text-[10px] text-zinc-500 text-center leading-relaxed max-w-[300px]">
                   Protected by reCAPTCHA. Google{' '}
                   <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-zinc-400">
