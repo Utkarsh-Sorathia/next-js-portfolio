@@ -7,6 +7,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { SiLinkedin, SiGithub, SiUpwork } from "react-icons/si";
 import Link from "next/link";
 import Strings from "@/constants/strings";
+import CopyEmailCard from "../UI/CopyEmailCard";
 
 const ContactSection = ({ id }: { id: string }) => {
   return (
@@ -30,16 +31,16 @@ const ContactSection = ({ id }: { id: string }) => {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 lg:gap-4 lg:space-y-4">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
               {/* Contact Cards */}
               <Link
                 href={Strings.linkedInLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
-                  <div className="p-2.5 md:p-4 bg-blue-100 dark:bg-blue-900/20 rounded-xl text-[#0077b5] shrink-0">
+                  <div className="p-2.5 lg:p-3.5 bg-blue-100 dark:bg-blue-900/20 rounded-xl text-[#0077b5] shrink-0">
                     <SiLinkedin className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
@@ -57,10 +58,10 @@ const ContactSection = ({ id }: { id: string }) => {
                 href={Strings.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-white/30 transition-all duration-300"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-white/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
-                  <div className="p-2.5 md:p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-zinc-900 dark:text-white shrink-0">
+                  <div className="p-2.5 lg:p-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-zinc-900 dark:text-white shrink-0">
                     <SiGithub className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
@@ -78,10 +79,10 @@ const ContactSection = ({ id }: { id: string }) => {
                 href={Strings.upworkLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#14a800]/30 transition-all duration-300"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#14a800]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
-                  <div className="p-2.5 md:p-4 bg-[#14a800]/10 dark:bg-[#14a800]/20 rounded-xl text-[#14a800] shrink-0">
+                  <div className="p-2.5 lg:p-3.5 bg-[#14a800]/10 dark:bg-[#14a800]/20 rounded-xl text-[#14a800] shrink-0">
                     <SiUpwork className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
@@ -94,6 +95,8 @@ const ContactSection = ({ id }: { id: string }) => {
                   <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
+
+              <CopyEmailCard />
 
             </div>
           </div>

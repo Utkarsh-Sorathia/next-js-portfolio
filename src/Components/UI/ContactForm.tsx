@@ -217,7 +217,6 @@ const ContactForm = () => {
                     <span className="text-[11px] font-bold uppercase tracking-[0.2em]">{message}</span>
                   </div>
                 )}
-...
                 <p className="text-[10px] text-zinc-500 text-center leading-relaxed max-w-[300px]">
                   Protected by reCAPTCHA. Google{' '}
                   <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-zinc-400">

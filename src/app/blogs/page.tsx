@@ -27,10 +27,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${baseURL}/og-image.webp`,
+        url: `${baseURL}/UtkarshSorathia.webp`,
         alt: "Utkarsh Sorathia - Full Stack Developer Blog",
-        width: 1920,
-        height: 966,
+        width: 800,
+        height: 1067,
         type: "image/webp",
       },
     ],
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
     description: "Read my latest thoughts on web development, technology, and programming.",
     creator: "@utkarshsor03",
-    images: [`${baseURL}/og-image.webp`],
+    images: [`${baseURL}/UtkarshSorathia.webp`],
   },
 };
 

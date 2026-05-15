@@ -30,6 +30,7 @@ class Strings {
   static upworkUsername = "Utkarsh S.";
 
 
+  static email = "utkarshsor03@gmail.com";
   static fullName = "Utkarsh Sorathia";
   static shortName = "U.S.";
 }
