@@ -107,10 +107,10 @@ export const metadata: Metadata = {
     siteName: "Utkarsh Sorathia Portfolio",
     images: [
       {
-        url: `${baseUrl}/UtkarshSorathia.webp`,
+        url: `${baseUrl}/og-image.webp`,
         alt: "Utkarsh Sorathia - Full Stack Developer Portfolio",
-        width: 512,
-        height: 487,
+        width: 1920,
+        height: 966,
         type: "image/webp",
       },
     ],
@@ -122,7 +122,7 @@ export const metadata: Metadata = {
     title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
     description:
       "Full Stack Developer specializing in Next.js, React, and MERN Stack. Building scalable, high-performance web applications and sharing modern development insights.",
-    images: [`${baseUrl}/UtkarshSorathia.webp`],
+    images: [`${baseUrl}/og-image.webp`],
     creator: "@utkarshsor03",
     site: "@utkarshsor03",
   },
@@ -149,6 +149,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // suppressHydrationWarning: browser extensions (e.g. password managers, dark-mode) can inject
+    // attributes onto <html> and <body>, causing false hydration mismatches. This suppresses those.
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
 
@@ -174,10 +176,9 @@ export default function RootLayout({
             />
           )}
           <Header className="app_nav" navItems={navMenus} />
-          <main className="flex-grow">{children}
-            <Analytics />
-            <SpeedInsights />
-          </main>
+          <main id="main-content" className="flex-grow">{children}</main>
+          <Analytics />
+          <SpeedInsights />
           <Footer />
           <ScrollToTop />
           <ErrorBoundary>

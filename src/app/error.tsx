@@ -1,0 +1,59 @@
+'use client'
+
+import { useEffect } from 'react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    console.error(error)
+  }, [error])
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="text-6xl font-bold text-white mb-4"
+      >
+        500
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1, duration: 0.5 }}
+        className="text-lg text-gray-300 mb-8 max-w-md"
+      >
+        Something went wrong on our end. Try refreshing or head back home.
+      </motion.p>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+      >
+        <button
+          onClick={reset}
+          className="inline-block bg-[var(--primaryColor)] text-white px-6 py-3 rounded-full font-medium shadow-md hover:opacity-90 transition-colors"
+        >
+          Try Again
+        </button>
+        <Link
+          href="/"
+          className="inline-block border border-[var(--primaryColor)] text-[var(--primaryColor)] hover:text-white px-6 py-3 rounded-full font-medium hover:bg-[var(--primaryColor)] transition-all duration-300"
+        >
+          Back to Home
+        </Link>
+      </motion.div>
+    </div>
+  )
+}

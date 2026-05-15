@@ -1,1 +1,3 @@
-export const baseURL = process.env.NODE_ENV === "development" ? "http://192.168.1.20:3000" : "https://utkarshsorathia.in";
+export const baseURL = process.env.NODE_ENV === "development"
+  ? (process.env.NEXT_PUBLIC_DEV_URL || "http://localhost:3000")
+  : "https://utkarshsorathia.in";

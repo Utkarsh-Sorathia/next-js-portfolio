@@ -1,11 +1,15 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
 
-const secretKey = process.env.JWT_SECRET || "fallback-secret-at-least-thirty-two-chars-long";
-const key = new TextEncoder().encode(secretKey);
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET environment variable is not set");
+}
 
-async function encrypt(payload: any) {
+const key = new TextEncoder().encode(process.env.JWT_SECRET);
+
+async function encrypt(payload: Record<string, unknown>) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -13,7 +17,7 @@ async function encrypt(payload: any) {
     .sign(key);
 }
 
-export async function decrypt(input: string): Promise<any> {
+export async function decrypt(input: string): Promise<Record<string, unknown>> {
   const { payload } = await jwtVerify(input, key, {
     algorithms: ["HS256"],
   });
@@ -21,8 +25,16 @@ export async function decrypt(input: string): Promise<any> {
 }
 
 export async function login(password: string) {
-  // Comparing with SECRET_KEY from env as the admin password
-  if (password !== process.env.SECRET_KEY) {
+  const adminPassword = process.env.SECRET_KEY;
+  if (!adminPassword) return false;
+
+  // Timing-safe comparison to prevent timing attacks
+  const inputBuffer = Buffer.from(password);
+  const secretBuffer = Buffer.from(adminPassword);
+  if (
+    inputBuffer.length !== secretBuffer.length ||
+    !crypto.timingSafeEqual(inputBuffer, secretBuffer)
+  ) {
     return false;
   }
 
@@ -56,7 +68,8 @@ export async function getSession() {
   try {
     const decrypted = await decrypt(session);
     // Check if the session has expired manually just in case
-    if (decrypted && decrypted.expires && new Date(decrypted.expires) < new Date()) {
+    const expires = decrypted.expires;
+    if (expires && (typeof expires === 'string' || typeof expires === 'number') && new Date(expires) < new Date()) {
       return null;
     }
     return decrypted;

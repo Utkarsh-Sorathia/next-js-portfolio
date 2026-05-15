@@ -35,6 +35,7 @@ const ContactSection = ({ id }: { id: string }) => {
               <Link
                 href={Strings.linkedInLink}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
@@ -43,7 +44,7 @@ const ContactSection = ({ id }: { id: string }) => {
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
                     <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#0077b5] mb-0.5 lg:mb-1 opacity-80">LinkedIn</p>
-                    <p className="text-white font-semibold truncate hidden lg:block">{Strings.linkedInUsername}</p>
+                    <p className="text-white font-semibold truncate text-xs lg:text-base">{Strings.linkedInUsername}</p>
                   </div>
                 </div>
                 <div className="hidden lg:flex items-center justify-end gap-3 text-xs font-bold uppercase tracking-tight text-[#0077b5] opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap min-w-[100px]">
@@ -55,6 +56,7 @@ const ContactSection = ({ id }: { id: string }) => {
               <Link
                 href={Strings.githubLink}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-white/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
@@ -63,7 +65,7 @@ const ContactSection = ({ id }: { id: string }) => {
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
                     <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#fff] mb-0.5 lg:mb-1 opacity-80">GitHub</p>
-                    <p className="text-white font-semibold truncate hidden lg:block">{Strings.githubUsername}</p>
+                    <p className="text-white font-semibold truncate text-xs lg:text-base">{Strings.githubUsername}</p>
                   </div>
                 </div>
                 <div className="hidden lg:flex items-center justify-end gap-3 text-xs font-bold uppercase tracking-tight text-white opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap min-w-[100px]">
@@ -75,6 +77,7 @@ const ContactSection = ({ id }: { id: string }) => {
               <Link
                 href={Strings.upworkLink}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 md:p-6 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#14a800]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
@@ -83,7 +86,7 @@ const ContactSection = ({ id }: { id: string }) => {
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
                     <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#14a800] mb-0.5 lg:mb-1 opacity-80">Upwork</p>
-                    <p className="text-white font-semibold truncate hidden lg:block">{Strings.upworkUsername}</p>
+                    <p className="text-white font-semibold truncate text-xs lg:text-base">{Strings.upworkUsername}</p>
                   </div>
                 </div>
                 <div className="hidden lg:flex items-center justify-end gap-3 text-xs font-bold uppercase tracking-tight text-[#14a800] opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap min-w-[100px]">

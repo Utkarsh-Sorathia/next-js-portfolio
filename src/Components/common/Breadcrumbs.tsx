@@ -42,7 +42,7 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
             >
               <ChevronRight className="w-4 h-4 text-zinc-600 flex-shrink-0" />
               {isLast ? (
-                <span className="text-[var(--textColor)] font-medium">
+                <span className="text-[var(--textColor)] font-medium" aria-current="page">
                   {item.name}
                 </span>
               ) : (

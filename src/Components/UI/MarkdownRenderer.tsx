@@ -71,9 +71,10 @@ const MarkdownRenderer = ({ html }: MarkdownRendererProps) => {
   return (
     <div 
       ref={containerRef}
-      className="markdown-body" 
+      className="markdown-body"
       dangerouslySetInnerHTML={{ __html: html }}
-      style={{ backgroundColor: 'transparent' }} 
+      style={{ backgroundColor: 'transparent' }}
+
     />
   );
 };

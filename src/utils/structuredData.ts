@@ -29,7 +29,7 @@ function ensureArray<T>(val: T | T[] | undefined): T[] {
  * PERSON SCHEMA
  */
 export function getPersonSchema() {
-  const currentJob = experience.find(exp => exp.endDate === "Present");
+  const currentJob = experience.find(exp => exp.endDate?.toLowerCase() === "present");
 
   const worksFor = currentJob
     ? {
@@ -42,7 +42,6 @@ export function getPersonSchema() {
         addressLocality: currentJob.location?.split(",")[0]?.trim() || "Surat",
         addressRegion: "Gujarat",
         addressCountry: "IN",
-        streetAddress: "",
         postalCode: "395002"
       },
     }
@@ -172,7 +171,6 @@ export function getWebSiteSchema() {
       ),
       address: {
         "@type": "PostalAddress",
-        streetAddress: "",
         addressLocality: "Surat",
         addressRegion: "Gujarat",
         postalCode: "395002",
@@ -298,7 +296,6 @@ export function getArticleSchema(
       },
       address: {
         "@type": "PostalAddress",
-        streetAddress: "",
         addressLocality: "Surat",
         addressRegion: "Gujarat",
         postalCode: "395002",
@@ -375,7 +372,6 @@ export function getBlogListingSchema(posts?: { title: string; url: string; dateP
       },
       address: {
         "@type": "PostalAddress",
-        streetAddress: "",
         addressLocality: "Surat",
         addressRegion: "Gujarat",
         postalCode: "395002",

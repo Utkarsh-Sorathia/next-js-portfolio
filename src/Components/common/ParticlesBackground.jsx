@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
@@ -111,4 +111,4 @@ const ParticlesBackground = () => {
   );
 };
 
-export default ParticlesBackground;
+export default memo(ParticlesBackground);

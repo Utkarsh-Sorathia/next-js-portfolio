@@ -2,10 +2,17 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { getSession } from '@/lib/auth';
 
+interface IpApiResponse {
+  city?: string;
+  region_name?: string;
+  country_name?: string;
+  [key: string]: unknown;
+}
+
 interface LogEntry {
     timestamp: Date;
     ip: string;
-    fullResponse: any;
+    fullResponse: IpApiResponse;
 }
 
 export async function GET(request: Request) {
@@ -23,7 +30,7 @@ export async function GET(request: Request) {
     // Date filters
     const dateFrom = searchParams.get('dateFrom');
     const dateTo = searchParams.get('dateTo');
-    const filter: any = {};
+    const filter: { timestamp?: { $gte?: Date; $lte?: Date } } = {};
 
     if (dateFrom || dateTo) {
         filter.timestamp = {};
@@ -37,9 +44,6 @@ export async function GET(request: Request) {
 
         const totalRecords = await db.collection('ipapiresponses').countDocuments();
         const total = await db.collection('ipapiresponses').countDocuments(filter);
-        // const cityFilter = await db.collection('ipapiresponses').distinct("fullResponse.city")
-        // const regionFilter = await db.collection('ipapiresponses').distinct("fullResponse.region_name")
-        // const countryFilter = await db.collection('ipapiresponses').distinct("fullResponse.country_name")
         const logs = await db
             .collection<LogEntry>('ipapiresponses')
             .find(filter)

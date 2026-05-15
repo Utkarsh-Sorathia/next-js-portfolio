@@ -70,7 +70,7 @@ const projects: IProjectItem[] = [
     id: "ChatApp Premium",
     title: "ChatApp Premium (PWA)",
     description:
-      "A high-performance real-time messaging PWA featuring intelligent push notifications, sub-millisecond delivery, and glassmorphic UI. Built for cross-platform excellence with offline support and advanced session handling.",
+      "A high-performance real-time messaging PWA featuring intelligent push notifications, low-latency delivery, and glassmorphic UI. Built for cross-platform excellence with offline support and advanced session handling.",
     icon: "/skills/nextjs.webp",
     repoType: RepoType.Private,
     projectType: ProjectType.Personal,
@@ -99,7 +99,7 @@ const projects: IProjectItem[] = [
     projectType: ProjectType.Personal,
     githubUrl: "https://github.com/Utkarsh-Sorathia/Typingo",
     url: "https://typingo.vercel.app/",
-    tags: ["React.js", "Tailwind css", "Typescript"],
+    tags: ["React.js", "Tailwind CSS", "TypeScript"],
   },
 ];
 export default projects;

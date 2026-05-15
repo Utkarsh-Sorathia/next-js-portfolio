@@ -37,19 +37,19 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
             </div>
           )}
           <div className="inline-flex items-center mx-auto pb-4">
-            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)] dark:text-[var(--textColor)]">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)]">
               Hi there, I am
               <NameAnimation
                 words={['Utkarsh Sorathia.', 'Full Stack Developer.']}
-                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)] dark:text-[var(--primaryColor)]"
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)]"
               />
             </h1>
           </div>
           <h2 className="sr-only">
             Full Stack Developer specializing in MERN, Next.js, and React.js — creating modern web and mobile applications.
           </h2>
-          <p className="text-sm md:text-base text-[var(--textColorLight)] dark:text-[var(--textColorLight)] mx-auto text-wrap max-w-2xl text-center">
-            MERN & Next.js Developer 🚀 2+ Years of Experience 🛠️ Building Modern <span className="whitespace-nowrap">Web Experiences 💻</span>
+          <p className="text-sm md:text-base text-[var(--textColorLight)] mx-auto text-wrap max-w-2xl text-center">
+            MERN & Next.js Developer — 2+ Years of Experience Building Modern <span className="whitespace-nowrap">Web Experiences</span>
           </p>
         </Column>
 
@@ -71,8 +71,6 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
 
 
         <div className="mt-12 lg:mt-16 w-full flex flex-col items-center">
-          <p className="text-base font-medium pb-3">Follow me here</p>
-
           <Row classNames="mt-2 gap-4 md:gap-6">
             {socialLinks.map((link, index) => (
               <Link
@@ -81,7 +79,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${link.name}`}
-                className="flex items-center text-2xl hover:transform hover:scale-120 transition duration-200"
+                className="flex items-center text-2xl hover:scale-110 transition duration-200"
               >
                 {typeof link.icon === 'string' ? (
                   <i className={link.icon} />

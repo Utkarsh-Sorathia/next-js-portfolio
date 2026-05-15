@@ -18,6 +18,30 @@ export const metadata: Metadata = {
   description:
     "Read my latest thoughts on web development, technology, and programming.",
   alternates: { canonical: `${baseURL}/blogs` },
+  openGraph: {
+    title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
+    description: "Read my latest thoughts on web development, technology, and programming.",
+    url: `${baseURL}/blogs`,
+    siteName: "Utkarsh Sorathia Portfolio",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: `${baseURL}/og-image.webp`,
+        alt: "Utkarsh Sorathia - Full Stack Developer Blog",
+        width: 1920,
+        height: 966,
+        type: "image/webp",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
+    description: "Read my latest thoughts on web development, technology, and programming.",
+    creator: "@utkarshsor03",
+    images: [`${baseURL}/og-image.webp`],
+  },
 };
 
 

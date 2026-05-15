@@ -35,7 +35,7 @@ const ContactForm = () => {
       setMessage("Please enter your email.");
       return;
     }
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
       setMessage("Please enter a valid email address.");
       return;
     }

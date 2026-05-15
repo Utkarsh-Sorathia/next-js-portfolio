@@ -35,7 +35,6 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              style={{ willChange: 'transform, opacity' }}
               className="relative flex items-center gap-6"
             >
               <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-[var(--primaryColor)]/50 overflow-hidden flex-shrink-0">
@@ -64,16 +63,15 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              style={{ willChange: 'transform, opacity' }}
             >
               <p className="mb-4 text-lg md:text-xl leading-relaxed text-left">
-                I'm a <span className="font-semibold text-[var(--primaryColor)]">Full Stack Developer</span> with <span className="font-semibold text-[var(--primaryColor)]">2+ years of experience</span> specializing in
-                <span className="font-semibold text-[var(--primaryColor)]"> React, Next.js, Node.js</span>, and
-                <span className="font-semibold text-[var(--primaryColor)]"> MongoDB</span>.
-                I build responsive web applications, REST APIs, and real-time systems at production scale.
+                I enjoy working across the full stack — from crafting pixel-precise UIs with
+                <span className="font-semibold text-[var(--primaryColor)]"> React & Next.js</span> to designing
+                <span className="font-semibold text-[var(--primaryColor)]"> Node.js APIs</span> and
+                <span className="font-semibold text-[var(--primaryColor)]"> MongoDB</span> schemas that hold up under real traffic.
               </p>
               <p className="text-base md:text-lg text-[var(--textColorLight)] text-left">
-                My approach emphasizes clean architecture, performance, and user-focused design — turning product ideas into reliable, maintainable solutions.
+                I care about clean architecture, honest performance, and shipping things that actually work — not just look good in a demo. When I'm not building, I'm usually writing about what I learned the hard way.
               </p>
             </motion.div>
 

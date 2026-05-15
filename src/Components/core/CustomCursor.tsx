@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, AnimatePresence } from 'framer-motion'
 
 const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const isVisibleRef = useRef(false)
 
   // Direct MotionValues for perfect 1-to-1 movement with zero delay
   const mouseX = useMotionValue(0)
@@ -18,14 +19,22 @@ const CustomCursor = () => {
     checkMobile()
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isVisible) setIsVisible(true)
-      // Update coordinates instantly
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true
+        setIsVisible(true)
+      }
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
     }
 
-    const handleMouseLeave = () => setIsVisible(false)
-    const handleMouseEnter = () => setIsVisible(true)
+    const handleMouseLeave = () => {
+      isVisibleRef.current = false
+      setIsVisible(false)
+    }
+    const handleMouseEnter = () => {
+      isVisibleRef.current = true
+      setIsVisible(true)
+    }
 
     window.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseleave', handleMouseLeave)
@@ -42,7 +51,7 @@ const CustomCursor = () => {
       document.removeEventListener('mouseenter', handleMouseEnter)
       document.body.style.cursor = 'auto'
     }
-  }, [mouseX, mouseY, isVisible])
+  }, [mouseX, mouseY])
 
   if (isMobile) return null
 

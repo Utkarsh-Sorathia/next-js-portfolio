@@ -22,6 +22,11 @@ const Header = ({
   const { query } = useKBar();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    setIsMac(/Mac|iPhone|iPad|iPod/.test(navigator.platform));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +58,13 @@ const Header = ({
   const isAtTop = !scrolled && pathname === '/';
 
   return (
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-[var(--primaryColor)] focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold"
+      >
+        Skip to main content
+      </a>
     <header className={cn(
       "fixed top-0 left-0 right-0 z-[5000] transition-all duration-300",
       isAtTop 
@@ -74,6 +86,7 @@ const Header = ({
               alt="Utkarsh Sorathia"
               fill
               sizes="40px"
+              priority
               className="object-cover"
             />
           </div>
@@ -136,7 +149,7 @@ const Header = ({
               <span className="hidden xl:inline text-xs font-semibold">Search...</span>
             </div>
             <div className="hidden xl:flex items-center gap-1 opacity-60">
-              <kbd className="bg-zinc-800 px-1 py-0.5 rounded text-[9px] font-bold border border-white/5">Ctrl</kbd>
+              <kbd className="bg-zinc-800 px-1 py-0.5 rounded text-[9px] font-bold border border-white/5">{isMac ? '⌘' : 'Ctrl'}</kbd>
               <kbd className="bg-zinc-800 px-1 py-0.5 rounded text-[9px] font-bold border border-white/5">K</kbd>
             </div>
           </button>
@@ -202,6 +215,7 @@ const Header = ({
         )}
       </AnimatePresence>
     </header>
+    </>
   )
 }
 

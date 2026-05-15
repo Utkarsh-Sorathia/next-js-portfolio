@@ -29,7 +29,7 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1])
 
   return (
-    <div className="w-full" ref={containerRef} style={{ position: 'relative' }}>
+    <div className="relative w-full" ref={containerRef}>
       <div ref={ref} className="relative max-w-7xl mx-auto">
         {/* Static Track Line - Single continuous background line */}
         <div
@@ -54,7 +54,7 @@ const Education = ({ data }: { data: TimelineEntry[] }) => {
           {data.map((entry, entryIndex) => (
             <div key={`entry-${entryIndex}`} className="relative">
               {entry.educations.map((item, itemIndex) => {
-                const globalIndex = entryIndex + itemIndex;
+                const globalIndex = data.slice(0, entryIndex).reduce((sum, e) => sum + e.educations.length, 0) + itemIndex;
                 return (
                   <motion.div
                     key={`edu-${entryIndex}-${itemIndex}`}

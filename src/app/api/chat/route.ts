@@ -76,10 +76,13 @@ export async function POST(req: NextRequest) {
 
   /* ---------------- PROMPT ATTACK DETECTION ---------------- */
 
-  const lastUserMessageObj = messages?.filter((m: any) => m.role === "user").pop();
+  type MessagePart = { type: string; text: string };
+  type ChatMessage = { role: string; content?: string; parts?: MessagePart[] };
+
+  const lastUserMessageObj = (messages as ChatMessage[])?.filter(m => m.role === "user").pop();
   const lastUserMessage = typeof lastUserMessageObj?.content === 'string'
     ? lastUserMessageObj.content
-    : (lastUserMessageObj?.parts?.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('') || "");
+    : (lastUserMessageObj?.parts?.filter(p => p.type === 'text').map(p => p.text).join('') || "");
 
   if (typeof lastUserMessage === "string") {
 
@@ -154,7 +157,7 @@ ${socialLinks.map(link => `- ${link.name}: ${link.url}`).join('\n')}
 
 --- LATEST BLOGS ---
 ${topBlogs.length > 0
-  ? topBlogs.map((post: any) =>
+  ? topBlogs.map((post: { title: string; slug?: { current?: string } }) =>
       `- ${post.title} (Link: https://utkarshsorathia.in/blogs/${post.slug?.current})`
     ).join('\n')
   : "No blogs available yet, check https://utkarshsorathia.in/blogs"}
@@ -223,14 +226,14 @@ ${educations.map(edu =>
       // Limit context to the last 10 messages to prevent context window exhaustion
       const recentMessages = messages.slice(-10);
 
-      const sanitizedMessages = recentMessages.map((m: any) => ({
-        role: m.role === 'user' ? 'user' : 'assistant',
+      const sanitizedMessages = (recentMessages as ChatMessage[]).map(m => ({
+        role: (m.role === 'user' ? 'user' : 'assistant') as 'user' | 'assistant',
         content: typeof m.content === 'string'
           ? m.content.replace(/ignore\s+previous\s+instructions/gi, '')
           : (m.parts
               ? m.parts
-                  .filter((p: any) => p.type === 'text')
-                  .map((p: any) => p.text)
+                  .filter(p => p.type === 'text')
+                  .map(p => p.text)
                   .join('')
               : '')
       }));

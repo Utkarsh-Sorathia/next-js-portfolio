@@ -88,7 +88,6 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05, ease: "easeOut" }}
                 viewport={{ once: true }}
-                style={{ willChange: "transform, opacity" }}
                 className={`hidden md:flex md:w-full items-center gap-8 ${
                   isLeft ? "flex-row" : "flex-row-reverse"
                 }`}

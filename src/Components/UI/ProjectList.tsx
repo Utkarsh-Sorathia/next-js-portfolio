@@ -23,8 +23,8 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
-  // For infinite loop, we clone the first few projects at the end
-  const extendedProjects = [...projects, ...projects.slice(0, 2)]
+  // Clone enough items for a smooth infinite loop (at least 3 clones)
+  const extendedProjects = [...projects, ...projects.slice(0, Math.max(3, Math.ceil(projects.length / 2)))]
 
   const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = 'smooth') => {
     if (carouselRef.current) {
@@ -83,23 +83,23 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
       const realIndex = index % projects.length
       setActiveIndex(realIndex)
 
-      // Teleportation logic: 
-      // We only teleport if we've landed on a clone (index >= projects.length)
+      // Teleport back to the real item when a clone is reached
       if (index >= projects.length) {
-        // Wait for the smooth scroll/snap to actually finish
         clearTimeout(timeoutId)
-        timeoutId = setTimeout(() => {
-          if (!carouselRef.current) return
-          const cont = carouselRef.current
-          
-          // Disable smooth scroll for the instant jump
+        const cont = carouselRef.current
+        const doTeleport = () => {
+          if (!cont) return
           cont.style.scrollBehavior = 'auto'
           cont.scrollLeft = (index % projects.length) * cardWidth
-          
-          // Force a reflow to ensure the jump is applied before re-enabling smooth scroll
-          void cont.offsetHeight 
+          void cont.offsetHeight
           cont.style.scrollBehavior = 'smooth'
-        }, 150) // 150ms is usually enough for the snap to settle
+        }
+        // Use scrollend when available, fall back to setTimeout
+        if ('onscrollend' in cont) {
+          cont.addEventListener('scrollend', doTeleport, { once: true })
+        } else {
+          timeoutId = setTimeout(doTeleport, 150)
+        }
       }
     }
 

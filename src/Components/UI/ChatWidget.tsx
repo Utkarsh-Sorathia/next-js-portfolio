@@ -101,11 +101,15 @@ export default function ChatWidget() {
 
   const showScrollTop = scrollY > 400;
 
+  // Offset accounts for the scroll-to-top button height (60px) + gap (16px)
+  const SCROLL_TOP_BUTTON_OFFSET = '76px';
+  const DEFAULT_BOTTOM = '16px';
+
   return (
     <div
       className="fixed right-4 z-[9999] flex flex-col items-end gap-3 transition-all duration-300"
       style={{
-        bottom: showScrollTop ? '76px' : '16px'
+        bottom: showScrollTop ? SCROLL_TOP_BUTTON_OFFSET : DEFAULT_BOTTOM
       }}
     >
       {/* Chat Window */}
@@ -150,7 +154,7 @@ export default function ChatWidget() {
               {messages.length === 0 && (
                 <div className="text-center text-zinc-500 text-sm mt-10 px-4">
                   <p className="mb-2">👋 Hi there!</p>
-                  <p>I'm Utkarsh's virtual assistant. Ask me about his projects, skills, or experience!</p>
+                  <p>Hi! I'm your virtual assistant. Ask me about Utkarsh's projects, skills, or experience!</p>
                   <div className="mt-4 flex flex-wrap gap-2 justify-center">
                     <button
                       onClick={async () => {
