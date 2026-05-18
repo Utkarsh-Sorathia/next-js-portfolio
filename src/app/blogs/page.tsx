@@ -16,11 +16,11 @@ export const revalidate = 2592000; // Revalidate every 30 days
 export const metadata: Metadata = {
   title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
   description:
-    "Read my latest thoughts on web development, technology, and programming.",
+    "Practical tutorials and insights on Next.js, React, and full-stack development — drawn from real production work.",
   alternates: { canonical: `${baseURL}/blogs` },
   openGraph: {
     title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
-    description: "Read my latest thoughts on web development, technology, and programming.",
+    description: "Practical tutorials and insights on Next.js, React, and full-stack development — drawn from real production work.",
     url: `${baseURL}/blogs`,
     siteName: "Utkarsh Sorathia Portfolio",
     locale: "en_US",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
-    description: "Read my latest thoughts on web development, technology, and programming.",
+    description: "Practical tutorials and insights on Next.js, React, and full-stack development — drawn from real production work.",
     creator: "@utkarshsor03",
     images: [`${baseURL}/UtkarshSorathia.webp`],
   },
@@ -85,8 +85,8 @@ export default async function BlogsPage() {
                 My <span className="text-[var(--primaryColor)]">Blogs</span>
               </SectionTitle>
               <p className="text-center text-base sm:text-lg text-[var(--textColorLight)] max-w-2xl mx-auto mt-4 sm:mt-6">
-                Thoughts, tutorials, and insights about web development,
-                technology, and programming.
+                Practical tutorials and insights on Next.js, React, and
+                full-stack development — drawn from real production work.
               </p>
             </div>
           </div>

@@ -167,7 +167,7 @@ const skills: ISkillListItem[] = [
     ],
   },
   {
-    title: "Nontechnical Skills",
+    title: "Soft Skills",
     items: [
       {
         title: "Problem Solving",

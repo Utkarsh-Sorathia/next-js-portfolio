@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
   description:
-    "Full Stack Developer specializing in Next.js, React, and MERN Stack. Building scalable, high-performance web applications and sharing modern development insights.",
+    "Full Stack Developer specializing in Next.js, React, and the MERN stack — building production-ready web apps and writing about real-world development.",
   authors: [{ name: "Utkarsh Sorathia", url: baseUrl }],
   creator: "Utkarsh Sorathia",
   publisher: "Utkarsh Sorathia",
@@ -102,7 +102,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
     description:
-      "Full Stack Developer specializing in Next.js, React, and MERN Stack. Building scalable, high-performance web applications and sharing modern development insights.",
+      "Full Stack Developer specializing in Next.js, React, and the MERN stack — building production-ready web apps and writing about real-world development.",
     url: baseUrl,
     siteName: "Utkarsh Sorathia Portfolio",
     images: [
@@ -121,7 +121,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
     description:
-      "Full Stack Developer specializing in Next.js, React, and MERN Stack. Building scalable, high-performance web applications and sharing modern development insights.",
+      "Full Stack Developer specializing in Next.js, React, and the MERN stack — building production-ready web apps and writing about real-world development.",
     images: [`${baseUrl}/UtkarshSorathia.webp`],
     creator: "@utkarshsor03",
     site: "@utkarshsor03",

@@ -38,7 +38,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
           )}
           <div className="inline-flex items-center mx-auto pb-4">
             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--textColor)]">
-              Hi there, I am
+              Hi, I&apos;m
               <NameAnimation
                 words={['Utkarsh Sorathia.', 'Full Stack Developer.']}
                 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-[var(--primaryColor)]"
@@ -49,7 +49,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
             Full Stack Developer specializing in MERN, Next.js, and React.js — creating modern web and mobile applications.
           </h2>
           <p className="text-sm md:text-base text-[var(--textColorLight)] mx-auto text-wrap max-w-2xl text-center">
-            MERN & Next.js Developer — 2+ Years of Experience Building Modern <span className="whitespace-nowrap">Web Experiences</span>
+            I build fast, scalable web apps with Next.js and the <span className="whitespace-nowrap">MERN stack</span> — 2+ years turning ideas into production-ready products.
           </p>
         </Column>
 

@@ -70,8 +70,8 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-sm text-zinc-400 leading-relaxed">
-              Full Stack Developer & Software Engineer crafting clean, performant,
-              and modern digital experiences.
+              Full Stack Developer building fast, production-ready web apps with
+              the MERN stack and Next.js.
             </p>
 
             <div className="flex items-center space-x-4 mt-4">
@@ -169,31 +169,6 @@ const Footer = () => {
           <p className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">
             © {new Date().getFullYear()} Utkarsh Sorathia. All Rights Reserved.
           </p>
-        </div>
-
-        {/* Hidden SEO Keywords & Tags */}
-        <div className="sr-only" aria-hidden="true">
-          <h2>SEO Keywords for Utkarsh Sorathia</h2>
-          <p>
-            Utkarsh, Utkarsh Sorathia, Utkarsh Portfolio, Utkarsh CV, Full Stack Developer,
-            Software Engineer India, MERN Stack Developer, React.js Expert, Next.js Developer,
-            Utkarsh Developer, Web Developer Surat, Gujarat Software Engineer, Utkarsh Programming,
-            Javascript Developer, Node.js Backend Developer, MongoDB Expert, Frontend Engineer,
-            Utkarsh Sorathia Projects, Utkarsh Sorathia Blogs, Portfolio Website, Web Application Developer,
-            TypeScript, Express.js Expert, Computer Engineer, Coding, Programming Insights,
-            Tech Blog by Utkarsh, Software Solutions, Modern Web Development, Clean Code.
-          </p>
-          <h3>Technologies and Skills</h3>
-          <ul>
-            <li>React.js</li>
-            <li>Next.js 15</li>
-            <li>Node.js</li>
-            <li>MongoDB</li>
-            <li>Tailwind CSS</li>
-            <li>Prisma</li>
-            <li>Sanity CMS</li>
-            <li>API Development</li>
-          </ul>
         </div>
       </div>
     </footer>

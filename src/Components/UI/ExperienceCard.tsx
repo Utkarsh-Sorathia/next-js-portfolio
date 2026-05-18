@@ -4,7 +4,6 @@ import { IExperienceItem } from "../../interfaces";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import CardBox from "../core/CardBox";
 
 interface ExperienceCardProps {
   data: IExperienceItem[];
@@ -12,10 +11,10 @@ interface ExperienceCardProps {
 
 const ExperienceCard = ({ data }: ExperienceCardProps) => {
   return (
-    <section className="w-full py-0 md:py-8 max-w-5xl mx-auto relative">
+    <section className="w-full py-0 md:py-8 md:px-2 relative">
       <div className="relative">
         {/* Desktop center line */}
-        <div className="hidden md:block absolute left-1/2 w-[2px] top-0 bottom-0 bg-[var(--primaryColor)]/30 transform -translate-x-1/2"></div>
+        <div className="hidden md:block absolute left-1/2 w-[2px] top-0 bottom-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(67,97,238,0.3)_5%,rgba(67,97,238,0.3)_68%,transparent_100%)] transform -translate-x-1/2"></div>
 
         {data.map((item, index) => {
           const isLeft = index % 2 === 0;
@@ -76,9 +75,17 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                     )}
                   </div>
 
-                  <p className="text-base opacity-80 leading-relaxed mt-3">
-                    {item.description}
-                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {item.description.map((point, i) => (
+                      <li
+                        key={i}
+                        className="flex gap-2.5 text-base opacity-80 leading-relaxed"
+                      >
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primaryColor)]" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </motion.div>
 
@@ -88,12 +95,12 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05, ease: "easeOut" }}
                 viewport={{ once: true }}
-                className={`hidden md:flex md:w-full items-center gap-8 ${
+                className={`hidden md:flex md:w-full items-start gap-8 ${
                   isLeft ? "flex-row" : "flex-row-reverse"
                 }`}
               >
                 {/* Content Card */}
-                <div className="w-[45%]">
+                <div className="w-[47%]">
                   <div
                     className="relative p-6 transition-all duration-500 border rounded-[var(--borderRadius)] border-white/10 hover:border-zinc-500 group overflow-hidden shadow-[2px_4px_16px_0px_rgba(0,0,0,0.1)_inset]"
                   >
@@ -134,23 +141,31 @@ const ExperienceCard = ({ data }: ExperienceCardProps) => {
                           <span className="whitespace-nowrap">{item.startDate} - {item.endDate}</span>
                           {item.location && <span className="truncate">📍 {item.location}</span>}
                         </div>
-                        <p className="text-sm xl:text-base text-[var(--textColor)] leading-relaxed mt-4 opacity-90">
-                          {item.description}
-                        </p>
+                        <ul className="mt-4 space-y-2">
+                          {item.description.map((point, i) => (
+                            <li
+                              key={i}
+                              className="flex gap-2.5 text-base xl:text-lg text-[var(--textColor)] leading-relaxed opacity-90"
+                            >
+                              <span className="mt-2 xl:mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primaryColor)]" />
+                              <span>{point}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Center Space for line & dot */}
-                <div className="w-[10%] flex justify-center relative">
-                  <div className="h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center bg-zinc-950 border border-white/20 z-20 shadow-xl">
+                <div className="w-[6%] flex justify-center relative">
+                  <div className="mt-6 lg:mt-7 h-6 w-6 lg:h-8 lg:w-8 rounded-full flex items-center justify-center bg-zinc-950 border border-white/20 z-20 shadow-xl">
                     <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-[var(--primaryColor)] shadow-[0_0_15px_var(--primaryColor)]" />
                   </div>
                 </div>
 
                 {/* Empty Space for alignment */}
-                <div className="w-[45%]"></div>
+                <div className="w-[47%]"></div>
               </motion.div>
 
             </div>

@@ -59,7 +59,7 @@ const projects: IProjectItem[] = [
     id: "Kachnar Nursery and Farm",
     title: "Kachnar Nursery & Farm (Website)",
     description:
-      "A premium plant nursery website built with Next.js featuring a full plant catalog, newsletter, and structured data for SEO. Designed with a rich, nature-inspired aesthetic and a roadmap e-commerce with Supabase and Cloudinary.",
+      "A plant nursery website built with Next.js featuring a full plant catalog, newsletter subscription, and structured data for SEO. E-commerce with Supabase and Cloudinary is in progress.",
     icon: "/skills/nextjs.webp",
     repoType: RepoType.Private,
     url: "https://kachnar-nursery-and-farm.vercel.app/",
@@ -70,7 +70,7 @@ const projects: IProjectItem[] = [
     id: "ChatApp Premium",
     title: "ChatApp Premium (PWA)",
     description:
-      "A high-performance real-time messaging PWA featuring intelligent push notifications, low-latency delivery, and glassmorphic UI. Built for cross-platform excellence with offline support and advanced session handling.",
+      "A real-time messaging PWA built with Next.js and Supabase Edge Functions. Supports push notifications, offline access, persistent sessions, and is installable on any device.",
     icon: "/skills/nextjs.webp",
     repoType: RepoType.Private,
     projectType: ProjectType.Personal,
@@ -81,7 +81,7 @@ const projects: IProjectItem[] = [
     id: "Real-Time Tic Tac Toe Elite",
     title: "Real-Time Tic Tac Toe Elite",
     description:
-      "A high-performance multiplayer platform featuring instantaneous move synchronization via Pusher, a recursive Minimax AI engine for unbeatable offline play, and persistent match history with MongoDB. Engineered for an immersive gaming experience with PWA support.",
+      "A multiplayer Tic Tac Toe platform with real-time move sync via Pusher, a Minimax AI for offline play, persistent match history in MongoDB, and PWA support.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -93,7 +93,7 @@ const projects: IProjectItem[] = [
     id: "Typing Test Website",
     title: "Typingo - Typing Test Website",
     description:
-      "A comprehensive web-based typing test platform designed to enhance typing speed, accuracy, and finger placement. Features interactive tests with real-time feedback and performance analytics.",
+      "A typing test app for improving speed, accuracy, and finger placement — with real-time feedback and session performance analytics.",
     icon: "/skills/react.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,

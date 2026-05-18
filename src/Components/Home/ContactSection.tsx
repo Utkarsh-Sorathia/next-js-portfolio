@@ -18,7 +18,7 @@ const ContactSection = ({ id }: { id: string }) => {
       <ConstrainedBox classNames="px-4 py-12 sm:py-16 lg:py-16">
         <SectionTitle>Get in Touch</SectionTitle>
         <p className="text-center text-zinc-400 mb-8 lg:mb-16 max-w-2xl mx-auto italic font-medium">
-          Let&apos;s work together on your next project. Whether you have a specific project in mind or just want to say hi, feel free to reach out!
+          Have a project in mind or a role to fill? Let&apos;s talk about how I can help bring it to life.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 w-full items-start">

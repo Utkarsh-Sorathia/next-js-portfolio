@@ -92,9 +92,9 @@ export interface IEducationItem {
 export interface IExperienceItem {
   company: string;
   position: string;
-  startDate: string; 
+  startDate: string;
   endDate: string;
-  description: string;
+  description: string[];
   location?: string;
   companyLogo?: string;
   companyLink?: string;
