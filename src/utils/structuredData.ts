@@ -76,7 +76,7 @@ export function getPersonSchema() {
     ),
     jobTitle: "Full Stack Developer",
     description:
-      "Utkarsh Sorathia is a passionate Full Stack Developer focused on creating scalable and performance-driven web applications using modern technologies like React.js, Next.js, Node.js, and MongoDB.",
+      "Utkarsh Sorathia is a Full Stack Developer specializing in Next.js, React, and the MERN stack — building production-ready web apps from Surat, India.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Surat",
@@ -157,7 +157,7 @@ export function getWebSiteSchema() {
     alternateName: ["Utkarsh", "Utkarsh Sorathia Portfolio", "Utkarsh Portfolio"],
     url: baseUrl,
     description:
-      "Portfolio website of Utkarsh Sorathia, a Full Stack Developer specializing in React.js, Next.js, Node.js, and modern web technologies.",
+      "Portfolio of Utkarsh Sorathia, a Full Stack Developer specializing in Next.js, React, and the MERN stack.",
     publisher: {
       "@type": "Organization",
       "@id": `${baseUrl}#publisher`,
@@ -353,7 +353,7 @@ export function getBlogListingSchema(posts?: { title: string; url: string; dateP
     "@type": ["CollectionPage", "Blog"],
     "@id": `${baseUrl}/blogs#blog`,
     name: "Blog | Utkarsh Sorathia",
-    description: "Read my latest thoughts on web development, technology, and programming.",
+    description: "Practical tutorials and insights on Next.js, React, and full-stack development — drawn from real production work.",
     url: `${baseUrl}/blogs`,
     author: {
       "@type": "Person",
@@ -412,7 +412,7 @@ export function getProfilePageSchema() {
       "name": "Utkarsh",
       "alternateName": "Utkarsh Sorathia",
       "identifier": "Utkarsh",
-      "description": "Utkarsh is a Full Stack Developer and Software Engineer.",
+      "description": "Utkarsh Sorathia is a Full Stack Developer specializing in Next.js, React, and the MERN stack.",
       "image": `${baseUrl}/UtkarshSorathia.webp`,
       "sameAs": [
         Strings.githubLink,
@@ -434,7 +434,7 @@ export function getFAQSchema() {
         "name": "Who is Utkarsh Sorathia?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Utkarsh Sorathia is a professional Full Stack Developer specializing in React, Next.js, and Node.js. He is based in Surat, India, and focuses on building scalable, performance-driven web and mobile applications."
+          "text": "Utkarsh Sorathia is a Full Stack Developer specializing in Next.js, React, and Node.js, based in Surat, India. He has 2+ years of experience building production-ready web and mobile applications."
         }
       },
       {

@@ -234,7 +234,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         }}
       />
       <ResponsiveBox
-        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] lg:px-12 xl:px-40"
+        classNames="min-h-screen bg-[var(--bgColor)] bg-grid-white/[0.1] lg:px-12 xl:px-40"
         id="blog-post"
       >
         <ConstrainedBox classNames="px-4 pb-16">
@@ -249,12 +249,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <article className="max-w-4xl mx-auto mt-4 sm:mt-8">
             {/* Article Header */}
             <header className="mb-8 p-1 sm:mb-12">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--textColor)] mb-4 sm:mb-6 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-(--textColor) mb-4 sm:mb-6 leading-tight">
                 {post.title}
               </h1>
 
               {/* Meta Information */}
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm sm:text-base text-[var(--textColorLight)] mb-6 sm:mb-8">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm sm:text-base text-(--textColorLight) mb-6 sm:mb-8">
                 <div className="flex items-center">
                   <User className="w-4 h-4 mr-2" />
                   <span>Utkarsh Sorathia</span>
@@ -271,7 +271,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Featured Image */}
               {post.image?.asset?.url ? (
-                <div className="relative w-full aspect-video mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden bg-gray-900">
+                <div className="relative w-full aspect-video mb-6 sm:mb-8 rounded-(--borderRadius) overflow-hidden bg-gray-900">
                   <BlogImageWithLoader
                     src={post.image.asset.url}
                     alt={post.image.asset.altText || getBlogAltText(post.title)}
@@ -281,7 +281,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   />
                 </div>
               ) : (
-                <div className="relative w-full aspect-video mb-6 sm:mb-8 rounded-[var(--borderRadius)] overflow-hidden bg-gray-800 flex items-center justify-center">
+                <div className="relative w-full aspect-video mb-6 sm:mb-8 rounded-(--borderRadius) overflow-hidden bg-gray-800 flex items-center justify-center">
                   <div className="text-gray-400 text-6xl">📝</div>
                 </div>
               )}
@@ -298,8 +298,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Recommended Posts */}
             {recommendedPosts.length > 0 && (
               <div className="mt-16 sm:mt-16">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--textColor)] mb-8">
-                  Recommended <span className="text-[var(--primaryColor)]">Posts</span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-(--textColor) mb-8">
+                  Recommended <span className="text-(--primaryColor)">Posts</span>
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {recommendedPosts.map((recommendedPost: any) => (
@@ -310,18 +310,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             )}
 
             {/* Article Footer */}
-            <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-[var(--textColor50)]">
+            <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-(--textColor50)">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6">
                 <div className="flex-1">
-                  <h3 className="text-lg sm:text-xl font-semibold text-[var(--textColor)] mb-2">About Me</h3>
-                  <p className="text-sm sm:text-base text-[var(--textColorLight)]">
+                  <h3 className="text-lg sm:text-xl font-semibold text-(--textColor) mb-2">About Me</h3>
+                  <p className="text-sm sm:text-base text-(--textColorLight)">
                     I&apos;m Utkarsh Sorathia, a Full Stack Developer passionate about React, Next.js, and modern JavaScript.
                     I love building scalable web applications and sharing programming insights on my blog.
                   </p>
                 </div>
                 <Link
                   href="/blogs"
-                  className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-[var(--primaryColor)] hover:opacity-90 text-white rounded-[var(--borderRadius)] transition-all duration-300 text-sm sm:text-base whitespace-nowrap shadow-lg shadow-[var(--primaryColor)]/20 active:scale-95"
+                  className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-(--primaryColor) hover:opacity-90 text-white rounded-(--borderRadius) transition-all duration-300 text-sm sm:text-base whitespace-nowrap shadow-lg shadow-(--primaryColor)/20 active:scale-95"
                 >
                   Read More Blogs
                 </Link>

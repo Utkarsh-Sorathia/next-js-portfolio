@@ -72,7 +72,7 @@ export default async function BlogsPage() {
       />
 
       <ResponsiveBox
-        classNames="min-h-screen dark:bg-[var(--bgColor)] bg-[var(--bgColor)] dark:bg-grid-white/[0.1] bg-grid-white/[0.1] lg:px-12 xl:px-40"
+        classNames="min-h-screen bg-[var(--bgColor)] bg-grid-white/[0.1] lg:px-12 xl:px-40"
       >
         <ConstrainedBox classNames="px-4 pb-16">
           <div className="pt-24">
@@ -82,9 +82,9 @@ export default async function BlogsPage() {
             <div>
               <h1 className="sr-only">Utkarsh Sorathia Blog - Web Development & Technology Insights</h1>
               <SectionTitle>
-                My <span className="text-[var(--primaryColor)]">Blogs</span>
+                My <span className="text-(--primaryColor)">Blogs</span>
               </SectionTitle>
-              <p className="text-center text-base sm:text-lg text-[var(--textColorLight)] max-w-2xl mx-auto mt-4 sm:mt-6">
+              <p className="text-center text-base sm:text-lg text-(--textColorLight) max-w-2xl mx-auto mt-4 sm:mt-6">
                 Practical tutorials and insights on Next.js, React, and
                 full-stack development — drawn from real production work.
               </p>

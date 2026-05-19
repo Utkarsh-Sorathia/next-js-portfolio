@@ -55,7 +55,7 @@ const BlogButton = () => {
     <>
       {/* Mobile: Bottom Right */}
       <div
-        className="fixed sm:hidden right-4 z-[4999] transition-all duration-300"
+        className="fixed sm:hidden right-4 z-4999 transition-all duration-300"
         style={{
           bottom: scrollY > 400 ? '144px' : '76px',
         }}
@@ -68,18 +68,18 @@ const BlogButton = () => {
                 initial={{ opacity: 0, y: 10, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                className="bg-white dark:bg-zinc-800 px-3.5 py-2.5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-200 dark:border-zinc-700 absolute whitespace-nowrap bottom-full mb-3 right-0"
+                className="bg-zinc-800 px-3.5 py-2.5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-700 absolute whitespace-nowrap bottom-full mb-3 right-0"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center flex-shrink-0 text-[var(--primaryColor)]">
+                  <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center shrink-0 text-(--primaryColor)">
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-[10px] uppercase font-bold text-[var(--primaryColor)] tracking-widest leading-none mb-1">Articles</span>
-                    <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-100 leading-tight">Read Blogs! ✍️</span>
+                    <span className="text-[10px] uppercase font-bold text-(--primaryColor) tracking-widest leading-none mb-1">Articles</span>
+                    <span className="text-xs font-semibold text-zinc-100 leading-tight">Read Blogs! ✍️</span>
                   </div>
                 </div>
-                <div className="absolute -bottom-1.5 right-[18px] w-3 h-3 bg-white dark:bg-zinc-800 border-r border-b border-zinc-200 dark:border-zinc-700 rotate-45"></div>
+                <div className="absolute -bottom-1.5 right-[18px] w-3 h-3 bg-zinc-800 border-r border-b border-zinc-700 rotate-45"></div>
               </motion.div>
             )}
           </AnimatePresence>

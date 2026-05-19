@@ -107,7 +107,7 @@ export default function ChatWidget() {
 
   return (
     <div
-      className="fixed right-4 z-[9999] flex flex-col items-end gap-3 transition-all duration-300"
+      className="fixed right-4 z-9999 flex flex-col items-end gap-3 transition-all duration-300"
       style={{
         bottom: showScrollTop ? SCROLL_TOP_BUTTON_OFFSET : DEFAULT_BOTTOM
       }}
@@ -119,10 +119,10 @@ export default function ChatWidget() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-[90vw] sm:w-[450px] h-[600px] max-h-[85vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 flex flex-col overflow-hidden"
+            className="w-[90vw] sm:w-[450px] h-[600px] max-h-[85vh] bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-700 flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-[var(--primaryColor)] p-4 flex items-center justify-between text-white shrink-0">
+            <div className="bg-(--primaryColor) p-4 flex items-center justify-between text-white shrink-0">
               <div className="flex items-center gap-3">
                 <Image src="/favicon.ico" alt="Logo" width={24} height={24} aria-hidden="true" />
                 <div className="flex flex-col">
@@ -149,7 +149,7 @@ export default function ChatWidget() {
               role="log"
               aria-live="polite"
               aria-labelledby="chat-window-title"
-              className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50 dark:bg-zinc-950/50 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700"
+              className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950/50"
             >
               {messages.length === 0 && (
                 <div className="text-center text-zinc-500 text-sm mt-10 px-4">
@@ -167,7 +167,7 @@ export default function ChatWidget() {
                         }
                       }}
                       aria-label="Ask about skills"
-                      className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      className="text-xs bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full hover:bg-(--primaryColor) hover:text-white transition-colors"
                     >
                       Skills?
                     </button>
@@ -182,7 +182,7 @@ export default function ChatWidget() {
                         }
                       }}
                       aria-label="Ask about projects"
-                      className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      className="text-xs bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full hover:bg-(--primaryColor) hover:text-white transition-colors"
                     >
                       Projects?
                     </button>
@@ -197,7 +197,7 @@ export default function ChatWidget() {
                         }
                       }}
                       aria-label="Ask about contact information"
-                      className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 rounded-full hover:bg-[var(--primaryColor)] hover:text-white transition-colors"
+                      className="text-xs bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full hover:bg-(--primaryColor) hover:text-white transition-colors"
                     >
                       Contact?
                     </button>
@@ -218,17 +218,17 @@ export default function ChatWidget() {
                     className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} mb-2`}
                   >
                     <div
-                      className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed break-words overflow-hidden ${m.role === 'user'
-                        ? 'bg-[var(--primaryColor)] text-white rounded-tr-none'
-                        : 'bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-100 dark:border-zinc-700 rounded-tl-none'
+                      className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed wrap-break-word overflow-hidden ${m.role === 'user'
+                        ? 'bg-(--primaryColor) text-white rounded-tr-none'
+                        : 'bg-zinc-800 text-zinc-200 border border-zinc-700 rounded-tl-none'
                         }`}
                     >
                       <div className="sr-only">{m.role === 'user' ? 'You said:' : 'AI said:'}</div>
-                      <div className="prose dark:prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:mb-4 last:prose-p:mb-0 prose-pre:bg-zinc-200 dark:prose-pre:bg-zinc-900 prose-ul:my-2 prose-li:my-1 break-words">
+                      <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:mb-4 last:prose-p:mb-0 prose-pre:bg-zinc-900 prose-ul:my-2 prose-li:my-1 wrap-break-word">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            a: (props: any) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline font-bold text-[var(--primaryColor)]" />
+                            a: (props: any) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline font-bold text-(--primaryColor)" />
                           }}
                         >
                           {textContent}
@@ -241,7 +241,7 @@ export default function ChatWidget() {
 
               {isLoading && (
                 <div className="flex justify-start" aria-label="AI is thinking">
-                  <div className="bg-white dark:bg-zinc-800 rounded-2xl rounded-tl-none px-4 py-3 border border-zinc-100 dark:border-zinc-700">
+                  <div className="bg-zinc-800 rounded-2xl rounded-tl-none px-4 py-3 border border-zinc-700">
                     <div className="flex gap-1.5">
                       <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
                       <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
@@ -254,7 +254,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Input Area */}
-            <form onSubmit={handleSubmit} className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-700">
+            <form onSubmit={handleSubmit} className="p-3 bg-zinc-900 border-t border-zinc-700">
               {error && (
                 <div role="alert" className="mb-2 px-3 py-2 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-[10px] text-red-500">
                   <AlertCircle className="w-3 h-3" aria-hidden="true" />
@@ -264,7 +264,7 @@ export default function ChatWidget() {
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
-                  className="flex-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[var(--primaryColor)]/50 transition-all placeholder:text-zinc-400"
+                  className="flex-1 bg-zinc-800 text-zinc-100 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-(--primaryColor)/50 transition-all placeholder:text-zinc-400"
                   value={input}
                   onChange={handleInputChange}
                   placeholder="Ask something..."
@@ -274,7 +274,7 @@ export default function ChatWidget() {
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
-                  className="bg-[var(--primaryColor)] text-white p-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  className="bg-(--primaryColor) text-white p-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   aria-label="Send message"
                 >
                   <Send className="w-4 h-4" aria-hidden="true" />
@@ -294,10 +294,10 @@ export default function ChatWidget() {
               animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, x: 20, scale: 0.9 }}
               role="status"
-              className="group bg-white dark:bg-zinc-800 px-3.5 py-2.5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-200 dark:border-zinc-700 absolute whitespace-nowrap right-full sm:right-0 bottom-0 sm:bottom-full mr-3 sm:mr-0 mb-0 sm:mb-3"
+              className="group bg-zinc-800 px-3.5 py-2.5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-zinc-700 absolute whitespace-nowrap right-full sm:right-0 bottom-0 sm:bottom-full mr-3 sm:mr-0 mb-0 sm:mb-3"
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-zinc-700 overflow-hidden shrink-0">
                   <Image
                     src="/android-chrome-192x192.png"
                     alt="AI Assistant Icon"
@@ -307,13 +307,13 @@ export default function ChatWidget() {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] uppercase font-bold text-[var(--primaryColor)] tracking-widest leading-none mb-1">AI Assistant</span>
-                  <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-100 leading-tight">Ask me about Utkarsh! 🚀</span>
+                  <span className="text-[10px] uppercase font-bold text-(--primaryColor) tracking-widest leading-none mb-1">AI Assistant</span>
+                  <span className="text-xs font-semibold text-zinc-100 leading-tight">Ask me about Utkarsh! 🚀</span>
                 </div>
               </div>
               {/* Arrow - Desktop (Bottom) / Mobile (Right) */}
-              <div className="hidden sm:block absolute -bottom-1.5 right-4 w-3 h-3 bg-white dark:bg-zinc-800 border-r border-b border-zinc-200 dark:border-zinc-700 rotate-45"></div>
-              <div className="sm:hidden absolute top-1/2 -translate-y-1/2 -right-1.5 w-3 h-3 bg-white dark:bg-zinc-800 border-t border-r border-zinc-200 dark:border-zinc-700 rotate-45"></div>
+              <div className="hidden sm:block absolute -bottom-1.5 right-4 w-3 h-3 bg-zinc-800 border-r border-b border-zinc-700 rotate-45"></div>
+              <div className="sm:hidden absolute top-1/2 -translate-y-1/2 -right-1.5 w-3 h-3 bg-zinc-800 border-t border-r border-zinc-700 rotate-45"></div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -324,7 +324,7 @@ export default function ChatWidget() {
           onMouseLeave={() => !isOpen && setIsNudgeVisible(false)}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
-          className={`${styles.chatToggle} h-12 w-12 bg-[var(--primaryColor)] rounded-full flex items-center justify-center text-white z-50 border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0`}
+          className={`${styles.chatToggle} h-12 w-12 bg-(--primaryColor) rounded-full flex items-center justify-center text-white z-50 border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0`}
           aria-label={isOpen ? "Close AI Assistant" : "Open AI Assistant"}
           aria-expanded={isOpen}
           aria-haspopup="true"

@@ -85,7 +85,7 @@ const ContactForm = () => {
 
   return (
     <div
-      className="bg-white/5 dark:bg-zinc-900/50 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/10 dark:border-zinc-800/50 relative overflow-hidden"
+      className="bg-zinc-900/50 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-zinc-800/50 relative overflow-hidden"
     >
       <AnimatePresence mode="wait">
         {isSuccess ? (
@@ -107,7 +107,7 @@ const ContactForm = () => {
             </p>
             <button
               onClick={() => setIsSuccess(false)}
-              className="px-8 py-3 bg-[var(--primaryColor)] text-white rounded-full font-bold hover:scale-105 transition-transform"
+              className="px-8 py-3 bg-(--primaryColor) text-white rounded-full font-bold hover:scale-105 transition-transform"
               aria-label="Send another message"
             >
               Send Another
@@ -133,7 +133,7 @@ const ContactForm = () => {
                     disabled={isSubmitting}
                     required
                     aria-required="true"
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-zinc-800/50 border border-zinc-700/50 focus:ring-2 focus:ring-(--primaryColor) focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
                   />
                 </div>
                 <div className="space-y-2">
@@ -150,7 +150,7 @@ const ContactForm = () => {
                     disabled={isSubmitting}
                     required
                     aria-required="true"
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-zinc-800/50 border border-zinc-700/50 focus:ring-2 focus:ring-(--primaryColor) focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
                   />
                 </div>
               </div>
@@ -169,7 +169,7 @@ const ContactForm = () => {
                   disabled={isSubmitting}
                   required
                   aria-required="true"
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
+                  className="w-full px-5 py-3.5 rounded-2xl bg-zinc-800/50 border border-zinc-700/50 focus:ring-2 focus:ring-(--primaryColor) focus:border-transparent outline-none transition-all placeholder:text-zinc-600"
                 />
               </div>
 
@@ -187,7 +187,7 @@ const ContactForm = () => {
                   disabled={isSubmitting}
                   required
                   aria-required="true"
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white/5 dark:bg-zinc-800/50 border border-white/10 dark:border-zinc-700/50 focus:ring-2 focus:ring-[var(--primaryColor)] focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-600"
+                  className="w-full px-5 py-3.5 rounded-2xl bg-zinc-800/50 border border-zinc-700/50 focus:ring-2 focus:ring-(--primaryColor) focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-600"
                 />
               </div>
 
@@ -195,7 +195,7 @@ const ContactForm = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full max-w-[200px] py-3.5 rounded-2xl bg-[var(--primaryColor)] text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-xl shadow-[var(--primaryColor)]/20 active:scale-95 group"
+                  className="w-full max-w-[200px] py-3.5 rounded-2xl bg-(--primaryColor) text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-xl shadow-(--primaryColor)/20 active:scale-95 group"
                 >
                   {isSubmitting ? (
                     <span className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
@@ -211,7 +211,7 @@ const ContactForm = () => {
                   <div 
                     role="alert"
                     aria-live="polite"
-                    className="flex items-center justify-start gap-2.5 text-[var(--primaryColor)] animate-in fade-in slide-in-from-top-1 duration-300 px-1"
+                    className="flex items-center justify-start gap-2.5 text-(--primaryColor) animate-in fade-in slide-in-from-top-1 duration-300 px-1"
                   >
                     <AlertCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="text-[11px] font-bold uppercase tracking-[0.2em]">{message}</span>

@@ -37,10 +37,10 @@ const ContactSection = ({ id }: { id: string }) => {
                 href={Strings.linkedInLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 backdrop-blur-sm group hover:border-[#0077b5]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
-                  <div className="p-2.5 lg:p-3.5 bg-blue-100 dark:bg-blue-900/20 rounded-xl text-[#0077b5] shrink-0">
+                  <div className="p-2.5 lg:p-3.5 bg-blue-900/20 rounded-xl text-[#0077b5] shrink-0">
                     <SiLinkedin className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
@@ -58,14 +58,14 @@ const ContactSection = ({ id }: { id: string }) => {
                 href={Strings.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-white/30 transition-all duration-300"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 backdrop-blur-sm group hover:border-white/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
-                  <div className="p-2.5 lg:p-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-zinc-900 dark:text-white shrink-0">
+                  <div className="p-2.5 lg:p-3.5 bg-zinc-800 rounded-xl text-white shrink-0">
                     <SiGithub className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
-                    <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-[#fff] mb-0.5 lg:mb-1 opacity-80">GitHub</p>
+                    <p className="text-[9px] lg:text-xs font-bold uppercase tracking-widest text-white mb-0.5 lg:mb-1 opacity-80">GitHub</p>
                     <p className="text-white font-semibold truncate text-xs lg:text-base">{Strings.githubUsername}</p>
                   </div>
                 </div>
@@ -79,10 +79,10 @@ const ContactSection = ({ id }: { id: string }) => {
                 href={Strings.upworkLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-white/5 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100/10 dark:border-zinc-800/50 backdrop-blur-sm group hover:border-[#14a800]/30 transition-all duration-300"
+                className="flex flex-col lg:flex-row items-center justify-center lg:justify-between p-3 lg:p-5 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 backdrop-blur-sm group hover:border-[#14a800]/30 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:flex-1 items-center gap-1.5 lg:gap-6 overflow-hidden">
-                  <div className="p-2.5 lg:p-3.5 bg-[#14a800]/10 dark:bg-[#14a800]/20 rounded-xl text-[#14a800] shrink-0">
+                  <div className="p-2.5 lg:p-3.5 bg-[#14a800]/20 rounded-xl text-[#14a800] shrink-0">
                     <SiUpwork className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div className="overflow-hidden text-center lg:text-left">
