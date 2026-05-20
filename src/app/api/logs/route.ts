@@ -26,6 +26,7 @@ export async function GET(request: Request) {
     const limit = 10;
     const skip = (page - 1) * limit;
     const sortOrder = searchParams.get('sort') === 'asc' ? 1 : -1;
+    const collection = searchParams.get('source') === 'legacy' ? 'ipapiresponses' : 'geo_visits';
 
     // Date filters
     const dateFrom = searchParams.get('dateFrom');
@@ -42,10 +43,10 @@ export async function GET(request: Request) {
         const client = await clientPromise;
         const db = client.db();
 
-        const totalRecords = await db.collection('ipapiresponses').countDocuments();
-        const total = await db.collection('ipapiresponses').countDocuments(filter);
+        const totalRecords = await db.collection(collection).countDocuments();
+        const total = await db.collection(collection).countDocuments(filter);
         const logs = await db
-            .collection<LogEntry>('ipapiresponses')
+            .collection<LogEntry>(collection)
             .find(filter)
             .sort({ timestamp: sortOrder })
             .skip(skip)

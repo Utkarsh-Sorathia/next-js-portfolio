@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ['@maxmind/geoip2-node'],
   turbopack: {
     root: process.cwd(),
   },

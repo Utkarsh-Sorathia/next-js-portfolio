@@ -12,7 +12,13 @@ interface IPAPILog {
   fullResponse: any;
 }
 
+const getFlag = (countryCode?: string) =>
+  countryCode?.length === 2
+    ? countryCode.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + 127397)).join('')
+    : '🌐';
+
 export default function AdminLogs() {
+  const [activeTab, setActiveTab] = useState<'new' | 'legacy'>('new');
   const [ipapiLogs, setIPAPILogs] = useState<IPAPILog[]>([]);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +53,8 @@ export default function AdminLogs() {
     page: number,
     sortOrder = sort,
     from = dateFrom,
-    to = dateTo
+    to = dateTo,
+    tab = activeTab
   ) => {
     setLoading(true);
     setError("");
@@ -58,6 +65,7 @@ export default function AdminLogs() {
       });
       if (from) params.append("dateFrom", from);
       if (to) params.append("dateTo", to);
+      if (tab === 'legacy') params.append("source", "legacy");
 
       const res = await fetch(`/api/logs?${params.toString()}`);
 
@@ -81,7 +89,7 @@ export default function AdminLogs() {
     } finally {
       setLoading(false);
     }
-  }, [sort, dateFrom, dateTo, router]);
+  }, [sort, dateFrom, dateTo, activeTab, router]);
 
   useEffect(() => {
     fetchSettings();
@@ -121,12 +129,18 @@ export default function AdminLogs() {
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return;
-    fetchLogs(page, sort, dateFrom, dateTo);
+    fetchLogs(page, sort, dateFrom, dateTo, activeTab);
   };
 
   const handleFilter = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchLogs(1, sort, dateFrom, dateTo);
+    fetchLogs(1, sort, dateFrom, dateTo, activeTab);
+  };
+
+  const handleTabChange = (tab: 'new' | 'legacy') => {
+    setActiveTab(tab);
+    setCurrentPage(1);
+    fetchLogs(1, sort, dateFrom, dateTo, tab);
   };
 
   return (
@@ -175,6 +189,23 @@ export default function AdminLogs() {
               />
             </button>
           </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex gap-2 mb-6">
+          <button
+            onClick={() => handleTabChange('new')}
+            className={`px-5 py-2 rounded-xl text-sm font-bold transition-all border ${activeTab === 'new' ? 'bg-[var(--primaryColor)] border-[var(--primaryColor)] text-white' : 'bg-zinc-900 border-zinc-700 text-zinc-400 hover:border-zinc-500'}`}
+          >
+            New Tracking
+          </button>
+          <button
+            onClick={() => handleTabChange('legacy')}
+            className={`px-5 py-2 rounded-xl text-sm font-bold transition-all border ${activeTab === 'legacy' ? 'bg-[var(--primaryColor)] border-[var(--primaryColor)] text-white' : 'bg-zinc-900 border-zinc-700 text-zinc-400 hover:border-zinc-500'}`}
+          >
+            Legacy
+            <span className="ml-2 text-[10px] bg-zinc-700 text-zinc-300 px-1.5 py-0.5 rounded-full">835</span>
+          </button>
         </div>
 
         {/* Filter Controls */}
@@ -266,15 +297,29 @@ export default function AdminLogs() {
                         <div className="text-xs text-zinc-500">{new Date(log.timestamp).toLocaleString()}</div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-white">{log.fullResponse.city}, {log.fullResponse.region_name}</div>
-                        <div className="text-xs text-zinc-500 flex items-center gap-2">
-                          <span>{log.fullResponse.location?.country_flag_emoji}</span>
-                          {log.fullResponse.country_name}
-                        </div>
+                        {activeTab === 'new' ? (
+                          <>
+                            <div className="text-white">{log.fullResponse.city}, {log.fullResponse.region}</div>
+                            <div className="text-xs text-zinc-500 flex items-center gap-2">
+                              <span>{getFlag(log.fullResponse.country_code)}</span>
+                              {log.fullResponse.country}
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="text-white">{log.fullResponse.city}, {log.fullResponse.region_name}</div>
+                            <div className="text-xs text-zinc-500 flex items-center gap-2">
+                              <span>{log.fullResponse.location?.country_flag_emoji}</span>
+                              {log.fullResponse.country_name}
+                            </div>
+                          </>
+                        )}
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-xs text-zinc-500">Zip: {log.fullResponse.zip}</div>
-                        <div className="text-xs text-zinc-500">Cont: {log.fullResponse.continent_name}</div>
+                        <div className="text-xs text-zinc-500">
+                          Cont: {activeTab === 'new' ? log.fullResponse.continent : log.fullResponse.continent_name}
+                        </div>
                       </td>
                       <td className="px-6 py-4">
                         <button
@@ -311,13 +356,13 @@ export default function AdminLogs() {
                     <div className="col-span-1">
                       <p className="text-[10px] text-zinc-500 uppercase font-bold">Location</p>
                       <p className="text-xs text-white flex items-center gap-1">
-                        <span>{log.fullResponse.location?.country_flag_emoji}</span>
-                        {log.fullResponse.city}, {log.fullResponse.country_name}
+                        <span>{activeTab === 'new' ? getFlag(log.fullResponse.country_code) : log.fullResponse.location?.country_flag_emoji}</span>
+                        {log.fullResponse.city}, {activeTab === 'new' ? log.fullResponse.country : log.fullResponse.country_name}
                       </p>
                     </div>
                     <div className="col-span-2">
                       <p className="text-[10px] text-zinc-500 uppercase font-bold">Extra</p>
-                      <p className="text-xs text-white">Zip: {log.fullResponse.zip} | Cont: {log.fullResponse.continent_name}</p>
+                      <p className="text-xs text-white">Zip: {log.fullResponse.zip} | Cont: {activeTab === 'new' ? log.fullResponse.continent : log.fullResponse.continent_name}</p>
                     </div>
                   </div>
                   <button
