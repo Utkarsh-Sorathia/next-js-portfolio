@@ -46,7 +46,7 @@ const projects: IProjectItem[] = [
     id: "Next.js Portfolio Website",
     title: "Next.js Portfolio Website",
     description:
-      "A modern portfolio built with Next.js 15, featuring a blog system with Sanity CMS, email subscriptions, and responsive design with dark mode. Showcases projects, skills, and experience with smooth animations.",
+      "A modern portfolio built with Next.js 15, featuring a blog system with Sanity CMS, email subscriptions, and a dark-themed responsive design. Showcases projects, skills, and experience with smooth animations.",
     icon: "/skills/nextjs.webp",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,

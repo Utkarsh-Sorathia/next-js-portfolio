@@ -53,7 +53,7 @@ const AboutSection = ({ id, isOpenToWork }: { id: string, isOpenToWork: boolean 
                 </h3>
                 <p className="text-lg text-[var(--textColor)]">
                   Full Stack Developer <br />
-                  <span className="text-base text-[var(--textColor)]">MERN | Next.js | Typescript</span>
+                  <span className="text-base text-[var(--textColor)]">MERN | Next.js | TypeScript</span>
                 </p>
               </div>
             </motion.div>

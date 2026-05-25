@@ -27,7 +27,7 @@ const ContactSection = ({ id }: { id: string }) => {
             <div className="hidden lg:block pt-8 bg-transparent">
               <h3 className="text-2xl font-bold text-zinc-100 mb-4">Let&apos;s Talk</h3>
               <p className="text-zinc-400 text-lg leading-relaxed">
-                I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                I&apos;m always open to discussing new projects, creative ideas, or the right full-time opportunity.
               </p>
             </div>
 
