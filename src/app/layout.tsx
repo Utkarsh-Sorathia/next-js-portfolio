@@ -175,6 +175,12 @@ export default function RootLayout({
               strategy="lazyOnload"
             />
           )}
+          <Script
+            src="https://app.navigationpulse.com/navigationpulse.min.js"
+            data-pid="c2dfa52e-7c76-471a-a2bf-e9cac3966ce7"
+            data-console="true"
+            strategy="afterInteractive"
+          />
           <Header className="app_nav" navItems={navMenus} />
           <main id="main-content" className="flex-grow">{children}</main>
           <Analytics />
