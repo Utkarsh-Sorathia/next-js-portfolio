@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { motion } from 'framer-motion'
 import { IProjectItem } from '@/interfaces'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import ProjectCard from './ProjectCard'
@@ -117,9 +118,16 @@ const ProjectList = ({ projects }: Readonly<{ projects: IProjectItem[] }>) => {
       <div className="hidden lg:block w-full">
         <div className="w-full grid grid-cols-3 gap-6">
           {visibleProjects.map((item, index) => (
-            <div key={`project-${item.id || index}`} className="w-full">
+            <motion.div
+              key={`project-${item.id || index}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: (index % 3) * 0.08, ease: "easeOut" }}
+              className="w-full"
+            >
               <ProjectCard project={item} />
-            </div>
+            </motion.div>
           ))}
         </div>
 

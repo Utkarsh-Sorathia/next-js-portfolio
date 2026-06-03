@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import ConstrainedBox from "../../Components/core/constrained-box";
 import ResponsiveBox from "../../Components/core/ResponsiveBox";
 import SectionTitle from "../../Components/common/SectionTitle";
@@ -11,7 +14,14 @@ const ProjectSection = ({ id }: { id: string }) => {
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-14 lg:py-16">
-        <SectionTitle>Projects & Recent Works</SectionTitle>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <SectionTitle>Projects & Recent Works</SectionTitle>
+        </motion.div>
 
         <ProjectList projects={projects} />
       </ConstrainedBox>

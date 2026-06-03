@@ -23,6 +23,7 @@ const Header = ({
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMac, setIsMac] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   useEffect(() => {
     setIsMac(/Mac|iPhone|iPad|iPod/.test(navigator.platform));
@@ -36,6 +37,37 @@ const Header = ({
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Track currently-visible section on the home page
+  useEffect(() => {
+    if (pathname !== '/') {
+      setActiveSection('');
+      return;
+    }
+
+    const sectionIds = navItems
+      .map((item) => item.link.split('#')[1])
+      .filter(Boolean) as string[];
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [pathname, navItems]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
     // Close the mobile menu immediately
@@ -103,7 +135,13 @@ const Header = ({
         {/* Desktop Links */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-10 transition-all" aria-label="Main navigation">
           {navItems.map((item, idx) => {
-            const isActive = pathname === item.link;
+            const sectionId = item.link.split('#')[1];
+            const isActive =
+              pathname === '/' && sectionId
+                ? activeSection === sectionId
+                : pathname === '/' && item.link === '/'
+                  ? activeSection === ''
+                  : pathname === item.link;
             return (
               <Link
                 key={idx}
@@ -111,11 +149,18 @@ const Header = ({
                 onClick={(e) => handleNavClick(e, item.link)}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  "text-[13px] xl:text-sm font-medium transition-colors whitespace-nowrap",
+                  "relative text-[13px] xl:text-sm font-medium transition-colors whitespace-nowrap",
                   isActive ? "text-white" : "text-[var(--textColorLight)] hover:text-white"
                 )}
               >
                 {item.name}
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-active-indicator"
+                    className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-[var(--primaryColor)] rounded-full"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
               </Link>
             );
           })}
@@ -182,7 +227,13 @@ const Header = ({
           >
             <nav className="flex flex-col py-2 items-center text-center px-6" aria-label="Mobile navigation">
               {navItems.map((item, idx) => {
-                const isActive = pathname === item.link;
+                const sectionId = item.link.split('#')[1];
+                const isActive =
+                  pathname === '/' && sectionId
+                    ? activeSection === sectionId
+                    : pathname === '/' && item.link === '/'
+                      ? activeSection === ''
+                      : pathname === item.link;
                 return (
                   <Link
                     key={idx}
@@ -191,7 +242,7 @@ const Header = ({
                     aria-current={isActive ? 'page' : undefined}
                     className={cn(
                       "text-lg font-medium transition-all py-3 w-full block rounded-lg hover:bg-white/5 active:bg-white/10",
-                      isActive ? "text-white" : "text-zinc-400 hover:text-white"
+                      isActive ? "text-white bg-[var(--primaryColor)]/10" : "text-zinc-400 hover:text-white"
                     )}
                   >
                     {item.name}

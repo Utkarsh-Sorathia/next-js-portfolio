@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import ConstrainedBox from "../core/constrained-box";
 import ResponsiveBox from "../core/ResponsiveBox";
 import GridBox from "../core/GridBox";
@@ -12,11 +15,29 @@ const SkillSection = ({ id }: { id: string }) => {
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-12">
-        <SectionTitle>Skills</SectionTitle>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <SectionTitle>Skills</SectionTitle>
+        </motion.div>
 
         <GridBox classNames="justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
           {skills.map((skill, index) => {
-            return <SkillCard key={`skill-${index}`} data={skill} />;
+            return (
+              <motion.div
+                key={`skill-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
+                className="w-full h-full"
+              >
+                <SkillCard data={skill} />
+              </motion.div>
+            );
           })}
         </GridBox>
       </ConstrainedBox>

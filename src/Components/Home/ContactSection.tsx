@@ -1,4 +1,6 @@
+"use client";
 
+import { motion } from "framer-motion";
 import ResponsiveBox from "../../Components/core/ResponsiveBox";
 import ConstrainedBox from "../../Components/core/constrained-box";
 import SectionTitle from "../../Components/common/SectionTitle";
@@ -16,10 +18,17 @@ const ContactSection = ({ id }: { id: string }) => {
       id={id}
     >
       <ConstrainedBox classNames="px-4 py-12 sm:py-16 lg:py-16">
-        <SectionTitle>Get in Touch</SectionTitle>
-        <p className="text-center text-zinc-400 mb-8 lg:mb-16 max-w-2xl mx-auto italic font-medium">
-          Have a project in mind or a role to fill? Let&apos;s talk about how I can help bring it to life.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <SectionTitle>Get in Touch</SectionTitle>
+          <p className="text-center text-zinc-400 mb-8 lg:mb-16 max-w-2xl mx-auto italic font-medium">
+            Have a project in mind or a role to fill? Let&apos;s talk about how I can help bring it to life.
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 w-full items-start">
           {/* Left Column: Let's Talk */}
