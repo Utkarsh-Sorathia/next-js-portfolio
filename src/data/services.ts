@@ -33,16 +33,16 @@ const services: IServiceItem[] = [
     id: 1,
     title: "Mobile App Development",
     icons: [
-      "/skills/socket-io.webp",
       "/skills/react-native.svg",
-      "/skills/firebase.svg",
+      "/skills/expo.svg",
       "/skills/typescript.svg",
-      "/skills/android-studio.webp",
+      "/skills/play-console-blue.webp",
+      "/skills/google-admob.webp",
     ],
     shortDescription:
-      "Cross-platform iOS & Android apps with React Native.",
+      "Cross-platform Android & iOS apps, shipped end to end.",
     description:
-      "I build scalable mobile applications for iOS and Android using React Native and TypeScript. My focus is on performance, reliability, and real-world features like real-time updates, push notifications, offline support, and clean API integrations. I ensure apps are production-ready through performance optimization, app store readiness, and thorough testing.",
+      "I build cross-platform mobile apps with React Native, Expo and TypeScript — and take them all the way to the store, not just to a working build. That means EAS build pipelines, app signing, Play Console listings and staged rollout. I've shipped 10+ apps to Google Play, including offline games and AdMob monetisation.",
   },
   {
     id: 6,

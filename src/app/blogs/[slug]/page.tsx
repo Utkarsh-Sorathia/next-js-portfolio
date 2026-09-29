@@ -47,11 +47,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
+  // Throw here (not just in the page) so the response is a real 404
+  // instead of a 200 soft-404 with indexable metadata.
   if (!post) {
-    return {
-      title: 'Post Not Found | Utkarsh Sorathia',
-      description: 'The requested blog post could not be found.',
-    };
+    notFound();
   }
 
   const excerpt = getBlogExcerpt(post, 160);

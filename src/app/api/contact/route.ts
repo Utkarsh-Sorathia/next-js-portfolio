@@ -3,36 +3,17 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import clientPromise from "@/lib/mongodb";
 import Strings from "@/constants/strings";
+import { contactRatelimit, getClientIp, isAllowed } from "@/lib/ratelimit";
 
 import { getContactNotificationEmailHtml } from "@/emails/ContactNotificationEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// In-memory rate limiter: 5 submissions per 15 min per IP
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 5;
-const WINDOW_MS = 15 * 60 * 1000;
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return false;
-  }
-  if (entry.count >= RATE_LIMIT) return true;
-  entry.count++;
-  return false;
-}
-
 export async function POST(req: Request) {
   try {
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      "unknown";
+    const ip = getClientIp(req);
 
-    if (isRateLimited(ip)) {
+    if (!(await isAllowed(contactRatelimit, ip))) {
       return NextResponse.json(
         { error: "Too many requests. Please wait before trying again." },
         { status: 429 }

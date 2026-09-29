@@ -20,6 +20,17 @@ import {
 } from "@/utils/structuredData";
 
 import { getSettings } from "@/utils/getSettings";
+import { baseURL } from "@/utils/api";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: baseURL,
+    types: {
+      "application/rss+xml": `${baseURL}/rss.xml`,
+    },
+  },
+};
 
 const Home = async () => {
   const settings = await getSettings();

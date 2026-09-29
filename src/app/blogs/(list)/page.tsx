@@ -4,8 +4,6 @@ import { getAllBlogPosts } from "@/lib/sanity";
 import PageBox from "@/Components/core/PageBox";
 import ResponsiveBox from "@/Components/core/ResponsiveBox";
 import ConstrainedBox from "@/Components/core/constrained-box";
-import SectionTitle from "@/Components/common/SectionTitle";
-import Breadcrumbs from "@/Components/common/Breadcrumbs";
 
 import { getBlogListingSchema, getBreadcrumbSchema, getCompleteBlogSchema } from "@/utils/structuredData";
 import { baseURL } from "@/utils/api";
@@ -76,23 +74,17 @@ export default async function BlogsPage() {
       >
         <ConstrainedBox classNames="px-4 pb-16">
           <div className="pt-24">
-            <Breadcrumbs items={[{ name: "Blogs", url: `${baseURL}/blogs` }]} />
-            
+            {/* Breadcrumbs + Search + Header now handled inside BlogsPageClient */}
+            <BlogsPageClient
+              posts={posts}
+              breadcrumbs={[{ name: "Blogs", url: `${baseURL}/blogs` }]}
+            />
+
             {/* Header Section */}
             <div>
               <h1 className="sr-only">Utkarsh Sorathia Blog - Web Development & Technology Insights</h1>
-              <SectionTitle>
-                My <span className="text-(--primaryColor)">Blogs</span>
-              </SectionTitle>
-              <p className="text-center text-base sm:text-lg text-(--textColorLight) max-w-2xl mx-auto mt-4 sm:mt-6">
-                Practical tutorials and insights on Next.js, React, and
-                full-stack development — drawn from real production work.
-              </p>
             </div>
           </div>
-
-          {/* LOAD MORE PAGINATION */}
-          <BlogsPageClient posts={posts} />
         </ConstrainedBox>
       </ResponsiveBox>
     </PageBox>

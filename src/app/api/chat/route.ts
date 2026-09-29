@@ -1,6 +1,9 @@
 import { createGroq } from '@ai-sdk/groq';
-import { streamText } from 'ai';
+import { streamText, tool, stepCountIs } from 'ai';
+import { z } from 'zod';
 import { NextRequest } from 'next/server';
+import { chatRatelimit, getClientIp, isAllowed } from '@/lib/ratelimit';
+import { retrieveBlogContext } from '@/lib/vector';
 
 // Import Data for Context
 import skills from '@/data/skills';
@@ -12,27 +15,6 @@ import socialLinks from '@/data/importantLinks';
 import { getAllBlogPosts } from '@/lib/sanity';
 
 import clientPromise from '@/lib/mongodb';
-
-/* ---------------- RATE LIMIT ---------------- */
-
-const rateLimitMap = new Map<string, { count: number; lastReset: number }>();
-const RATELIMIT_WINDOW = 60 * 1000;
-const MAX_REQUESTS = 5;
-
-function getRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const userData = rateLimitMap.get(ip) || { count: 0, lastReset: now };
-
-  if (now - userData.lastReset > RATELIMIT_WINDOW) {
-    userData.count = 1;
-    userData.lastReset = now;
-  } else {
-    userData.count++;
-  }
-
-  rateLimitMap.set(ip, userData);
-  return userData.count <= MAX_REQUESTS;
-}
 
 /* ---------------- PROMPT ATTACK PROTECTION ---------------- */
 
@@ -66,9 +48,9 @@ function isPromptAttack(text: string): boolean {
 export async function POST(req: NextRequest) {
 
   // Rate Limit
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
+  const ip = getClientIp(req);
 
-  if (!getRateLimit(ip)) {
+  if (!(await isAllowed(chatRatelimit, ip))) {
     return new Response("Too many requests. Please slow down!", { status: 429 });
   }
 
@@ -103,16 +85,20 @@ export async function POST(req: NextRequest) {
   const gRecaptchaToken = metadata?.gRecaptchaToken || req.headers.get('x-recaptcha-token');
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
-  // Fetch blogs and verify recaptcha in parallel
-  const [verifyData, allBlogs] = await Promise.all([
-    secretKey && gRecaptchaToken 
+  // Verify recaptcha, fetch recent blogs, and RAG-retrieve relevant blog chunks
+  // — all in parallel.
+  const [verifyData, allBlogs, relevantChunks] = await Promise.all([
+    secretKey && gRecaptchaToken
       ? fetch("https://www.google.com/recaptcha/api/siteverify", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: `secret=${secretKey}&response=${gRecaptchaToken}`,
         }).then(res => res.json())
       : Promise.resolve({ success: true, score: 1 }),
-    getAllBlogPosts()
+    getAllBlogPosts(),
+    // Retrieve the blog excerpts most relevant to what the user just asked.
+    // Returns [] if nothing clears the similarity threshold (see /lib/vector.ts).
+    lastUserMessage ? retrieveBlogContext(lastUserMessage) : Promise.resolve([]),
   ]);
 
   if (!verifyData.success || (verifyData.score < 0.5)) {
@@ -120,6 +106,13 @@ export async function POST(req: NextRequest) {
   }
 
   const topBlogs = allBlogs.slice(0, 3);
+
+  // Build the retrieved-excerpts block (only present when something was relevant).
+  const blogExcerpts = relevantChunks.length > 0
+    ? relevantChunks
+        .map((c) => `From "${c.title}" (https://utkarshsorathia.in${c.url}):\n${c.text}`)
+        .join('\n\n')
+    : '';
 
   /* ---------------- CONTEXT ---------------- */
 
@@ -157,10 +150,15 @@ ${socialLinks.map(link => `- ${link.name}: ${link.url}`).join('\n')}
 
 --- LATEST BLOGS ---
 ${topBlogs.length > 0
-  ? topBlogs.map((post: { title: string; slug?: { current?: string } }) =>
+  ? `Here are Utkarsh's 3 most recent posts:\n${topBlogs.map((post: { title: string; slug?: { current?: string } }) =>
       `- ${post.title} (Link: https://utkarshsorathia.in/blogs/${post.slug?.current})`
-    ).join('\n')
+    ).join('\n')}\n\nFor the full archive or to search for specific topics, direct users to: https://utkarshsorathia.in/blogs (has a search bar)`
   : "No blogs available yet, check https://utkarshsorathia.in/blogs"}
+
+--- RELEVANT BLOG EXCERPTS ---
+${blogExcerpts
+  ? `The following are excerpts from Utkarsh's blog posts most relevant to the user's current question. Answer the question using these excerpts, and cite/link the source post when you do:\n\n${blogExcerpts}`
+  : "(No blog post closely matches the user's current question — do not invent one.)"}
 
 --- SKILLS ---
 ${skills.map(cat =>
@@ -189,6 +187,8 @@ ${educations.map(edu =>
 4. Use bullet points for lists.
 5. For hiring or professional inquiries, guide users to the "Contact Me" section on the home page (https://utkarshsorathia.in/#contact) or his LinkedIn profile.
 6. If unknown, say: "I don't have that specific information, but feel free to reach out to Utkarsh directly via the contact form or LinkedIn!"
+7. If RELEVANT BLOG EXCERPTS are provided above, answer the user's blog/topic question directly from them and link the source post. Only if no relevant excerpts are provided should you direct users to https://utkarshsorathia.in/blogs — the page has a built-in search to find posts by title or topic.
+8. When the user asks about Utkarsh's projects — what he has built, or projects using a specific technology — ALWAYS use the getProjects tool to fetch accurate, full details, rather than answering from memory. Pass the technology as the "tech" argument when they mention one.
 `;
 
   /* ---------------- API KEY CHECK ---------------- */
@@ -207,9 +207,10 @@ ${educations.map(edu =>
 
   const modelChain = [
     // Top Tier (High Capability)
-    'llama-3.3-70b-versatile',
+    // NOTE: llama-3.3-70b-versatile was decommissioned by Groq on 2026-08-16
+    // (see their deprecation notice) — removed from the chain.
     'openai/gpt-oss-120b',
-    
+
     // Mid Tier (High Throughput & Speed)
     'qwen/qwen3-32b', // 60 RPM (Highest request concurrency limit)
     'meta-llama/llama-4-scout-17b-16e-instruct', // 30K TPM (Highest burst token throughput)
@@ -250,6 +251,50 @@ ${educations.map(edu =>
         model: groq(modelId),
         messages: sanitizedMessages,
         system: context,
+        // Low temperature makes the model's *formatting* far more reliable —
+        // it dramatically reduces malformed/garbled tool calls (the model
+        // fusing name + args). Standard best practice for tool/structured tasks.
+        temperature: 0,
+        // TOOL USE: we hand the model one function it can choose to call. When a
+        // question needs it, the model emits a structured call like
+        // getProjects({ tech: "React Native" }) — it does NOT run anything.
+        // The SDK then runs `execute` below, feeds the result back, and the
+        // model writes its answer from that real data.
+        tools: {
+          getProjects: tool({
+            description:
+              "Get details about Utkarsh's real projects. Optionally filter by a technology or tag (e.g. 'React Native', 'Next.js', 'MongoDB'). Call this whenever the user asks about his projects, work, or what he has built.",
+            inputSchema: z.object({
+              tech: z
+                .string()
+                .optional()
+                .describe("Technology/tag to filter by, e.g. 'React Native'. Omit to return all projects."),
+            }),
+            // This is the "one dumb, deterministic step": plain filtering, no AI.
+            execute: async ({ tech }) => {
+              // TEACHING LOG (remove later): watch the terminal — this proves the
+              // model DECIDED to call getProjects and EXTRACTED `tech` from the
+              // natural-language question, before any of your code ran.
+              console.log('[tool] getProjects called with:', { tech });
+              const list = tech
+                ? projects.filter((p) =>
+                    p.tags?.some((t) => t.toLowerCase().includes(tech.toLowerCase()))
+                  )
+                : projects;
+              return list.map((p) => ({
+                title: p.title,
+                description: p.description,
+                tags: p.tags,
+                url: p.url ?? null,
+                type: p.projectType,
+              }));
+            },
+          }),
+        },
+        // Without this the SDK defaults to stepCountIs(1) — it would call the
+        // tool and STOP, never writing the final answer. This lets it loop:
+        // call tool → read result → respond.
+        stopWhen: stepCountIs(5),
         onFinish: async ({ text }) => {
           try {
             const client = await clientPromise;
@@ -269,6 +314,9 @@ ${educations.map(edu =>
         },
       });
 
+      // Let stream errors propagate normally so the client's useChat status
+      // transitions to 'error' (which re-enables the input). We turn the error
+      // into a friendly message on the CLIENT instead (see ChatWidget onError).
       return result.toUIMessageStreamResponse();
 
     } catch (error: any) {

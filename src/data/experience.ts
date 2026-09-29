@@ -8,6 +8,8 @@ const experience: IExperienceItem[] = [
     endDate: "Present",
     description: [
       "Lead development of production MERN applications, improving API performance and refactoring large codebases into cleaner, modular services.",
+      "Ship cross-platform Android apps with React Native and Expo — 10 published to Google Play, owning the full release cycle from EAS builds and app signing through store listings, Data Safety declarations and staged rollout.",
+      "Integrate AdMob monetisation with GDPR consent flows, and resolve native Android build failures across the Gradle and Kotlin toolchain.",
       "Build SEO-focused Next.js sites and custom Strapi plugins for client projects.",
       "Optimized GraphQL queries, cutting data-fetching time by 40%.",
     ],
