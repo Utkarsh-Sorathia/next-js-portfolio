@@ -82,6 +82,31 @@ const skills: ISkillListItem[] = [
     ],
   },
   {
+    title: "Mobile App Development",
+    items: [
+      {
+        title: "React Native (Android & iOS)",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/react-native.svg",
+      },
+      {
+        title: "Expo / EAS Build",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/expo.svg",
+      },
+      {
+        title: "Google Play Console",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/play-console-blue.webp",
+      },
+      {
+        title: "AdMob",
+        level: SkillLevel.Intermediate,
+        icon: "/skills/google-admob.webp",
+      },
+    ],
+  },
+  {
     title: "Database Management",
     items: [
       {
@@ -118,21 +143,6 @@ const skills: ISkillListItem[] = [
         title: "Strapi",
         level: SkillLevel.Intermediate,
         icon: "/skills/strapi.svg",
-      },
-    ],
-  },
-  {
-    title: "Mobile App Development",
-    items: [
-      {
-        title: "React Native (Android & iOS)",
-        level: SkillLevel.Intermediate,
-        icon: "/skills/react-native.svg",
-      },
-      {
-        title: "Expo",
-        level: SkillLevel.Intermediate,
-        icon: "/skills/expo.svg",
       },
     ],
   },

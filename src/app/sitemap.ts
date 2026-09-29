@@ -10,19 +10,21 @@ const baseUrl = baseURL;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllBlogPosts()
   
-  // Use current date for homepage to signal freshness
-  const now = new Date();
+  // Real dates only: Google ignores lastmod if it changes on every build
+  const latestPostDate = posts.reduce((latest: Date | undefined, post: IBlogPost) => {
+    const date = new Date(post._updatedAt || post._createdAt)
+    return !latest || date > latest ? date : latest
+  }, undefined)
 
   const staticRoutes = [
     {
       url: baseUrl,
-      lastModified: now,
       changeFrequency: 'daily' as const,
       priority: 1,
     },
     {
       url: `${baseUrl}/blogs`,
-      lastModified: now,
+      lastModified: latestPostDate,
       changeFrequency: 'daily' as const, 
       priority: 0.9, 
     },

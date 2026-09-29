@@ -135,8 +135,8 @@ export const metadata: Metadata = {
     "geo.position": "21.1702; 72.8311",
     "ICBM": "21.1702, 72.8311",
   },
+  // No canonical here: it would be inherited by every page that doesn't set its own.
   alternates: {
-    canonical: baseUrl,
     types: {
       "application/rss+xml": `${baseUrl}/rss.xml`,
     },

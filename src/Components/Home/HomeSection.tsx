@@ -40,13 +40,13 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
             <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-(--textColor)">
               Hi, I&apos;m
               <NameAnimation
-                words={['Utkarsh Sorathia.', 'Full Stack Developer.']}
+                words={['Utkarsh Sorathia.', 'Full Stack Developer.', 'Mobile App Developer.']}
                 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-(--primaryColor)"
               />
             </h1>
           </div>
           <h2 className="sr-only">
-            Full Stack Developer specializing in MERN, Next.js, and React.js — creating modern web and mobile applications.
+            Full Stack & Mobile Developer specializing in MERN, Next.js and React Native — with 10 apps shipped to Google Play.
           </h2>
           <p className="text-sm md:text-base text-(--textColorLight) mx-auto text-wrap max-w-2xl text-center">
             I build fast, scalable web apps with Next.js and the <span className="whitespace-nowrap">MERN stack</span> — 2+ years turning ideas into production-ready products.

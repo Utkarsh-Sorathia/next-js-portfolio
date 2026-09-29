@@ -2,6 +2,38 @@ import { IProjectItem, ProjectType, RepoType } from "@/interfaces";
 
 const projects: IProjectItem[] = [
   {
+    id: "Arrow Game Adventure",
+    title: "Arrow Game Adventure (Android)",
+    description:
+      "A calm arrow puzzle game for Android. Levels are generated procedurally and every board is verified solvable by a BFS solver before it reaches the player. The grid renders as a single Skia canvas to stay smooth at 18×18, with Reanimated driving the snake-style arrow movement.",
+    icon: "/skills/react-native.svg",
+    repoType: RepoType.Public,
+    projectType: ProjectType.JobWork,
+    url: "https://play.google.com/store/apps/details?id=com.sparklesuite.arrowgame",
+    tags: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Skia",
+      "Reanimated",
+      "Zustand",
+      "AdMob",
+    ],
+    about:
+      "One of 10 apps I've published to Google Play, covering the full release pipeline — EAS builds, app signing, store listings and staged rollout.",
+  },
+  {
+    id: "Bluff Cheat Card Game",
+    title: "Bluff — Cheat Card Game (Android)",
+    description:
+      "Real-time multiplayer card game for 2–6 players. Players join a table with a short code — no account needed — and every play, claim and challenge syncs live across the table. A solo mode adds bot opponents, with an adjustable bot count and four difficulty levels.",
+    icon: "/skills/react-native.svg",
+    repoType: RepoType.Private,
+    projectType: ProjectType.JobWork,
+    url: "https://play.google.com/store/apps/details?id=com.sparklesuite.bluffcards",
+    tags: ["React Native", "Expo", "TypeScript", "Real-time", "Socket.io", "Bot AI"],
+  },
+  {
     id: "Sparkle Infotech Site",
     title: "Sparkle Infotech - On Demand Software Solution",
     description:

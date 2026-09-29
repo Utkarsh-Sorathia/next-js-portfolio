@@ -18,7 +18,29 @@ export default function ChatWidget() {
   const [isMobile, setIsMobile] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [error, setError] = useState<string | null>(null);
-  const { messages, sendMessage, status } = useChat();
+  const { messages, sendMessage, status } = useChat({
+    // Surface server-side rejections (rate limit, blocked prompt, etc.) in the
+    // UI — otherwise a non-2xx response is silently swallowed and the user just
+    // sees nothing happen.
+    onError: (err) => {
+      const msg = err?.message || '';
+      if (msg.includes('Too many requests')) {
+        setError("You're sending messages too quickly. Please wait a moment and try again.");
+      } else if (
+        msg.includes("can't help with that") ||
+        msg.includes('too long') ||
+        msg.includes('Security check')
+      ) {
+        setError(msg);
+      } else {
+        // Generic stream/model failure (e.g. a flaky tool call). The raw detail
+        // is obscured by the SDK, so show a calm, on-brand fallback. Because the
+        // error propagates normally, useChat's status becomes 'error' and the
+        // input re-enables — no more frozen chat.
+        setError("Sorry, I couldn't pull that up just now — mind rephrasing, or take a look at the Projects section on the page?");
+      }
+    },
+  });
   const isLoading = status === 'submitted' || status === 'streaming';
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);

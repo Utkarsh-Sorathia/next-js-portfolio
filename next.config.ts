@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   // Allow local network access for mobile testing
-  allowedDevOrigins: ['192.168.1.20'],
+  allowedDevOrigins: ['192.168.1.19', 'd0c8-116-72-18-164.ngrok-free.app'],
 
   async redirects() {
     return [
@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
       {
         source: "/Blog/:path*",
         destination: "/blogs/:path*",
+        permanent: true,
+      },
+      // Renamed blog slugs
+      {
+        source: "/blogs/why-i-added-a-chatbot-to-my-portfolio-website",
+        destination: "/blogs/why-i-added-a-chatbot-to-my-portfolio-website-and-why-every-developer-should",
         permanent: true,
       },
       // Force HTTPS redirect
