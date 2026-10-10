@@ -1,7 +1,6 @@
 import { RepoType, ProjectType, type IProjectItem } from "@/interfaces";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { SiGithub } from "react-icons/si";
+import { Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CardBox from "../../Components/core/CardBox";
@@ -81,7 +80,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
                     aria-label={`View source code of ${project.title} on GitHub`}
                     className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-zinc-800/50 border border-white/10 text-[10px] font-bold text-zinc-300 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
                   >
-                    <FontAwesomeIcon icon={faGithub} className="text-xs" />
+                    <SiGithub className="w-3 h-3" aria-hidden="true" />
                     <span>Source</span>
                   </Link>
                 )}
@@ -93,7 +92,7 @@ const ProjectCard = ({ project }: { project: IProjectItem }) => {
                     aria-label={`View live demo of ${project.title}`}
                     className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[var(--primaryColor)]/10 border border-[var(--primaryColor)]/20 text-[10px] font-bold text-[var(--primaryColor)] hover:bg-[var(--primaryColor)] hover:text-white transition-all duration-300"
                   >
-                    <FontAwesomeIcon icon={faEye} className="text-xs" />
+                    <Eye className="w-3 h-3" aria-hidden="true" />
                     <span>Demo</span>
                   </Link>
                 )}

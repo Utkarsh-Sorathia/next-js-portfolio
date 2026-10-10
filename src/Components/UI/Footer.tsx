@@ -168,6 +168,10 @@ const Footer = () => {
         <div className="text-center mt-8 pt-6 border-t border-white/10">
           <p className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">
             © {new Date().getFullYear()} Utkarsh Sorathia. All Rights Reserved.
+            {" · "}
+            <Link href="/privacy" className="hover:text-zinc-300 transition-colors">
+              Privacy
+            </Link>
           </p>
         </div>
       </div>

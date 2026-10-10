@@ -22,6 +22,7 @@ export default function AdminLogin() {
                 body: JSON.stringify({ secretKey }),
             });
 
+            if (res.status === 429) throw new Error("Too many attempts. Try again in 15 minutes.");
             if (!res.ok) throw new Error("Invalid secret key");
 
             router.push("/admin/logs");

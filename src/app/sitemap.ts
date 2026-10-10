@@ -28,6 +28,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily' as const, 
       priority: 0.9, 
     },
+    {
+      url: `${baseUrl}/privacy`,
+      changeFrequency: 'yearly' as const,
+      priority: 0.2,
+    },
   ]
   
   const blogRoutes = posts.map((post: IBlogPost) => ({

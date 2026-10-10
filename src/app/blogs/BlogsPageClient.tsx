@@ -49,7 +49,6 @@ export default function BlogsPageClient({ posts, breadcrumbs }: BlogsPageClientP
       .map(({ post }) => post);
   }, [posts, debouncedQuery]);
 
-  const visiblePosts = isSearching ? filteredPosts : filteredPosts.slice(0, visibleCount);
   const showLoadMore = !isSearching && visibleCount < posts.length;
 
   const handleLoadMore = () => setVisibleCount((prev) => prev + PAGE_SIZE);
@@ -93,10 +92,14 @@ export default function BlogsPageClient({ posts, breadcrumbs }: BlogsPageClientP
       </div>
 
       {/* Blog Posts Grid */}
-      {visiblePosts.length > 0 && (
+      {/* Every card stays in the HTML (hidden past the "Load more" cutoff) so
+          crawlers can follow a link to every post from this page. */}
+      {filteredPosts.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-          {visiblePosts.map((post) => (
-            <BlogCard key={post._id} post={post} />
+          {filteredPosts.map((post, index) => (
+            <div key={post._id} className={isSearching || index < visibleCount ? "h-full" : "hidden"}>
+              <BlogCard post={post} />
+            </div>
           ))}
         </div>
       )}
