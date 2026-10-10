@@ -1,4 +1,11 @@
-export function getContactNotificationEmailHtml(name: string, email: string, subject: string, message: string) {
+import { escapeHtml } from "@/utils/escapeHtml";
+
+export function getContactNotificationEmailHtml(rawName: string, rawEmail: string, rawSubject: string, rawMessage: string) {
+  // All four values come from the public contact form — escape before interpolating.
+  const name = escapeHtml(rawName);
+  const email = escapeHtml(rawEmail);
+  const subject = escapeHtml(rawSubject);
+  const message = escapeHtml(rawMessage);
   return `
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6fb;padding:32px 0;font-family: 'Segoe UI', Arial, sans-serif;">
     <tr>

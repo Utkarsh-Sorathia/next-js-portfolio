@@ -42,6 +42,8 @@ export const chatRatelimit = createLimiter(5, "60 s", "chat");
 export const contactRatelimit = createLimiter(5, "15 m", "contact");
 export const subscribeRatelimit = createLimiter(3, "10 m", "subscribe");
 export const unsubscribeRatelimit = createLimiter(5, "10 m", "unsubscribe");
+// Brute-force protection for the admin password.
+export const adminLoginRatelimit = createLimiter(5, "15 m", "admin-login");
 
 // Extracts the client IP from the standard proxy headers Vercel sets.
 export function getClientIp(req: Request): string {

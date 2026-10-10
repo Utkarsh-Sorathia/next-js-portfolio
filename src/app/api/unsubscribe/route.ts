@@ -13,9 +13,12 @@ export async function POST(req: Request) {
       );
     }
 
-    const { token } = await req.json();
+    const body = await req.json().catch(() => null);
+    const token = body?.token;
 
-    if (!token) {
+    // Must be a plain hex string — an object like {"$ne": ""} would otherwise act
+    // as a MongoDB operator and delete an arbitrary subscriber.
+    if (typeof token !== "string" || !/^[a-f0-9]{64}$/.test(token)) {
       return NextResponse.json({ error: "Token is required" }, { status: 400 });
     }
 

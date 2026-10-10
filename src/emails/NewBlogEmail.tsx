@@ -1,3 +1,5 @@
+import { escapeHtml } from "@/utils/escapeHtml";
+
 type NewBlogEmailProps = {
   title: string;
   excerpt?: string;
@@ -5,7 +7,9 @@ type NewBlogEmailProps = {
   token: string;
 };
 
-export function getNewBlogEmailHtml({ title, excerpt, blogUrl, token }: NewBlogEmailProps) {
+export function getNewBlogEmailHtml({ title: rawTitle, excerpt: rawExcerpt, blogUrl, token }: NewBlogEmailProps) {
+  const title = escapeHtml(rawTitle);
+  const excerpt = rawExcerpt ? escapeHtml(rawExcerpt) : "";
   return `
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6fb;padding:32px 0;font-family:'Segoe UI',Arial,sans-serif;">
     <tr>

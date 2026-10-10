@@ -1,13 +1,22 @@
 import { NextResponse } from "next/server";
 // @ts-ignore: types for 'resend' are .d.mts and not compatible with current moduleResolution
 import { Resend } from "resend";
+import { z } from "zod";
 import clientPromise from "@/lib/mongodb";
 import { getWelcomeEmailHtml } from "@/emails/WelcomeEmail";
 import crypto from "crypto";
 import Strings from "@/constants/strings";
 import { subscribeRatelimit, getClientIp, isAllowed } from "@/lib/ratelimit";
+import { verifyRecaptcha } from "@/lib/recaptcha";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// `email` must be a plain string — an object like {"$ne": null} would otherwise
+// be passed straight into the MongoDB query as an operator.
+const subscribeSchema = z.object({
+  email: z.string().trim().toLowerCase().email().max(254),
+  gRecaptchaToken: z.string().optional(),
+});
 
 export async function POST(req: Request) {
   try {
@@ -20,43 +29,16 @@ export async function POST(req: Request) {
       );
     }
 
-    const { email, gRecaptchaToken } = await req.json();
-
-    if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    const parsed = subscribeSchema.safeParse(await req.json().catch(() => null));
+    if (!parsed.success) {
+      return NextResponse.json({ error: "A valid email is required" }, { status: 400 });
     }
+    const { email, gRecaptchaToken } = parsed.data;
 
     // reCAPTCHA verification — fails closed
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-    if (!secretKey) {
-      console.error("RECAPTCHA_SECRET_KEY is not set");
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
-    }
-    if (!gRecaptchaToken) {
-      return NextResponse.json({ error: "Security token missing" }, { status: 400 });
-    }
-
-    try {
-      const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `secret=${secretKey}&response=${gRecaptchaToken}`,
-      });
-
-      const verifyData = await verifyRes.json();
-
-      if (!verifyData.success || verifyData.score < 0.5) {
-        return NextResponse.json(
-          { error: "Security check failed. Please try again." },
-          { status: 400 }
-        );
-      }
-    } catch (error) {
-      console.error("Newsletter reCAPTCHA error:", error);
-      return NextResponse.json(
-        { error: "Security verification unavailable. Please try again later." },
-        { status: 503 }
-      );
+    const recaptcha = await verifyRecaptcha(gRecaptchaToken);
+    if (!recaptcha.ok) {
+      return NextResponse.json({ error: recaptcha.error }, { status: recaptcha.status });
     }
 
     const client = await clientPromise;
@@ -80,7 +62,7 @@ export async function POST(req: Request) {
 
     // Send welcome email
     try {
-      const welcomeHtml = getWelcomeEmailHtml(email, token); // <-- pass token
+      const welcomeHtml = getWelcomeEmailHtml(email, token);
       await resend.emails.send({
         from: `${Strings.fullName} <${process.env.NEWSLETTER_FROM_EMAIL || "contact@utkarshsorathia.in"}>`,
         to: email,

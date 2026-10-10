@@ -22,7 +22,7 @@ export async function GET(request: Request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const page = parseInt(searchParams.get('page') || '1', 10);
+    const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
     const limit = 10;
     const skip = (page - 1) * limit;
     const sortOrder = searchParams.get('sort') === 'asc' ? 1 : -1;
@@ -34,8 +34,10 @@ export async function GET(request: Request) {
 
     if (dateFrom || dateTo) {
         filter.timestamp = {};
-        if (dateFrom) filter.timestamp.$gte = new Date(dateFrom);
-        if (dateTo) filter.timestamp.$lte = new Date(dateTo);
+        const from = dateFrom ? new Date(dateFrom) : null;
+        const to = dateTo ? new Date(dateTo) : null;
+        if (from && !isNaN(from.getTime())) filter.timestamp.$gte = from;
+        if (to && !isNaN(to.getTime())) filter.timestamp.$lte = to;
     }
 
     try {

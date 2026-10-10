@@ -105,6 +105,8 @@ export function getPersonSchema() {
         "TypeScript",
         "JavaScript",
         "MERN Stack",
+        "React Native",
+        "Expo",
       ],
     },
     knowsAbout: [
@@ -120,14 +122,19 @@ export function getPersonSchema() {
       "MERN Stack",
       "Frontend Development",
       "Backend Development",
+      "Mobile App Development",
+      "React Native",
+      "Android App Development",
     ],
+    // Other profiles of the same person (not this site itself) — helps Google
+    // tell this Utkarsh Sorathia apart from others with the same name.
     sameAs: [
       Strings.githubLink,
       Strings.linkedInLink,
       Strings.instagramLink,
       Strings.twitterLink,
+      Strings.upworkLink,
       "https://www.wikidata.org/wiki/Q137171536",
-      "https://utkarshsorathia.in"
     ].filter(Boolean),
     contactPoint: {
       "@type": "ContactPoint",
@@ -281,6 +288,8 @@ export function getArticleSchema(
         Strings.linkedInLink,
         Strings.instagramLink,
         Strings.twitterLink,
+        Strings.upworkLink,
+        "https://www.wikidata.org/wiki/Q137171536",
       ].filter(Boolean),
       "@id": `${baseUrl}#person`,
     },

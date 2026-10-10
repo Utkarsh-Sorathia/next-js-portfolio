@@ -28,7 +28,11 @@ export async function POST(request: Request) {
     }
 
     try {
-        const { openToWork } = await request.json();
+        const body = await request.json().catch(() => null);
+        const openToWork = body?.openToWork;
+        if (typeof openToWork !== 'boolean') {
+            return NextResponse.json({ error: 'openToWork must be a boolean' }, { status: 400 });
+        }
         const client = await clientPromise;
         const db = client.db();
         

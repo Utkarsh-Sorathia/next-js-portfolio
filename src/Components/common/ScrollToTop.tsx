@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpLong } from "@fortawesome/free-solid-svg-icons";
+import { ArrowUp } from "lucide-react";
 import styles from "@/app/scroll.module.css";
 
 const ScrollToTop = () => {
@@ -38,7 +37,7 @@ const ScrollToTop = () => {
           aria-label="Scroll back to top"
           title="Scroll back to top"
         >
-          <FontAwesomeIcon icon={faArrowUpLong} className={styles.iconStyle} aria-hidden="true" />
+          <ArrowUp className={styles.iconStyle} strokeWidth={2.5} aria-hidden="true" />
         </button>
       ) : null}
     </div>

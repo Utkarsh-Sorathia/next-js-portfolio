@@ -1,4 +1,3 @@
-import { IconDefinition, IconProp } from "@fortawesome/fontawesome-svg-core";
 import type { MouseEventHandler, ReactNode, RefObject } from "react";
 
 export interface INavItem {
@@ -36,7 +35,6 @@ export interface IProjectItem {
 export type IServiceItem = {
   id: number | string;
   title: string;
-  icon?: IconDefinition;
   shortDescription: string;
   description: string;
   icons: string[];

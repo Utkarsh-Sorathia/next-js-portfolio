@@ -1,85 +1,25 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useChat } from '@ai-sdk/react';
+import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, AlertCircle } from 'lucide-react';
-import { useGoogleReCaptcha } from '@/hooks/useGoogleReCaptcha';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { X } from 'lucide-react';
 import styles from '@/app/chat.module.css';
 import Image from 'next/image';
 
+// The chat window (AI SDK + markdown renderer) is the heaviest client code on the
+// site, so it's only downloaded when the visitor shows intent to open it.
+const loadChatPanel = () => import('./ChatPanel');
+const ChatPanel = dynamic(loadChatPanel, { ssr: false });
+const preloadChatPanel = () => { void loadChatPanel(); };
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  // Mount the panel on first open and keep it mounted so the conversation survives closing.
+  const [hasOpened, setHasOpened] = useState(false);
   const [isNudgeVisible, setIsNudgeVisible] = useState(false);
   const [hasSeenNudge, setHasSeenNudge] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const { executeRecaptcha } = useGoogleReCaptcha();
-  const [error, setError] = useState<string | null>(null);
-  const { messages, sendMessage, status } = useChat({
-    // Surface server-side rejections (rate limit, blocked prompt, etc.) in the
-    // UI — otherwise a non-2xx response is silently swallowed and the user just
-    // sees nothing happen.
-    onError: (err) => {
-      const msg = err?.message || '';
-      if (msg.includes('Too many requests')) {
-        setError("You're sending messages too quickly. Please wait a moment and try again.");
-      } else if (
-        msg.includes("can't help with that") ||
-        msg.includes('too long') ||
-        msg.includes('Security check')
-      ) {
-        setError(msg);
-      } else {
-        // Generic stream/model failure (e.g. a flaky tool call). The raw detail
-        // is obscured by the SDK, so show a calm, on-brand fallback. Because the
-        // error propagates normally, useChat's status becomes 'error' and the
-        // input re-enables — no more frozen chat.
-        setError("Sorry, I couldn't pull that up just now — mind rephrasing, or take a look at the Projects section on the page?");
-      }
-    },
-  });
-  const isLoading = status === 'submitted' || status === 'streaming';
-  const [input, setInput] = useState('');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    if (!executeRecaptcha) {
-      setError('Security service not ready. Please try again.');
-      return;
-    }
-
-    try {
-      setError(null);
-      const token = await executeRecaptcha('chat_message');
-      await sendMessage({
-        text: input,
-      }, {
-        headers: { 'x-recaptcha-token': token },
-        body: { metadata: { gRecaptchaToken: token } }
-      });
-      setInput('');
-    } catch (err) {
-      setError('Security verification failed. Please try again.');
-    }
-  };
-
-  // Auto-scroll to bottom
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages]);
 
   // Initial nudge timer (shows after 4s)
   useEffect(() => {
@@ -104,21 +44,11 @@ export default function ChatWidget() {
     return () => clearTimeout(timer);
   }, [isNudgeVisible]);
 
-  // Track scroll and window size for dynamic positioning
+  // Track scroll for dynamic positioning
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-
-    // Initial check
-    handleResize();
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
-    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const showScrollTop = scrollY > 400;
@@ -135,177 +65,7 @@ export default function ChatWidget() {
       }}
     >
       {/* Chat Window */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-[90vw] sm:w-[450px] h-[600px] max-h-[85vh] bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-700 flex flex-col overflow-hidden"
-          >
-            {/* Header */}
-            <div className="bg-(--primaryColor) p-4 flex items-center justify-between text-white shrink-0">
-              <div className="flex items-center gap-3">
-                <Image src="/favicon.ico" alt="Logo" width={24} height={24} aria-hidden="true" />
-                <div className="flex flex-col">
-                  <h3 id="chat-window-title" className="font-semibold text-sm leading-none flex items-center gap-2">
-                    AI Assistant
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" title="System Online"></span>
-                  </h3>
-                  <div className="flex items-center gap-1 mt-1">
-                    <p className="text-[10px] opacity-80 uppercase tracking-wider font-bold">Powered by Groq</p>
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-full transition-colors focus:outline-none"
-                aria-label="Close Chat"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Messages Area */}
-            <div 
-              role="log"
-              aria-live="polite"
-              aria-labelledby="chat-window-title"
-              className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950/50"
-            >
-              {messages.length === 0 && (
-                <div className="text-center text-zinc-500 text-sm mt-10 px-4">
-                  <p className="mb-2">👋 Hi there!</p>
-                  <p>Hi! I'm your virtual assistant. Ask me about Utkarsh's projects, skills, or experience!</p>
-                  <div className="mt-4 flex flex-wrap gap-2 justify-center">
-                    <button
-                      onClick={async () => {
-                        if (executeRecaptcha) {
-                          const token = await executeRecaptcha('chat_message');
-                          sendMessage({ text: "What are Utkarsh's top skills?" }, {
-                            headers: { 'x-recaptcha-token': token },
-                            body: { metadata: { gRecaptchaToken: token } }
-                          });
-                        }
-                      }}
-                      aria-label="Ask about skills"
-                      className="text-xs bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full hover:bg-(--primaryColor) hover:text-white transition-colors"
-                    >
-                      Skills?
-                    </button>
-                    <button
-                      onClick={async () => {
-                        if (executeRecaptcha) {
-                          const token = await executeRecaptcha('chat_message');
-                          sendMessage({ text: "Show me his latest projects" }, {
-                            headers: { 'x-recaptcha-token': token },
-                            body: { metadata: { gRecaptchaToken: token } }
-                          });
-                        }
-                      }}
-                      aria-label="Ask about projects"
-                      className="text-xs bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full hover:bg-(--primaryColor) hover:text-white transition-colors"
-                    >
-                      Projects?
-                    </button>
-                    <button
-                      onClick={async () => {
-                        if (executeRecaptcha) {
-                          const token = await executeRecaptcha('chat_message');
-                          sendMessage({ text: "How can I contact him?" }, {
-                            headers: { 'x-recaptcha-token': token },
-                            body: { metadata: { gRecaptchaToken: token } }
-                          });
-                        }
-                      }}
-                      aria-label="Ask about contact information"
-                      className="text-xs bg-zinc-800 border border-zinc-700 px-3 py-1.5 rounded-full hover:bg-(--primaryColor) hover:text-white transition-colors"
-                    >
-                      Contact?
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {messages.map((m: any) => {
-                // ... (unchanged logic)
-                const rawContent = m.parts
-                  ? m.parts.map((part: any) => part.type === 'text' ? part.text : '').join('')
-                  : m.content || '';
-                const textContent = rawContent.replace(/<think>[\s\S]*?(?:<\/think>|$)/g, '').trim();
-
-                return (
-                  <div
-                    key={m.id}
-                    className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} mb-2`}
-                  >
-                    <div
-                      className={`max-w-[90%] rounded-2xl px-4 py-3 text-sm shadow-sm leading-relaxed wrap-break-word overflow-hidden ${m.role === 'user'
-                        ? 'bg-(--primaryColor) text-white rounded-tr-none'
-                        : 'bg-zinc-800 text-zinc-200 border border-zinc-700 rounded-tl-none'
-                        }`}
-                    >
-                      <div className="sr-only">{m.role === 'user' ? 'You said:' : 'AI said:'}</div>
-                      <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:mb-4 last:prose-p:mb-0 prose-pre:bg-zinc-900 prose-ul:my-2 prose-li:my-1 wrap-break-word">
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            a: (props: any) => <a {...props} target="_blank" rel="noopener noreferrer" className="underline font-bold text-(--primaryColor)" />
-                          }}
-                        >
-                          {textContent}
-                        </ReactMarkdown>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {isLoading && (
-                <div className="flex justify-start" aria-label="AI is thinking">
-                  <div className="bg-zinc-800 rounded-2xl rounded-tl-none px-4 py-3 border border-zinc-700">
-                    <div className="flex gap-1.5">
-                      <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                      <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                      <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce"></span>
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input Area */}
-            <form onSubmit={handleSubmit} className="p-3 bg-zinc-900 border-t border-zinc-700">
-              {error && (
-                <div role="alert" className="mb-2 px-3 py-2 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-[10px] text-red-500">
-                  <AlertCircle className="w-3 h-3" aria-hidden="true" />
-                  {error}
-                </div>
-              )}
-              <div className="flex gap-2">
-                <input
-                  ref={inputRef}
-                  className="flex-1 bg-zinc-800 text-zinc-100 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-(--primaryColor)/50 transition-all placeholder:text-zinc-400"
-                  value={input}
-                  onChange={handleInputChange}
-                  placeholder="Ask something..."
-                  disabled={isLoading}
-                  aria-label="Ask AI Assistant something"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading || !input.trim()}
-                  className="bg-(--primaryColor) text-white p-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                  aria-label="Send message"
-                >
-                  <Send className="w-4 h-4" aria-hidden="true" />
-                </button>
-              </div>
-            </form>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {hasOpened && <ChatPanel isOpen={isOpen} onClose={() => setIsOpen(false)} />}
 
       <div className="relative flex items-center justify-end">
         {/* Nudge Bubble */}
@@ -342,10 +102,12 @@ export default function ChatWidget() {
 
         {/* Toggle Button */}
         <motion.button
-          onMouseEnter={() => !isOpen && setIsNudgeVisible(true)}
+          onMouseEnter={() => { preloadChatPanel(); if (!isOpen) setIsNudgeVisible(true); }}
+          onFocus={preloadChatPanel}
+          onTouchStart={preloadChatPanel}
           onMouseLeave={() => !isOpen && setIsNudgeVisible(false)}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => { setHasOpened(true); setIsOpen(!isOpen); }}
           className={`${styles.chatToggle} h-12 w-12 bg-(--primaryColor) rounded-full flex items-center justify-center text-white z-50 border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0`}
           aria-label={isOpen ? "Close AI Assistant" : "Open AI Assistant"}
           aria-expanded={isOpen}

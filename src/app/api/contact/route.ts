@@ -1,13 +1,24 @@
 import { NextResponse } from "next/server";
 // @ts-ignore: types for 'resend' are .d.mts and not compatible with current moduleResolution
 import { Resend } from "resend";
+import { z } from "zod";
 import clientPromise from "@/lib/mongodb";
 import Strings from "@/constants/strings";
 import { contactRatelimit, getClientIp, isAllowed } from "@/lib/ratelimit";
+import { verifyRecaptcha } from "@/lib/recaptcha";
 
 import { getContactNotificationEmailHtml } from "@/emails/ContactNotificationEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Strings only (blocks NoSQL operator objects) with sane length caps.
+const contactSchema = z.object({
+  name: z.string().trim().min(1).max(100),
+  email: z.string().trim().toLowerCase().email().max(254),
+  subject: z.string().trim().min(1).max(200),
+  message: z.string().trim().min(1).max(5000),
+  gRecaptchaToken: z.string().optional(),
+});
 
 export async function POST(req: Request) {
   try {
@@ -20,43 +31,19 @@ export async function POST(req: Request) {
       );
     }
 
-    const { name, email, subject, message, gRecaptchaToken } = await req.json();
-
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    const parsed = contactSchema.safeParse(await req.json().catch(() => null));
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Please fill in all fields with valid values." },
+        { status: 400 }
+      );
     }
+    const { name, email, subject, message, gRecaptchaToken } = parsed.data;
 
     // reCAPTCHA verification — fails closed: any verification failure blocks submission
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-    if (!secretKey) {
-      console.error("RECAPTCHA_SECRET_KEY is not set");
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
-    }
-    if (!gRecaptchaToken) {
-      return NextResponse.json({ error: "Security token missing" }, { status: 400 });
-    }
-
-    try {
-      const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `secret=${secretKey}&response=${gRecaptchaToken}`,
-      });
-
-      const verifyData = await verifyRes.json();
-
-      if (!verifyData.success || verifyData.score < 0.5) {
-        return NextResponse.json(
-          { error: "Security check failed. Please try again." },
-          { status: 400 }
-        );
-      }
-    } catch (error) {
-      console.error("reCAPTCHA verification error:", error);
-      return NextResponse.json(
-        { error: "Security verification unavailable. Please try again later." },
-        { status: 503 }
-      );
+    const recaptcha = await verifyRecaptcha(gRecaptchaToken);
+    if (!recaptcha.ok) {
+      return NextResponse.json({ error: recaptcha.error }, { status: recaptcha.status });
     }
 
     const client = await clientPromise;
@@ -78,7 +65,8 @@ export async function POST(req: Request) {
         from: `${Strings.fullName} <${process.env.CONTACT_FROM_EMAIL || "contact@utkarshsorathia.in"}>`,
         to: process.env.PERSONAL_EMAIL || "utkarshsor03@gmail.com",
         replyTo: email,
-        subject: `[Portfolio] ${name}: ${subject}`,
+        // Strip newlines so a crafted subject can't inject extra headers/lines
+        subject: `[Portfolio] ${name}: ${subject}`.replace(/[\r\n]+/g, " "),
         html: emailHtml,
       });
     } catch (emailError) {
