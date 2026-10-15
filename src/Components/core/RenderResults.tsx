@@ -1,6 +1,26 @@
 'use client';
 
 import { KBarResults, useMatches } from 'kbar';
+import { isLightDesign } from '@/config/design';
+
+// Result styles per site design (dark values are the original ones).
+const c = isLightDesign
+  ? {
+      section: 'px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-[#55555b] bg-[#f9f9f8]',
+      iconIdle: 'bg-[#f4f4f2] text-[#55555b]',
+      nameActive: 'text-[#0b0b0c]',
+      nameIdle: 'text-[#26262b]',
+      subtitle: 'text-[11px] text-[#55555b] font-medium mt-0.5',
+      kbdIdle: 'bg-[#f4f4f2] text-[#55555b] border border-[#e5e5e2]',
+    }
+  : {
+      section: 'px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-zinc-500 bg-zinc-900/50',
+      iconIdle: 'bg-zinc-800/50 text-zinc-400',
+      nameActive: 'text-white',
+      nameIdle: 'text-zinc-300',
+      subtitle: 'text-[11px] text-zinc-500 font-medium mt-0.5',
+      kbdIdle: 'bg-zinc-800 text-zinc-500 border border-white/5',
+    };
 
 export default function RenderResults() {
   const { results } = useMatches();
@@ -10,7 +30,7 @@ export default function RenderResults() {
       items={results}
       onRender={({ item, active }) =>
         typeof item === 'string' ? (
-          <div className="px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-zinc-500 bg-zinc-900/50">
+          <div className={c.section}>
             {item}
           </div>
         ) : (
@@ -19,7 +39,7 @@ export default function RenderResults() {
               }`}
           >
             <div className="flex items-center gap-4">
-              <div className={`p-2 rounded-lg transition-colors ${active ? 'bg-[var(--primaryColor)]/20 text-[var(--primaryColor)]' : 'bg-zinc-800/50 text-zinc-400'}`}>
+              <div className={`p-2 rounded-lg transition-colors ${active ? 'bg-[var(--primaryColor)]/20 text-[var(--primaryColor)]' : c.iconIdle}`}>
                 {item.section === 'Navigation' && (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
                 )}
@@ -34,9 +54,9 @@ export default function RenderResults() {
                 )}
               </div>
               <div className="flex flex-col">
-                <span className={`text-sm font-semibold ${active ? 'text-white' : 'text-zinc-300'}`}>{item.name}</span>
+                <span className={`text-sm font-semibold ${active ? c.nameActive : c.nameIdle}`}>{item.name}</span>
                 {item.subtitle && (
-                  <span className="text-[11px] text-zinc-500 font-medium mt-0.5">{item.subtitle}</span>
+                  <span className={c.subtitle}>{item.subtitle}</span>
                 )}
               </div>
             </div>
@@ -45,7 +65,7 @@ export default function RenderResults() {
                 {item.shortcut.map((sc) => (
                   <kbd
                     key={sc}
-                    className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${active ? 'bg-[var(--primaryColor)] text-white' : 'bg-zinc-800 text-zinc-500 border border-white/5'
+                    className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${active ? 'bg-[var(--primaryColor)] text-white' : c.kbdIdle
                       }`}
                   >
                     {sc}

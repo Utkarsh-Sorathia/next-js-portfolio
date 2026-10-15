@@ -8,6 +8,8 @@ import ConstrainedBox from "@/Components/core/constrained-box";
 import { getBlogListingSchema, getBreadcrumbSchema, getCompleteBlogSchema } from "@/utils/structuredData";
 import { baseURL } from "@/utils/api";
 import BlogsPageClient from "@/app/blogs/BlogsPageClient";
+import { isLightDesign } from "@/config/design";
+import LightBlogsList from "@/Components/light/blog/LightBlogsList";
 
 export const revalidate = 2592000; // Revalidate every 30 days
 
@@ -69,6 +71,9 @@ export default async function BlogsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(completeBlogSchema) }}
       />
 
+      {isLightDesign ? (
+        <LightBlogsList posts={posts} />
+      ) : (
       <ResponsiveBox
         classNames="min-h-screen bg-[var(--bgColor)] bg-grid-white/[0.1] lg:px-12 xl:px-40"
       >
@@ -87,6 +92,7 @@ export default async function BlogsPage() {
           </div>
         </ConstrainedBox>
       </ResponsiveBox>
+      )}
     </PageBox>
   );
 }

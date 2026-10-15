@@ -42,7 +42,7 @@ const services: IServiceItem[] = [
     shortDescription:
       "Cross-platform Android & iOS apps, shipped end to end.",
     description:
-      "I build cross-platform mobile apps with React Native, Expo and TypeScript — and take them all the way to the store, not just to a working build. That means EAS build pipelines, app signing, Play Console listings and staged rollout. I've shipped 10+ apps to Google Play, including offline games and AdMob monetisation.",
+      "I build cross-platform mobile apps with React Native, Expo and TypeScript — and take them all the way to the store, not just to a working build. That means EAS build pipelines, app signing, Play Console listings and staged rollout. I've shipped a portfolio of apps to Google Play, including offline games and AdMob monetisation.",
   },
   {
     id: 6,

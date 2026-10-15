@@ -20,7 +20,7 @@ const projects: IProjectItem[] = [
       "AdMob",
     ],
     about:
-      "One of 10 apps I've published to Google Play, covering the full release pipeline — EAS builds, app signing, store listings and staged rollout.",
+      "One of several apps I've published to Google Play, covering the full release pipeline — EAS builds, app signing, store listings and staged rollout.",
   },
   {
     id: "Bluff Cheat Card Game",

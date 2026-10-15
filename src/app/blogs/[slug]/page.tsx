@@ -18,6 +18,8 @@ import ShareButtons from '@/Components/UI/ShareButtons';
 import { getBlogExcerpt, formatDate, getReadingTime } from '@/utils/blog';
 import { parseMarkdownToHtml } from '@/utils/markdown';
 import 'github-markdown-css/github-markdown.css';
+import { isLightDesign, THEME_COLOR } from '@/config/design';
+import LightBlogPost from '@/Components/light/blog/LightBlogPost';
 
 export const revalidate = 2592000; // Revalidate every 30 days (ISR with webhook support)
 export const dynamicParams = true; // Allow new blogs without rebuild
@@ -37,7 +39,7 @@ export async function generateStaticParams() {
 }
 
 export const viewport = {
-  themeColor: '#000000',
+  themeColor: THEME_COLOR,
   width: 'device-width',
   initialScale: 1,
 };
@@ -216,6 +218,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     { name: 'Blogs', url: `${baseURL}/blogs` },
     { name: post.title, url: `${baseURL}/blogs/${post.slug.current}` },
   ]);
+
+  if (isLightDesign) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+        <LightBlogPost post={post} bodyHtml={bodyHtml} publishedDate={publishedDate} readingTime={readingTime} />
+      </>
+    );
+  }
 
   return (
     <PageBox>

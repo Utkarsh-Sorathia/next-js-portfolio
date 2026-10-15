@@ -46,7 +46,7 @@ const HomeSection = ({ id, isOpenToWork }: Readonly<{ id: string, isOpenToWork: 
             </h1>
           </div>
           <h2 className="sr-only">
-            Full Stack & Mobile Developer specializing in MERN, Next.js and React Native — with 10 apps shipped to Google Play.
+            Full Stack & Mobile App Developer specializing in MERN, Next.js and React Native — with multiple apps live on Google Play.
           </h2>
           <p className="text-sm md:text-base text-(--textColorLight) mx-auto text-wrap max-w-2xl text-center">
             I build fast, scalable web apps with Next.js and the <span className="whitespace-nowrap">MERN stack</span> — 2+ years turning ideas into production-ready products.

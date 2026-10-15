@@ -3,34 +3,54 @@
 import { KBarProvider, KBarPortal, KBarPositioner, KBarSearch, KBarAnimator, useKBar } from 'kbar';
 import { useRouter } from 'next/navigation';
 import RenderResults from '@/Components/core/RenderResults';
+import { isLightDesign } from '@/config/design';
+
+// Palette styles per site design (dark values are the original ones).
+const styles = isLightDesign
+  ? {
+      positioner: 'fixed inset-0 bg-black/25 backdrop-blur-[2px] z-[99999] flex items-start justify-center pt-[15vh] px-4',
+      animator: 'w-full max-w-[600px] bg-white border border-[#e5e5e2] rounded-3xl shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)] overflow-hidden scale-in',
+      search: 'w-full py-5 px-6 bg-transparent outline-none text-lg text-[#0b0b0c] placeholder:text-[#9a9aa0] border-b border-[#e5e5e2]',
+      footer: 'px-6 py-4 bg-[#f9f9f8] flex items-center justify-between border-t border-[#e5e5e2]',
+      hint: 'flex items-center gap-1.5 text-[10px] text-[#55555b] font-bold uppercase tracking-widest',
+      kbd: 'bg-white px-1.5 py-0.5 rounded border border-[#d4d4d0] text-[#0b0b0c]',
+    }
+  : {
+      positioner: 'fixed inset-0 bg-black/80 backdrop-blur-[2px] z-[99999] flex items-start justify-center pt-[15vh] px-4',
+      animator: 'w-full max-w-[600px] bg-[#0c0c0e] border border-white/10 rounded-2xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden scale-in',
+      search: 'w-full py-5 px-6 bg-transparent outline-none text-lg text-white placeholder:text-zinc-500 border-b border-white/5',
+      footer: 'px-6 py-4 bg-zinc-900/30 flex items-center justify-between border-t border-white/5',
+      hint: 'flex items-center gap-1.5 text-[10px] text-zinc-500 font-bold uppercase tracking-widest',
+      kbd: 'bg-zinc-800 px-1.5 py-0.5 rounded border border-white/10 text-white',
+    };
 
 function KBarContent({ children }: { children: React.ReactNode }) {
   // We use this inner component to access useKBar state
   return (
     <>
       <KBarPortal>
-        <KBarPositioner className="fixed inset-0 bg-black/80 backdrop-blur-[2px] z-[99999] flex items-start justify-center pt-[15vh] px-4">
-          <KBarAnimator className="w-full max-w-[600px] bg-[#0c0c0e] border border-white/10 rounded-2xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden scale-in">
+        <KBarPositioner className={styles.positioner}>
+          <KBarAnimator className={styles.animator}>
             <div className="flex flex-col">
               <KBarSearch
-                className="w-full py-5 px-6 bg-transparent outline-none text-lg text-white placeholder:text-zinc-500 border-b border-white/5"
+                className={styles.search}
                 placeholder="Type a command or search..."
                 autoFocus={typeof window !== 'undefined' && window.innerWidth > 768}
               />
               <RenderResults />
-              <div className="px-6 py-4 bg-zinc-900/30 flex items-center justify-between border-t border-white/5">
+              <div className={styles.footer}>
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
-                    <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded border border-white/10 text-white">Enter</kbd>
+                  <div className={styles.hint}>
+                    <kbd className={styles.kbd}>Enter</kbd>
                     <span>Select</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
-                    <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded border border-white/10 text-white">↑↓</kbd>
+                  <div className={styles.hint}>
+                    <kbd className={styles.kbd}>↑↓</kbd>
                     <span>Navigate</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-bold uppercase tracking-widest leading-none">
-                  <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded border border-white/10 text-white">Esc</kbd>
+                <div className={`${styles.hint} leading-none`}>
+                  <kbd className={styles.kbd}>Esc</kbd>
                   <span>Close</span>
                 </div>
               </div>

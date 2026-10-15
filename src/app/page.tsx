@@ -20,6 +20,8 @@ import {
 } from "@/utils/structuredData";
 
 import { getSettings } from "@/utils/getSettings";
+import { isLightDesign } from "@/config/design";
+import LightHome from "@/Components/light/home/LightHome";
 import { baseURL } from "@/utils/api";
 import type { Metadata } from "next";
 
@@ -87,6 +89,9 @@ const Home = async () => {
         }}
       />
 
+      {isLightDesign ? (
+        <LightHome isOpenToWork={settings.openToWork} />
+      ) : (
       <PageBox>
         <HomeSection id="/" isOpenToWork={settings.openToWork} />
         <AboutSection id="about" isOpenToWork={settings.openToWork} />
@@ -96,6 +101,7 @@ const Home = async () => {
         <ServiceSection id="services" />
         <ContactSection id="contact" />
       </PageBox>
+      )}
     </>
   )
 }

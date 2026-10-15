@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@/styles/light.css";
 import Header from "@/Components/UI/Header";
 import ScrollToTop from "@/Components/common/ScrollToTop";
 import { navMenus } from "../data/navItems";
@@ -20,6 +21,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import VisitorTracker from "@/Components/core/VisitorTracker";
 import Script from "next/script";
 import CustomCursor from "@/Components/core/CustomCursor";
+import { SITE_DESIGN, isLightDesign, THEME_COLOR } from "@/config/design";
+import LightHeader from "@/Components/light/LightHeader";
+import LightFooter from "@/Components/light/LightFooter";
+import LightChatWidget from "@/Components/light/chat/LightChatWidget";
 
 const baseUrl = baseURL;
 
@@ -38,7 +43,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport = {
-  themeColor: '#000000',
+  themeColor: THEME_COLOR,
   width: 'device-width',
   initialScale: 1,
 };
@@ -151,7 +156,19 @@ export default function RootLayout({
   return (
     // suppressHydrationWarning: browser extensions (e.g. password managers, dark-mode) can inject
     // attributes onto <html> and <body>, causing false hydration mismatches. This suppresses those.
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      data-design={SITE_DESIGN}
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      // Light design: point body text and Tailwind's font-mono at the loaded Geist
+      // fonts (globals.css overrides --font-geist-sans with a plain name).
+      style={
+        isLightDesign
+          ? ({ '--lt-sans': geistSans.style.fontFamily, '--font-mono': geistMono.style.fontFamily } as React.CSSProperties)
+          : undefined
+      }
+      suppressHydrationWarning
+    >
       <head>
 
         <link rel="preconnect" href="https://cdn.sanity.io" />
@@ -167,7 +184,7 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen antialiased" suppressHydrationWarning>
         <KBarWrapper>
-          <CustomCursor />
+          {!isLightDesign && <CustomCursor />}
           <VisitorTracker />
           {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
             <Script
@@ -183,18 +200,18 @@ export default function RootLayout({
               strategy="afterInteractive"
             />
           )}
-          <Header className="app_nav" navItems={navMenus} />
+          {isLightDesign ? <LightHeader /> : <Header className="app_nav" navItems={navMenus} />}
           <main id="main-content" className="flex-grow">{children}</main>
           <Analytics />
           <SpeedInsights />
-          <Footer />
-          <ScrollToTop />
+          {isLightDesign ? <LightFooter /> : <Footer />}
+          {!isLightDesign && <ScrollToTop />}
           <ErrorBoundary>
             <Suspense fallback={null}>
               <GoogleAnalytics />
             </Suspense>
-            <BlogButton />
-            <ChatWidget />
+            {!isLightDesign && <BlogButton />}
+            {isLightDesign ? <LightChatWidget /> : <ChatWidget />}
           </ErrorBoundary>
         </KBarWrapper>
       </body>

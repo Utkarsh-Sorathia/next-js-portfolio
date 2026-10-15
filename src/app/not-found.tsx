@@ -1,4 +1,6 @@
 import NotFoundClient from "./not-found-client";
+import { isLightDesign, THEME_COLOR } from "@/config/design";
+import LightNotFound from "@/Components/light/LightNotFound";
 
 export const metadata = {
   title: "404 | Page Not Found",
@@ -6,11 +8,11 @@ export const metadata = {
 };
      
 export const viewport = {
-  themeColor: '#000000',
+  themeColor: THEME_COLOR,
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function NotFound() {
-  return <NotFoundClient />;
+  return isLightDesign ? <LightNotFound /> : <NotFoundClient />;
 }
