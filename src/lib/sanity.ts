@@ -113,6 +113,30 @@ const getBlogPostBySlugQuery = `
   }
 `;
 
+// GROQ query for the RSS feed: like the listing query, plus the full body so
+// feed readers and cross-posting services (dev.to, Hashnode) get the whole post.
+const getAllBlogPostsForFeedQuery = `
+  *[_type == "post"] | order(publishedAt desc) {
+    _id,
+    _createdAt,
+    _updatedAt,
+    title,
+    publishedAt,
+    excerpt,
+    body,
+    slug {
+      current
+    },
+    image {
+      asset->{
+        url,
+        altText,
+        "mimeType": mimeType
+      }
+    }
+  }
+`;
+
 // GROQ query for fetching all blog post slugs (for static generation)
 const getAllBlogPostSlugsQuery = `
   *[_type == "post"] {
@@ -201,6 +225,25 @@ export async function getAllBlogPostSlugs() {
     return slugs?.map((item: any) => item.slug.current) || [];
   } catch (error) {
     console.error('Error fetching blog post slugs:', error);
+    return [];
+  }
+}
+
+export async function getAllBlogPostsForFeed() {
+  try {
+    const posts = await client.fetch(
+      getAllBlogPostsForFeedQuery,
+      {},
+      {
+        next: {
+          revalidate: 3600,
+          tags: ['blog-posts'], // Revalidated with the other blog data on publish
+        },
+      }
+    );
+    return posts || [];
+  } catch (error) {
+    console.error('Error fetching blog posts for feed:', error);
     return [];
   }
 }

@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${baseURL}/UtkarshSorathia.webp`,
+        url: `${baseURL}/og?title=${encodeURIComponent("Practical notes on Next.js, React & full-stack development")}`,
         alt: "Utkarsh Sorathia - Full Stack Developer Blog",
-        width: 800,
-        height: 1067,
-        type: "image/webp",
+        width: 1200,
+        height: 630,
+        type: "image/png",
       },
     ],
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Blogs | Utkarsh Sorathia - Full Stack Developer",
     description: "Practical tutorials and insights on Next.js, React, and full-stack development — drawn from real production work.",
     creator: "@utkarshsor03",
-    images: [`${baseURL}/UtkarshSorathia.webp`],
+    images: [`${baseURL}/og?title=${encodeURIComponent("Practical notes on Next.js, React & full-stack development")}`],
   },
 };
 
