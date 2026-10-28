@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { hasValidSecret } from "@/lib/webhookSecret";
+import { submitToIndexNow } from "@/lib/indexnow";
 
 export async function POST(req: NextRequest) {
   if (!hasValidSecret(req, process.env.REVALIDATE_SECRET)) {
@@ -31,10 +32,18 @@ export async function POST(req: NextRequest) {
     // Revalidate the sitemap so Google discovers the new blog
     revalidatePath("/sitemap.xml", "page");
 
+    // Refresh the RSS feed so feed readers and cross-posting (dev.to,
+    // Hashnode) pick up the post without waiting for the cache to expire
+    revalidatePath("/rss.xml");
+
+    // Tell Bing & co. right away (Google reads the sitemap instead)
+    const indexNow = await submitToIndexNow([`/blogs/${slug}`, "/blogs"]);
+
     return NextResponse.json({ 
       revalidated: true, 
       slug,
-      paths: ["/blogs", `/blogs/${slug}`, "/sitemap.xml"]
+      paths: ["/blogs", `/blogs/${slug}`, "/sitemap.xml", "/rss.xml"],
+      indexNow,
     });
   } catch (err) {
     console.error("Revalidation failed:", err);

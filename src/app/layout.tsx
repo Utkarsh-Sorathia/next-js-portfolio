@@ -107,11 +107,12 @@ export const metadata: Metadata = {
     siteName: "Utkarsh Sorathia Portfolio",
     images: [
       {
-        url: `${baseUrl}/UtkarshSorathia.webp`,
+        // Generated 1200×630 social card (src/app/og/route.tsx)
+        url: `${baseUrl}/og`,
         alt: "Utkarsh Sorathia - Full Stack Developer Portfolio",
-        width: 800,
-        height: 1067,
-        type: "image/webp",
+        width: 1200,
+        height: 630,
+        type: "image/png",
       },
     ],
     type: "website",
@@ -122,7 +123,7 @@ export const metadata: Metadata = {
     title: "Utkarsh Sorathia | Full Stack Developer (MERN & Next.js)",
     description:
       "Full Stack Developer specializing in Next.js, React, and the MERN stack — building production-ready web apps and writing about real-world development.",
-    images: [`${baseUrl}/UtkarshSorathia.webp`],
+    images: [`${baseUrl}/og`],
     creator: "@utkarshsor03",
     site: "@utkarshsor03",
   },

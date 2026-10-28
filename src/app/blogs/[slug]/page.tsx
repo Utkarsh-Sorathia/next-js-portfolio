@@ -15,7 +15,7 @@ import { getArticleSchema, getBreadcrumbSchema } from '@/utils/structuredData';
 import { baseURL } from '@/utils/api';
 import ReadingProgressBar from '@/Components/UI/ReadingProgressBar';
 import ShareButtons from '@/Components/UI/ShareButtons';
-import { getBlogExcerpt, formatDate, getReadingTime } from '@/utils/blog';
+import { getBlogExcerpt, formatDate, getReadingTime, getPostMarkdown } from '@/utils/blog';
 import { parseMarkdownToHtml } from '@/utils/markdown';
 import 'github-markdown-css/github-markdown.css';
 
@@ -91,7 +91,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       images: post.image?.asset?.url
         ? [post.image.asset.url]
         : [{
-          url: `${baseURL}/UtkarshSorathia.webp`,
+          // No cover image: use a generated title card
+          url: `${baseURL}/og?kind=post&title=${encodeURIComponent(post.title)}`,
           alt: post.title,
           width: 1200,
           height: 630,
@@ -109,7 +110,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description: excerpt,
       images: post.image?.asset?.url
         ? [post.image.asset.url]
-        : [`${baseURL}/UtkarshSorathia.webp`],
+        : [`${baseURL}/og?kind=post&title=${encodeURIComponent(post.title)}`],
       creator: '@utkarshsor03',
     },
     alternates: {
@@ -133,67 +134,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const timeSincePublished = getTimeSincePublished(post.publishedAt);
   const readingTime = getReadingTime(post.body);
 
-  // Convert Portable Text to Markdown string
-  const convertPortableTextToMarkdown = (body: any): string => {
-    if (!body) return '';
-    if (typeof body === 'string') return body;
-    if (!Array.isArray(body)) return '';
-
-    let markdown = '';
-
-    body.forEach((block: any) => {
-      if (block._type === 'block') {
-        const style = block.style || 'normal';
-        const listItem = block.listItem;
-
-        let text = '';
-
-        if (block.children && Array.isArray(block.children)) {
-          block.children.forEach((child: any) => {
-            let childText = String(child?.text || '');
-
-            // Apply marks from the child
-            if (child?.marks && Array.isArray(child.marks)) {
-              // Check for strong
-              if (child.marks.includes('strong')) {
-                childText = `**${childText}**`;
-              }
-              // Check for em
-              if (child.marks.includes('em')) {
-                childText = `*${childText}*`;
-              }
-              // Check for code
-              if (child.marks.includes('code')) {
-                childText = `\`${childText}\``;
-              }
-            }
-
-            text += childText;
-          });
-        }
-
-        // Handle lists
-        if (listItem) {
-          const prefix = listItem === 'bullet' ? '- ' : '1. ';
-          markdown += `${prefix}${text}\n`;
-        }
-        // Apply block styles
-        else if (style === 'h1') markdown += `# ${text}\n\n`;
-        else if (style === 'h2') markdown += `## ${text}\n\n`;
-        else if (style === 'h3') markdown += `### ${text}\n\n`;
-        else if (style === 'h4') markdown += `#### ${text}\n\n`;
-        else if (style === 'blockquote') markdown += `> ${text}\n\n`;
-        else markdown += `${text}\n\n`;
-      }
-    });
-
-    return markdown;
-  };
-
   // Convert body to markdown string if needed
-  const bodyMarkdown = typeof post.body === 'string'
-    ? post.body
-    : convertPortableTextToMarkdown(post.body);
+  const bodyMarkdown = getPostMarkdown(post);
 
   const bodyHtml = await parseMarkdownToHtml(bodyMarkdown);
 
